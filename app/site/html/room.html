@@ -84,7 +84,19 @@
                             </tr>                           
                             <!--  {/loop} -->
                             </table>                             		
-                    <!--{/if}-->                    
+                    <!--{/if}--> 
+
+                	<!--{if $item[table]=='photos'}-->
+                        <div class="widget-photo-list"> 
+                        <ul class="list-s"> 
+                        <!--  {loop $item[content] $item}  -->
+                            <li>
+                            <a href="{SITE_URL}{tsUrl('site','photos',array('ts'=>'photo','photosid'=>$item[photosid],'pid'=>$item[photoid]))}" title="" alt=""><img src="{SITE_URL}{php echo tsXimg($item[photourl],'site',100,100,$item[path],1)}"/></a>
+                            </li>
+						<!--  {/loop} -->                            
+                        </ul> 
+                        </div>                                                        		
+                    <!--{/if}-->                                        
                                         
 			</div>
 		</div>

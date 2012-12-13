@@ -89,8 +89,8 @@ function sortMod($mod)
 					$strMods[$key]['action']  = '<a href="'.SITE_URL.tsUrl('site','photos',
 							array('ts'=>'upload','photosid'=>$item[1])).'">添加照片</a>';	
 							
-					//$strMods[$key]['content'] = aac('site')->findAll('site_forum_discuss',
-						//	array('forumid'=>$item[1]),'istop desc,addtime desc', '','0,'.$display_number.'');				
+					$strMods[$key]['content'] = aac('site')->findAll('site_photos_pic',
+							array('photosid'=>$item[1]),'addtime desc', '','0,'.$display_number.'');				
 				}
 					
 			}			

@@ -25,12 +25,12 @@
             	
 
 <div class="bd">
-	<form method="post" name="album_info">
+	<form method="post" name="album_info" action="<?php echo SITE_URL;?><?php echo tsurl('site','photos',array('ts'=>'addinfo','photosid'=>$photosid))?>">
 	<div class="photo-complete">
      	<?php foreach((array)$arrPhotos as $item) {?>
         <div class="photo-item">
             <div class="cover">
-                <a href="<?php echo SITE_URL;?><?php echo tsurl('site','photos',array('ts'=>'photo','photosid'=>$photosid,'id'=>$item['photoid']))?>"><img src="<?php echo SITE_URL;?><?php echo tsXimg($item['photourl'],'site',100,100,$item['path'])?>"></a>
+                <a href="<?php echo SITE_URL;?><?php echo tsurl('site','photos',array('ts'=>'photo','photosid'=>$photosid,'pid'=>$item['photoid']))?>"><img src="<?php echo SITE_URL;?><?php echo tsXimg($item['photourl'],'site',100,100,$item['path'])?>"/></a>
             </div>
             <div class="intro">
                 <textarea maxlength="128" name="desc_<?php echo $item['photoid'];?>"><?php echo $item['photodesc'];?></textarea>

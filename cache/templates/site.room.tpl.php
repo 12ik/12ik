@@ -84,7 +84,19 @@
                             </tr>                           
                             <!--  <?php } ?> -->
                             </table>                             		
-                    <?php } ?>                    
+                    <?php } ?> 
+
+                	<?php if($item['table']=='photos') { ?>
+                        <div class="widget-photo-list"> 
+                        <ul class="list-s"> 
+                        <!--  <?php foreach((array)$item['content'] as $item) {?>  -->
+                            <li>
+                            <a href="<?php echo SITE_URL;?><?php echo tsurl('site','photos',array('ts'=>'photo','photosid'=>$item['photosid'],'pid'=>$item['photoid']))?>" title="" alt=""><img src="<?php echo SITE_URL;?><?php echo tsXimg($item['photourl'],'site',100,100,$item['path'],1)?>"/></a>
+                            </li>
+						<!--  <?php } ?> -->                            
+                        </ul> 
+                        </div>                                                        		
+                    <?php } ?>                                        
                                         
 			</div>
 		</div>

@@ -25,7 +25,7 @@
             	
 
 <div class="bd">
-	<form method="post" name="album_info">
+	<form method="post" name="album_info" action="{SITE_URL}{tsUrl('site','photos',array('ts'=>'addinfo','photosid'=>$photosid))}">
 	<div class="photo-complete">
      	{loop $arrPhotos $item}
         <div class="photo-item">

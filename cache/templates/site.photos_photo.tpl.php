@@ -26,16 +26,22 @@
     <div class="photitle">
         <span class="back-lnk">&gt;<a href="<?php echo SITE_URL;?><?php echo tsurl('site','photos',array('ts'=>'list','photosid'=>$photosid))?>">返回<?php echo $strPhotos['title'];?></a></span>
         <span class="nums">第<?php echo $nowPage;?>张 / 共<?php echo $conutPage;?>张</span>
-        <link href="" rel="prev">
-        <a id="pre_photo" title="用方向键←可以向前翻页" href="#">上一张</a>
+        <?php if($nowPage >1) { ?>
+        <link href="#" rel="prev">
+        <a id="pre_photo" title="用方向键←可以向前翻页" href="<?php echo SITE_URL;?><?php echo tsurl('site','photos',array('ts'=>'photo','photosid'=>$photosid,'pid'=>$prev))?>">上一张</a>
+        <?php if($nowPage < $conutPage) { ?>
         /
+        <?php } ?>
+        <?php } ?>
+        <?php if($nowPage < $conutPage) { ?>
         <link href="#" rel="next">
-        <a id="next_photo" title="用方向键→可以向后翻页" href="#">下一张</a>
+        <a id="next_photo" title="用方向键→可以向后翻页" name="next_photo" href="<?php echo SITE_URL;?><?php echo tsurl('site','photos',array('ts'=>'photo','photosid'=>$photosid,'pid'=>$next))?>">下一张</a>
+        <?php } ?>
     </div>
 
     <div class="phoview">
         <?php if($nowPage < $conutPage) { ?>
-        <a title="点击查看下一张" href="<?php echo SITE_URL;?><?php echo tsurl('site','photos',array('ts'=>'photo','photosid'=>$photosid,'id'=>$next))?>" class="mainphoto">
+        <a title="点击查看下一张" href="<?php echo SITE_URL;?><?php echo tsurl('site','photos',array('ts'=>'photo','photosid'=>$photosid,'pid'=>$next))?>" class="mainphoto">
         <?php } ?>
             <img src="<?php echo SITE_URL;?><?php echo tsXimg($strPhoto['photourl'],'site',600,600,$strPhoto['path'])?>">
         <?php if($nowPage < $conutPage) { ?>

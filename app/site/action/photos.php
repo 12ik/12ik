@@ -68,6 +68,11 @@ switch ($ts) {
 		$title = '完成上传！添加描述 - '.$strPhotos['title'];
 		include template('photos_complete');
 		break;	
+
+	case "addinfo" :
+	
+		header("Location: ".SITE_URL.tsUrl('site','photos',array('ts'=>'list','photosid'=>$photosid)));
+		break;	
 		
 	case "list" :
 		$photosList = aac('site')->findAll('site_photos_pic',array('photosid'=>$photosid),'addtime desc');
@@ -86,9 +91,9 @@ switch ($ts) {
 			header("Location: ".SITE_URL.tsUrl('site','photos',array('ts'=>'list','photosid'=>$photosid)));
 			exit;
 		}	
-		$strPhoto = aac('site')->findAll('site_photos_pic',array('photoid'=>$photoid),'addtime desc');
+		$strPhoto = aac('site')->find('site_photos_pic',array('photoid'=>$photoid));
 		
-		$arrPhotoIds = aac('site')->findAll('site_photos_pic',array('photosid'=>$photosid),'photoid desc','photoid');
+		$arrPhotoIds = $db->fetch_all_assoc("select photoid from ".dbprefix."site_photos_pic where photosid='$photosid' order by photoid desc");
 		foreach($arrPhotoIds as $item){
 			$arrPhotoId[] = $item['photoid'];
 		}

@@ -25,13 +25,13 @@
 </div>
 
 <div style="text-align:center">
-    <?php if($nowPage < $conutPage) { ?>
-	<a title="点击查看下一张" href="<?php echo SITE_URL;?><?php echo tsurl('photo','show',array(photoid=>$next))?>" class="mainphoto">
+<?php if($nowPage < $conutPage) { ?>
+<a title="点击查看下一张" href="<?php echo SITE_URL;?><?php echo tsurl('photo','show',array(photoid=>$next))?>" class="mainphoto">
 <?php } ?>
-        <img src="<?php echo SITE_URL;?><?php echo tsXimg($strPhoto['photourl'],'photo',600,600,$strPhoto['path'])?>">
-	<?php if($nowPage < $conutPage) { ?>
-   </a>
-   <?php } ?>
+    <img src="<?php echo SITE_URL;?><?php echo tsXimg($strPhoto['photourl'],'photo',600,600,$strPhoto['path'])?>">
+<?php if($nowPage < $conutPage) { ?>
+</a>
+<?php } ?>
 </div>
 
 <div class="photo_descri">
