@@ -30,7 +30,7 @@
      	{loop $arrPhotos $item}
         <div class="photo-item">
             <div class="cover">
-                <a href="{SITE_URL}{tsUrl('site','photos',array('ts'=>'photo','photosid'=>$photosid,'id'=>$item[photoid]))}"><img src="{SITE_URL}{php echo tsXimg($item[photourl],'site/photos',170,170,$item[path])}"></a>
+                <a href="{SITE_URL}{tsUrl('site','photos',array('ts'=>'photo','photosid'=>$photosid,'pid'=>$item[photoid]))}"><img src="{SITE_URL}{php echo tsXimg($item[photourl],'site',100,100,$item[path])}"/></a>
             </div>
             <div class="intro">
                 <textarea maxlength="128" name="desc_{$item[photoid]}">{$item[photodesc]}</textarea>

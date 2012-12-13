@@ -60,15 +60,52 @@ switch ($ts) {
 	case "complete" :
 		$userid = intval($IK_USER['user']['userid']);
 		$addtime = intval($_GET['addtime']);
-		echo $addtime;
 		//判断权限
 		aac('site')->isAllow($strPhotos['userid'],$userid,'complete');
-		
-		$arrPhotos = aac('site')->findAll('site_photos_pic',array('photosid'=>$photosid, 'userid'=> $userid, 'addtime'=>$addtime));
+
+		$arrPhotos = aac('site')->findAll('site_photos_pic',"photosid='$photosid' and  userid='$userid' and addtime>'$addtime'");
 
 		$title = '完成上传！添加描述 - '.$strPhotos['title'];
 		include template('photos_complete');
-		break;				
+		break;	
+		
+	case "list" :
+		$photosList = aac('site')->findAll('site_photos_pic',array('photosid'=>$photosid),'addtime desc');
+		$title = $strPhotos['title'];
+		include template('photos_list');
+		break;	
+		
+	case "photo" :
+		$photoid = intval($_GET['pid']);//照片id
+		if($photoid == 0){
+			header("Location: ".SITE_URL.tsUrl('site','photos',array('ts'=>'list','photosid'=>$photosid)));
+			exit;
+		}
+		$photoNum = $db->once_fetch_assoc("select count(*) from ".dbprefix."site_photos_pic where `photoid`='$photoid'");
+		if($photoNum['count(*)']==0){
+			header("Location: ".SITE_URL.tsUrl('site','photos',array('ts'=>'list','photosid'=>$photosid)));
+			exit;
+		}	
+		$strPhoto = aac('site')->findAll('site_photos_pic',array('photoid'=>$photoid),'addtime desc');
+		
+		$arrPhotoIds = aac('site')->findAll('site_photos_pic',array('photosid'=>$photosid),'photoid desc','photoid');
+		foreach($arrPhotoIds as $item){
+			$arrPhotoId[] = $item['photoid'];
+		}
+		//逆向排序
+		rsort($arrPhotoId);	
+		$nowkey = array_search($photoid,$arrPhotoId);
+		$nowPage =  $nowkey+1 ;
+		$conutPage = count($arrPhotoId);
+		$prev = $arrPhotoId[$nowkey - 1];
+		$next = $arrPhotoId[$nowkey +1];			
+		
+		//更新浏览量		
+		aac('site')->update('site_photos_pic',array('photoid'=>$photoid),array('count_view'=>'count_view + 1'));
+
+		$title = $strPhotos['title'].'-第'.$nowPage.'张';
+		include template('photos_photo');
+		break;								
 	
 	
 }
