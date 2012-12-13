@@ -1,0 +1,68 @@
+{template header}
+<div class="midder">
+
+{if $user==''}
+<div class="anony-nav">
+<div class="bd">
+<div class="reg">
+
+<strong>爱客社区</strong>
+<div>
+<b>12ik创新社区新体验，内容互动性强，交流更方便</b><br><em>简单</em><em>快捷</em><em>方便</em><em>建设本地化，垂直型社区；目前已有<cite>{$count_user}</cite>位用户加入！</em>
+</div>
+<a class="submit" href="{SITE_URL}{tsUrl('user','register')}">加入我们</a>
+</div>
+
+<div class="login">
+<form action="{SITE_URL}{tsUrl('user','login',array('ts'=>'do'))}" method="post" name="lzform" id="lzform">
+<fieldset>
+<legend>登录</legend>
+<div class="item">
+<label>Email：</label><input type="email" tabindex="1" value="" name="email" class="txt">
+</div>
+<div class="item">
+<label>密码：</label><input type="password" tabindex="2" class="txt" name="pwd" > <a href="{SITE_URL}index.php?app=user&ac=forgetpwd">忘记密码？</a>
+</div>
+
+<div class="item1">
+<label for="form_remember"><input type="checkbox" tabindex="3" id="form_remember" name="remember"> 记住我</label>
+</div>
+<div class="item1">
+<input type="hidden" name="cktime" value="2592000" />
+<input type="submit" tabindex="4" class="submit" value="登录" style="margin-left:10px">
+{php doAction('pub_header_login')}
+</div>
+</fieldset>
+</form>
+</div>
+
+</div>
+</div>
+{/if}
+
+<div class="mc">
+
+
+<div id="content" class="cf">
+  	<div class="joykumodel">
+   		<h2>
+            <strong>这里正在流行...</strong>
+            <em>[ 共 {$photoNum} 张美图 ]</em>
+		</h2>
+        <div id="container">
+			<!--{loop $arrPhoto $key $item}-->      
+            <div class="item"><a href="{SITE_URL}{tsUrl('photo','album',array(ts=>photo,albumid=>$item[albumid]))}" target="_blank"><img src="{SITE_URL}{php echo tsXimg($item[photourl],'photo',210,0,$item[path])}" /></a></div>
+			<!--{/loop}-->                                                          
+        </div>
+    
+        <nav id="page-nav">
+           <a href="{SITE_URL}{tsUrl('home','homepage',array('page'=>'2'))}"></a>
+        </nav>
+    </div>	
+</div>
+
+	
+</div>
+
+</div>
+{template footer}

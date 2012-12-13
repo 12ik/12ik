@@ -1,0 +1,41 @@
+{template header}
+
+<div class="midder">
+
+<div class="mc">
+<h1>某某某管理的小组</h1>
+    <div class="cleft">
+    
+    <h2>我管理的小组 &nbsp; ·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;</h2>
+    
+        <div class="obss"><dl class="obu"><dt><a class="nbg" href="{SITE_URL}{tsUrl('hi','',array('id'=>$strLeader[doname]))}"><img alt="mido" class="m_sub_img" src="{$strLeader[face]}"></a></dt>
+        <dd>{$strLeader[username]}<br><span class="pl">(<a href="{SITE_URL}{tsUrl('location','area',array(areaid=>$strLeader[area][areaid]))}">{$strLeader[area][areaname]}</a>)</span></dd></dl><br clear="all">
+        </div>
+    
+    <h2>我参加的小组 &nbsp; ·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;</h2>
+    
+        <div class="obss">
+        
+        <!--{loop $arrAdmin $key $item}-->
+        <dl class="obu"><dt><a class="nbg" href="{SITE_URL}{tsUrl('hi','',array('id'=>$item[doname]))}"><img alt="{$item[username]}" class="imgg" src="{$item[face]}"></a>
+        <!--{if $IK_USER[user][userid] == $strLeader[userid]}-->
+        <span title="取消管理员" class="gact"><a title="取消{$item[username]}的管理员" class="j a_confirm_link" href="{SITE_URL}index.php?app=group&ac=group_user_set&ts=isadmin&userid={$item[userid]}&groupid={$strGroup[groupid]}&isadmin=0" rel="nofollow">^</a></span>
+        <!--{/if}-->
+        </dt><dd>{$item[username]}<br><span class="pl">(<a href="{SITE_URL}{tsUrl('location','area',array(areaid=>$item[area][areaid]))}">{$item[area][areaname]}</a>)</span></dd></dl>
+        <!--{/loop}-->
+        
+        
+        <br clear="all">
+        </div>
+    
+    
+    </div>
+
+
+    <div class="cright">
+    
+    </div>
+</div>
+</div>
+
+{template footer}

@@ -1,0 +1,11 @@
+<div class="tabnav">
+    <ul>
+<!--
+<li {if $ts=="notification"} class="select" {/if} >
+<a href="{SITE_URL}{tsUrl('message','ikmail',array(ts=>notification))}">提醒</a>
+</li>
+-->
+<li <!--{if $ts=="outbox"}-->class="select"<!--{/if}--> ><a href="{SITE_URL}{tsUrl('message','ikmail',array(ts=>outbox))}">发件箱</a></li>
+<li <!--{if $ts=="inbox" || $ts=="spam" || $ts=="unread"}-->class="select"<!--{/if}--> ><a href="{SITE_URL}{tsUrl('message','ikmail',array(ts=>inbox))}">收件箱</a></li>
+    </ul>
+</div>

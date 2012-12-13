@@ -1,0 +1,39 @@
+{template header}
+<!--main-->
+<div class="midder">
+
+<div class="mc">
+{template edit_xbar}
+
+<div class="cleft">
+
+<form method="POST" action="{SITE_URL}index.php?app=group&ac=do&ts=edit_base">
+<table align="center" style="width:100%;clear: both;" class="table_1">
+	<tr><th>小组名称：</th>
+    <td><input type="text" value="{$strGroup[groupname]}" maxlength="63" size="31" name="groupname" gtbfieldid="13" class="txt" placeholder="请填写小组名称"></td></tr>
+    <tr><th>小组介绍：</th>
+    <td><textarea style="width:100%;height:300px;" name="groupdesc" id="editor_mini" class="txt"   placeholder="请填写小组介绍">{$strGroup[groupdesc]}</textarea></td></tr>
+    <tr>
+    	<th>&nbsp;</th>
+        <td>
+          <input type="hidden" name="groupid" value="{$strGroup[groupid]}" />
+          <input class="submit" type="submit" tabinde="8" value="更新小组设置" >
+        </td>
+    </tr>
+</table>
+</form>
+
+
+</div>
+
+<div class="cright">
+
+<p class="pl2">&gt; <a href="{SITE_URL}{tsUrl('group','show',array('id'=>$strGroup[groupid]))}">返回{$strGroup[groupname]}</a></p>
+
+</div>
+
+</div>
+
+</div>
+<!--加载编辑器-->
+{template footer}

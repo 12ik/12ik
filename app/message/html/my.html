@@ -1,0 +1,43 @@
+{template header}
+<!--main-->
+<div class="midder">
+<div><a href="{SITE_URL}index.php?app=message&ac=my"><img src="{SITE_URL}app/{$app}/skins/{$skin}/imbox.gif" alt="消息盒子" /></a></div>
+
+<div class="imbox">
+<table width="100%">
+<tr>
+<td valign="top">
+<div id="msgbox" style="background:#fafbfb; height:250px; overflow:auto">
+
+ 
+
+</div>
+<div id="sendbox"></div>
+</td>
+<td valign="top" width="200" style="background:#eaf5f9;">
+
+<div class="leftbar" style="max-height:400px; overflow:auto">
+<div class="bartitle">系统消息</div>
+    <ul>
+        <li><a href="javascript:void(0);" onclick="systembox('{$IK_USER[user][userid]}');"><img src="{SITE_URL}app/{$app}/skins/{$skin}/system.gif" align="absmiddle" />系统消息</a>
+        <!--{if $systemNum > '0'}-->({$systemNum})<!--{/if}--></li>
+    </ul>
+    
+<div class="bartitle">好友消息</div>
+<ul>
+<!--{loop $arrToUser $key $item}-->
+<li>
+<a href="javascript:void(0);" onclick="sendbox('{$item[userid]}');"><img alt="{$item[user][username]}" class="m_sub_img" width="16" src="{$item[user][face]}" align="absmiddle" /> {$item[user][username]} </a><!--{if $item[count] > 0}-->({$item[count]})<!--{/if}-->
+</li>
+<!--{/loop}-->
+
+</ul>
+</div>&nbsp;</td>
+
+</tr>
+</table>
+</div>
+
+</div>
+
+{template footer}

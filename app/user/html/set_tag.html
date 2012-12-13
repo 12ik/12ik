@@ -1,0 +1,29 @@
+{template header}
+
+<!--main-->
+<div class="midder">
+<div class="mc">
+{template set_menu}
+
+<div>
+<div class="tags">
+<!--{loop $arrTag $key $item}-->
+<a rel="tag" title="" class="post-tag" href="">{$item[tagname]}</a>
+<!--{/loop}-->
+
+
+
+<a rel="tag" href="javascript:void(0);" onclick="showTagFrom()">+添加个人标签</a>
+<p id="tagFrom" style="display:none">
+<input class="tagtxt" type="text" name="tags" id="tags" /> <button type="submit" class="subab" onclick="savaTag({$userid})">添加</button> <a href="javascript:void(0);" onclick="showTagFrom()">取消</a>
+</p>
+
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+{template footer}

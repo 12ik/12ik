@@ -1,0 +1,69 @@
+ <!--头部-->
+{template site_header}
+<!--//头部-->
+<!--导航-->
+{template site_nav}
+<!--//导航-->
+ 
+<!--内容-->
+<div id="content">
+    <!--main-->
+
+
+<style>
+
+</style>    
+    <div class="main"> 
+         
+        <div class="content-nav">
+        <a href="{SITE_URL}{tsUrl('site','room',array('siteid'=>$siteid,'roomid'=>$roomid))}">&gt; 回{$strSite[sitename]}</a>
+        </div>  
+        <h1>{$title}</h1> 
+        <div class="title-link">
+            <a class="lnk-flat" href="{SITE_URL}{tsUrl('site','forum',array('ts'=>'create','forumid'=>$forumid))}">+ 发言</a>
+        </div>                   
+        <div class="mod">
+
+
+    <div class="post-list">
+    <table class="list-b">
+        <tr><td>话题</td><td>作者</td><td nowrap="nowrap">回应</td><td align="right">更新时间</td></tr>
+   		 <!--{loop $arrDiscus $item}-->
+        <tr>
+            <td>
+                {if $item[istop]==1}<img src="/public/images/stick.gif"/>{/if} <a title="{$item[title]}" href="{SITE_URL}{tsUrl('site','forum',array('forumid'=>$item[forumid],'discussid'=>$item[discussid]))}">{$item[title]}</a>
+            </td>
+            <td>来自 <a href="{SITE_URL}{tsUrl('hi','',array('id'=>$item[user][doname]))}">$item[user][username]</a>
+            </td>
+            <td nowrap="nowrap" class="count">{$item[count_comment]}</td>
+            <td class="date">{php echo date('Y-m-d H:i:s',$item[addtime])}</td>
+        </tr>
+    	<!--{/loop}-->    
+    </table>
+    </div>
+
+
+            
+        </div>
+
+
+    </div>
+    
+    <!--//main-->
+    
+    <!--aside-->      
+    <div class="aside">  
+    
+    </div>
+    <!--//aside-->  
+
+    <div class="extra">
+         
+    </div>
+ 
+</div>
+<!--//内容-->
+
+<!--尾部-->
+{template site_footer}
+<!--//尾部-->

@@ -1,0 +1,30 @@
+{php include template("admin/header");}
+
+<!--main-->
+<div class="midder">
+
+{php include template("admin/menu");}
+
+<div class="page">{$pageUrl}</div>
+
+<table>
+<tr class="old">
+<td>ID</td>
+<td>名称</td>
+<td>状态</td>
+<td>操作</td>
+</tr>
+
+<!--{loop $arrSite $key $item}-->
+<tr>
+<td>{$item[siteid]}</td>
+<td>{$item[sitename]}</td>
+<td>{if {$item[isaudit]}==0}<font color="red">未审核</font>{else}已审核{/if}</td>
+<td><a href="{SITE_URL}index.php?app=site&ac=admin&mg=site&ts=isaudit&isaudit={$item[isaudit]}&siteid={$item[siteid]}">审核</a></td></tr>
+<!--{/loop}-->
+
+</table>
+
+</div>
+
+{php include template("admin/footer");}

@@ -1,0 +1,64 @@
+{template header}
+<div class="midder">
+<div class="mc">
+	<h1>全部小组</h1>
+    
+<div class="cleft">
+
+                <!--{loop $arrRecommendGroup $key $item}-->
+                <div class="sub-item">
+                
+                    <div class="pic">
+                        <a href="{SITE_URL}{tsUrl('group','show',array('id'=>$item[groupid]))}">
+                        <img data-defer-src="{$item[icon_48]}" src="{$item[icon_48]}" alt="{$item[groupname]}">
+                        </a>
+                        <a class="joingroup" href="{SITE_URL}{tsUrl('group','do',array('ts'=>'join','groupid'=>$item['groupid']))}" title="加入">+加入</a>
+                    </div>
+                    <div class="info">
+                            <div class="title">
+                                <a href="{SITE_URL}{tsUrl('group','show',array('id'=>$item[groupid]))}" title="{$item[groupname]}" target="_blank">{$item[groupname]}</a>
+                                <span class="follow-num">{$item[count_user]}个成员</span>
+                            </div>
+                                        
+                            <p>{$item[groupdesc]}</p>
+                    </div> 
+                           
+                </div>
+                <!--{/loop}-->
+
+
+        <div class="clear"></div>
+        
+        <div class="page">{$pageUrl}</div>
+
+</div>
+
+    <div class="cright">
+    
+        <h2>热门帖子</h2>
+        <div class="line23">
+        {loop $arrTopic $key $item}
+        <a href="{SITE_URL}{tsUrl('group','topic',array('id'=>$item[topicid]))}">{$item[title]}</a> ({$item[count_comment]})
+        <br />
+        {/loop}
+        </div>
+    
+        <div class="clear"></div>
+    
+        <h2>最新创建小组</h2>
+        
+        <div class="line23">
+        <!--{if $arrNewGroup}-->
+        <!--{loop $arrNewGroup $key $item}-->
+        <a href="{SITE_URL}{tsUrl('group','show',array('id'=>$item[groupid]))}">{$item[groupname]}</a> ({$item[count_user]}<!--{if $item[uptime]>strtotime(date('Y-m-d 00:00:00'))}-->/<font color="orange">{$item[count_topic_today]}</font><!--{else}--><!--{/if}-->)<br>
+        <!--{/loop}-->
+        <!--{/if}-->
+        </div>
+    
+        <div class="clear"></div>
+    
+    </div>
+    
+</div>
+</div>
+{template footer}

@@ -1,0 +1,56 @@
+<!--头部-->
+{template site_header}
+<!--//头部-->
+<!--导航-->
+{template site_nav}
+<!--//导航-->
+
+<!--内容-->
+<div id="content">
+    <!--main-->
+    <div class="main">           
+        <h1>小站管理</h1>               
+        <div class="mod" id="sp-setting">
+            <div class="hd">
+					{template setting_nav}
+            </div>
+
+<form class="pt10 mb30" method="post" action="{SITE_URL}{tsUrl('site','admins',array('ts'=>'postpermission','siteid'=>$siteid))}">
+        <ul class="setting-list">
+        	{if $isaction==0}
+            <li><input type="radio" value="0" name="isaction" id="ac1" checked="checked"><label for="ac1">任何人都能参与小站互动</label></li>
+            <li><input type="radio" value="1" name="isaction" id="ac2"><label for="ac2">只有喜欢了小站，才能参加小站互动</label></li>
+            {else}
+            <li><input type="radio" value="0" name="isaction" id="ac1" ><label for="ac1">任何人都能参与小站互动</label></li>
+            <li><input type="radio" value="1" name="isaction" id="ac2" checked="checked"><label for="ac2">只有喜欢了小站，才能参加小站互动</label></li>  
+            {/if}
+        </ul>
+        {$message}       
+        <div class="sp-setting-btn">
+            <span href="" class="bn-flat-hot" id="submit-theme"><input type="submit" hidefocus="1" value="保存修改"></span>
+            <a href="#" id="cancel-theme">取消</a>
+        </div>
+</form>
+
+
+        </div>
+    </div>
+    <!--//main-->
+    
+     <!--aside-->    
+    <div class="aside">
+        {template admins_aside}
+    </div>
+    <!--//aside-->  
+ 
+
+    <div class="extra">
+            
+    </div>
+ 
+</div>
+<!--//内容-->
+
+<!--尾部-->
+{template site_footer}
+<!--//尾部-->

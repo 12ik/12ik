@@ -1,0 +1,127 @@
+.mc .footer{
+	background-color: #F8F8F8;
+    padding: 21px 0;
+    text-align: center;
+	margin-top:20px;
+}
+.tags-nav {
+    border-bottom: 1px solid #DDDDDD;
+    color: #999999;
+    font-size: 0;
+    line-height: 1.8;
+    padding-bottom: 15px;
+}
+.tags-nav li {
+    display: inline-block;
+    font-size: 12px;
+}
+.tags-nav li a:hover, .tags-nav li a.active {
+    background: none repeat scroll 0 0 #82BF71;
+    color: white;
+}
+.tags-nav li a {
+    display: block;
+    margin-bottom: 3px;
+    margin-right: 5px;
+    padding: 2px 0;
+    text-align: center;
+    width: 60px;
+}
+/**loading**/
+.site-loading {
+    display: none;
+    margin: 15px 0;
+    text-align: center;
+}
+.ajax-process .stat, .site-loading .state {
+    background: url(loading.gif) no-repeat scroll 0 0 transparent;
+    padding-left: 20px;
+}
+.site-list {
+    display: none;
+    font-size: 0;
+    margin-left: -5%;
+    margin-top: -1px;
+}
+.site-item {
+    border-top: 1px solid #EFEFEF;
+    display: inline-block;
+    margin: 0 -2px 0 0;
+    padding-bottom: 20px;
+    padding-left: 5%;
+    padding-top: 20px;
+    vertical-align: top;
+    width: 45%;
+}
+.site-item .pic {
+    float: left;
+    padding-right: 10px;
+}
+.site-item .info {
+    overflow: hidden;
+}
+.site-item .title {
+    font-size: 14px;
+}
+.site-item .info p {
+	font-size: 12px;
+    color: #666666;
+    margin: 0;
+}
+/*加载更多*/
+.site-more {
+    background-color: #F8F8F8;
+    cursor: pointer;
+    display: block;
+    height: 36px;
+    line-height: 36px;
+    margin-top: 5px;
+    position: relative;
+    text-align: center;
+    z-index: 1;
+	cursor: pointer;
+}
+.site-more:hover{ background-color:#F0F0F0}
+
+/**右侧**/
+.site-rec .list-items {
+    margin-top: -15px;
+}
+.site-rec .list-item {
+    font-size: 0;
+    padding: 15px 0;
+}
+.site-rec .pic {
+    display: inline-block;
+}
+.site-rec .info {
+    display: inline-block;
+    font-size: 12px;
+    overflow: hidden;
+    padding-left: 10px;
+    vertical-align: top;
+}
+.site-rec .like-num {
+    color: #666666;
+}
+/**site-tags**/
+.site-tags{
+  width:400px; 
+}
+.site-tags dd{
+	background-color: white;
+    color: #666666;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 12px;
+    margin: 3px 3px 3px 0;
+    padding: 2px 12px;
+}
+.site-tags dd:hover{ background-color:#f2f2f2; border-radius:2px;}
+.site-tags dd.selected, .site-tags dd.selected:hover{ background-color: #F5F5F5;color: #999999;}
+/**result**/
+#new-site-result{}
+#new-site-result .hd{ margin-bottom:15px}
+#new-site-result h1{ border-bottom:#ccc solid 1px; padding-bottom:10px}
+#new-site-result .bd{}
+#new-site-result .bd p{ line-height:20px; margin-bottom:10px}

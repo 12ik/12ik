@@ -1,0 +1,5 @@
+<div id="container">
+    <!--{loop $arrPhoto $key $item}-->        
+    <div class="item"><a href="{SITE_URL}{tsUrl('photo','album',array(ts=>photo,albumid=>$item[albumid]))}" target="_blank"><img src="{SITE_URL}{php echo tsXimg($item[photourl],'photo',210,0,$item[path])}" /></a></div>
+    <!--{/loop}-->       
+</div>

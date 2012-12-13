@@ -1,0 +1,18 @@
+<div style="margin-bottom: 10px;overflow: hidden;">
+<!--{loop $arrUser $key $item}-->
+<dl class="obu">
+        <dt>
+        	<a href="{SITE_URL}{tsUrl('hi','',array('id'=>$item[doname]))}" title="{$item[username]}">
+        		<img  alt="{$item[username]}"  src="{$item[face]}"class="m_sub_img"  >
+            </a>
+        </dt>
+        <dd>
+        	 {$item[username]}<br>
+            <span class="pl">(<a href="{SITE_URL}{tsUrl('location','area',array(areaid=>$item[area][areaid]))}">{$item[area][areaname]}</a>)</span>
+        </dd>
+</dl>
+        
+        
+<!--{/loop}-->
+<br clear="all">
+</div>

@@ -1,0 +1,69 @@
+{template header}
+
+<div class="midder">
+
+<div class="mc">
+	
+    <h1>我的小组发言</h1>
+
+<div class="cleft">
+
+{template my_menu}
+
+           <div class="indent">
+                <table class="olt">
+                    <tbody>
+                        <tr>
+                            <td>话题</td>
+                            <td>小组</td>
+                            <td>作者</td>
+                            <td nowrap="nowrap" align="right">&nbsp;&nbsp;&nbsp;&nbsp;回应</td>
+                            <td align="right">最后回应</td>
+                        </tr>
+            <!--{if $arrTopic}-->
+            <!--{loop $arrTopic $key $item}-->
+                            <tr class="pl">
+                                <td><a title="{$item[title]}" href="{SITE_URL}{tsUrl('group','topic',array('id'=>$item[topicid]))}">{$item[title]}</a>
+            <!--{if $item[istop]=='1'}-->
+            <img src="{SITE_URL}app/{$app}/skins/{$skin}/headtopic_1.gif" title="[置顶]" alt="[置顶]" />
+            <!--{/if}-->
+            <!--{if $item[addtime]>strtotime(date('Y-m-d 00:00:00'))}-->
+            <img src="{SITE_URL}app/{$app}/skins/{$skin}/topic_new.gif" align="absmiddle"  title="[新帖]" alt="[新帖]" />
+            <!--{/if}--> 
+            <!--{if $item[isphoto]=='1'}-->
+            <img src="{SITE_URL}app/{$app}/skins/{$skin}/image_s.gif" title="[图片]" alt="[图片]" align="absmiddle" />
+            <!--{/if}--> 
+            <!--{if $item[isattach] == '1'}-->
+            <img src="{SITE_URL}app/{$app}/skins/{$skin}/attach.gif" title="[附件]" alt="[附件]" />
+            <!--{/if}-->
+            <!--{if $item[isposts] == '1'}-->
+            <img src="{SITE_URL}public/images/posts.gif" title="[精华]" alt="[精华]" />
+            <!--{/if}--></td>
+                                <td><a href="{SITE_URL}{tsUrl('group','show',array('id'=>$item[groupid]))}">{$item[group][groupname]}</a></td>
+                                <td><a href="{SITE_URL}{tsUrl('hi','',array('id'=>$item[user][doname]))}">{$item[user][username]}</a></td>
+                                <td align="right"><!--{if $item[count_comment]>0}-->{$item[count_comment]}<!--{/if}--></td>
+                                <td nowrap="nowrap" align="right">&nbsp;&nbsp;&nbsp;&nbsp;{php echo getTime($item[uptime],time())}</td>
+                            </tr>
+             <!--{/loop}-->
+            <!--{/if}-->         
+                </tbody>
+              </table>
+            </div>
+            
+            
+            
+
+<div class="clear"></div>
+
+</div>
+
+<div class="cright">
+
+<p class="pl2">&gt; <a href="{SITE_URL}{tsUrl('group')}">返回我的小组</a></p>
+
+</div>
+</div>
+</div>
+
+
+{template footer}

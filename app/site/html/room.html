@@ -1,0 +1,237 @@
+ <!--头部-->
+{template site_header}
+<!--//头部-->
+<!--导航-->
+{template site_nav}
+<!--//导航-->
+ 
+<!--内容-->
+<div id="content">
+    <!--main-->
+    
+    <div class="main">
+    <noscript>
+        <div class="message">
+            您的浏览器不支持javascript，不能使用此页面的全部功能。
+            请换用其他浏览器或者开启对javascript的支持。
+        </div>
+    </noscript>
+ 
+    <!--{loop $strLeftMod $item}-->
+    	{if $strSite[userid] == $IK_USER[user][userid]}
+		<div  class="mod sort"  id="{$item[table]}-{$item[itemid]}">
+        {else}
+		<div  class="mod" id="{$item[table]}-{$item[itemid]}">
+		{/if}
+			<div class="hd">
+			<h2>
+				<span>$item[title]</span>
+				{if $strSite[userid] == $IK_USER[user][userid]}
+                	{if $item[list]}
+                <span class="pl"> ( {$item[list]}&nbsp;&middot;&nbsp;{$item[action]} ) </span>
+                	{else}
+                <span class="pl"> ( {$item[action]} ) </span>   
+                    {/if}
+                {elseif $item[list] }
+                <span class="pl"> ( {$item[list]} ) </span>
+                {/if}                
+			</h2>
+				<div class="edit">
+					{if $strSite[userid] == $IK_USER[user][userid]} {$item[settingurl]} {/if}
+				</div>
+			</div>
+			<div class="bd">
+                	<!--{if $item[table]=='bulletin'}-->
+                    <div class="bulletin-content" >{php echo nl2br($item[content])}</div>
+                    <!--{/if}-->
+                    
+                	<!--{if $item[table]=='notes'}-->
+                    		<!--{if $item[content]==''}-->
+                            <div class="createnew">
+                                记录你的最新动向 <a href="{SITE_URL}{tsUrl('site','notes',array('ts'=>'create','notesid'=>$item[itemid]))}"> &gt; 提笔写日记</a>
+                            </div>
+                            <!--{else}-->  
+                                 
+                             <!--  {loop $item[content] $item}  -->
+                                <div class="item-entry">
+                                
+                                    <div class="title">
+                                        <a href="{SITE_URL}{tsUrl('site','notes',array('notesid'=>$item[notesid],'noteid'=>$item[contentid]))}" title="{$item[title]}">{$item[title]}</a>
+                                    </div>
+                                    <div class="datetime">{php echo date('Y-m-d H:i:s',$item[addtime])}</div>
+                                    <div id="note_$item[contentid]_short" class="summary">
+                                    	{php echo getsubstrutf8(t($item[content]),0,120)}
+                                    	<a href="{SITE_URL}{tsUrl('site','notes',array('notesid'=>$item[notesid],'noteid'=>$item[contentid]))}#note_{$item[contentid]}_footer">({$item[count_comment]}回应)</a>
+                                    </div>
+                                    
+                                </div>                               		
+                                <!--  {/loop} -->
+                                
+                            <!--{/if}-->
+                    <!--{/if}-->
+                    
+                	<!--{if $item[table]=='forum'}-->
+                            <table class="list-b">
+                            <tr><td>话题</td><td>作者</td><td nowrap="nowrap">回应</td><td align="right">更新时间</td></tr>
+                            <!--  {loop $item[content] $item}  -->
+                            <tr>
+                                <td>{if $item[istop]==1}<img src="/public/images/stick.gif"/>{/if} <a title="{$item[title]}" href="{SITE_URL}{tsUrl('site','forum',array('forumid'=>$item[forumid],'discussid'=>$item[discussid]))}">{$item[title]}</a></td>
+                                    {php $struser = aac('user')->getOneUser($item[userid]);}
+                                <td>来自 <a href="{SITE_URL}{tsUrl('hi','',array('id'=>$struser[doname]))}">																 									{$struser[username]}</a>
+                                </td>
+                                <td class="count" nowrap="nowrap">{$item[count_comment]}</td>
+                                <td class="date">{php echo date('Y-m-d H:i:s',$item[addtime])}</td>
+                            </tr>                           
+                            <!--  {/loop} -->
+                            </table>                             		
+                    <!--{/if}-->                    
+                                        
+			</div>
+		</div>
+		<script type="text/javascript">IK('common', 'setting-eventhandler'); </script>
+    <!--{/loop}-->   
+    
+        
+        <!--{if $countAchives > 0}-->
+        <div id="div_archives" class="mod">
+            <a href="{SITE_URL}{tsUrl('site','archives',array('roomid'=>$roomid))}">&gt; 更多应用</a>
+        </div>
+        <!--{/if}-->
+        
+        <div class="mod" id="sp-rec-room">
+            <div class="bd">
+                <div class="rec-sec">
+                    <span class="rec"></span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+    <!--//main-->
+    
+    <!--aside-->      
+    <div class="aside">
+    
+        <div id="sp-user" class="mod" >
+            <div class="bd">
+                <div class="user-pic">
+                    <img src="{$strSite[icon_180]}" alt="{$strSite[sitename]}">
+                </div>
+                <div class="site-follow">
+					<!--{if $ismyfollow }-->
+            		<span>我喜欢这个小站。</span><span><a id="unlike" href="{SITE_URL}{tsUrl('site','siteac')}" class="lnk-unfollow a_lnk_unlike" title="确实不再关注 {$strSite[sitename]} 吗?">&gt;取消</a></span>
+            		<input id="followed" value="1" type="hidden">
+                    <!--{else}-->  
+                        <!--{if $IK_USER[user][userid] > 0}-->  
+                        <a class="lnk-follow a_lnk_like" href="{SITE_URL}{tsUrl('site','siteac')}" id="like">喜欢</a>
+                        <!--{else}-->
+                        <a class="lnk-follow a_show_login" href="{SITE_URL}{tsUrl('site','siteac')}" id="like">喜欢</a>
+                        <!--{/if}-->
+                    <input id="followed" type="hidden" value="0" />
+                    <!--{/if}-->
+                </div>
+                <div class="desc">
+                    {$strSite[sitedesc]}
+                </div>           
+                <div class="share" id="share-site">
+                    <p>
+                    <strong class="title">分享小站</strong>
+                    <span class="shuo" title="豆瓣广播"><a href="#" class="a_lnk_share" rel="http://www.douban.com/recommend/?|douban|{$strSite[sitename]}|推荐{$strSite[sitename]}的爱客小站|{SITE_URL}{tsUrl('site','mine',array('siteid'=>$siteid))}">&nbsp;</a></span>
+                    <span class="sina" title="新浪微博"><a href="#" class="a_lnk_share" rel="http://v.t.sina.com.cn/share/share.php?appkey=|sina|{$strSite[sitename]}|推荐{$strSite[sitename]}的爱客小站|{SITE_URL}{tsUrl('site','mine',array('siteid'=>$siteid))}">&nbsp;</a></span>
+                    <span class="tqq" title="腾讯微博"><a href="#" class="a_lnk_share" rel="http://v.t.qq.com/share/share.php?source=|qzone|{$strSite[sitename]}|推荐{$strSite[sitename]}的爱客小站|{SITE_URL}{tsUrl('site','mine',array('siteid'=>$siteid))}">&nbsp;</a></span>
+                    </p>
+                    <script>IK('sharetool')</script>
+                </div>                           
+                <div class="site-info">
+                    网站信息
+                </div>
+            </div>
+        </div>
+    
+        <div class="mod" id="db-followers">
+          <div class="hd">
+            <h2>
+                <span>喜欢该小站的成员</span>
+                <span class="pl">
+                        ( <a href="{SITE_URL}{tsUrl('site','likers',array('id'=>$strSite[siteid]))}">{$likesiteNum}</a> )
+                </span>
+            </h2>
+          </div>
+          
+          <div class="bd">
+                <ul class="list-s">
+                    {loop $arrlikeUser $item}
+                    <li>
+                    <div class="pic">
+                        <a class="nbg" href="{SITE_URL}{tsUrl('hi','',array('id'=>$item[doname]))}" title="{$item[username]}">
+                        <img  alt="{$item[username]}" class="imgg" src="{$item[face_32]}">
+                        </a> 
+                    </div>
+                    </li>
+                 	{/loop}
+                </ul>
+          </div>
+          
+        </div>
+        
+ 
+     <!--{loop $strRightMod $item}-->
+		<div class="mod sort" id="{$item[table]}-{$item[itemid]}">
+			<div class="hd">
+			<h2>
+				<span>$item[title]</span>
+				<span class="pl"> ( <a href="updateurl">修改</a> ) </span>
+			</h2>
+				<div class="edit">
+				<a href="#" rel="settingurl" class="a_lnk_mod_setting">设置</a>
+				</div>
+			</div>
+			<div class="bd">
+                	<!--{if $item[table]=='bulletin'}-->
+                    <div class="bulletin-content" >{php echo nl2br($item[content])}</div>
+                    <!--{/if}-->
+                	<!--{if $item[table]=='notes'}-->
+                    		<!--{if $item[content]==''}-->
+                            <div class="createnew">
+                                记录你的最新动向 <a href="http://site.douban.com/widget/notes/8528623/create"> &gt; 提笔写日记</a>
+                            </div>
+                            <!--{else}-->       
+                               {$item[content]}
+                            <!--{/if}-->
+                    <!--{/if}-->                    
+			</div>
+		</div>
+    <!--{/loop}-->   
+
+ 
+    
+    </div>
+    <!--//aside-->  
+ 
+
+    <div class="extra">
+            <a href="#" class="gact">&gt; 举报不良信息</a>
+    </div>
+ 
+</div>
+<!--//内容-->
+<!--{if $strSite[userid] == $IK_USER[user][userid]}-->
+<script type="text/javascript">
+    var mine_page_url="{SITE_URL}{tsUrl('site','layout',array('ts'=>'update','roomid'=>$roomid))}";
+	var globalsiteid = "{$siteid}", globalroomid = "{$roomid}";
+    var aside = false;
+   IK('{SITE_URL}public/js/lib/jquery-ui-sortable-dd.js',
+	  '{SITE_URL}app/site/js/mod_dragdrop.js',
+      '{SITE_URL}app/site/js/nav_dragdrop.js');
+</script>
+<!--{/if}-->
+<script type="text/javascript">
+var pop_like_form = "{SITE_URL}{tsUrl('site','siteac',array('ts'=>'pop_like_form','siteid'=>$siteid))}";
+var pop_unlike_form = "{SITE_URL}{tsUrl('site','siteac',array('ts'=>'pop_unlike_form','siteid'=>$siteid))}";
+IK('room-action');
+</script>
+
+<!--尾部-->
+{template site_footer}
+<!--//尾部-->

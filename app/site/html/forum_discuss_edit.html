@@ -1,0 +1,67 @@
+ <!--头部-->
+{template site_header}
+<!--//头部-->
+<!--导航-->
+{template site_nav}
+<!--//导航-->
+ 
+<!--内容-->
+<div id="content">
+    <!--main-->
+
+<style>
+
+</style>    
+    <div class="main"> 
+         
+        <div class="content-nav">
+        <a href="{SITE_URL}{tsUrl('site','forum',array('ts'=>'list','forumid'=>$forumid))}">&gt; 返回{$strForum[title]}</a>
+        </div>
+        
+        <h1>{$title}</h1>
+        
+        <div class="mod">
+            	
+
+<form id="db-frm-discuss" method="post" action="{SITE_URL}{tsUrl('site','forum',array('ts'=>'updatediscuss','forumid'=>$forumid,'discussid'=>$discussid))}">
+<div style="display:none;"><input type="hidden" name="ck" value="_qHl"/></div>
+<div class="attn" id="errordiv"></div>
+
+<div class="item">
+  <label>标题: </label> <input class="post-title" name="title" type="text" maxlength="100" value="{$strDiscusion[title]}" style="width:88%;">
+</div>
+
+<div class="item">
+  <label><img src="{$strUser[face]}" width="40"></label>
+  <textarea name="content" rows="30" cols="69" style="width:88%; height:300px">{$strDiscusion[content]}</textarea>
+</div>
+
+<div class="item-submit">
+ <span class="bn-flat-hot"><input name="submit" type="submit" value="好了，说吧"/></span>
+ &nbsp;&nbsp;&nbsp;
+ <span class="bn-flat"><input name="cancel" type="button" value="撤消" onClick="javascript:history.go(-1)" /></span>
+</div>
+</form>
+
+        </div>
+
+    </div>
+    
+    <!--//main-->
+    
+    <!--aside-->      
+    <div class="aside">  
+    
+    </div>
+    <!--//aside-->  
+
+    <div class="extra">
+         
+    </div>
+ 
+</div>
+<!--//内容-->
+
+<!--尾部-->
+{template site_footer}
+<!--//尾部-->

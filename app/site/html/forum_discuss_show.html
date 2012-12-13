@@ -1,0 +1,151 @@
+ <!--头部-->
+{template site_header}
+<!--//头部-->
+<!--导航-->
+{template site_nav}
+<!--//导航-->
+ 
+<!--内容-->
+<div id="content">
+    <!--main-->
+
+
+<style>
+.lnk-reply { margin-right:20px; }
+.op-lnks { visibility:hidden;text-align:right; }
+.over .op-lnks { visibility:visible; }
+.reply-quote { width:30em;padding-left:7px;margin:20px 0;border-left:1px solid;  }
+.reply-quote .all { display: none }
+
+.reply-comment { width:90%;position:relative;padding:3px 4px;margin-bottom:5px;background-color:#e8eef2; }
+.reply-comment .lnk-close { position:absolute;right:10px;top:10px;line-height:1;padding:0 2px; }
+.reply-comment .lnk-close:link,
+.reply-comment .lnk-close:visited,
+.reply-comment .lnk-close:hover,
+.reply-comment .lnk-close:active { font-size:16px; }
+.reply-comment .lnk-close:link { color:#999; }
+.reply-comment .lnk-close:hover { background-color:#999;color:#fff; }
+.reply-comment p { width:30em;padding:6px;margin:0; }
+.reply-comment .pubdate { white-space:nowrap;margin-left:10px; }
+
+</style>    
+    <div class="main"> 
+         
+        <div class="content-nav">
+        <a href="{SITE_URL}{tsUrl('site','forum',array('ts'=>'list','forumid'=>$strdiscuss[forumid]))}">&gt; {$strForum[title]}</a>
+        </div>   
+        <h1>{$strdiscuss[title]}</h1>     
+        <div class="mod">
+
+            <div class="post">
+              <div class="post-author"> <a href="{SITE_URL}{tsUrl('hi','',array('id'=>$strUser[doname]))}"><img src="{$strUser[face]}" class="pil"></a> </div>
+              <div class="post-content">
+                <div class="post-info"> <span class="datetime">{php echo date('Y-m-d H:i:s',$strdiscuss[addtime])}</span> <span class="from">来自: <a href="{SITE_URL}{tsUrl('hi','',array('id'=>$strUser[doname]))}">{$strUser[username]}</a>(性格决定命运)</span>
+                </div>
+                <p id="link-report">
+                    {$strdiscuss[content]}
+                	{if $userid>0}<span class="report"><a href="#" rel="nofollow">举报</a></span>{/if}
+                </p>
+                <div class="post-func">
+
+                {if $strdiscuss[userid] == $userid}
+                <a href="{SITE_URL}{tsUrl('site','forum',array('ts'=>'editdiscuss','forumid'=>$forumid,'discussid'=>$discussid))}" rel="nofollow">&gt; 修改&#12288;</a>
+                <a href="{SITE_URL}{tsUrl('site','forum',array('ts'=>'deldiscuss','forumid'=>$forumid,'discussid'=>$discussid))}" rel="nofollow" onClick="return confirm('真的要删除“$strdiscuss[title]”?')" >&gt; 删除&#12288;</a>                
+                {/if}
+                {if  $strForum[userid] == $userid && $strdiscuss[userid] != $userid}
+                <a href="{SITE_URL}{tsUrl('site','forum',array('ts'=>'deldiscuss','forumid'=>$forumid,'discussid'=>$discussid))}" rel="nofollow" onClick="return confirm('真的要删除"$strdiscuss[title]"?')">&gt; 删除&#12288;</a>
+                {/if}
+                {if  $strForum[userid] == $userid}
+                <a href="{SITE_URL}{tsUrl('site','forum',array('ts'=>'istop','forumid'=>$forumid,'discussid'=>$discussid))}" rel="nofollow">&gt; {if $strdiscuss[istop]==0}置顶{else}取消置顶{/if}&#12288;</a>
+                {/if}
+
+                </div>
+                
+              </div>
+            </div>
+            
+<!--评论-->       
+<div class="post-comments">
+  <div id="comments">
+    <!--{loop $arrComment $item}-->
+    <div id="13299013" class="comment-item">
+        <div class="pic">
+            <a href="{SITE_URL}{tsUrl('hi','',array('id'=>$item[user][doname]))}"><img alt="{$item[user][username]}" src="{$item[user][face]}"></a>
+        </div>
+        <div class="content report-comment">
+            <div class="author">
+              <a href="{SITE_URL}{tsUrl('hi','',array('id'=>$item[user][doname]))}">{$item[user][username]}</a> 
+              {php echo date('Y-m-d H:i:s',$item[addtime])}
+            </div>
+            <p>{php echo nl2br($item[content])}</p>
+            
+            <div class="op-lnks">
+                {if $userid>0}
+                	{if $item[user][userid]==$userid || $strForum[userid]==$userid}
+                <a title="删除{$item[user][username]}的留言?" class="" href="{SITE_URL}{tsUrl('site','forum',array('ts'=>'del_comment','forumid'=>$forumid,'discussid'=>$discussid,'commentid'=>$item['commentid']))}" rel="nofollow" onClick="return confirm('删除{$item[user][username]}的留言?')">删除</a>
+                	{/if}
+                {/if}
+            	{if $userid>0}<span class="comment-report"><a href="#" rel="nofollow">举报</a></span>{/if}
+            </div>
+    
+
+        </div>
+    </div>
+    <!--{/loop}--> 
+    <div id="last"></div>
+    {if $userid == '' }
+    <div class="comment-lnk">&gt;&nbsp;
+    <a href="#add_comment" rel="nofollow" class="a_show_login">我来回应</a>
+    </div>
+    {/if}
+    {if $mycommentTime && $userid>0}    
+    <h2>你的回应 &nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;· </h2>
+    <div id="add_comment" class="comment-form txd">
+      <form action="{SITE_URL}{tsUrl('site','forum',array('ts'=>'add_comment','forumid'=>$forumid,'discussid'=>$discussid))}" method="post" name="comment_form">
+        <div style="display:none;">
+          <input type="hidden" value="-PMQ" name="ck">
+        </div>
+        <div class="item">
+          <textarea cols="64" rows="4" name="content"></textarea>
+          <br>
+        </div>
+        <div class="item">
+        	<span class="bn-flat-hot ">
+          <input type="submit" value="加上去">
+          </span>
+         </div>
+      </form>
+    </div>
+    {elseif $userid>0}
+    <div class="comment-lnk">&gt;&nbsp;
+    <a href="{SITE_URL}{tsUrl('site','forum',array('forumid'=>$forumid,'discussid'=>$discussid,'goon'=>'1'))}#add_comment" rel="nofollow">继续发言</a>
+    </div>    
+    {/if}
+  </div>
+</div>
+<!--//评论-->            
+{template comment_tpl} 
+            
+        </div>
+
+
+    </div>
+    
+    <!--//main-->
+    
+    <!--aside-->      
+    <div class="aside">  
+    
+    </div>
+    <!--//aside-->  
+
+    <div class="extra">
+         
+    </div>
+ 
+</div>
+<!--//内容-->
+
+<!--尾部-->
+{template site_footer}
+<!--//尾部-->

@@ -1,0 +1,103 @@
+<!--头部-->
+{template site_header}
+<!--//头部-->
+<!--导航-->
+{template site_nav}
+<!--//导航-->
+
+<!--内容-->
+<div id="content">
+<style>
+#sp-admin li,
+#sp-followers li { width:16%; }
+.sidenav p { margin-bottom: 20px }
+.tips-light { font-size: 12px; margin-bottom: 30px }
+#sp-followers .error-msg { color: #FF2200; padding-left: 20px; }
+.host-event-admin {fint-size:12px;margin-left:5px;}
+</style>
+    <!--main-->
+    <div class="main">
+      <h1>{$title}</h1>
+      <div class="user-search">
+        <form method="get" action="{SITE_URL}{tsUrl('site','likers',array('ts'=>'search'))}" name="usp_form">
+          <input type="text" title="名号、个人域名、常居地、email" value="" maxlength="36" class="search-input" name="keyword">
+          <input type="submit" class="search-submit">
+        </form>
+      </div>
+     {if $adminUser[userid] == $IK_USER[user][userid]}
+      <div class="mod" id="sp-admin">
+        <div class="hd">
+          <h2> <span>小站管理员</span> <span class="pl"> </span> </h2>
+        </div>
+        <div class="bd">
+          <div class="followers-admin">
+            <ul class="list-s">
+              <li>
+                <div class="pic"> <a class="nbg" href="{SITE_URL}{tsUrl('hi','',array('id'=>$adminUser[doname]))}">
+                 <img title="{$adminUser[username]}" alt="{$adminUser[username]}" class="imgg" src="{$adminUser[face]}"></a> </div>
+                <div class="info">
+                 <span class="name">
+                 	<a href="{SITE_URL}{tsUrl('hi','',array('id'=>$adminUser[doname]))}">{$adminUser[username]}</a>
+                 </span>		 				 
+                 <span class="opt"><a title="授予小豆管理权限" href="#"></a> </span> 
+                 </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+     {/if} 
+      <div class="mod" id="sp-followers">
+        <div class="hd">
+          <h2> <span>普通成员</span> <span class="pl"> </span> </h2>
+        </div>
+        <div class="bd">
+          <ul class="list-s">
+            {loop $arrlikeUser $item}
+            <li>
+              <div class="pic">
+              <a class="nbg" href="{SITE_URL}{tsUrl('hi','',array('id'=>$item[doname]))}">
+              <img title="{$item[username]}" alt="{$item[username]}" class="imgg" src="{$item[face]}">
+              </a>
+              </div>
+              <div class="info"> 
+              <span class="name"><a href="{SITE_URL}{tsUrl('hi','',array('id'=>$item[doname]))}">{$item[username]}</a> <em></em> </span> 						 			  
+              <span class="loca">({$item[area][areaname]})</span>
+              {if $adminUser[userid] == $IK_USER[user][userid]}
+              <span class="opt"> 
+              <a title="担任管理员" href="{SITE_URL}{tsUrl('site','likers',array('ts'=>'promote','userid'=>$item[userid]))}" class="icon-star"></a> 
+              <a title="拉入黑名单" href="{SITE_URL}{tsUrl('site','likers',array('ts'=>'blacklist','userid'=>$item[userid]))}" class="icon-ban"></a> 
+              </span>
+              {/if} 
+              </div>
+            </li>
+            {/loop}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!--//main-->
+    
+     <!--aside-->    
+    <div class="aside">
+    	{if $adminUser[userid] == $IK_USER[user][userid]}
+        <div class="mod sidenav">
+            <p>&gt;&nbsp;<a href="#">管理黑名单</a></p>
+            <p>&gt;&nbsp;<a href="#">转让小站主人身份</a></p>
+        </div>
+        {/if}
+    </div>
+    <!--//aside-->  
+ 
+
+    <div class="extra">
+            
+    </div>
+ 
+</div>
+<!--//内容-->
+
+<!--尾部-->
+{template site_footer}
+<!--//尾部-->
+

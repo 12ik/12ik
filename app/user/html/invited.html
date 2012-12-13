@@ -1,0 +1,82 @@
+{template header}
+<link type="text/css" rel="stylesheet" href="{SITE_URL}app/{$app}/skins/{$skin}/validate.css" id="skin" />
+<script src="{SITE_URL}public/js/validate/jquery.validateid.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	var validator = $("#signupform").validate({
+		onkeyup: false,
+		rules:{
+			pwd: {
+				required: true,
+				minlength: 6
+			},
+			username:{
+				required: true,
+				minlength: 2,
+				maxlength: 15,
+				remote:"{SITE_URL}index.php?app=user&ac=check&ts=isusername"
+			}
+		},
+		messages: {
+			pwd: {
+				required: "请输入密码",
+				minlength: jQuery.format("至少输入6个字符")
+			},
+			username:{
+				required:"请输入用户名",
+				minlength: jQuery.format("至少输入2个字符"),
+				maxlength: jQuery.format("最多输入15个字符"),
+				remote:jQuery.format("用户名已经存在，请更换其他用户名")
+			}
+		},
+
+		// the errorPlacement has to take the table layout into account
+		errorPlacement: function(error, element) {
+				error.appendTo( element.next() );
+		},
+
+		success: function(label) {
+			// set &nbsp; as text for IE
+			label.html("&nbsp;").addClass("checked");
+		}
+	});
+
+});
+</script>
+<div class="midder">
+
+<div class="mc">
+	<h1>欢迎, {$invitedUser[invitemail]}</h1>
+	<div class="cleft">
+    
+<div class="invitedbd">
+<form id="signupform" method="post" action="{SITE_URL}{tsUrl('user','register',array('ts'=>'from_invite_user'))}">
+    <h3>请给自己选一个名号和密码，然后马上进入爱客网</h3>
+    <div class="indent">
+        <br>你的名号(以后大家怎么称呼你。建议五字内的中文名。<br>
+        <input  type="text" size="15" maxlength="15" value=""  id="username" name="username" class="uinput" style="width:200px"> 
+        <span class="status"></span><br>
+        <br>你的密码(你在别的电脑上上网时需要用它登录。英文字母，符号或数字。<br>
+        <input  type="password" id="pwd" name="pwd" size="12" maxlength="20" value="" class="uinput" style="width:200px"> 
+        <span class="status"></span><br>
+        
+        <br>
+        <input name="form_register" class="submit" type="submit" value="完成"><br>
+        <input type="hidden" name="email" value="{$invitedUser[invitemail]}">
+        <input type="hidden" name="fuserid" value="{$invitedUser[userid]}">
+    </div>
+</form>
+</div>
+
+    </div>
+
+    <div class="cright">
+ 
+
+
+    </div>
+
+</div>
+</div>
+{template footer}

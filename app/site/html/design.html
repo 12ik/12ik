@@ -1,0 +1,480 @@
+<!--头部-->
+{template site_header}
+<!--//头部-->
+<!--导航-->
+{template site_nav}
+<!--//导航-->
+
+<!--内容-->
+<div id="content">
+    <!--main-->
+    <div class="main">           
+        <h1>小站管理</h1>               
+        <div class="mod" id="sp-setting">
+            <div class="hd">
+					{template setting_nav}
+            </div>
+        
+<div class="bd">
+        <h2>请选择一个主题</h2>
+        <ul class="list-s sys-bg-list">
+        
+            <li id="bg-1" ><img alt="" src="{SITE_URL}app/site/pics/site/theme/1/thumbnail.png" {if $strTheme[theme_id]==1} class="selected" {/if}></li>
+            <li id="bg-2" ><img alt="" src="{SITE_URL}app/site/pics/site/theme/2/thumbnail.png" {if $strTheme[theme_id]==2} class="selected" {/if}></li>
+            <li id="bg-3" ><img alt="" src="{SITE_URL}app/site/pics/site/theme/3/thumbnail.png" {if $strTheme[theme_id]==3} class="selected" {/if}></li>
+            <li id="bg-4" ><img alt="" src="{SITE_URL}app/site/pics/site/theme/4/thumbnail.png" {if $strTheme[theme_id]==4} class="selected" {/if}></li>
+            <li id="bg-5" ><img alt="" src="{SITE_URL}app/site/pics/site/theme/5/thumbnail.png" {if $strTheme[theme_id]==5} class="selected" {/if}></li>            
+            <li id="bg-6" ><img alt="" src="{SITE_URL}app/site/pics/site/theme/6/thumbnail.png" {if $strTheme[theme_id]==6} class="selected" {/if}></li>
+            <li id="bg-7" ><img alt="" src="{SITE_URL}app/site/pics/site/theme/7/thumbnail.png" {if $strTheme[theme_id]==7} class="selected" {/if}></li>
+            <li id="bg-8" ><img alt="" src="{SITE_URL}app/site/pics/site/theme/8/thumbnail.png" {if $strTheme[theme_id]==8} class="selected" {/if}></li>
+            <li id="bg-9" ><img alt="" src="{SITE_URL}app/site/pics/site/theme/9/thumbnail.png" {if $strTheme[theme_id]==9} class="selected" {/if}></li>            
+            <li id="bg-10" ><img alt="" src="{SITE_URL}app/site/pics/site/theme/10/thumbnail.png" {if $strTheme[theme_id]==10} class="selected" {/if}></li>
+            <li id="bg-11" ><img alt="" src="{SITE_URL}app/site/pics/site/theme/11/thumbnail.png" {if $strTheme[theme_id]==11} class="selected" {/if}></li>
+            <li id="bg-12" ><img alt="" src="{SITE_URL}app/site/pics/site/theme/12/thumbnail.png" {if $strTheme[theme_id]==12} class="selected" {/if}></li>            
+            <li id="bg-13" ><img alt="" src="{SITE_URL}app/site/pics/site/theme/13/thumbnail.png" {if $strTheme[theme_id]==13} class="selected" {/if}></li>            
+            <li id="bg-14" ><img alt="" src="{SITE_URL}app/site/pics/site/theme/14/thumbnail.png" {if $strTheme[theme_id]==14} class="selected" {/if}></li> 
+            <li id="bg-15" ><img alt="" src="{SITE_URL}app/site/pics/site/theme/15/thumbnail.png" {if $strTheme[theme_id]==15} class="selected" {/if}></li>             
+            <li id="bg-16" ><img alt="" src="{SITE_URL}app/site/pics/site/theme/16/thumbnail.png" {if $strTheme[theme_id]==16} class="selected" {/if}></li>             
+                                    
+        </ul>
+        <div class="sp-design-opt">
+            
+            <input type="button" value="修改背景图" class="btn-large" name="bg-modify" hidefocus="hidefocus">
+            <input type="button" value="修改主题颜色" class="btn-large" name="theme-modify" hidefocus="hidefocus">
+            
+            <form enctype="multipart/form-data" method="post" 
+            action="{SITE_URL}{tsUrl('site','custom',array('ts'=>'background','siteid'=>$strSite[siteid]))}" id="bg-upload-form" target="iframe-post-form">
+            	<div style="display:none;"><input type="hidden" value="{$strTheme[ck]}" name="ck">
+                <input type="hidden" value="{$strTheme[background_ver]}" name="ver"></div>
+                <input type="file" id="sp-bg-upload" name="picfile">
+                <label for="sp-bg-upload">背景图高度300px，可以上传不超过800KB的 JPG, JPEG, GIF, PNG 文件</label>
+            </form>
+                
+            <div class="mod-setting" id="sp-bg-modify"> 
+                <div class="sp-bg-preview">
+                   
+    <!--{if $strTheme[background_cancel]!='true'}-->
+    <span title="应用背景图" class="sp-bg-show selected">
+		<!--{if $strTheme[background_image]}-->
+        <img src="uploadfile/site/custom/theme/{$strTheme[background_ver]}/{$strTheme[background_image]}?ver={$strTheme[background_ver]}" class="sys-bg" bgimg="{$strTheme[background_image]}" bgpath="{$strTheme[background_path]}">
+        <!--{/if}-->
+        <!--{if $strTheme[theme_id]!=0}-->
+        <img src="{SITE_URL}app/site/pics/site/theme/$strTheme[theme_id]/thumbnail.png" class="sys-bg" bgimg="" bgpath="">
+        <!--{/if}-->
+    </span>
+    <!--{else}-->
+    <span title="应用背景图" class="sp-bg-show"></span>
+    <!--{/if}-->
+                    
+                    <!--{if $strTheme[background_cancel]== 'true'}-->
+                    <span title="取消背景图" class="sp-bg-none selected"></span>
+                    <!--{else}-->
+                    <span title="取消背景图" class="sp-bg-none"></span>
+                    <!--{/if}-->
+
+                    <div class="sp-bg-sel">
+                        
+                        <input type="radio" value="left" name="sp-bg" id="pos-left">
+                        <label for="pos-left">居左</label>
+                        	<input type="radio" value="center" name="sp-bg" id="pos-center">
+                        <label for="pos-center">居中</label>
+                        	<input type="radio" value="right" name="sp-bg" id="pos-right">
+                        <label for="pos-right">居右</label>
+                        <br>
+                        <input type="checkbox" id="sp-bg-repeat" {if $strTheme[background_repeat]=='repeat'}checked="checked"{/if}>
+                        <label for="sp-bg-repeat">平铺背景图片</label>
+                        <br>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="mod-setting" id="sp-theme-modify">
+            	<div id="picker" style="float: right;"></div>
+                <div class="sp-theme-sel">
+                    <ul>
+                        <li>
+                            <span class="kind">页面背景</span>
+                            <a hidefocus="true" id="theme-bg" href="javascript:;"><em>▼</em></a>
+                        </li>
+                        <li>
+                            <span class="kind">顶部横幅背景</span>
+                            <a hidefocus="true" id="theme-banner" href="javascript:;"><em>▼</em></a>
+                        </li>
+                        <li>
+                            <span class="kind">顶部标签背景</span>
+                            <a hidefocus="true" id="theme-tag-bg" href="#"><em>▼</em></a>
+                        </li>
+                        <li>
+                            <span class="kind">顶部标签文字</span>
+                            <a hidefocus="true" id="theme-tag-link" href="#"><em>▼</em></a>
+                        </li>
+                        <li>
+                            <span class="kind">页面链接</span>
+                            <a hidefocus="true" id="theme-link" href="#"><em>▼</em></a>
+                        </li>
+                    </ul>
+                </div> 
+            </div>
+            <div class="sp-setting-btn">
+                <span href="" class="bn-flat-hot" id="submit-theme"><input type="submit" hidefocus="1" value="保存修改"></span>
+                <a href="#" id="cancel-theme">取消</a>
+            </div>
+<script>
+IK.add('colorpicker-css', {path: '{SITE_URL}public/js/colorpicker/css/colorpicker.css', type: 'css'});
+IK.add('colorpicker', {path: '{SITE_URL}public/js/colorpicker/js/colorpicker.js', type: 'js', requires: ['colorpicker-css']});
+IK.add('effects', {path: '{SITE_URL}public/js/ui/jquery-ui-effects-core.min.js', type: 'js'});
+IK.add('iframe-post-form-css', {path: '{SITE_URL}public/css/lib/iframe-post-form.css', type: 'css'});
+IK.add('iframe-post-form', {path: '{SITE_URL}public/js/lib/iframe-post-form.min.js', type: 'js', requires: ['iframe-post-form-css']});
+
+IK('colorpicker', 'effects', 'iframe-post-form', function () {
+	 var 	self,
+            bgVer = '',
+            currId = '',
+            currColor = '',
+            bgRepeat = '',
+			oBg = $('.bg'),
+		 	oBgRepeat = $('#sp-bg-repeat'),
+			oColorSelector = $('.sp-theme-sel a'),
+			siteId = $('body').attr('id'),
+			rgb2hex = function (rgb) {
+                if (!$.browser.msie) {
+                    var hexDigits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'],
+                        rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+                        hex = function (x) {
+                            return isNaN(x) ? '00' : hexDigits[(x - x % 16) / 16] + hexDigits[x % 16];
+                        }
+                    return '#' + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+                } else {
+                    return rgb;
+                }
+            },
+            getBgColor = function (o) {
+				return rgb2hex(o.css('background-color'));
+            },
+			removeTips = function () {
+                $(css_top_tips).slideUp(function () {
+                    $(this).remove();
+                })
+            },
+			 
+			 oThumbnail = $('.sys-bg-list li'),
+			 oInputAll = $('.sp-bg-sel input'),
+			 oBgPos = $('input[name="sp-bg"]'),
+			 oInitTheme = $('#init-theme'),
+			 oCustomTheme = $('#custom-theme'),
+			 oThemeCSS = $('#sys-theme'),
+			 oBgShow = $('.sp-bg-show'),
+			 oBgNone = $('.sp-bg-none'),
+			 oSwither = $('.btn-large'),
+			 oFormUpload = $('#bg-upload-form'),
+			 oUpload = $('#sp-bg-upload'),
+			 oSubmit = $('#submit-theme'),
+			 oBgCancel = $('#cancel-theme'),
+			 css_tips = '#upload-tips',
+             css_top_tips = '#top-tips',
+             css_error_tips = '.error-tips',
+             css_bn_active = 'btn-large-active',
+			 tmpl_upload_tips = '<span id="upload-tips">上传中，请稍候...</span>',
+             tmpl_top_tips = '<div id="top-tips">你的最新设置已经被成功保存.</div>',
+             tmpl_error_tips = '<span class="error-tips">文件大小不得超过800k</span>',
+			 
+			 designStatus = {
+                hasThemeId: false,
+                hasBgPos: false,
+                hasBgRepeat: false,
+                hasCustomColor: false
+             },
+			 initInput = function () {
+                var posX = $.browser.msie ? oBg.css('background-positionX') : oBg.css('background-position').split(' ')[0];
+                // init background repeat
+                if (oBg.css('background-repeat') !== 'no-repeat') {
+                    oBgRepeat.attr('checked', 'checked');
+                } else {
+                    oBgRepeat.removeAttr('checked');
+                }
+                // init background position
+
+                if (posX === '0%') {
+                    $('#pos-left').attr('checked', 'checked');
+                } else if (posX === '50%') {
+                    $('#pos-center').attr('checked', 'checked');
+                }
+            };
+			
+	   initInput();
+	   
+	   //颜色选择器 
+       oColorSelector.ColorPicker({
+            onBeforeShow: function () {
+                	self = this,
+                    currId = $(self).attr('id'),
+					currColor = getBgColor($(self));
+                $(this).ColorPickerSetColor(currColor);
+            },
+            onChange: function (hsb, hex, rgb) { 
+                switch (currId) {
+                    case 'theme-bg':
+                    oBg.css('background-color', '#' + hex);
+                    break;
+
+                    case 'theme-banner':
+                    $('.sp-nav').css('background', '#' + hex);
+                    break;
+
+                    case 'theme-tag-bg':
+                    $('.nav-items li').css('background', '#' + hex);
+					$('.type-nav .on a, .type-nav a:hover').css({'background':'#' + hex,'color':'#fff'});
+                    $('.nav-items .on').css('background', '#fff');
+                    break;
+
+                    case 'theme-tag-link':
+                    $('.nav-items a').css('color', '#' + hex);
+                    break;
+                    
+                    case 'theme-link':
+                    $('.top-nav-info a, #footer a').css('color', '#' + hex);
+                    break;
+                }
+                $(self).css('backgroundColor', '#' + hex);
+				designStatus.hasCustomColor = true;
+            }
+        }).click(function (e) {
+            e.preventDefault();
+        });
+	
+	    // 系统风格
+        oThumbnail.click(function (e) {
+            var id = $(this).attr('id').split('-')[1],
+                bgUrl = siteUrl+'app/site/pics/site/theme/' + id + '/bg.png',
+                src = $(this).children().attr('src');
+
+            // change style
+            oCustomTheme.remove();
+            oInitTheme.remove();
+            oInputAll.removeAttr('disabled');
+            oThumbnail.children('.selected').removeClass();
+            $('img', this).attr('class', 'selected');
+            oBgShow.html('<img class="sys-bg" src="' + src + '" />').addClass('selected');//应用背景图
+            oBgNone.removeClass('selected'); //取消应用背景图
+			oBgRepeat.removeAttr('checked');
+			
+            // clear inline style
+            $('.bg, .sp-nav, .nav-items li, .nav-items .on, .nav-items a, .top-nav-info a, #footer a, #theme-bg, #theme-banner, #theme-tag-bg, #theme-tag-link, #theme-link').removeAttr('style');
+            oThemeCSS.attr('href', siteUrl+'app/site/css/site/theme/' + id + '/core.css');
+
+            // clear flag
+            //bgVer = '';
+            designStatus.hasBgPos = false;
+            designStatus.hasBgRepeat = false;
+            designStatus.hasCustomColor = false;
+            designStatus.hasThemeId = true;
+
+           // initInput();
+        });
+		
+		//去背景图
+        oBgNone.click(function () {
+            $(this).addClass('selected').prev().removeClass('selected');
+            oBg.css('background-image', 'none');
+            oInputAll.attr('disabled', 'disabled'); 
+        });
+		//设置背景图
+		oBgShow.click(function () {
+            var currBg;
+            $(this).attr('class', 'sp-bg-show selected').
+                next().removeClass('selected');
+            // restore background
+            if ($('img', this).hasClass('sys-bg')) {
+                currBg = $('img', this).attr('src').replace('thumbnail', 'bg');
+            } else {
+                currBg = $('img', this).attr('src');
+            }
+            oInputAll.removeAttr('disabled');
+            oBg.css('background-image', 'url(' + currBg + ')');
+        });
+		
+		// 背景图位置 
+        oBgPos.change(function () {
+            var bgPosX = $(this).val();
+            oBg.css('background-position', bgPosX + ' top' );
+            designStatus.hasBgPos = true;
+        });
+		// 背景重复
+        oBgRepeat.change(function () {
+            var isRepeat = $(this).is(':checked');
+            oBg.css('background-repeat', isRepeat ? 'repeat' : 'no-repeat');
+            designStatus.hasBgRepeat = true;
+        });
+
+        /* 标签切换 */
+        oSwither.click(function (e) {
+            e.preventDefault();
+            var btnId = '#sp-' + $(this).attr('name');
+
+            if (!$(this).hasClass(css_bn_active)) {
+                $('.btn-large').removeClass(css_bn_active);
+                $(this).addClass(css_bn_active);
+                $('.mod-setting').hide();
+                $(btnId).fadeIn();
+                if (btnId === '#sp-bg-modify') {
+                    oFormUpload.show();
+                } else {
+                    oFormUpload.hide();
+                }
+            }
+        });
+		// ajax 上传背景图
+        oFormUpload.iframePostForm({
+            post: function () {
+                if (!$(css_tips).length) {
+                    oUpload.after(tmpl_upload_tips);
+                }
+                $(css_error_tips).remove();
+            },
+            complete: function (bg) {
+				
+               var realJson = eval('(' + bg.match(/\{[^\}]+\}/)[0]  + ')'),
+			   	    bgUrl = realJson.pic,
+					path = realJson.path,
+					url = realJson.url;
+                // save bg version
+                bgVer = realJson.ver;
+                designStatus.hasBgVer = true;
+				//设置版本
+				$('input[name=ver]').val(bgVer);
+
+                // remove uploading tips
+                $(css_tips).remove();
+                if (!realJson.error) {
+                    oBgShow.html('<img src="' + bgUrl + '" bgimg="'+url+'" bgpath="'+path+'"/>');
+                    oBg.css({
+                        'background-image': 'url(' + bgUrl + ')',
+                        'background-position': 'left top',
+                        'background-repeat': 'repeat'
+                    });
+                    $('#pos-left').attr('checked', 'checked');
+                    oBgRepeat.attr('checked', 'checked');
+                    designStatus.hasBgRepeat = true;
+
+                    // remove system theme selected border
+                    oThumbnail.children('img').removeClass();
+                    oBgNone.removeClass('selected');
+                    oBgShow.addClass('selected');
+                    oInputAll.removeAttr('disabled');
+                } else {
+                    if (!$(css_error_tips).length) {
+                        oUpload.after(tmpl_error_tips);
+                    }
+                }
+            }
+        }).find('#sp-bg-upload').change(function () {
+            $(this).parent().submit();
+        });
+		
+	     // 取消设置
+        oBgCancel.click(function (e) {
+            e.preventDefault();
+            window.location.reload(); 
+        });
+		
+		/* 保存theme */
+        oSubmit.click(function (e) {
+            e.preventDefault();
+            var isCustom = oThumbnail.children('img').hasClass('selected'),
+                sysThemeId = '',
+                themeBg = '', themeBanner = '', themeTagBg = '', themeTagLink = '', themeLink = '',
+                bgPos = '', bgRepeat = '', bgNone = '',bgimg = '',bgpath='';
+                
+            // get system themeId
+            if (isCustom) {
+                sysThemeId = $('.sys-bg-list .selected').parent().attr('id').split('-')[1];
+            }
+            
+            // get custom colors
+			themeBg = getBgColor($('#theme-bg')),
+			themeBanner = getBgColor($('#theme-banner')),
+			themeTagBg = getBgColor($('#theme-tag-bg')),
+			themeTagLink = getBgColor($('#theme-tag-link'));
+			themeLink = getBgColor($('#theme-link'));
+            // get background position
+			bgPos = $('input[name="sp-bg"]:checked').val();
+            // get background repeat
+			bgRepeat = oBgRepeat.is(':checked') ? 'repeat' : 'no-repeat';
+
+            // background none
+			bgNone = oBgNone.hasClass('selected') ?  true : false;
+			
+			// 背景图
+
+			bgimg = oBgShow.find('img').length > 0 ? oBgShow.find('img').attr('bgimg') : '';
+			bgpath = oBgShow.find('img').length > 0 ? oBgShow.find('img').attr('bgpath') : '';
+
+
+			// 背景固定 还是滚动
+            bgFixed = $('#sp-bg-fixed').is(':checked') ? 'fixed' : 'scorll';
+            bannerTransparent = $('#banner_transparent').is(':checked') ? true : false;
+
+            // 开始保存
+            $.post_withck(
+                siteUrl+'index.php?app=site&ac=custom&ts=savetheme&siteid=' + siteId ,
+                {
+                    'theme_id': sysThemeId,
+                    'background_ver': bgVer,
+                    'background_pos': bgPos,
+                    'background_repeat': bgRepeat,
+                    'background_cancel': bgNone,
+                    'background_color': themeBg,
+                    'banner_color': themeBanner,
+                    'tab_color': themeTagBg,
+                    'tab_link_color': themeTagLink,
+                    'link_color': themeLink,
+					'background_image' : bgimg,
+					'background_path' :  bgpath,
+					
+					'biz_theme': $('input[name="biz-theme"]:checked').val(),
+                    'bg_fixed': bgFixed,
+                    'logo_color': $('input[name="logo_color"]').val(), 
+                    'banner_transparent': bannerTransparent
+                },
+				//成功
+                function () {
+                        if (!$(css_top_tips).length) {
+                            $('body').append(tmpl_top_tips);
+                            $(css_top_tips).slideDown();
+                            setTimeout(removeTips, 5000); 
+                        }
+                }
+            );
+        });
+		// close top tips
+        $('body').delegate(css_top_tips, 'click', removeTips);
+});
+</script>
+
+            
+        </div>
+    </div>
+
+        </div>
+    </div>
+    <!--//main-->
+    
+     <!--aside-->    
+    <div class="aside">
+        {template admins_aside}
+    </div>
+    <!--//aside-->  
+ 
+
+    <div class="extra">
+            
+    </div>
+ 
+</div>
+<!--//内容-->
+
+<!--尾部-->
+{template site_footer}
+<!--//尾部-->
+

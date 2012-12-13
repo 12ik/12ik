@@ -1,0 +1,71 @@
+<!--头部-->
+{template site_header}
+<!--//头部-->
+<!--导航-->
+{template site_nav}
+<!--//导航-->
+
+<!--内容-->
+<div id="content">
+    <!--main-->
+    <div class="main">           
+        <h1>小站管理</h1>               
+        <div class="mod" id="sp-setting">
+            <div class="hd">
+					{template setting_nav}
+            </div>
+        
+<div class="bd">
+        <div class="mod" id="dou-balance">
+            <div class="bd">
+                <p>乖乖网暂时没有小豆</p>
+            </div>
+        </div>
+
+        <div class="mod" id="dou-details">
+            <h2>最近记录</h2>
+            <div class="bd">
+                <table cellspacing="0" cellpadding="0" border="0">
+        <thead>
+            <tr>
+                <th class="td-user">用户</th>
+                <th class="td-in">收到</th>
+                <th class="td-out">给出</th>
+                <th class="td-datetime">时间</th>
+                <th class="td-type">类型</th>
+                <th>备注</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+            </div>
+        </div>
+
+        <div class="ft">
+            &gt; <a href="./?start=0">所有记录</a>
+        </div>
+    </div>
+    
+        </div>
+    </div>
+    <!--//main-->
+    
+     <!--aside-->    
+    <div class="aside">
+        {template admins_aside}
+    </div>
+    <!--//aside-->  
+ 
+
+    <div class="extra">
+            
+    </div>
+ 
+</div>
+<!--//内容-->
+
+<!--尾部-->
+{template site_footer}
+<!--//尾部-->

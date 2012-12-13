@@ -1,0 +1,48 @@
+ <!--头部-->
+{template site_header}
+<!--//头部-->
+<!--导航-->
+{template site_nav}
+<!--//导航-->
+ 
+<!--内容-->
+<div id="content">
+    <!--main-->  
+    <div class="main"> 
+<style>
+div.edit { display:none; }
+.sort .hd h2 { cursor:auto; }
+</style>         
+        <div id="bulletin-{$bulletinid}" class="mod sort">
+              <div class="hd">
+                <h2> <span>{$title}</span> <span class="pl"> ( <a href="{SITE_URL}{tsUrl('site','bulletin',array('siteid'=>$siteid,'ts'=>'update','bulletinid'=>$bulletinid))}">修改</a> ) </span> </h2>
+              </div>
+          
+              <div class="bd">
+                <div data-id="{$bulletinid}" id="link-report{$bulletinid}" class="bulletin-content">
+                	{php echo nl2br($strBulletin[content])}
+                  <div class="report" style="visibility: hidden;"><a href="#" rel="nofollow">举报</a></div>
+                </div>
+              </div>
+        </div>
+
+    </div>
+    
+    <!--//main-->
+    
+    <!--aside-->      
+    <div class="aside">  
+    
+    </div>
+    <!--//aside-->  
+
+    <div class="extra">
+         
+    </div>
+ 
+</div>
+<!--//内容-->
+
+<!--尾部-->
+{template site_footer}
+<!--//尾部-->

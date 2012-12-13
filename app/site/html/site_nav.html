@@ -1,0 +1,104 @@
+<div id="header">
+       <div class="top-nav">
+            <a class="logo" href="{SITE_URL}" title="{$IK_SITE[base][site_title]}">{$IK_SITE[base][site_title]}</a>
+            <div class="top-nav-info">
+                <!--{if $IK_USER[user] == ''}-->
+				<a href="{SITE_URL}{tsUrl('user','login')}">登录</a> <a href="{SITE_URL}{tsUrl('user','register')}">注册</a>       
+                <!--{else}-->
+                <a id="newmsg" href="{SITE_URL}{tsUrl('message','ikmail',array(ts=>inbox))}">新消息</em></a>
+                <a href="{SITE_URL}{tsUrl('user','set',array(ts=>base))}" target="_blank">{$IK_USER[user][username]}的帐号</a>
+                <a href="{SITE_URL}{tsUrl('user','login',array(ts=>out))}">退出</a>
+                <!--{/if}-->                
+                
+            </div>
+       </div>
+       
+<div class="sp-nav">
+<!--sp-logo-->
+<div class="sp-logo">
+    <a class="logo" 
+    href="{SITE_URL}{tsUrl('site','mine',array('siteid'=>$strSite[siteid]))}" 
+    title="{$strSite[sitename]}">
+    <img width="48" height="48" style="background:url({$strSite[icon_48]}) no-repeat 0 0;" 
+    src="{SITE_URL}public/images/blank.gif" alt="{$strSite[sitename]}">{$strSite[sitename]}</a>
+</div>
+<!--nav-items--> 
+<div class="nav-items">
+<ul>                    
+<!--{loop $strNavs $item}-->
+<li {if $item[roomid] == $roomid} class="on" {/if}>
+    <a hidefocus="true" href="{SITE_URL}{tsUrl('site','room',array('siteid'=>$strSite[siteid],'roomid'=>$item[roomid]))}" roomid="$item[roomid]">
+         <span>{$item[name]}</span>{if $item[roomid] == $roomid && $strSite[userid] == $IK_USER[user][userid] }<em title="房间设置">房间设置</em> {/if}
+    </a>
+</li>
+<!--{/loop}-->
+<!--{if $strSite[userid] == $IK_USER[user][userid]}-->
+<li class="opt" id="room-admin">
+	<a href="{SITE_URL}{tsUrl('site','admins',array('siteid'=>$strSite[siteid]))}" id="admin-icon" title="管理小站">管理小站</a>
+    <div class="user-guide" style="display:none">
+        <em></em>
+        <h1>小站设置</h1>
+        <span>1/2</span>
+        <p>16套主题模板，让你的小站与众不同。</p><a class="lnk-add" href="#" id="next-step">知道了</a>
+    </div>
+</li>
+<!--{/if}-->
+</ul>
+</div>
+<!--{if $strSite[userid] == $IK_USER[user][userid]}-->
+<script>
+<!--{if empty($strLeftMod) && empty($strRightMod) && $isRoomEmpty==1}-->
+var isRoomEmpty = true;//页面空 true 否则false
+<!--{else}-->
+var isRoomEmpty = false; //页面空 true 否则false
+<!--{/if}-->
+<!--{if $strSite[issetting]==0}-->
+var isSiteFirstEnter = true;//页面空 true 否则false
+<!--{else}-->
+var isSiteFirstEnter = false;//页面空 true 否则false
+<!--{/if}-->
+IK('slider', 'room-setting');
+IK(function(){$(function(){$('.mod:has(.edit)').live('mouseenter', function(e){ $(e.currentTarget).addClass('mod-stat-active'); }).live('mouseleave', function(e){ $(e.currentTarget).removeClass('mod-stat-active');});});});
+</script>
+<!--{/if}-->
+</div>
+<!--//sp-nav-->
+
+<!--{if $roomid>0 && $strSite[userid] == $IK_USER[user][userid]}-->   
+<!--sp-fn-box-->    
+    <div class="sp-fn-box">
+        <a href="#" class="box-close" style="display: block;">x</a>
+        <div class="room-box" style="display: inline-block;">
+            <input type="text" maxlength="15" value="{$strRoom[name]}" id="room-rename" roomid="{$roomid}" >
+            <label class="icon-save">保存</label>
+            <span class="widget-tips selected" id="type-normal">小站公共应用<em>▶</em></span>
+            <span class="widget-tips" id="type-game">游戏应用<em>▶</em></span>
+            <a class="room-del" hidefocus="true" id="room_1650259" href="javascript:;">删除房间</a>
+        </div>
+    
+        <div id="widget-normal" class="widgets-box" style="display: inline-block;">
+        <div class="widgets-slider">
+        <ul class="list-s slider">
+        <!--{loop $strWidgets $item}-->
+            <li>
+                <div class="intro">
+                <h2><!--{$item[widgetname]}--></h2>
+                <p><!--{$item[widgetdesc]}--></p>
+                </div>
+            	<a class="lnk-add" id="k-{$item[othername]}" roomid="{$roomid}" href="#">添加</a>
+            </li>
+         <!--{/loop}-->
+        </ul>
+        </div>
+        <div class="slider-switcher">
+            <ul class="list-s switcher-dot"></ul>
+            <span class="switcher-prev switcher-dis">&lt;</span>
+            <span class="switcher-next">&gt;</span>
+        </div>
+        </div>
+    </div>
+<!--//sp-fn-box-->    
+<!--{/if}-->
+</div><!--//header-->
+
+

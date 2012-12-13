@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>
+{$title}
+</title>
+<meta name="robots" content="all" />
+<meta name="Copyright" content="{$IK_SOFT[info][name]}" />
+<meta name="keywords" content="" /> 
+<meta name="description" content="{$strSite[sitedesc]}">
+<link rel="icon" type="image/ico" href="{SITE_URL}public/images/fav.ico">
+<style>
+@import url({SITE_URL}app/{$app}/css/core.css);
+@import url({SITE_URL}app/{$app}/css/site/common.css);
+<!--{if $ac=='admins'}-->
+@import url({SITE_URL}app/{$app}/css/site/setting.css);
+<!--{/if}-->
+</style>
+
+<script>var siteUrl = '{SITE_URL}';</script>
+<script src="{SITE_URL}public/js/IK.js" type="text/javascript" data-cfg-corelib="{SITE_URL}public/js/jquery.js"></script>
+
+<script type="text/javascript">
+IK.add('common', {path: '{SITE_URL}app/site/js/common.js', type: 'js'});
+IK.add('sharetool', {path: '{SITE_URL}public/js/lib/sharetool.js', type: 'js' , requires: ['common']});
+IK.add('common-eventhandler', {path: '{SITE_URL}app/site/js/common_eventhandler.js', type: 'js', requires: ['common']});
+IK.add('setting-eventhandler', {path: '{SITE_URL}app/site/js/setting_eventhandler.js', type: 'js', requires: ['common']});
+IK.add('dialog-css', {path: '{SITE_URL}public/css/ui/dialog.css', type: 'css'});
+IK.add('dialog', {path: '{SITE_URL}public/js/ui/dialog.js', type: 'js', requires: ['dialog-css']});
+//Do.add('swf', {path: '{SITE_URL}public/js/swfobject.js', type: 'js'});
+//Do.add('video', {path: '{SITE_URL}public/js/site/video.js', type: 'js'});
+//Do.add('artist', {path: '{SITE_URL}public/js/site/artist.js', type: 'js', requires: ['swf']});
+IK.add('slider', {path: '{SITE_URL}app/site/js/slider.js', type: 'js'});
+IK.add('effects', {path: '{SITE_URL}public/js/ui/jquery-ui-effects-core.min.js', type: 'js'});
+IK.add('room-setting', {path: '{SITE_URL}app/site/js/room-setting.js', type: 'js'});
+IK.add('room-action', {path: '{SITE_URL}app/site/js/room-action.js', type: 'js' , requires: ['common']});
+IK.global('common', 'common-eventhandler');
+
+var STATIC_FILE_VER = '53019';
+var roomHoverColor = 'rgb(90,83,12)';
+</script>
+
+<!--{if $strSite[istheme] == 0}-->
+
+    <link id="sys-theme" rel="stylesheet" type="text/css" href="{SITE_URL}app/{$app}/css/site/theme/1/core.css" />
+    <style id="init-theme">
+    #theme-bg {background-color: #e7e3cd}
+    #theme-banner {background-color:#f56147}
+    #theme-tag-bg {background-color:#7a7643}
+    #theme-tag-link {background-color:#7b6363}
+    #theme-link {background-color: #938c1b}
+    </style>
+
+<!--{else}-->
+
+    <!--{if $strTheme[theme_id] == 0}-->
+<link id="sys-theme" rel="stylesheet" type="text/css" href="" />
+    <!--{else}-->
+<link id="sys-theme" rel="stylesheet" type="text/css" href="{SITE_URL}app/{$app}/css/site/theme/{$strTheme[theme_id]}/core.css" />   
+    <!--{/if}-->
+
+<style id="init-theme">
+#theme-bg {background-color: $strTheme[background_color]}
+#theme-banner {background-color: $strTheme[banner_color]}
+#theme-tag-bg {background-color: $strTheme[tab_color]}
+#theme-tag-link {background-color: $strTheme[tab_link_color]}
+#theme-link {background-color: $strTheme[link_color]}
+</style>
+<style id="custom-theme">
+/* global custom theme */
+
+<!--{if $strTheme[background_color]}-->
+.bg { background-color: $strTheme[background_color] }
+<!--{/if}-->
+
+<!--{if $strTheme[background_cancel]=='true' }-->
+.bg { background-image: none}
+<!--{/if}-->
+<!--{if $strTheme[background_cancel]=='false' && $strTheme[background_image]!=''}-->
+.bg { background-image:url({SITE_URL}uploadfile/site/custom/theme/$strTheme[background_ver]/$strTheme[background_image]?ver=$strTheme[background_ver]);}
+<!--{/if}-->
+
+.bg .mask { display: none }
+<!--{if $strTheme[background_pos]}-->
+.bg { background-position: $strTheme[background_pos] top }
+<!--{/if}-->
+<!--{if $strTheme[background_repeat]}-->
+.bg { background-repeat: $strTheme[background_repeat] }
+<!--{/if}-->
+
+<!--{if $strTheme[link_color]}-->
+.top-nav a:link, .top-nav a:visited, .top-nav a:hover, .top-nav a:active, .mod a, #footer a, .content-nav a { color: $strTheme[link_color]}
+.top-nav .top-nav-info a:hover, .mod a:hover, #footer a:hover, .content-nav a:hover { color: #fff; background-color: $strTheme[link_color] }
+<!--{/if}-->
+
+<!--{if $strTheme[banner_color]}-->
+.sp-nav { background-color: $strTheme[banner_color] }
+<!--{/if}-->
+
+<!--{if $strTheme[tab_color]}-->
+.nav-items li { background-color: $strTheme[tab_color] }
+.nav-items li.on { border-color: $strTheme[tab_color] }
+.nav-items li#room-more ul { border-color: $strTheme[tab_color]; }
+<!--{/if}-->
+<!--{if $strTheme[tab_link_color]}-->
+.nav-items li a:link,
+.nav-items li a:visited { color: $strTheme[tab_link_color] }
+<!--{/if}-->
+
+<!--{if $strTheme[tab_color]}-->
+.nav-items li a:hover { background-color: $strTheme[tab_color]; }
+<!--{/if}-->
+
+<!--{if $strTheme[tab_color] ||  $strTheme[tab_link_color] }-->
+.nav-items li#room-more li a:hover { background-color: $strTheme[tab_color] ;color: $strTheme[tab_link_color] }
+.type-nav .on a, .type-nav a:hover{ background-color: $strTheme[tab_color]; color:#fff}
+<!--{/if}-->
+</style>
+<!--{/if}-->
+
+
+</head>
+<body id="{$strSite[siteid]}">
+<div class="wrapper">
