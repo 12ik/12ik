@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>php学习</title>
+</head>
+
+<body>
+<ol>
+  <li>指出一些在PHP输入一段HTML代码的办法<br>
+    <code>
+    $variable = 12;<br>
+echo "My string $variable";//你也可以使用这种方法：
+    </code>
+  </li>
+  <li>php设置时区和文本编码<br>
+  <code>header('Content-Type: text/html; charset=utf-8');<br>
+date_default_timezone_set('PRC');//设置默认北京时区
+<br>
+echo '北京时间：'.date('Y-m-d H:i:s',time()).'';<br>
+date_default_timezone_set('Hongkong');//设置默认北京时区
+<br>
+echo '香港时间：'.date('Y-m-d H:i:s',time()).'
+';</code>
+  </li>
+  <li>php打印出前一天时间<br>
+  <code>echo date('Y-m-d H:i:s', time()-86400);</code>
+  </li>
+  <li>echo(),print(),print_r()的区别<br>
+   <code> echo()输出信息<br>
+  print（） 等于 print '' 一个语言构造器而不是一个函数，不能被  <a href="http://cn2.php.net/manual/zh/functions.variable-functions.php">可变函数</a> 调用。 <br>
+  print_r —        打印关于变量的易于理解的信息。</code></li>
+  <li>PHP中文字符串翻转<br>
+  <code>function cstrrev($str)
+{
+	$len = strlen($str);
+	for($i = 0; $i < $len; $i++)
+	{
+		$char = $str{0};
+		if(ord($char) > 127)
+		{
+			$i++;
+			if($i < $len)
+			{
+				$arr[] = substr($str, 0, 2);
+				$str = substr($str, 2);
+			}
+		}
+		else
+		{
+			$arr[] = $char;
+			$str = substr($str, 1);
+		}
+	}
+	return join(array_reverse($arr));
+}</code>
+  </li>
+  <li>用PHP写出显示客户端IP与服务器IP的代码<br>
+  <code>客户端：echo $_SERVER['REMOTE_ADDR']; 或 echo getenv('REMOTE_ADDR'); //get environmental  获取环境
+<br>
+服务器：echo gethostbyname("www.baidu.com");</code>
+  </li>
+  <li>mysql_fetch_row() 和mysql_fetch_array之间有什么区别<br>
+  <code>mysql_fetch_row是从结果集取出1行数组,作为枚举  mysql_fetch_array是从结果集取出一行数组作为关联数组,或数字数组,两者兼得 </code>
+  </li>
+</ol>
+</body>
+</html>

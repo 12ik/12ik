@@ -32,14 +32,12 @@
     <div class="event-photo-list">
      <ul class="list-s">
      	{loop $photosList $item}
-        
         <li>
             <div class="photo-item">
                 <a id="p{$item[photoid]}" class="album_photo" title="{$item[photodesc]}" href="{SITE_URL}{tsUrl('site','photos',array('ts'=>'photo','photosid'=>$photosid,'pid'=>$item[photoid]))}"><img src="{SITE_URL}{php echo tsXimg($item[photourl],'site',170,170,$item[path])}" alt="{$item[photodesc]}" /></a>
                 <div class="desc">{$item[photodesc]}</div>
             </div>
         </li>
-        
         {/loop}
      </ul>
     </div>

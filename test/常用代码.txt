@@ -1,0 +1,91 @@
+$arrMessages = aac('message')->find('message',array('messageid'=>$messageid));
+
+date('Y-m-d H:i',$item['addtime']);
+
+2.文本处理
+输入：
+'title'				=> htmlspecialchars($title),
+'content'		=> htmlspecialchars($content),
+输出：
+{php echo nl2br($strTopic[content])}
+编辑：不用加任何函数
+$strcontent['conent']
+
+
+3.post提交
+$.post(
+	postUrl, 
+	_Form.serialize(),
+	function (ret) {
+		alert(ret)
+		/*
+		if (ret.r==0){
+				if (!$(css_top_tips).length) {
+					$('body').append(tmpl_top_tips);
+					$(css_top_tips).slideDown();
+					setTimeout(removeTips, 5000); 
+				}
+			} else {
+				show_error(ret.error);
+			}
+		*/	
+});
+
+4.iframe提交
+// ajax upload
+oForm.iframePostForm({
+	post: function () {
+		oJcropApi.destroy();
+		oJcropApi = {};
+		$(css_error_tips).remove(); 
+	},
+	complete: function (icon) { 
+	
+		var data, realJson;
+		data = icon.match(/\{[^\}]+\}/)[0];
+		oFileInput.attr('disabled', 0);
+		if (!data) { return; }
+		realJson = eval('(' + data + ')');
+		if (realJson.error && !$(css_error_tips).length) {
+			oFileInput.parent().after(tmpl_error_tips);
+		}
+		iconVer = realJson.ver;
+		$(css_tips).remove();
+		$(css_cropbox + ', ' + css_preview).attr('src', realJson.pic+'?v='+ Math.ceil(Math.random()*1000));
+		$(css_cropbox).attr('rel',realJson.pic);//标示是否是上传图片
+		setTimeout(function () {
+			oJcropApi = $.Jcrop(css_cropbox, { 
+				onChange: showPreview,
+				onSelect: showPreview,
+				aspectRatio: 1
+			});
+			oJcropApi.animateTo(defaultPos);
+		}, 500);
+		
+	}
+}).find(css_file_icon).change(function () {
+	if (!$(css_tips).length) {
+		oFileInput.after(tmpl_upload_tips);
+	}
+	//oFileInput.attr('disabled', 1);
+	$(this).parents('form').submit();
+});
+
+5.jquery delegate函数使用 委派
+<div style="background-color:red">
+<p>这是一个段落。</p>
+<button>请点击这里</button>
+</div>
+
+$(document).ready(function(){
+  $("div").delegate("button","click",function(){
+    $("p").hide();
+  });
+});
+
+6.
+foreach($arrComments as $key => $item)
+{
+	$arrComment[] = $item;
+	$arrComment[$key]['user'] = aac('user')->getOneUser($item['userid']);
+}

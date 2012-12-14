@@ -1,0 +1,231 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+@import url(http://127.0.0.1/12ik/theme/blue/base.css);
+@import url(http://127.0.0.1/12ik/app/home/skins/default/style.css);
+</style>
+<style>
+.pop_win_bg {
+	opacity:.3;
+	filter:alpha(opacity=30);
+	position:fixed;
+	background:#000;
+	border-radius:6px;
+	-webkit-border-radius:6px;
+	-moz-border-radius:6px;
+	_position:absolute;
+_top:expression(eval(document.documentElement.scrollTop+(document.documentElement.clientHeight-this.offsetHeight)*.45))!important
+}
+.pop_win form {
+	padding:0;
+	margin:0;
+	border:1px solid #fff
+}
+aa.pop_win_close, .pop_win_close:visited, .pop_win_close:link {
+	position:absolute;
+	right:0;
+	top:0;
+	font:11px "Comic Sans MS";
+	margin:9px 10px 0 0;
+	padding:0 .3em;
+	color:#b4b4b4;
+	z-index:99
+}
+a.pop_win_close:hover {
+	color:#fab0b6;
+	background:0
+}
+.pop_win {
+	background:#fff;
+	padding:17px 14px 16px 12px;
+	_padding-right:0;
+	visibility:hidden;
+	position:fixed;
+	border-radius:6px;
+	-webkit-border-radius:6px;
+	-moz-border-radius:6px;
+	_position:absolute;
+_margin-top:expression(eval(document.documentElement.scrollTop))
+}
+.login_input {
+	font-size:12px;
+	color:#016502;
+	text-align:left
+}
+.login_input input {
+	width:200px
+}
+.login_input span {
+	width:3.5em;
+	float:left
+}
+.pop_reg {
+	float:left;
+	margin-top:2em;
+	display:block
+}
+.pop_sub {
+	text-align:left;
+	margin-left:3.4em;
+	margin-top:.3em
+}
+.pop_sub input {
+	width:5em;
+	padding-top:2px
+}
+.pop_rem {
+	margin-top:.5em;
+	padding-bottom:5px;
+	text-align:left;
+	margin-left:3.2em
+}
+</style>
+<script src="http://127.0.0.1/12ik/public/js/jquery.js" type="text/javascript"></script>
+<script language="javascript">
+Do = (typeof Do === 'undefined')? function(fn){setTimeout(fn, 0);} : Do;
+Charm = new Object();
+Charm.init_show_login = function(o){
+    $(o).click(function(){
+		return pop_win.load('login.html');
+    });
+}
+function load_event_monitor(root) {
+    var re = /a_(\w+)/;
+    var fns = {};
+    $(".j", root).each(function(i) {
+		 var m = re.exec(this.className);
+        if (m) {
+            var actionName = m[1],
+                f = fns[actionName];
+            if (!f) {
+				
+                 f = eval("Charm.init_"+actionName);//action函数对象 fn(o){}
+                 fns[actionName] = f;
+            }
+			
+            f && f(this);
+        }
+    });
+}
+function pop_win (htm, hide_close) {
+    if (!window.__pop_win) {
+        var pop_win_bg = document.createElement('div');
+        pop_win_bg.className = 'pop_win_bg';
+        document.body.appendChild(pop_win_bg);
+
+        var pop_win_body = document.createElement('div');
+        pop_win_body.className = 'pop_win';
+        document.body.appendChild(pop_win_body);
+
+        __pop_win = {
+            bg: pop_win_bg,
+            body: pop_win_body,
+            body_j: $(pop_win_body),
+            bg_j: $(pop_win_bg)
+        };
+    }
+    var b = __pop_win.body,
+        body_j = __pop_win.body_j,
+        dom = js_parser(htm);
+    if (hide_close !== true) {
+        dom.htm = '<a onclick="pop_win.close()" href="javascript:;" class="pop_win_close">X</a>' + dom.htm;
+    }
+    b.innerHTML = dom.htm;
+    var cr = {
+        left:(document.documentElement.offsetWidth-b.offsetWidth)/2+'px',
+        top:(document.documentElement.clientHeight-b.offsetHeight)*.45+'px'
+    };
+    if(document.documentElement.clientHeight<b.offsetHeight){
+        cr.top = '0';
+        cr.height = document.documentElement.clientHeight - 40 + 'px';
+        cr.overflow = 'auto';
+    }
+    body_j.css({ display: 'block' }).css(cr).css({ visibility: 'visible', zIndex: 9999});
+    dom.js();
+    pop_win.fit();
+    if(!window.XMLHttpRequest){
+        __pop_win.bg.style.top = '';
+    }
+}
+pop_win.close=function(){
+    $(__pop_win.bg).remove()
+    $(__pop_win.body).remove();
+    window.__pop_win = null;
+}
+pop_win.load=function(url,cache){
+    pop_win("<div style=\"padding:20px 60px;\">加载中, 请稍等...</div>")
+    $.ajax({url: url, success: pop_win, cache: cache||false, dataType: 'html'});
+    return false;//不让跳转
+}
+function js_parser(htm){
+    var tag="script>",begin="<"+tag,end="</"+tag,pos=pos_pre=0,result=script="";
+    while(
+        (pos=htm.indexOf(begin,pos))+1
+    ){
+        result+=htm.substring(pos_pre,pos);
+        pos+=8;
+        pos_pre=htm.indexOf(end,pos);
+        if(pos_pre<0){
+            break;
+        }
+        script+=htm.substring(pos,pos_pre)+";";
+        pos_pre+=9;
+    }
+    result+=htm.substring(pos_pre,htm.length);
+
+    return {
+        htm:result,
+        js:function(){eval(script)}
+    };
+}
+pop_win.fit = function () {
+    if (window.__pop_win) {
+        var b=__pop_win.body;
+        __pop_win.bg_j.css({
+            height: b.offsetHeight + 16 + 'px',
+            width: b.offsetWidth + 16 + 'px',
+            left: b.offsetLeft - 8 + 'px',
+            top: b.offsetTop - 8 + 'px',
+            zIndex: 8888
+        }).show();
+    }
+}
+
+// 转移==> core/cookie.js
+var set_cookie = function(dict, days, domain, path){
+    var date = new Date();
+    date.setTime(date.getTime()+((days || 30)*24*60*60*1000));
+    var expires = "; expires="+date.toGMTString();
+    for (var i in dict){
+        document.cookie = i+"="+dict[i]+expires+"; domain=" + (domain || "12ik.com") + "; path=" + (path || "/");
+    }
+}
+
+// 转移==> core/cookie.js
+function get_cookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) {
+            return c.substring(nameEQ.length,c.length).replace(/\"/g,'');
+        }
+    }
+    return null;
+}
+$(function() {
+    load_event_monitor(document);
+    // request_log_ad_displays();
+});
+</script>
+</head>
+
+<body style="background-color:#fff">
+<a href="http://www.baidu.com" class="j a_show_login" target="_blank">登录注册</a>
+
+</body>
+</html>

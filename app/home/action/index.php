@@ -15,9 +15,16 @@ if ($IK_USER ['user'] == '') {
 	}
 	//最新10个小组
 	$arrNewGroup = aac ( 'group' )->getNewGroup ( '10' );
+	//最新 6个小站
+	$arrNewSites = aac ( 'site' )->findAll('site', null, 'addtime desc','siteid',6);
+	$arrNewSite = array();
+	foreach($arrNewSites as $item)
+	{
+		$arrNewSite[] = aac('site')->getOneSite($item['siteid']);
+	}
 	
 	//最新发表日志
-	$arrNewNote = aac('note')->getNewNote('10');
+	$arrNewNote = aac('note')->getNewNote('15');
 	//热门10个热门话题
 	$arrHotTopics = aac('group')->findAll('group_topics',null,'count_comment desc','userid,topicid,title,content,count_comment,
 	count_view,addtime,uptime',10);
@@ -34,6 +41,9 @@ if ($IK_USER ['user'] == '') {
 	$arrHotUser = aac('user')->getHotUser(16);
 	//获取用户数
 	$count_user = aac('user')->getUsers();
+	
+	//最新小站日志
+	$arrSiteNote = aac('site')->findAll('site_notes_content',null,'addtime desc');
 
 
 

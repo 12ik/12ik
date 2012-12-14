@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS `ik_site` (
   `istheme` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否有自定义风格',
   `issetting` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否第一次访问',
   `isfollow` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否关注小站的广播更新 0默认关注 1不关注',      
+  `isrecommend` tinyint(1) NOT NULL DEFAULT '0' COMMENT '1 推荐 0 不推荐',       
   `addtime` int(11) NOT NULL DEFAULT '0' COMMENT '时间',
   PRIMARY KEY (`siteid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;

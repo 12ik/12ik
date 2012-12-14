@@ -1,0 +1,3 @@
+RewriteRule ^user\/space\/([0-9]+)$ index.php?app=user&ac=space&id=$1 [L]
+
+RewriteRule ^user\/space\/([0-9]+)/?$ index.php?app=user&ac=space&id=$1 [QSA,L]
