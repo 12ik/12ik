@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script language="javascript">
+function add(a,b)
+{
+	if(a&&b)
+	{
+		alert(a+b);
+	}else{
+		alert(a)
+	}
+}
+function sum(a)
+{
+	alert(a)
+}
+add.call(sum,2,34)//print 5 让sum继承了 add的方法
+</script>
+</head>
+
+<body>
+
+</body>
+</html>

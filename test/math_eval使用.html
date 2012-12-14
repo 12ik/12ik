@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script language="javascript">
+				var icon = '{"r":1,"error":"上传的图像文件有问题"}';
+				var data = icon.match(/\{[^\}]+\}/)[0];
+				var realJson = eval('(' + data + ')');
+				alert(realJson.error)
+</script>
+</head>
+
+<body>
+</body>
+</html>
