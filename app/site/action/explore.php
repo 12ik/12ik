@@ -17,6 +17,17 @@ switch ($ts) {
 			//$arrSite[$key]['sitedesc'] = getsubstrutf8(t($item['sitedesc']),0,30);
 			$arrSite[] = aac('site')->getOneSite($item['siteid']);
 		}
+		//最新推荐小站
+		$recommendSite = aac('site')->getRecommendSite(5);
+		$recommendSites = array();
+		if($recommendSite)
+		{
+			foreach($recommendSite as $key=>$item)
+			{
+				$recommendSites[] = $item;
+				$recommendSites[$key]['likenum'] = 	aac('site')->findCount('site_follow', array('follow_siteid'=>$item['siteid']));
+			}
+		}
 		
 		$title = "发现小站";
 		include template("site");

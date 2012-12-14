@@ -78,33 +78,24 @@ $(function(){
     </div>
 
     <div class="cright">
- 		<h2>
-        最新推荐小站&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·
-            <span class="pl">&nbsp;(<a href="/partner/brand">更多</a>) </span>
-    	</h2>
+ 		<h2>最新推荐小站</h2>
         <div class="site-rec">
         <ul class="list-items">
+        	<?php foreach((array)$recommendSites as $item) {?>
                 <li class="list-item">
-                <div class="pic">
-                    <a href="http://site.douban.com/faw-vw/" target="_blank">
-                        <img width="50" height="50" src="http://127.0.0.1/12ik/cache/group/0/0/48/8112da8e5f_48_48.jpg">
-                    </a>
-                </div>
-                <div class="info">
-                    <a href="http://site.douban.com/faw-vw/" target="_blank">一汽-大众</a>
-                    <p class="like-num">7769人喜欢</p>
-                </div>
-                </li>                <li class="list-item">
-                <div class="pic">
-                    <a href="http://site.douban.com/faw-vw/" target="_blank">
-                        <img width="50" height="50" src="http://127.0.0.1/12ik/cache/group/0/0/48/8112da8e5f_48_48.jpg">
-                    </a>
-                </div>
-                <div class="info">
-                    <a href="http://site.douban.com/faw-vw/" target="_blank">一汽-大众</a>
-                    <p class="like-num">7769人喜欢</p>
-                </div>
-                </li>
+                    <div class="pic">
+                        <a href="<?php echo SITE_URL;?><?php echo tsurl('site','mine',array('siteid'=>$item['siteid']))?>" target="_blank" title="<?php echo $item['sitename'];?>">
+                            <img width="50" height="50" alt="<?php echo $item['sitename'];?>" src="<?php echo $item['icon_75'];?>">
+                        </a>
+                    </div>
+                    <div class="info">
+                        <a href="<?php echo SITE_URL;?><?php echo tsurl('site','mine',array('siteid'=>$item['siteid']))?>" target="_blank" title="<?php echo $item['sitename'];?>"><?php echo $item['sitename'];?></a>
+                        <p class="like-num"><?php echo $item['likenum'];?>人喜欢</p>
+                    </div>
+                </li> 
+            <?php } ?>    
+                
+                
          </ul>
         </div>
         

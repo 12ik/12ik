@@ -104,9 +104,25 @@
     <!--{/loop}-->
  	<br clear="all"/>
     </div>
-
-<h2>最新创建小组</h2>
-
+    
+<h2>最新创建小站&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·<span class="pl">&nbsp;(<a href="{SITE_URL}{tsUrl('site','explore',array('ts'=>'site'))}">全部</a>) </span></h2>
+<div class="indent">
+    <!--{loop $arrNewSite $key $item}-->
+    <dl class="obu">
+        <dt>
+            <a href="{SITE_URL}{tsUrl('site','mine',array('siteid'=>$item[siteid]))}" target="_blank" title="{$item[sitename]}">
+            <img  class="m_sub_img" alt="{$item[sitename]}" src="{$item[icon_48]}" width="48" />
+            </a>
+        </dt>
+        <dd>
+            <a href="{SITE_URL}{tsUrl('site','mine',array('siteid'=>$item[siteid]))}" target="_blank" title="$item[sitename]">$item[sitename]</a>
+        </dd>
+    </dl>
+    <!--{/loop}-->
+    <br clear="all"/>
+</div>
+    
+<h2>最新创建小组&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·<span class="pl">&nbsp;(<a href="{SITE_URL}{tsUrl('group','all')}">全部</a>) </span></h2>
 <div class="line23">
 <!--{if $arrNewGroup}-->
 <!--{loop $arrNewGroup $key $item}-->
@@ -115,6 +131,7 @@
 <!--{/if}-->
 </div>
 
+    
 <h2>最新发表日志</h2>
 
 <div class="line23">

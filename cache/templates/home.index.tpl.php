@@ -104,9 +104,25 @@
     <?php }?>
  	<br clear="all"/>
     </div>
-
+    
+<h2>最新创建小站&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·<span class="pl">&nbsp;(<a href="<?php echo SITE_URL;?><?php echo tsurl('site','explore',array('ts'=>'site'))?>">全部</a>) </span></h2>
+<div class="indent">
+    <?php foreach((array)$arrNewSite as $key=>$item) {?>
+    <dl class="obu">
+        <dt>
+            <a href="<?php echo SITE_URL;?><?php echo tsurl('site','mine',array('siteid'=>$item['siteid']))?>" target="_blank" title="<?php echo $item['sitename'];?>">
+            <img  class="m_sub_img" alt="<?php echo $item['sitename'];?>" src="<?php echo $item['icon_48'];?>" width="48" />
+            </a>
+        </dt>
+        <dd>
+            <a href="<?php echo SITE_URL;?><?php echo tsurl('site','mine',array('siteid'=>$item['siteid']))?>" target="_blank" title="<?php echo $item['sitename'];?>"><?php echo $item['sitename'];?></a>
+        </dd>
+    </dl>
+    <?php }?>
+    <br clear="all"/>
+</div>
+    
 <h2>最新创建小组</h2>
-
 <div class="line23">
 <?php if($arrNewGroup) { ?>
 <?php foreach((array)$arrNewGroup as $key=>$item) {?>
@@ -115,6 +131,7 @@
 <?php } ?>
 </div>
 
+    
 <h2>最新发表日志</h2>
 
 <div class="line23">

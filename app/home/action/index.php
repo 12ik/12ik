@@ -15,6 +15,13 @@ if ($IK_USER ['user'] == '') {
 	}
 	//最新10个小组
 	$arrNewGroup = aac ( 'group' )->getNewGroup ( '10' );
+	//最新 6个小站
+	$arrNewSites = aac ( 'site' )->findAll('site', null, 'addtime desc','siteid',6);
+	$arrNewSite = array();
+	foreach($arrNewSites as $item)
+	{
+		$arrNewSite[] = aac('site')->getOneSite($item['siteid']);
+	}
 	
 	//最新发表日志
 	$arrNewNote = aac('note')->getNewNote('15');

@@ -39,12 +39,12 @@ class site extends IKApp{
 				$arrPos = explode('_',$strSite['imgpos']);
 				$bigImg = tsXimg($strSite['siteicon'],'site',180,220,$strSite['iconpath'],0);
 				$strSite['icon_180'] = SITE_URL.$bigImg;
-				$strSite['icon_75'] = SITE_URL.tsXimg($bigImg,'site',75,75,$strSite['iconpath'],1,array(
-				'X'=>$arrPos[0], 'Y'=>$arrPos[1],'W'=>$arrPos[2],'H'=>$arrPos[2],'R'=>1
-			));
-				$strSite['icon_48'] = SITE_URL.tsXimg($bigImg,'site',48,48,$strSite['iconpath'],1,array(
-				'X'=>$arrPos[0], 'Y'=>$arrPos[1],'W'=>$arrPos[2],'H'=>$arrPos[2],'R'=>1
-			));
+				$strSite['icon_75'] = SITE_URL.tsXimg($strSite['siteicon'],'site',75,75,$strSite['iconpath'],1);
+				$strSite['icon_48'] = SITE_URL.tsXimg($strSite['siteicon'],'site',48,48,$strSite['iconpath'],1);
+				//$strSite['icon_75'] = SITE_URL.tsXimg($bigImg,'site',75,75,$strSite['iconpath'],1,array(
+				//'X'=>$arrPos[0], 'Y'=>$arrPos[1],'W'=>$arrPos[2],'H'=>$arrPos[2],'R'=>1));
+				//$strSite['icon_48'] = SITE_URL.tsXimg($bigImg,'site',48,48,$strSite['iconpath'],1,array(
+				//'X'=>$arrPos[0], 'Y'=>$arrPos[1],'W'=>$arrPos[2],'H'=>$arrPos[2],'R'=>1));
 			}else{
 				$strSite['icon_180'] = SITE_URL.tsXimg($strSite['siteicon'],'site',180,220,$strSite['iconpath'],0);
 				$strSite['icon_75'] = SITE_URL.tsXimg($strSite['siteicon'],'site',75,75,$strSite['iconpath'],0);
@@ -264,5 +264,17 @@ class site extends IKApp{
 		$arrPhoto['photo_140'] = SITE_URL.tsXimg($arrPhoto['photourl'],'site',140,170,$arrPhoto['path'],0);
 		$arrPhoto['photo_600'] = SITE_URL.tsXimg($arrPhoto['photourl'],'site',600,730,$arrPhoto['path'],0);			
 		return $arrPhoto;	
-	}	 
+	}
+	//获取最新推荐小站
+	function getRecommendSite($num)
+	{
+		$arrRecommends = $this->db->fetch_all_assoc("select siteid from ".dbprefix."site where isrecommend='1' limit $num");
+		$arrRecommend = array();
+		if(is_array($arrRecommends)){
+			foreach($arrRecommends as $item){
+				$arrRecommend[] = $this->getOneSite($item['siteid']);
+			}
+		}
+		return $arrRecommend;
+	} 
 }
