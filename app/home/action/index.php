@@ -17,7 +17,7 @@ if ($IK_USER ['user'] == '') {
 	$arrNewGroup = aac ( 'group' )->getNewGroup ( '10' );
 	
 	//最新发表日志
-	$arrNewNote = aac('note')->getNewNote('10');
+	$arrNewNote = aac('note')->getNewNote('15');
 	//热门10个热门话题
 	$arrHotTopics = aac('group')->findAll('group_topics',null,'count_comment desc','userid,topicid,title,content,count_comment,
 	count_view,addtime,uptime',10);
