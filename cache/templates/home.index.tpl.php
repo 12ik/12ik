@@ -125,6 +125,18 @@
 <?php } ?>
 </div>
 
+<h2>最新小站日记</h2>
+
+<div class="line23">
+<?php if($arrSiteNote) { ?>
+<?php foreach((array)$arrSiteNote as $key=>$item) {?>
+    <a href="<?php echo SITE_URL;?><?php echo tsurl('site','notes',array('notesid'=>$item['notesid'],'noteid'=>$item['contentid']))?>" title="<?php echo $item['title'];?>">
+    <?php echo $item['title'];?>
+    </a><br>
+<?php }?>
+<?php } ?>
+</div>
+
 <div class="clear"></div>
 <?php doAction('home_index_right_footer')?>
 </div>

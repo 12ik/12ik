@@ -34,6 +34,9 @@ if ($IK_USER ['user'] == '') {
 	$arrHotUser = aac('user')->getHotUser(16);
 	//获取用户数
 	$count_user = aac('user')->getUsers();
+	
+	//最新小站日志
+	$arrSiteNote = aac('site')->findAll('site_notes_content',null,'addtime desc');
 
 
 
