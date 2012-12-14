@@ -122,7 +122,7 @@
     <br clear="all"/>
 </div>
     
-<h2>最新创建小组</h2>
+<h2>最新创建小组&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·<span class="pl">&nbsp;(<a href="<?php echo SITE_URL;?><?php echo tsurl('group','all')?>">全部</a>) </span></h2>
 <div class="line23">
 <?php if($arrNewGroup) { ?>
 <?php foreach((array)$arrNewGroup as $key=>$item) {?>
