@@ -1,23 +1,122 @@
 <?php
-$messagetext = geturlfile('http://127.0.0.1/test/text.html');
+//$messagetext = geturlfile('http://roll.news.sina.com.cn/news/gnxw/szyw/index.shtml');
 
-$subjectarr = pregmessage($messagetext, '<title>[subject]</title>', 'subject');
+header("Content-type: text/html; charset=utf-8"); 
+//定义编码
+$_SCONFIG = array('charset'=>'utf-8');//合并配置
+define('S_ROOT', dirname(__FILE__).DIRECTORY_SEPARATOR);
+include_once(S_ROOT.'/admincp.lang.php');
+include_once(S_ROOT.'/robot.func.php');
 
-$subjecturlarr = pregmessage($messagetext, '<ul>[list]</ul>', 'list');
+	$postlisturl = addslashes(serialize(array('manual'=>$_POST['listurl_manual'], 'auto'=>$_POST['listurl_auto'])));
+	
+	
+	
+	//采集器编辑调试用
+	@ini_set('max_execution_time', 2000);	//设置超时时间
+	$_POST['debugprocess'] = !empty($_POST['debugprocess']) ? trim($_POST['debugprocess']) : 0;
+
+	$listurlarr = $_POST['listurl_manual'];
+	
+		//测试：显示链接
+		if($_POST['debugprocess'] == 'showlisturl') {
+			showprogress($alang['robot_debug_link_list'], 1);
+			if($i >= 1000) {
+				showprogress($alang['robot_debug_excessive_list']);
+			}
+			$output = implode("<br />\n", $listurlarr);
+			showprogress($output);
+			exit();
+		}
+		
+				//测试：尝试连接
+		if($_POST['debugprocess'] == 'pinglisturl') {
+			$i = 0;
+			showprogress($alang['robot_debug_link_list'], 1);
+			foreach($listurlarr as $tmpvalue) {
+				$sourcehtml = geturlfile($tmpvalue, 0);
+				if(!empty($sourcehtml)) {
+					$output = $alang['robot_debug_connecting_success'];
+				} else {
+					$output = $alang['robot_debug_unable_to_connect'];
+				}
+				showprogress($tmpvalue.'--'.$output."\n");
+				$i++;
+				if($i >= 10) {
+					break;
+				}
+			}
+			exit();
+		}
+
+
+
+		$sourcecharset = 'utf-8';
+		echo $tmpvalue.'22'; 
+
+
+
+/*
+showprogress($alang['robot_debug_excessive_list']);
+
+
+$listurlarr[0]  = "http://127.0.0.1/test/text.html";
+
+
+//获取编码
+preg_match_all("/\<meta[^\<\>]+charset=([^\<\>\"\'\s]+)[^\<\>]*\>/i", $messagetext, $temp, PREG_SET_ORDER);
+$sourcecharset = !empty($temp) ? trim(strtoupper($temp[0][1])) : '';
+
+
+//url编码
+$listurlarr[0] = encodeconvert($sourcecharset, $listurlarr[0], 1);
+			
+//获取页面			
+$sourcehtml = geturlfile($listurlarr[0], 0);	//读取网页
+
+//页面编码
+$messagemsgtext = encodeconvert($sourcecharset, $sourcehtml);
+
+
+
+$subjectarr = pregmessage($messagemsgtext, '<title>[subject]</title>', 'subject');
+
+//$subjecturlarr = pregmessage($messagetext, '<ul class="list_009">[list]</ul>', 'list');
+
+$messagearr = pregmessage($messagemsgtext, '<div id="main_content">[message]</div>', 'message');
 
 		
-
 //标题
-echo $subjectarr[0].'<br>';
+showprogress($subjectarr[0]);
+
+*/
+			
+			//echo $listurlarr[0];
+			
+//列表
+//echo $subjecturlarr[0];
+
 //内容
-//print_r($subjecturlarr);
+//echo $messagearr[0];
 
 //保存图片
-for($i=10; $i<20; $i++)
-{
-saveremotefile('http://www.met-nude.com/MNPics/MN20121202_Chinese-Nude-JNZYY/img/jnzyy1_('.$i.').jpg',$i);
-}
 
+//saveremotefile('http://met-nude.com/MNPics/MN20121117_Met-Art-Albus-Nikia-A/img/Met-Art_Albus_Nikia-A_by_Rylsky_medium_0002.jpg',1);
+
+
+//替换字符串中的特殊字符
+//去掉指定字符串中\\或\'前的\
+function sstripslashes($string) {
+
+	if(is_array($string)) {
+		foreach($string as $key => $val) {
+			$string[$key] = sstripslashes($val);
+		}
+	} else {
+		$string = stripslashes($string);
+	}
+	return $string;
+}
 //super site 模式解析器
 function pregmessage($message, $rule, $getstr, $limit=1) {
 	$result = array('0'=>'');
@@ -46,6 +145,29 @@ function convertrule($rule) {
 	return $rule;
 }
 
+
+
+//转码
+function encodeconvert($encode, $content, $to=0) {
+	global $_SCONFIG;
+
+	if($to) {
+		$in_charset = strtoupper($_SCONFIG['charset']);
+		$out_charset = strtoupper($encode);
+	} else {
+		$in_charset = strtoupper($encode);
+		$out_charset = strtoupper($_SCONFIG['charset']);
+	}
+	if(!empty($encode) && $in_charset != $out_charset) {
+		if (function_exists('iconv') && (@$outstr = iconv("$in_charset//IGNORE", "$out_charset//IGNORE", $content))) {
+			$content = $outstr;
+		} elseif (function_exists('mb_convert_encoding') && (@$outstr = mb_convert_encoding($content, $out_charset, $in_charset))) {
+			$content = $outstr;
+		}
+	}
+	return $content;
+}
+
 function geturlfile($url, $encode=1) {
 
 	$text = '';
@@ -62,6 +184,7 @@ function geturlfile($url, $encode=1) {
 	curl_close($ch);
 	return $file_contents;
 }
+
 //获取文件后缀
 //获取文件名后缀
 function fileext($filename) {
@@ -193,7 +316,7 @@ function saveremotefile($url,$name) {
 		//debug 得到存储目录
 	//$dirpath = getattachdir();
 	//if(!empty($dirpath)) $dirpath .= '/';
-	$patharr['file'] = dirname ( __FILE__ ).'/'.$name.'.'.$ext;
+	$patharr['file'] = dirname ( __FILE__ ).'/img/'.$name.'.'.$ext;
 	
 	$content = sreadfile($url, 'rb', 1, $maxsize);
 	writefile($patharr['file'], $content, 'text', 'wb', 0);
@@ -256,5 +379,13 @@ function writefile($filename, $writetext, $filemod='text', $openmod='w', $eixt=1
 		fwrite($fp, $text);
 		fclose($fp);
 		return true;
+	}
+}
+//FUNCTION
+function showprogress($message, $title=0) {	
+	if($title) {
+		echo '<div class="progress">'.$message.'</div>';
+	} else {
+		echo $message.'<br>';
 	}
 }
