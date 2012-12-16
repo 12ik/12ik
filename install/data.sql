@@ -1499,4 +1499,62 @@ CREATE TABLE IF NOT EXISTS `ik_user_scores` (
 --
 -- 转存表中的数据 `ik_user_scores`
 --
+-- --------------------------------------------------------
 
+--
+-- 表的结构 'ik_robots'
+--
+CREATE TABLE IF NOT EXISTS `ik_robots` (
+  robotid smallint(6) unsigned NOT NULL auto_increment,
+  `name` varchar(50) NOT NULL default '',
+  uid mediumint(8) unsigned NOT NULL default '0',
+  dateline int(10) unsigned NOT NULL default '0',
+  lasttime int(10) unsigned NOT NULL default '0',
+  importcatid smallint(6) unsigned NOT NULL default '0',
+  importtype varchar(10) NOT NULL default '',
+  robotnum smallint(6) unsigned NOT NULL default '0',
+  listurltype varchar(10) NOT NULL default '',
+  listurl text NOT NULL,
+  listpagestart smallint(6) unsigned NOT NULL default '0',
+  listpageend smallint(6) unsigned NOT NULL default '0',
+  reverseorder tinyint(1) NOT NULL default '1',
+  allnum smallint(6) unsigned NOT NULL default '0',
+  pernum smallint(6) unsigned NOT NULL default '0',
+  savepic tinyint(1) NOT NULL default '0',
+  encode varchar(20) NOT NULL default '',
+  picurllinkpre text NOT NULL,
+  saveflash tinyint(1) NOT NULL default '0',
+  subjecturlrule text NOT NULL,
+  subjecturllinkrule text NOT NULL,
+  subjecturllinkpre text NOT NULL,
+  subjectrule text NOT NULL,
+  subjectfilter text NOT NULL,
+  subjectreplace text NOT NULL,
+  subjectreplaceto text NOT NULL,
+  subjectkey text NOT NULL,
+  subjectallowrepeat tinyint(1) NOT NULL default '0',
+  datelinerule text NOT NULL,
+  fromrule text NOT NULL,
+  authorrule text NOT NULL,
+  messagerule text NOT NULL,
+  messagefilter text NOT NULL,
+  messagepagetype varchar(10) NOT NULL default '',
+  messagepagerule text NOT NULL,
+  messagepageurlrule text NOT NULL,
+  messagepageurllinkpre text NOT NULL,
+  messagereplace text NOT NULL,
+  messagereplaceto text NOT NULL,
+  autotype tinyint(1) NOT NULL default '0',
+  wildcardlen tinyint(1) NOT NULL default '0',
+  subjecturllinkcancel text NOT NULL,
+  subjecturllinkfilter text NOT NULL,
+  subjecturllinkpf text NOT NULL,
+  subjectkeycancel text NOT NULL,
+  messagekey text NOT NULL,
+  messagekeycancel text NOT NULL,
+  messageformat tinyint(1) NOT NULL default '0',
+  messagepageurllinkpf text NOT NULL,
+  uidrule text NOT NULL,
+  defaultdateline int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (robotid)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='采集器' AUTO_INCREMENT=1 ;
