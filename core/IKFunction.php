@@ -357,6 +357,29 @@ function getmicrotime() {
 	return (( float ) $usec + ( float ) $sec);
 }
 
+//写文件
+function writefile($filename, $writetext, $filemod='text', $openmod='w', $eixt=1) {
+	if(!@$fp = fopen($filename, $openmod)) {
+		if($eixt) {
+			exit('File :<br>'.srealpath($filename).'<br>Have no access to write!');
+		} else {
+			return false;
+		}
+	} else {
+		$text = '';
+		if($filemod == 'php') {
+			$text = "<?php\r\n\r\nif(!defined('IN_IK')) exit('Access Denied');\r\n\r\n";
+		}
+		$text .= $writetext;
+		if($filemod == 'php') {
+			$text .= "\r\n\r\n?>";
+		}
+		flock($fp, 2);
+		fwrite($fp, $text);
+		fclose($fp);
+		return true;
+	}
+}
 /*写入文件
  @By 小麦 2012-4-10
  @$file 缓存文件
@@ -1295,4 +1318,50 @@ function html_filter($str,$max_num='20000'){
 		$str = str_replace("　","",$str);
 	}
 	return str_addslashes($str);
+}
+//htmlspecialchars() 函数把一些预定义的字符转换为 HTML 实体。& （和号） 成为 &amp;
+//html 转化
+function shtmlspecialchars($string) {
+	if(is_array($string)) {
+		foreach($string as $key => $val) {
+			$string[$key] = shtmlspecialchars($val);
+		}
+	} else {
+		$string = preg_replace('/&amp;((#(\d{3,5}|x[a-fA-F0-9]{4})|[a-zA-Z][a-z0-9]{2,5});)/', '&\\1',
+				str_replace(array('&', '"', '<', '>'), array('&amp;', '&quot;', '&lt;', '&gt;'), $string));
+	}
+	return $string;
+}
+function saddslashes($string) {
+	if(is_array($string)) {
+		foreach($string as $key => $val) {
+			$string[$key] = saddslashes($val);
+		}
+	} else {
+		$string = addslashes($string);
+	}
+	return $string;
+}
+//将数组加上单引号,并整理成串
+function simplode($sarr, $comma=',') {
+	return '\''.implode('\''.$comma.'\'', $sarr).'\'';
+}
+
+//数组转换成字串
+function arrayeval($array, $level = 0) {
+	$space = '';
+	$evaluate = "Array $space(";
+	$comma = $space;
+	foreach($array as $key => $val) {
+		$key = is_string($key) ? '\''.addcslashes($key, '\'\\').'\'' : $key;
+		$val = !is_array($val) && (!preg_match("/^\-?\d+$/", $val) || strlen($val) > 12) ? '\''.addcslashes($val, '\'\\').'\'' : $val;
+		if(is_array($val)) {
+			$evaluate .= "$comma$key => ".arrayeval($val, $level + 1);
+		} else {
+			$evaluate .= "$comma$key => $val";
+		}
+		$comma = ",$space";
+	}
+	$evaluate .= "$space)";
+	return $evaluate;
 }

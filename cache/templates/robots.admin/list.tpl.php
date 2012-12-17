@@ -19,7 +19,10 @@
     <td><?php echo $item['name'];?></td>
     <td><?php echo $item['lasttime'];?></td>
     <td><?php echo $item['robotnum'];?></td>
-    <td><a href="#">开始采集</a> <a href="<?php echo SITE_URL;?>index.php?app=robots&ac=admin&mg=edit&robotid=<?php echo $item['robotid'];?>">编辑配置</a> <a href="#">删除机器</a></td>
+    <td>
+    <a href="<?php echo SITE_URL;?>index.php?app=robots&ac=admin&mg=robot&robotid=<?php echo $item['robotid'];?>">开始采集</a> 
+    <a href="<?php echo SITE_URL;?>index.php?app=robots&ac=admin&mg=edit&robotid=<?php echo $item['robotid'];?>">编辑配置</a> 
+    <a href="<?php echo SITE_URL;?>index.php?app=robots&ac=admin&mg=delete&robotid=<?php echo $item['robotid'];?>">删除机器</a></td>
 </tr>
 <?php }?>
 </table>

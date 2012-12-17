@@ -155,28 +155,9 @@ function addreplace(str, replace, replaceto) {
         <p>选择资讯分类，可以直接将采集的结果导入到资讯库中</p></th>
       <td><select name="import">
           <option value="0">-------</option>
-          <optgroup label="资讯">
-          <option value="news_1">科技世界</option>
-          <option value="news_2">互联网络</option>
-          <option value="news_3">财经报道</option>
-          <option value="news_4">体育资讯</option>
-          <option value="news_5">明星娱乐</option>
-          <option value="news_6">生活资讯</option>
-          <option value="news_7">网站建设</option>
-          <option value="news_8">动态报道</option>
-          <option value="news_9">特别关注</option>
-          </optgroup>
-          <optgroup label="HTML5教程">
-          <option value="html_10">科技世界</option>
-          <option value="html_11">互联网络</option>
-          <option value="html_12">财经报道</option>
-          <option value="html_13">体育资讯</option>
-          <option value="html_14">明星娱乐</option>
-          <option value="html_15">生活资讯</option>
-          <option value="html_16">网站建设</option>
-          <option value="html_17">动态报道</option>
-          <option value="html_18">特别关注</option>
-          </optgroup>
+          <?php foreach((array)$arrCatename as $item) {?>
+         	 <option value="cateid_<?php echo $item['cateid'];?>"><?php echo $item['catename'];?></option>
+          <?php } ?>
         </select></td>
     </tr>
     <tr id="tr_dateline">
@@ -196,7 +177,7 @@ function addreplace(str, replace, replaceto) {
     <tr id="tr_robot_listurltype">
       <td width="50%" valign="top"> 手工输入<br>
         <div id="udiv">
-        <?php echo $thevalue['listurl'];?>
+        <?php echo $thevalue['listurl_manual'];?>
         </div>
         增加新的列表页面链接:
         <input type="text" size="40" name="url" id="url">
@@ -205,16 +186,16 @@ function addreplace(str, replace, replaceto) {
         例如:http://www.12ik.com/note/cate/list/cateid/8/ </td>
       <td width="50%" valign="top"> 自动增长<br>
         URL:
-        <input type="text" onblur="inputcheck(this);" value="" size="46" id="listurl_auto" name="listurl_auto">
+        <input type="text" onblur="inputcheck(this);" value="<?php echo $thevalue['listurl_auto'];?>" size="46" id="listurl_auto" name="listurl_auto">
         <br>
         例如: http://www.discuz.net/file_[page].htm<br>
         &nbsp;从:&nbsp;&nbsp;&nbsp;
-        <input type="text" onkeyup="inputcheck(this);" maxlength="10" size="4" value="0" name="listpagestart" id="listpagestart">
+        <input type="text" onkeyup="inputcheck(this);" maxlength="10" size="4" value="<?php echo $thevalue['listpagestart'];?>" name="listpagestart" id="listpagestart">
         &nbsp;&nbsp;到:&nbsp;&nbsp;
-        <input type="text" onkeyup="inputcheck(this);" maxlength="10" size="4" value="0" name="listpageend" id="listpageend">
+        <input type="text" onkeyup="inputcheck(this);" maxlength="10" size="4" value="<?php echo $thevalue['listpageend'];?>" name="listpageend" id="listpageend">
         <br>
         <span id="wildcard">通配符长度:&nbsp;&nbsp;
-        <input type="text" onkeyup="inputcheck(this);" maxlength="1" size="3" value="0" name="wildcardlen" id="wildcardlen">
+        <input type="text" onkeyup="inputcheck(this);" maxlength="1" size="3" value="<?php echo $thevalue['wildcardlen'];?>" name="wildcardlen" id="wildcardlen">
         说明: 长度不足时，前面补0. </span>
         <div style="color: #aaa; display: none" id="str_wc"></div></td>
     </tr>
@@ -233,15 +214,25 @@ function addreplace(str, replace, replaceto) {
     <tr id="tr_reverseorder">
       <th>文章倒序采集
         <p>设为此项后列表中的文章将从最后面的开始采集</p></th>
-      <td><input type="radio" checked="" value="0" name="reverseorder">
+      <td>
+      <?php if($thevalue['reverseorder'] == 0) { ?>
+      <input type="radio" checked="" value="0" name="reverseorder">
         否&nbsp;&nbsp;
         <input type="radio" value="1" name="reverseorder">
-        是&nbsp;&nbsp;</td>
+        是&nbsp;&nbsp;
+      <?php } else { ?>
+      <input type="radio" value="0" name="reverseorder">
+        否&nbsp;&nbsp;
+        <input type="radio"  checked="" value="1" name="reverseorder">
+        是&nbsp;&nbsp;      
+      
+      <?php } ?> 
+       </td>
     </tr>
     <tr id="tr_encode">
       <th>采集页面编码
         <p>请输入要采集页面的编码。比如：gbk、utf-8、big5。为空则不进行编码转换</p></th>
-      <td><input type="text" value="" size="10" id="encode" name="encode">
+      <td><input type="text" value="<?php echo $thevalue['encode'];?>" size="10" id="encode" name="encode">
         <input type="button" onclick="debugsubmit(this, 'tr_encode', 'charset');" value="程序辅助识别"></td>
     </tr>
     <tr id="tr_subjecturlrule">
@@ -252,7 +243,7 @@ function addreplace(str, replace, replaceto) {
         <p>如&lt;td&gt;文章列表&lt;/td&gt;</p>
         <p>规则就是&lt;td&gt;[list]&lt;/td&gt;</p>
         <p>用 * 来代替任意字符、换行、回车</p></th>
-      <td><textarea rows="2" style="width:75%;" name="subjecturlrule" id="subjecturlrule"></textarea>
+      <td><textarea rows="2" style="width:75%;" name="subjecturlrule" id="subjecturlrule"><?php echo $thevalue['subjecturlrule'];?></textarea>
         <input type="button" onclick="debugsubmit(this, 'tr_subjecturlrule', 'subjecturlrule');" value="测试">
         <input type="button" onclick="$('#subjecturlrule').val(''); debugsubmit(this, 'tr_subjecturlrule', 'subjecturlrule');" value="自动识别">
         <br>
@@ -264,7 +255,7 @@ function addreplace(str, replace, replaceto) {
           <input type="input" disabled="disabled" value="[url]" size="10" name="tmp[]">
         </p>
         <p>用 * 来代替任意字符、换行、回车</p></th>
-      <td><textarea rows="2" style="width:75%;" name="subjecturllinkrule" id="subjecturllinkrule"></textarea>
+      <td><textarea rows="2" style="width:75%;" name="subjecturllinkrule" id="subjecturllinkrule"><?php echo $thevalue['subjecturllinkrule'];?></textarea>
         <input type="button" onclick="debugsubmit(this, 'tr_subjecturllinkrule', 'subjecturllinkrule');" value="测试">
         <input type="button" onclick="$('subjecturllinkrule').value=''; debugsubmit(this, 'tr_subjecturllinkrule', 'subjecturllinkrule');" value="自动识别">
         <br>
@@ -274,19 +265,19 @@ function addreplace(str, replace, replaceto) {
       <th>文章链接URL剔除规则
         <p>功能:凡符合规则的链接不进行采集,区分大小写.用 * 来代替任意字符、换行、回车</p>
         <p>多个规则之间用 | 隔开</p></th>
-      <td><textarea rows="2" style="width:75%;" name="subjecturllinkcancel" id="subjecturllinkcancel"></textarea>
+      <td><textarea rows="2" style="width:75%;" name="subjecturllinkcancel" id="subjecturllinkcancel"><?php echo $thevalue['subjecturllinkcancel'];?></textarea>
         <input type="button" onclick="debugsubmit(this, 'tr_subjecturllinkcancel', 'subjecturllinkcancel');" value="测试"></td>
     </tr>
     <tr id="tr_subjecturllinkfilter">
       <th>文章链接URL过滤规则
         <p>功能:过滤掉链接中的字符串,可以用来整理链接,区分大小写.用 * 来代替任意字符、换行、回车</p>
         <p>多个规则之间用 | 隔开</p></th>
-      <td><textarea rows="2" style="width:75%;" name="subjecturllinkfilter" id="subjecturllinkfilter"></textarea>
+      <td><textarea rows="2" style="width:75%;" name="subjecturllinkfilter" id="subjecturllinkfilter"><?php echo $thevalue['subjecturllinkfilter'];?></textarea>
         <input type="button" onclick="debugsubmit(this, 'tr_subjecturllinkfilter', 'subjecturllinkfilter');" value="测试"></td>
     </tr>
     <tr id="tr_subjecturllinkpre">
       <th>文章链接URL补充前缀</th>
-      <td><input type="text" value="" size="60" id="subjecturllinkpre" name="subjecturllinkpre">
+      <td><input type="text" value="<?php echo $thevalue['subjecturllinkpre'];?>" size="60" id="subjecturllinkpre" name="subjecturllinkpre" >
         <input type="button" onclick="debugsubmit(this, 'tr_subjecturllinkpre', 'subjecturllinkpre');" value="测试">
         <input type="button" onclick="$('subjecturllinkpre').value=''; debugsubmit(this, 'tr_subjecturllinkpre', 'subjecturllinkpre');" value="自动识别">
         <br>
@@ -294,7 +285,7 @@ function addreplace(str, replace, replaceto) {
     </tr>
     <tr id="tr_subjecturllinkpf">
       <th>文章链接URL补充后缀</th>
-      <td><input type="text" value="" size="60" id="subjecturllinkpf" name="subjecturllinkpf">
+      <td><input type="text" value="<?php echo $thevalue['subjecturllinkpf'];?>" size="60" id="subjecturllinkpf" name="subjecturllinkpf">
         <input type="button" onclick="debugsubmit(this, 'tr_subjecturllinkpf', 'subjecturllinkpf');" value="测试"></td>
     </tr>
   </tbody>
@@ -311,14 +302,14 @@ function addreplace(str, replace, replaceto) {
             <input type="input" disabled="disabled" value="[subject]" size="10" name="tmp[]">
           </p>
           <p>用 * 来代替任意字符、换行、回车</p></th>
-        <td><textarea rows="2" style="width:75%;" name="subjectrule" id="subjectrule"></textarea>
+        <td><textarea rows="2" style="width:75%;" name="subjectrule" id="subjectrule"><?php echo $thevalue['subjectrule'];?></textarea>
           <input type="button" onclick="debugsubmit(this, 'tr_subjectrule', 'subjectrule');" value="测试"></td>
       </tr>
       <tr id="tr_subjectfilter">
         <th>文章标题过滤规则
           <p>用 * 来代替任意字符、换行、回车</p>
           <p>多个规则之间用 | 隔开</p></th>
-        <td><textarea rows="2" style="width:75%;" name="subjectfilter" id="subjectfilter"></textarea>
+        <td><textarea rows="2" style="width:75%;" name="subjectfilter" id="subjectfilter"><?php echo $thevalue['subjectfilter'];?></textarea>
           <input type="button" onclick="debugsubmit(this, 'tr_subjectfilter', 'subjectfilter');" value="测试"></td>
       </tr>
       <tr id="tr_subjectreplace_title">
@@ -343,23 +334,32 @@ function addreplace(str, replace, replaceto) {
         <th>文章标题包含关键字
           <p>设置该选项后，则只采集标题包含关键字的文章</p>
           <p>多个关键字之间用 | 隔开</p></th>
-        <td><textarea rows="2" style="width:75%;" name="subjectkey" id="subjectkey"></textarea>
+        <td><textarea rows="2" style="width:75%;" name="subjectkey" id="subjectkey"><?php echo $thevalue['subjectkey'];?></textarea>
           <input type="button" onclick="debugsubmit(this, 'tr_subjectkey', 'subjectkey');" value="测试"></td>
       </tr>
       <tr id="tr_subjectkeycancel">
         <th>文章标题关键字剔除过滤
           <p>设置该选项后，不会采集标题包含关键字的文章</p>
           <p>多个关键字之间用 | 隔开</p></th>
-        <td><textarea rows="2" style="width:75%;" name="subjectkeycancel" id="subjectkeycancel"></textarea>
+        <td><textarea rows="2" style="width:75%;" name="subjectkeycancel" id="subjectkeycancel"><?php echo $thevalue['subjectkeycancel'];?></textarea>
           <input type="button" onclick="debugsubmit(this, 'tr_subjectkeycancel', 'subjectkeycancel');" value="测试"></td>
       </tr>
       <tr id="tr_subjectallowrepeat">
         <th>允许文章标题重复
           <p>(<strong style="color:red">如果启用自动入库再启用此项文章标题不允许重复将加重数据库的负载</strong>)</p></th>
-        <td><input type="radio" checked="" value="1" name="subjectallowrepeat">
+        <td>
+        <?php if($thevalue['subjectallowrepeat'] ==1 ) { ?>
+          <input type="radio" checked="" value="1" name="subjectallowrepeat">
           允许重复&nbsp;&nbsp;
           <input type="radio" value="0" name="subjectallowrepeat">
-          不允许重复&nbsp;&nbsp;</td>
+          不允许重复&nbsp;&nbsp;
+        <?php } else { ?>
+          <input type="radio" value="1" name="subjectallowrepeat">
+          允许重复&nbsp;&nbsp;
+          <input type="radio" value="0" checked=""  name="subjectallowrepeat">
+          不允许重复&nbsp;&nbsp;        
+        <?php } ?>  
+          </td>
       </tr>
     </tbody>
   </table>
@@ -375,7 +375,7 @@ function addreplace(str, replace, replaceto) {
             <input type="input" disabled="disabled" value="[message]" size="10" name="tmp[]">
           </p>
           <p>用 * 来代替任意字符、换行、回车</p></th>
-        <td><textarea rows="2" style="width:75%;" name="messagerule" id="messagerule"></textarea>
+        <td><textarea rows="2" style="width:75%;" name="messagerule" id="messagerule"><?php echo $thevalue['messagerule'];?></textarea>
           <input type="button" onclick="debugsubmit(this, 'tr_messagerule', 'messagerule');" value="测试">
           <input type="button" onclick="$('messagerule').value=''; debugsubmit(this, 'tr_messagerule', 'messagerule');" value="自动识别">
           <br>
@@ -385,7 +385,7 @@ function addreplace(str, replace, replaceto) {
         <th>文章内容过滤规则
           <p>用 * 来代替任意字符、换行、回车</p>
           <p>多个规则之间用 | 隔开</p></th>
-        <td><textarea rows="2" style="width:75%;" name="messagefilter" id="messagefilter"></textarea>
+        <td><textarea rows="2" style="width:75%;" name="messagefilter" id="messagefilter"><?php echo $thevalue['messagefilter'];?></textarea>
           <input type="button" onclick="debugsubmit(this, 'tr_messagefilter', 'messagefilter');" value="测试"></td>
       </tr>
       <tr id="tr_messagereplace_title">
@@ -411,32 +411,50 @@ function addreplace(str, replace, replaceto) {
         <th>文章内容包含关键字
           <p>设置该选项后，则只采集文章内容包含关键字的文章</p>
           <p>多个关键字之间用 | 隔开</p></th>
-        <td><textarea rows="2" style="width:75%;" name="messagekey" id="messagekey"></textarea>
+        <td><textarea rows="2" style="width:75%;" name="messagekey" id="messagekey"><?php echo $thevalue['messagekey'];?></textarea>
           <input type="button" onclick="debugsubmit(this, 'tr_messagekey', 'messagekey');" value="测试"></td>
       </tr>
       <tr id="tr_messagekeycancel">
         <th>文章内容关键字剔除过滤
           <p>设置该选项后，不会采集文章内容包含关键字的文章</p>
           <p>多个关键字之间用 | 隔开</p></th>
-        <td><textarea rows="2" style="width:75%;" name="messagekeycancel" id="messagekeycancel"></textarea>
+        <td><textarea rows="2" style="width:75%;" name="messagekeycancel" id="messagekeycancel"><?php echo $thevalue['messagekeycancel'];?></textarea>
           <input type="button" onclick="debugsubmit(this, 'tr_messagekeycancel', 'messagekeycancel');" value="测试"></td>
       </tr>
       <tr id="tr_messageformat">
         <th>文章内容格式化
           <p>此操作将去除网页多余代码,并将文章内容按原有段落分段.格式化的过程为程序自动分析,会存在一些误差.</p></th>
-        <td><input type="radio" checked="checked" value="1" name="messageformat" id="messageformat">
+        <td>
+        <?php if($thevalue['messageformat']==1) { ?>
+        <input type="radio" checked="checked" value="1" name="messageformat" id="messageformat">
           格式化&nbsp;&nbsp;
           <input type="radio" value="0" name="messageformat" id="messageformat">
           不格式化
+        <?php } else { ?>
+        <input type="radio"  value="1" name="messageformat" id="messageformat">
+          格式化&nbsp;&nbsp;
+          <input type="radio" checked="checked" value="0" name="messageformat" id="messageformat">
+          不格式化        
+        <?php } ?>  
           <input type="button" onclick="debugsubmit(this, 'tr_messageformat', 'messageformat');" value="测试"></td>
       </tr>
       <tr id="tr_messagepagetype">
         <th>文章内容分页模式
           <p>当选择上下页导航时,"分页区域识别规则"请将下一页配置成识别区域.</p></th>
-        <td><input type="radio" checked="" value="page" name="messagepagetype">
-          页码导航&nbsp;&nbsp;
-          <input type="radio" value="next" name="messagepagetype">
-          上下页导航&nbsp;&nbsp;</td>
+        <td>
+        <?php if($thevalue['messagepagetype'] == 'page') { ?>
+            <input type="radio" checked="" value="page" name="messagepagetype">
+            页码导航&nbsp;&nbsp;
+            <input type="radio" value="next" name="messagepagetype">
+            上下页导航&nbsp;&nbsp;
+        <?php } else { ?>
+            <input type="radio" value="page" name="messagepagetype">
+            页码导航&nbsp;&nbsp;
+            <input type="radio" value="next"  checked=""  name="messagepagetype">
+            上下页导航&nbsp;&nbsp;        
+        
+        <?php } ?>    
+       </td>
       </tr>
       <tr id="tr_messagepagerule">
         <th>文章内容分页区域识别规则
@@ -444,7 +462,7 @@ function addreplace(str, replace, replaceto) {
             <input type="input" disabled="disabled" value="[pagearea]" size="10" name="tmp[]">
           </p>
           <p>用 * 来代替任意字符、换行、回车</p></th>
-        <td><textarea rows="2" style="width:75%;" name="messagepagerule" id="messagepagerule"></textarea>
+        <td><textarea rows="2" style="width:75%;" name="messagepagerule" id="messagepagerule"><?php echo $thevalue['messagepagerule'];?></textarea>
           <input type="button" onclick="debugsubmit(this, 'tr_messagepagerule', 'messagepagerule');" value="测试"></td>
       </tr>
       <tr id="tr_messagepageurlrule">
@@ -453,12 +471,12 @@ function addreplace(str, replace, replaceto) {
             <input type="input" disabled="disabled" value="[page]" size="10" name="tmp[]">
           </p>
           <p>用 * 来代替任意字符、换行、回车</p></th>
-        <td><textarea rows="2" style="width:75%;" name="messagepageurlrule" id="messagepageurlrule"></textarea>
+        <td><textarea rows="2" style="width:75%;" name="messagepageurlrule" id="messagepageurlrule"><?php echo $thevalue['messagepageurlrule'];?></textarea>
           <input type="button" onclick="debugsubmit(this, 'tr_messagepageurlrule', 'messagepageurlrule');" value="测试"></td>
       </tr>
       <tr id="tr_messagepageurllinkpre">
         <th>文章内容分页链接URL补充前缀</th>
-        <td><input type="text" value="" size="60" id="messagepageurllinkpre" name="messagepageurllinkpre">
+        <td><input type="text" value="<?php echo $thevalue['messagepageurllinkpre'];?>" size="60" id="messagepageurllinkpre" name="messagepageurllinkpre">
           <input type="button" onclick="debugsubmit(this, 'tr_messagepageurllinkpre', 'messagepageurllinkpre');" value="测试">
           <input type="button" onclick="$('messagepageurllinkpre').value=''; debugsubmit(this, 'tr_messagepageurllinkpre', 'messagepageurllinkpre');" value="自动识别">
           <br>
@@ -466,7 +484,7 @@ function addreplace(str, replace, replaceto) {
       </tr>
       <tr id="tr_messagepageurllinkpf">
         <th>文章内容分页链接URL补充后缀</th>
-        <td><input type="text" value="" size="60" id="messagepageurllinkpf" name="messagepageurllinkpf">
+        <td><input type="text" value="<?php echo $thevalue['messagepageurllinkpre'];?>"  size="60" id="messagepageurllinkpf" name="messagepageurllinkpf">
           <input type="button" onclick="debugsubmit(this, 'tr_messagepageurllinkpf', 'messagepageurllinkpf');" value="测试"></td>
       </tr>
     </tbody>
@@ -484,7 +502,7 @@ function addreplace(str, replace, replaceto) {
             <input type="input" disabled="disabled" value="[from]" size="10" name="tmp[]">
           </p>
           <p>用 * 来代替任意字符、换行、回车</p></th>
-        <td><textarea rows="4" style="width:75%;" name="fromrule" id="fromrule"></textarea>
+        <td><textarea rows="4" style="width:75%;" name="fromrule" id="fromrule"><?php echo $thevalue['fromrule'];?></textarea>
           <input type="button" onclick="debugsubmit(this, 'tr_fromrule', 'fromrule');" value="测试">
           <br>
           当规则中不出现"标记符([from])"时,此值为"固定值"</td>
@@ -495,7 +513,7 @@ function addreplace(str, replace, replaceto) {
             <input type="input" disabled="disabled" value="[author]" size="10" name="tmp[]">
           </p>
           <p>用 * 来代替任意字符、换行、回车. 也可以指定多个作者,采集结果在入库时随机抽取其中的一个.多个作者之间用 | 隔开,在指定多个作者时,不能出现标记符([author]).</p></th>
-        <td><textarea rows="4" style="width:75%;" name="authorrule" id="authorrule"></textarea>
+        <td><textarea rows="4" style="width:75%;" name="authorrule" id="authorrule"><?php echo $thevalue['authorrule'];?></textarea>
           <input type="button" onclick="debugsubmit(this, 'tr_authorrule', 'authorrule');" value="测试">
           <br>
           当规则中不出现"标记符([author])"时,此值为"固定值"</td>
@@ -510,26 +528,43 @@ function addreplace(str, replace, replaceto) {
       <tr id="tr_uidrule">
         <th>发布者UID
           <p>可以指定多个发布者UID,采集结果在入库时随机抽取其中的一个,UID必须是网站的真实用户UID.多个发布者UID之间用 | 隔开</p></th>
-        <td><textarea rows="4" style="width:75%;" name="uidrule" id="uidrule"></textarea>
+        <td><textarea rows="4" style="width:75%;" name="uidrule" id="uidrule"><?php echo $thevalue['uidrule'];?></textarea>
           <input type="button" onclick="debugsubmit(this, 'tr_uidrule', 'uidrule');" value="测试"></td>
       </tr>
       <tr id="tr_savepic">
         <th>保存内容中的图片到本地</th>
-        <td><input type="radio" checked="" value="0" name="savepic">
+        <td>
+        <?php if($thevalue['savepic'] == 0) { ?>
+          <input type="radio" checked="" value="0" name="savepic">
           否&nbsp;&nbsp;
           <input type="radio" value="1" name="savepic">
-          是&nbsp;&nbsp;</td>
+          是&nbsp;&nbsp;
+        <?php } else { ?>
+          <input type="radio"  value="0" name="savepic">
+          否&nbsp;&nbsp;
+          <input type="radio" value="1" checked="" name="savepic">
+          是&nbsp;&nbsp;          
+        <?php } ?>  </td>
       </tr>
       <tr id="tr_saveflash">
         <th>保存内容中的FLASH到本地</th>
-        <td><input type="radio" checked="" value="0" name="saveflash">
+        <td>
+           <?php if($thevalue['saveflash'] == 0) { ?>
+          <input type="radio" checked="" value="0" name="saveflash">
           否&nbsp;&nbsp;
           <input type="radio" value="1" name="saveflash">
-          是&nbsp;&nbsp;</td>
+          是&nbsp;&nbsp;
+          <?php } else { ?>
+          <input type="radio"  value="0" name="saveflash">
+          否&nbsp;&nbsp;
+          <input type="radio" checked="" value="1" name="saveflash">
+          是&nbsp;&nbsp;          
+          <?php } ?>
+          </td>
       </tr>
       <tr id="tr_picurllinkpre">
         <th>图片/FLASH链接的URL补充前缀</th>
-        <td><input type="text" value="" size="60" id="picurllinkpre" name="picurllinkpre">
+        <td><input type="text" value="<?php echo $thevalue['picurllinkpre'];?>" size="60" id="picurllinkpre" name="picurllinkpre">
           <br>
           <a onclick="$('picurllinkpre').value='';" href="javascript:;">自动识别</a> ("图片/FLASH链接的URL补充前缀"为空时，程序自动补充前缀)</td>
       </tr>
