@@ -4,8 +4,15 @@ switch ($ts) {
 	
 	case "" :
 		$robotid = $_GET ['robotid'];
-		aac('robots')->delete('robots',array('robotid'=>$robotid));
-		qiMsg ( "成功删除机器人" );
+		$res = aac ( 'robots' )->find ( 'robots', array ('robotid' => robotid ) );
+		if (! empty ( $res )) {
+			aac ( 'robots' )->delete ( 'robots', array ('robotid' => $robotid ) );
+			$cachefile = IKDATA . '/robot/robot_' . $_GET ['robotid'] . '.cache.php';
+			if (file_exists ( $cachefile )) {
+				@unlink ( $cachefile );
+			}
+			qiMsg ( "成功删除机器人" );
+		}
 		break;
 
 }

@@ -5,7 +5,7 @@ function updaterobot($id) {
 
 	$tarr = $results = $userarr = array();
 
-	$results = $db->once_fetch_assoc("select uidrule from ".dbprefix."robots where robotid='.$id.'");
+	$results = aac('robots')->find('robots',array('robotid'=>$id),'uidrule');
 	if(!empty($results)) {
 		$results['uidrule'] = explode('|', $results['uidrule']);
 		if(!empty($results['uidrule'])) {

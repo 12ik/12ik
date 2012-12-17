@@ -1,8 +1,5 @@
 <?php
 
-$_SCONFIG = array('charset'=>'UTF-8');//合并配置
-$_SGLOBAL['timestamp'] = time();
-$_SCONFIG['timeoffset'] = 8;
 $theurl = SITE_URL."index.php?app=robots&ac=admin";
 
 include_once('robot.func.php');
@@ -20,9 +17,9 @@ switch ($ts) {
 		empty ( $_GET ['status'] ) ? $status = 0 : $status = $_GET ['status']; // 当次采集个数
 		
 		//ONE VIEW FOR UPDATE
-		$arrRobot = aac('robots')->find('robots',array('robotid'=>$robotid));
-		if($arrRobot) {
-			showprogress('采集机器人开始工作',1);
+		$thevalue = aac('robots')->find('robots',array('robotid'=>$robotid));
+		if($thevalue) {
+			showprogress('<font color=green>采集机器人开始工作</font>',1);
 		} else {
 			qiMsg('指定的采集机器人不存在.');
 		}
@@ -30,7 +27,7 @@ switch ($ts) {
 		$listurlarr = $listurlarr2 = array (); // 初始采集页面数组
 		// 对采集数组进行整理
 		$thevalue ['listurl_manual'] = $thevalue ['listurl_auto'] = '';	
-			
+	
 		if ($thevalue ['listurltype'] == 'note') {
 			$thevalue ['listurl'] = unserialize ( $thevalue ['listurl'] );
 			$thevalue ['listurl_manual'] = $thevalue ['listurl'] ['manual'];
@@ -99,7 +96,7 @@ switch ($ts) {
 			} else {
 				showprogress ('处理索引列表页面结束' );
 			}
-		/* 
+		 
 			// GET SUBJECT URL LIST
 			$subjecturl = array ();
 			if (! $listcache && ! empty ( $listtext )) {
@@ -113,7 +110,7 @@ switch ($ts) {
 				$subjecturl = $subjecturlarr [0];
 			}
 			if (! $listcache && ! empty ( $subjecturl )) {
-				showprogress ( '处理处理索引列表页面<b>链接区域</b>成功' );
+				showprogress ( '处理处理索引列表页面 <b style="color:green">链接区域成功</b>' );
 				// 文章链接URL识别
 				$urlarr = array ();
 				if (empty ( $thevalue ['subjecturllinkrule'] )) {
@@ -133,7 +130,7 @@ switch ($ts) {
 				}
 		
 				if (! empty ( $urlarr )) {
-					showprogress ( '处理处理索引列表页面<b>链接</b>成功' );
+					showprogress ( '处理处理索引列表页面 <b style="color:green">链接成功</b>' );
 					// 文章链接URL剔除
 					if (! empty ( $thevalue ['subjecturllinkcancel'] )) {
 						$tmparr = array ();
@@ -200,13 +197,13 @@ switch ($ts) {
 					}
 				}
 			}
-		
+	
 			if (! empty ( $newurlarr )) {
 				$thevalue ['pernum'] = empty ( $thevalue ['pernum'] ) ? 5 : $thevalue ['pernum'];
 				$thevalue ['allnum'] = empty ( $thevalue ['allnum'] ) ? 65535 : $thevalue ['allnum'];
 				if (! $listcache)
 					cacherobotlist ( 'make', $lurl, $_GET ['robotid'], $newurlarr ); // 生成文章列表数列表URL地址
-		
+			
 				while ( true ) { // 死循环采集文章
 					$nextpage = false;
 					if ($mpage >= count ( $newurlarr )) { // 文章列表页数是否大于单个索引页整理出来的文章列表总数
@@ -285,18 +282,21 @@ switch ($ts) {
 								
 							// 采集次数累加1并结整采集程序
 							if (empty ( $status )) {
-								$_SGLOBAL ['db']->query ( 'UPDATE ' . tname ( 'robots' ) . ' SET lasttime=\'' . $_SGLOBAL ['timestamp'] . '\',robotnum=robotnum+1 WHERE robotid=\'' . $_GET ['robotid'] . '\'' );
+								$times = $_SGLOBAL ['timestamp'];
+								$db->query("update ".dbprefix."robots set `lasttime`='$times',`robotnum`='robotnum+1' where `robotid`='$robotid'");
 								$status = 1;
 							}
 								
 							$msgarr = pregmessagearray ( $messagetext, $thevalue, $mnum, 1, 1, $msgurl ); // 解析文章内容
 							if (! empty ( $msgarr ['subject'] ) && ! empty ( $msgarr ['message'] )) {
-								// INSERT ITEM
+								// 插入到库中
 								$itemid = messageaddtodb ( $msgarr, $_GET ['robotid'], 0 );
 								$mnum ++;
 							} else {
 								$mnum ++;
 							}
+							
+							echo $mnum; die;
 								
 							// 对文章列表页的处理
 							if (! empty ( $msgarr ['pagearr'] ) && $thevalue ['messagepagetype'] == 'page') {
@@ -341,7 +341,7 @@ switch ($ts) {
 					include_once template ( 'admin/tpl/footer.htm', 1 );
 					jumpurl ( $theurl . '&mg=robot&robotid=' . $_GET ['robotid'] . '&lpage=' . $lpage . '&mpage=' . $mpage . '&mnum=' . $mnum . '&status=' . $status, 1 );
 				}
-			} */
+			} 
 		} else {
 			showprogress ( '无法链接到指定的URL地址', 1 );
 		}

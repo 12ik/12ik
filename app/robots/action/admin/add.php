@@ -1,10 +1,6 @@
 <?php
 defined('IN_IK') or die('Access Denied.');
-
-$_SCONFIG = array('charset'=>'UTF-8');//合并配置
-$_SGLOBAL['timestamp'] = time();
-$_SCONFIG['timeoffset'] = 8;
-
+echo $_SCONFIG['charset'];
 include_once('robot.func.php');
 include_once(IKCORE.'./IKCache.func.php');
 
@@ -886,7 +882,7 @@ switch ($ts) {
 			$setsqlarr['uid'] = $_SESSION ['tsadmin']['userid'];
 			$robotid = aac('robots') -> create('robots', $setsqlarr);
 			updaterobot($robotid);	//更新采集器缓存
-			//qiMsg("采集机器人成功添加",'返回',SITE_URL.'index.php?app=robots&ac=admin&mg=list');
+			qiMsg("采集机器人成功添加",'返回',SITE_URL.'index.php?app=robots&ac=admin&mg=list');
 		} else {
 			//UPDATE
 			$wheresqlarr = array(
@@ -894,7 +890,7 @@ switch ($ts) {
 			);
 			aac('robots') -> update('robots', $wheresqlarr, $setsqlarr);
 			updaterobot($_POST['robotid']);	//更新采集器缓存
-			//qiMsg("采集机器人编辑成功",'返回',SITE_URL.'index.php?app=robots&ac=admin&mg=list');
+			qiMsg("采集机器人编辑成功",'返回',SITE_URL.'index.php?app=robots&ac=admin&mg=list');
 		}		
 		
 		break;

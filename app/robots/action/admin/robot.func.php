@@ -616,11 +616,12 @@ function sstrtotime($timestamp) {
  */
 function cacherobotlist($type, $url, $robotid, $sarray=array(), $varname='newurlarr') {
 
-	$cachefile = IKDATA.'./data/robot/'.$robotid.'_'.md5($url).'.php';
+	$cachefile = IKDATA.'/robot/'.$robotid.'_'.md5($url).'.php';
+	
 	if($type == 'get') {
 		if(file_exists($cachefile)) {
 			include_once($cachefile);
-			showprogress('列表缓存文件成功读取'.' ('.srealpath($cachefile).')', 1);	//srealpath是格式化URL地址
+			showprogress('<font color=green>列表缓存文件成功读取'.' ('.srealpath($cachefile).')</font>', 1);	//srealpath是格式化URL地址
 			return $$varname;
 		} else {
 			return false;
@@ -637,9 +638,443 @@ function cacherobotlist($type, $url, $robotid, $sarray=array(), $varname='newurl
 			flock($fp, 2);
 			fwrite($fp, $text);
 			fclose($fp);
-			showprogress('列表缓存文件成功写入'.' ('.srealpath($cachefile).')', 1);
+			showprogress('<font color=green>列表缓存文件成功写入'.' ('.srealpath($cachefile).')</font>', 1);
 		}
 	}
 
+}
+
+
+/**
+ * 采集器方法 存入数据库
+ */
+function messageaddtodb($msgarr, $robotid, $itemid=0) {
+	global $_SGLOBAL;
+	$filepath = IKDATA.'/robot/robot_'.$robotid.'.cache.php';
+	@include_once($filepath);
+
+	if(!$itemid) { 
+		$uid = empty($msgarr['uid']) ? $_SGLOBAL['supe_uid'] : $msgarr['uid'];
+		echo $_SGLOBAL['supe_username']; die;
+		$username = empty($cacheinfo['uids'][$msgarr['uid']]) ? $_SGLOBAL['supe_username'] : $cacheinfo['uids'][$msgarr['uid']];
+		//判断是否直接入库操作
+		if(empty($msgarr['importcatid'])) {
+			$insertsqlarr = array(
+				'uid' => $uid,
+				'username' => saddslashes($username),
+				'robotid' => $robotid,
+				'robottime' => $_SGLOBAL['timestamp'],
+				'subject' => saddslashes($msgarr['subject'])
+			);
+			if(!empty($msgarr['itemfrom'])) $insertsqlarr['itemfrom'] = saddslashes($msgarr['itemfrom']);
+			if(!empty($msgarr['author'])) $insertsqlarr['author'] = saddslashes($msgarr['author']);
+			if(!empty($msgarr['dateline'])) $insertsqlarr['dateline'] = $msgarr['dateline'];
+			if(!empty($msgarr['patharr'])) $insertsqlarr['haveattach'] = 1;
+			$itemid = inserttable('robotitems', $insertsqlarr, 1);
+		} else {
+			$hashstr = smd5($_SGLOBAL['supe_uid'].'/'.rand(1000, 9999).$_SGLOBAL['timestamp']);
+			$insertsqlarr = array(
+				'catid' => $msgarr['importcatid'],
+				'uid' => $uid,
+				'username' => saddslashes($username),
+				'type' => $msgarr['importtype'],
+				'subject' => saddslashes($msgarr['subject']),
+				'dateline' => $msgarr['dateline'],
+				'lastpost' => $msgarr['dateline'],
+				'hash' => $hashstr,
+				'fromtype' => 'robotpost',
+				'fromid' => $robotid,
+				'haveattach' => (!empty($msgarr['patharr'])?1:0)
+			);
+			$itemid = inserttable('spaceitems', $insertsqlarr, 1);
+		}
+		$hash = md5($msgarr['subject']);
+		$_SGLOBAL['db']->query('REPLACE INTO '.tname('robotlog')." (hash) VALUES ('$hash')");	//插入起防重复操作
+	}
+
+	//INSERT MESSAGE
+	if(empty($msgarr['importcatid'])) {
+		$insertsqlarr = array(
+			'itemid' => $itemid,
+			'robotid' => $robotid
+		);
+		if(!empty($msgarr['message'])) $insertsqlarr['message'] = saddslashes($msgarr['message']);
+		if(!empty($msgarr['picarr'])) $insertsqlarr['picurls'] = saddslashes(serialize($msgarr['picarr']));
+		if(!empty($msgarr['flasharr'])) $insertsqlarr['flashurls'] = saddslashes(serialize($msgarr['flasharr']));
+		inserttable('robotmessages', $insertsqlarr, 0, 1);
+	} else {
+		$insertsqlarr = array(
+			'itemid' => $itemid,
+			'message' => saddslashes($msgarr['message']),
+			'newsauthor' => saddslashes($msgarr['author']),
+			'newsfrom' => saddslashes($msgarr['itemfrom'])
+		);
+		inserttable('spacenews', $insertsqlarr);
+	}
+
+
+	if(!empty($msgarr['patharr'])) {
+		$attacharr['hash'] = 'R'.$robotid.'I'.$itemid;
+		$thevalue = array();
+		if(empty($msgarr['importcatid'])) {
+			$query = $_SGLOBAL['db']->query("SELECT haveattach, uid FROM ".tname('robotitems')." WHERE itemid='$itemid'");
+		} else {
+			$query = $_SGLOBAL['db']->query("SELECT haveattach, hash, uid FROM ".tname('spaceitems')." WHERE itemid='$itemid'");
+		}
+		$thevalue = $_SGLOBAL['db']->fetch_array($query);
+		if(!empty($thevalue['hash'])) {
+			$attacharr['hash'] = $thevalue['hash'];
+		}
+		$uid = $thevalue['uid'];
+		$insertkeysql = $comma = '';
+		$insertvaluesql = '(';
+		foreach ($msgarr['patharr'] as $key => $value) {
+			$value['hash'] = $attacharr['hash'];
+			$value['uid'] = $uid;
+			$value['itemid'] = empty($msgarr['importcatid'])?0:$itemid;
+			foreach($value as $insert_key => $insert_value) {
+				if($key == 0) {
+					$insertkeysql .= $comma.$insert_key;
+				}
+				$insertvaluesql .= $comma.'\''.$insert_value.'\'';
+				$comma = ', ';
+			}
+
+			if(count($msgarr['patharr'])-1 > $key) {
+				$insertvaluesql .= '), (';
+				$comma = '';
+			}
+		}
+		$insertvaluesql .= ')';
+
+		$_SGLOBAL['db']->query('INSERT INTO '.tname('attachments').' ('.$insertkeysql.') VALUES '.$insertvaluesql);
+		if(isset($thevalue['hash'])) {
+			$query = $_SGLOBAL['db']->query("SELECT aid FROM ".tname('attachments')." WHERE itemid='$itemid' AND isimage='1' LIMIT 0 ,1");
+			$attvalue = $_SGLOBAL['db']->fetch_array($query);
+			$_SGLOBAL['db']->query("UPDATE ".tname('spaceitems')." SET haveattach='1',picid='$attvalue[aid]' WHERE itemid='$itemid'");
+		}
+	}
+	return $itemid;
+}
+
+//正则表达式匹配 简析抓取
+function pregmessagearray($messagetext, $rulearr, $mnum, $getpage=0, $getsubject=0, $msgurl='') {
+	global $_SGLOBAL, $alang;
+	
+	if($getsubject) $mnum = $mnum+1;
+	$msgarr = array(
+		'subject' => '',
+		'dateline' => '',
+		'itemfrom' => '',
+		'author' => '',
+		'message' => '',
+		'importcatid' => $rulearr['importcatid'],
+		'importtype' => $rulearr['importtype'],
+		'pagearr' => array(),
+		'picarr' => array(),
+		'flasharr' => array(),
+		'patharr' => array()
+	);
+	$nextprogress = true;
+
+	//文章标题识别
+	if($getsubject && $messagetext && !empty($rulearr['subjectrule'])) {
+		$subjectarr = pregmessage($messagetext, $rulearr['subjectrule'], 'subject');
+		$msgarr['subject'] = $subjectarr[0];
+	}
+	//文章标题过滤
+	if($getsubject && $msgarr['subject'] && !empty($rulearr['subjectfilter'])) {
+		$rule = convertrule($rulearr['subjectfilter']);
+		$msgarr['subject'] = preg_replace("/($rule)/s", '', $msgarr['subject']);
+	}
+	//文章标题文字替换
+	if($getsubject && $msgarr['subject'] && !empty($rulearr['subjectreplace'])) {
+		$rulearr['subjectreplace'] = explode("\n", $rulearr['subjectreplace']);
+		$rulearr['subjectreplaceto'] = explode("\n", $rulearr['subjectreplaceto']);
+		$msgarr['subject'] = stringreplace($rulearr['subjectreplace'], $rulearr['subjectreplaceto'], $msgarr['subject']);
+	}
+	//文章标题包含关键字
+	if($getsubject && $msgarr['subject'] && !empty($rulearr['subjectkey'])) {
+		$rule = convertrule($rulearr['subjectkey']);
+		$newsubject = preg_replace("/($rule)/s", '', $msgarr['subject']);
+		if($newsubject == $msgarr['subject']) {
+			showprogress('['.$mnum.'] '.$msgarr['subject'].' '.$alang['robot_robot_subject_no_key']);
+			$nextprogress = false;
+			$msgarr['subject'] = '';
+		}					
+	}
+	//文章标题关键字剔除过滤
+	if($getsubject && $msgarr['subject'] && !empty($rulearr['subjectkeycancel'])) {
+		$rule = convertrule($rulearr['subjectkeycancel']);
+		$newsubject = preg_replace("/($rule)/s", '', $msgarr['subject']);
+		if($newsubject != $msgarr['subject']) {
+			showprogress('['.$mnum.'] '.$msgarr['subject'].' '.$alang['robot_robot_subject_key_cancel']);
+			$nextprogress = false;
+			$msgarr['subject'] = '';
+		}				
+	}
+	$msgarr['subject'] = trim($msgarr['subject']);
+	if($getsubject && $nextprogress && empty($msgarr['subject'])) {
+		showprogress('['.$mnum.'] '.$alang['robot_robot_subject_null']);
+		$nextprogress = false;
+	}
+	if($getsubject && $nextprogress && !$rulearr['subjectallowrepeat']) {
+		$query = $_SGLOBAL['db']->query('SELECT COUNT(*) FROM '.tname('robotlog').' WHERE hash=\''.md5($msgarr['subject']).'\'');
+		if($_SGLOBAL['db']->result($query, 0)) {
+			showprogress('['.$mnum.'] '.$msgarr['subject'].' '.$alang['robot_robot_subject_exists']);
+			$nextprogress = false;
+		}
+	}
+	if($nextprogress && $getsubject && $msgarr['subject']) {
+		showprogress('['.$mnum.'] [<b>'.$msgarr['subject'].'</b>] '.$alang['robot_robot_deal'].'<b>'.'<b>'.$alang['robot_robot_subject'].'</b>'.$alang['robot_robot_success']);
+	}
+	if(!$nextprogress) {
+		$msgarr['subject'] = '';
+	}
+	
+	//DATELINE
+	if(empty($rulearr['defaultdateline'])) {
+		$msgarr['dateline'] = $_SGLOBAL['timestamp'];
+	} else {
+		$msgarr['dateline'] = intval($rulearr['defaultdateline']);
+	}
+	
+	//信息来源识别
+	if($getsubject && $nextprogress && !empty($rulearr['fromrule'])) {
+		if(preg_match("/\[from\]/", $rulearr['fromrule'])) {
+			$fromarr = pregmessage($messagetext, $rulearr['fromrule'], 'from');
+		} else {
+			$fromarr[0] = $rulearr['fromrule'];
+		}
+		$msgarr['itemfrom'] = $fromarr[0];
+		if($msgarr['itemfrom']) {
+			showprogress('['.$mnum.'] [<b>'.$msgarr['itemfrom'].'</b>] '.$alang['robot_robot_deal'].'<b>'.$alang['robot_robot_itemfrom'].'</b>'.$alang['robot_robot_success']);
+		} else {
+			showprogress('['.$mnum.'] '.$alang['robot_robot_deal'].'<b>'.'<b>'.$alang['robot_robot_itemfrom'].'</b>'.$alang['robot_robot_failed']);
+		}
+	}
+	//作者识别
+	if($getsubject && $nextprogress && !empty($rulearr['authorrule'])) {
+		if(preg_match("/\[author\]/", $rulearr['authorrule'])) {
+			$authorarr = pregmessage($messagetext, $rulearr['authorrule'], 'author');
+		} else {
+			$rulearr['authorrule'] = explode('|', $rulearr['authorrule']);
+			$rulearr['authorrule'] = strim($rulearr['authorrule']);
+			if(is_array($rulearr['authorrule'])) {
+				foreach($rulearr['authorrule'] as $tmpkey => $tmpvalue) {
+					if(empty($tmpvalue)) {
+						unset($rulearr['authorrule'][$tmpkey]);
+					}
+				}
+				$tmprand = 0;
+				$tmprand = rand(0, count($rulearr['authorrule'])-1);
+				$authorarr[0] = $rulearr['authorrule'][$tmprand];
+			} else {
+				$authorarr[0] = $rulearr['authorrule'];
+			}
+		}
+		$msgarr['author'] = $authorarr[0];
+		if($msgarr['author']) {
+			showprogress('['.$mnum.'] [<b>'.$msgarr['author'].'</b>] '.$alang['robot_robot_deal'].'<b>'.$alang['robot_robot_author'].'</b>'.$alang['robot_robot_success']);
+		} else {
+			showprogress('['.$mnum.'] '.$alang['robot_robot_deal'].'<b>'.$alang['robot_robot_author'].'</b>'.$alang['robot_robot_failed']);
+		}
+	}
+	//发布者UID
+	if($getsubject && $nextprogress && !empty($rulearr['uidrule'])) {
+		$rulearr['uidrule'] = explode('|', $rulearr['uidrule']);
+		$rulearr['uidrule'] = strim($rulearr['uidrule']);
+		if(is_array($rulearr['uidrule'])) {
+			foreach($rulearr['uidrule'] as $tmpkey => $tmpvalue) {
+				if(empty($tmpvalue)) {
+					unset($rulearr['uidrule'][$tmpkey]);
+				}
+			}
+			$tmprand = 0;
+			$tmprand = rand(0, count($rulearr['uidrule'])-1);
+			$msgarr['uid'] = intval($rulearr['uidrule'][$tmprand]);
+		} else {
+			$msgarr['uid'] = intval($rulearr['uidrule']);
+		}
+	}
+	
+	//文章内容识别
+	if($nextprogress && !empty($rulearr['messagerule'])) {
+		if(empty($rulearr['messagerule'])) {
+			$rsmessagearr = getrobotmessage($messagetext, $msgurl, 2);
+			$messagearr[0] = $rsmessagearr['leachmessage'];
+		} else {
+			$messagearr = pregmessage($messagetext, $rulearr['messagerule'], 'message');
+		}
+		$msgarr['message'] = $messagearr[0];
+	}
+	//文章内容过滤
+	if($nextprogress && $msgarr['message'] && !empty($rulearr['messagefilter'])) {
+		$rule = convertrule($rulearr['messagefilter']);
+		$msgarr['message'] = preg_replace("/($rule)/s", '', $msgarr['message']);
+	}
+	//文章内容文字替换
+	if($nextprogress && $msgarr['message'] && !empty($rulearr['messagereplace'])) {
+		$rulearr['messagereplace'] = explode("\n", $rulearr['messagereplace']);
+		$rulearr['messagereplaceto'] = explode("\n", $rulearr['messagereplaceto']);
+		$msgarr['message'] = stringreplace($rulearr['messagereplace'], $rulearr['messagereplaceto'], $msgarr['message']);
+	}
+	//文章内容包含关键字
+	if($nextprogress && $msgarr['message'] && !empty($rulearr['messagekey'])) {
+		$rule = convertrule($rulearr['messagekey']);
+		$newmessage = preg_replace("/($rule)/s", '', $msgarr['message']);
+		if($newmessage == $msgarr['message']) {
+			showprogress('['.$mnum.'] '.$msgarr['subject'].' '.$alang['robot_robot_message_no_key']);
+			$nextprogress = false;
+			$msgarr['message'] = '';
+		}					
+	}
+	//文章内容关键字剔除过滤
+	if($nextprogress && $msgarr['message'] && !empty($rulearr['messagekeycancel'])) {
+		$rule = convertrule($rulearr['messagekeycancel']);
+		$newmessage = preg_replace("/($rule)/s", '', $msgarr['message']);
+		if(md5($newmessage) != md5($msgarr['message'])) {
+			showprogress('['.$mnum.'] '.$msgarr['subject'].' '.$alang['robot_robot_message_key_cancel']);
+			$nextprogress = false;
+			$msgarr['message'] = '';
+		}					
+	}
+	//文章内容格式化
+	if($nextprogress && $msgarr['message'] && !empty($rulearr['messageformat'])) {
+		$rsmessagearr = getrobotmessage($msgarr['message'], $msgurl);
+		$msgarr['message'] = $rsmessagearr['leachmessage'];
+	}
+	
+	if($nextprogress) {
+		if($msgarr['message']) {
+			showprogress('['.$mnum.'] '.$alang['robot_robot_deal'].'<b>'.$alang['robot_robot_message'].'</b>'.$alang['robot_robot_success']);
+		} else {
+			$msgarr['subject'] = '';
+			$nextprogress = false;
+			showprogress('['.$mnum.'] '.$alang['robot_robot_deal'].'<b>'.$alang['robot_robot_message'].'</b>'.$alang['robot_robot_failed']);
+		}
+	}
+	
+	//LOCAL PIC URL
+	if($nextprogress && (!empty($rulearr['picurllinkpre']) || $rulearr['savepic'])) {
+		preg_match_all("/\<img\s+.*?src=[\'\"]*([a-z0-9\/\-_+=.~!%@?#%&;:$\\()|]+)[\'\"\s\>]+/is", $msgarr['message'], $picurlarr);
+		if(!empty($picurlarr[1])) $msgarr['picarr'] = sarray_unique($picurlarr[1]);
+		if(!empty($rulearr['picurllinkpre'])) {
+			foreach($msgarr['picarr'] as $pickey => $picurl) {
+				if(strpos($picurl, '://') === false) {
+					$msgarr['picarr'][$pickey] = $rulearr['picurllinkpre'].$picurl;
+					$msgarr['message'] = str_replace($picurl, $rulearr['picurllinkpre'].$picurl, $msgarr['message']);
+				}
+			}
+		} else {
+			$url = array();
+			$posturl = parse_url($msgurl);
+			foreach ($msgarr['picarr'] as $pickey => $picurl) {
+				if(!empty($picurl)) {
+					$url = parse_url($picurl);
+					if(!empty($url['host'])){
+						$msgarr['picarr'][$pickey] = $picurl;
+					} else {
+						$offset = strpos($picurl, '/');
+						if(!is_bool($offset) && $offset == 0){
+							$msgarr['picarr'][$pickey] = $posturl['scheme'].'://'.$posturl['host'].$picurl;
+						} else {
+							$msgarr['picarr'][$pickey] = substr($msgurl, 0, strrpos($msgurl, '/')).'/'.$picurl;
+						}
+					}
+					$msgarr['message'] = str_replace($picurl, $msgarr['picarr'][$pickey], $msgarr['message']);
+				}
+			}
+		}
+		if($rulearr['savepic']) {
+			$msgarr = saveurlarr($msgarr, 'picarr');
+			showprogress('['.$mnum.'] '.$alang['robot_robot_deal'].'<b>'.$alang['robot_robot_picarr'].'</b>'.$alang['robot_robot_success']);
+		}
+	}
+	
+	//LOCAL FLASH URL
+	if($nextprogress && (!empty($rulearr['picurllinkpre']) || $rulearr['saveflash'])) {
+		preg_match_all("/\<embed\s+.*?src=[\'\"]*([a-z0-9\/\-_+=.~!%@?#%&;:$\\()|])[\'\"\s\>]+/is", $msgarr['message'], $flashurlarr);
+		if(!empty($flashurlarr[1])) $msgarr['flasharr'] = sarray_unique($flashurlarr[1]);
+		if(!empty($rulearr['picurllinkpre'])) {
+			foreach($msgarr['flasharr'] as $flashkey => $flashurl) {
+				if(strpos($flashurl, '://') === false) {
+					$msgarr['flasharr'][$flashkey] = $rulearr['picurllinkpre'].$flashurl;
+					$msgarr['message'] = str_replace($flashurl, $rulearr['picurllinkpre'].$flashurl, $msgarr['message']);
+				}
+			}
+		} else {
+			$url = array();
+			$posturl = parse_url($msgurl);
+			foreach ($msgarr['flasharr'] as $flashkey => $flashurl) {
+				if(!empty($flashurl)) {
+					$url = parse_url($flashurl);
+					if(!empty($url['host'])){
+						$msgarr['flasharr'][$flashkey] = $flashurl;
+					} else {
+						$offset = strpos($flashurl, '/');
+						if(!is_bool($offset) && $offset == 0){
+							$msgarr['flasharr'][$flashkey] = $posturl['scheme'].'://'.$posturl['host'].$flashurl;
+						} else {
+							$msgarr['flasharr'][$flashkey] = substr($msgurl, 0, strrpos($msgurl, '/')).'/'.$flashurl;
+						}
+					}
+					$msgarr['message'] = str_replace($flashurl, $msgarr['flasharr'][$flashkey], $msgarr['message']);
+				}
+			}
+		}
+		if($rulearr['saveflash']) {
+			$msgarr = saveurlarr($msgarr, 'flasharr');
+			showprogress('['.$mnum.'] '.$alang['robot_robot_deal'].'<b>'.$alang['robot_robot_flasharr'].'</b>'.$alang['robot_robot_success']);
+		}
+	}
+
+	//PAGE URL
+	if($getpage && $nextprogress && !empty($rulearr['messagepagerule'])) {
+		$messagepagearr = pregmessage($messagetext, $rulearr['messagepagerule'], 'pagearea');
+		$messagepage = $messagepagearr[0];
+		if($messagepage && !empty($rulearr['messagepageurlrule'])) {
+			$msgarr['pagearr'] = pregmessage($messagepage, $rulearr['messagepageurlrule'], 'page', -1);
+			$msgarr['pagearr'] = sarray_unique($msgarr['pagearr']);
+		}
+		if($msgarr['pagearr']) {
+			if(!empty($rulearr['messagepageurllinkpre'])) {
+				foreach($msgarr['pagearr'] as $pkey => $purl) {
+					if(strpos($purl, '://') === false) {
+						$msgarr['pagearr'][$pkey] = $rulearr['messagepageurllinkpre'].$purl;
+					}
+				}
+			} else {
+				$url = array();
+				$posturl = parse_url($msgurl);
+				foreach($msgarr['pagearr'] as $pkey => $purl) {
+					if(!empty($purl)) {
+						$url = parse_url($purl);
+						if(!empty($url['host'])){
+							$msgarr['pagearr'][$pkey] = $purl;
+						} else {
+							$offset = strpos($purl, '/');
+							if(!is_bool($offset) && $offset == 0){
+								$msgarr['pagearr'][$pkey] = $posturl['scheme'].'://'.$posturl['host'].$purl;
+							} else {
+								$msgarr['pagearr'][$pkey] = substr($msgurl, 0, strrpos($msgurl, '/')).'/'.$purl;
+							}
+						}
+					}
+				}
+			}
+			if(!empty($rulearr['messagepageurllinkpf'])) {
+				foreach ($msgarr['pagearr'] as $pkey => $purl) {
+					if(!empty($purl)) {
+						$msgarr['pagearr'][$pkey] = $purl.$rulearr['messagepageurllinkpf'];
+					}
+				}
+			}
+			showprogress('['.$mnum.'] '.$alang['robot_robot_deal'].'<b>'.$alang['robot_robot_pagearr'].'</b>'.$alang['robot_robot_success']);
+		} else {
+			showprogress('['.$mnum.'] '.$alang['robot_robot_deal'].'<b>'.$alang['robot_robot_pagearr'].'</b>'.$alang['robot_robot_failed']);
+		}
+	}
+	return $msgarr;
 }
 ?>

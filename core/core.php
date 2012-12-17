@@ -19,6 +19,14 @@ session_start ();
 //前台用户基本数据,$IK_USER数组
 $IK_USER = array ('user' => isset ( $_SESSION ['tsuser'] ) ? $_SESSION ['tsuser'] : '', 'admin' => isset ( $_SESSION ['tsadmin'] ) ? $_SESSION ['tsadmin'] : '' );
 
+//定义全局变量
+$_SGLOBAL = $_SBLOCK  = $_SCONFIG = $_SHTML = $_DCACHE = $_SGET = array();
+$_SGLOBAL['timestamp'] = time();
+$_SGLOBAL['supe_uid'] = $IK_USER['admin']['userid'];
+$_SGLOBAL['supe_username'] = $IK_USER['admin']['username'];
+$_SCONFIG['charset'] = 'UTF-8';//合并配置
+$_SCONFIG['timeoffset'] = 8;
+
 //加载基础函数
 require_once 'IKFunction.php';
 

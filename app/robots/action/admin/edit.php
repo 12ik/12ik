@@ -26,7 +26,7 @@ switch ($ts) {
 						$thevalue['listurl'] .= '<div id="url_s'.$tmpkey.'">';
 						$thevalue['listurl'] .= $tmpvalue;
 						$thevalue['listurl'] .= ' <a href="javascript:;" onclick="$(this).parent().remove();">删除</a>
-						<input id="listurl_manual[]" type="text" name="listurl_manual[]" size="5" style="display: none;" value="$tmpvalue"/></div>';
+						<input id="listurl_manual[]" type="text" name="listurl_manual[]" size="5" style="display: none;" value="'.$tmpvalue.'"/></div>';
 											
 					}
 				}

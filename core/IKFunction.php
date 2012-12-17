@@ -1365,3 +1365,13 @@ function arrayeval($array, $level = 0) {
 	$evaluate .= "$space)";
 	return $evaluate;
 }
+//格式化路径
+function srealpath($path) {
+	$path = str_replace('./', '', $path);
+	if(DIRECTORY_SEPARATOR == '\\') {
+		$path = str_replace('/', '\\', $path);
+	} elseif(DIRECTORY_SEPARATOR == '/') {
+		$path = str_replace('\\', '/', $path);
+	}
+	return $path;
+}
