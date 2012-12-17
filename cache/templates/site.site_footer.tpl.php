@@ -9,7 +9,9 @@
     <span class="copyright">
         &copy; 2012－2015 12ik.com, all rights reserved
     </span>
-    <p>Powered by <a class="softname" href="<?php echo $IK_SOFT['info'][url];?>"><?php echo $IK_SOFT['info'][name];?></a> <?php echo $IK_SOFT['info'][version];?> <?php echo $IK_SOFT['info'][year];?> <?php echo $IK_SITE['base'][site_icp];?><br /><span style="font-size:0.83em;">Processed in <?php echo $runTime;?> second(s)</span></p>  
+    <p>Powered by <a class="softname" href="<?php echo $IK_SOFT['info'][url];?>"><?php echo $IK_SOFT['info'][name];?></a> <?php echo $IK_SOFT['info'][version];?> <?php echo $IK_SOFT['info'][year];?> <?php echo $IK_SITE['base'][site_icp];?><br /><span style="font-size:0.83em;">Processed in <?php echo $runTime;?> second(s)</span>
+    <script src="http://s21.cnzz.com/stat.php?id=2973516&web_id=2973516" language="JavaScript"></script>
+    </p>  
 </div>
 </div>
 

@@ -1,0 +1,239 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="http://127.0.0.1/web/admin/images/style.css" rel="stylesheet" type="text/css" />
+<script language="javascript" type="text/javascript" src="http://127.0.0.1/web/include/js/common.js"></script>
+
+<title>机器人</title>
+
+</head>
+
+<body>
+<div class="maininner">
+<form method="post" name="thevalueform" id="theform" action="getfile.php" enctype="multipart/form-data" >
+ 
+
+<div class="colorarea01">
+				<h2>基本设置</h2>
+				<table cellspacing="0" cellpadding="0" width="100%"  class="maintable">
+
+					<tbody id="hiddendebugframe" style="display: none;">
+					<tr id="tr_debugframe">
+						<th>调试窗口<p>Debug URL: <br />(例如:http://www.xxx.com/abc.htm)<br /><input name="f_debugurl" type="text" id="f_debugurl" style="width: 95%"><br />
+						<input name="f_allowurlnull" type="checkbox" id="f_allowurlnull">每次调试清空Debug URL&nbsp;&nbsp;
+						<a href="javascript:;" onclick="$('f_debugurl').value='';">清空URL</a><br /><br />
+							Debug URL作用: 不受采集链接的影响,方便采集规则的调试.<br />Debug URL不清空带来的麻烦: 因为不同的测试针对的网址会略有不同,当URL框中有值时程序会跳过正常的URL.</p>
+
+							<div align="right"><a href="javascript:;" onclick="closedebugframe();">关闭</a></div></th>
+						<td><iframe id="debugframe" name="debugframe" width="100%" height="300" marginwidth="0" scrolling="auto" frameborder="0" src="about:blank"></iframe></td>
+					</tr>
+					</tbody>
+					<tr id="tr_name">
+						<th>机器人名</th>
+						<td><input name="name" type="text" id="name" size="30" value="" /></td>
+
+					</tr>
+					<tr id="tr_allnum">
+						<th>采集总个数</th>
+						<td><input name="allnum" type="text" id="allnum" size="10" value="100" /></td>
+					</tr>
+					<tr id="tr_pernum">
+						<th>单次采集个数<p>视网速而定，建议设置小一些，以免超时</p></th>
+
+						<td><input name="pernum" type="text" id="pernum" size="10" value="1" /></td>
+					</tr>
+					<tr id="tr_import">
+						<th>自动导入到<p>选择资讯分类，可以直接将采集的结果导入到资讯库中</p></th>
+						<td><select name="import"><option value="0">-------</option><optgroup label="资讯"><option value="news_1">科技世界</option><option value="news_2">互联网络</option><option value="news_3">财经报道</option><option value="news_4">体育资讯</option><option value="news_5">明星娱乐</option><option value="news_6">生活资讯</option><option value="news_7">网站建设</option><option value="news_8">动态报道</option><option value="news_9">特别关注</option></optgroup><optgroup label="HTML5教程"><option value="html_10">科技世界</option><option value="html_11">互联网络</option><option value="html_12">财经报道</option><option value="html_13">体育资讯</option><option value="html_14">明星娱乐</option><option value="html_15">生活资讯</option><option value="html_16">网站建设</option><option value="html_17">动态报道</option><option value="html_18">特别关注</option></optgroup></select></td>
+
+					</tr>
+					<tr id="tr_dateline">
+						<th>预定义发布时间<p>导入资讯分类以后，定义的发布时间</p></th>
+						<td><input name="defaultdateline" type="text" id="defaultdateline" size="30" value="" readonly/><img onclick="getDatePicker('defaultdateline', event, 21)" src="http://127.0.0.1/web/admin/images/time.gif"/>&nbsp;
+                        <a href="javascript:;" onclick="$('defaultdateline').value=''">清空</td>
+					</tr>
+				</table>
+			</div>
+
+<div class="colorarea02">
+				<h2>列表页面采集设置</h2>
+<table width="100%" cellspacing="0" cellpadding="0" class="maintable">
+					<tbody><tr id="tr_robot_listurltype">
+						<td width="50%" valign="top">
+							手工输入<br><br>
+							<div id="udiv"></div>
+							增加新的列表页面链接:<input type="text" size="40" name="url" id="url"><input type="button" onclick="insertitem();" value="添加"><br>
+							例如:http://www.discuz.net/file_1.htm
+						</td>
+						<td width="50%" valign="top">
+							自动增长<br><br>
+							URL: <input type="text" onblur="inputcheck(this);" value="" size="46" id="listurl_auto" name="listurl_auto"><br>
+							例如: http://www.discuz.net/file_[page].htm<br>
+							&nbsp;从:&nbsp;&nbsp;&nbsp;<input type="text" onkeyup="inputcheck(this);" maxlength="10" size="4" value="0" name="listpagestart" id="listpagestart">&nbsp;&nbsp;到:&nbsp;&nbsp;<input type="text" onkeyup="inputcheck(this);" maxlength="10" size="4" value="0" name="listpageend" id="listpageend"> 
+							<br>
+							<span id="wildcard">通配符长度:&nbsp;&nbsp;<input type="text" onkeyup="inputcheck(this);" maxlength="1" size="3" value="0" name="wildcardlen" id="wildcardlen"> 说明: 长度不足时，前面补0. </span>
+							<div style="color: #aaa; display: none" id="str_wc"></div>
+						</td>
+					</tr>
+					<tr id="tr_robot_debug">
+						<td align="right" colspan="2">
+							<input type="button" onclick="debugsubmit(this, 'tr_robot_debug', 'showlisturl');" value="测试:显示链接">
+							<input type="button" onclick="debugsubmit(this, 'tr_robot_debug', 'pinglisturl');" value="测试:尝试连接">
+						</td>
+					</tr>
+</table>
+</div>
+
+			<div class="buttons">
+				<input type="submit" name="thevaluesubmit" value="提交保存" class="submit">
+				<input type="reset" name="thevaluereset" value="重置">
+			</div>
+            <input id="valuesubmit" name="valuesubmit" type="hidden" value="yes" />
+				<input id="robotid" name="robotid" type="hidden" value="0" />
+				<input id="debugurl" name="debugurl" type="hidden" value="" />
+
+				<input id="debugprocess" name="debugprocess" type="hidden" value="" />
+</form>
+
+
+</div>
+
+ 
+<script language="javascript">
+var num_item = 0;
+var bool_ext = true;
+function setitem(){
+	objudiv = document.getElementById('udiv');
+	adddiv = document.getElementById('url');
+
+	if(adddiv.value != ''){
+		urln = document.createElement('div');
+		urln.id = 'url_' + num_item;
+		
+		urln.appendChild(document.createTextNode(adddiv.value));
+		urln.appendChild(document.createTextNode(' '));
+
+		oBody = document.createElement('a');
+		oBody.href = 'javascript:;';
+		oBody.title = '';
+		if(window.document.all != null) // IE
+			oBody.attachEvent('onclick', new Function('delitem('+num_item+');'));
+		else // Firefox
+			oBody.addEventListener('click', new Function('delitem('+num_item+');'), false);
+		oBody.appendChild(document.createTextNode('删除'));
+		urln.appendChild(oBody);
+		
+		oBody = document.createElement("input");
+		oBody.id = 'listurl_manual[]';
+		oBody.name = 'listurl_manual[]';
+		oBody.type = 'text';
+		oBody.value = adddiv.value;
+		oBody.size = '5';
+		oBody.style.display = 'none';
+		urln.appendChild(oBody);
+
+		objudiv.appendChild(urln);
+		adddiv.value = '';
+		num_item++
+	}
+}
+function insertitem(){
+	setitem();
+}
+		<!--
+		var objdebugframe;
+		
+		function debugsubmit(obj, nodename, process) { 
+			var debugurl = '';
+			var allowurlnull = false;
+			if(objdebugframe == null) {
+				objdebugframe = $('tr_debugframe').cloneNode(true);
+			}
+			var objnode = $(nodename);
+			if($('tr_debugframe') != null) {
+				debugurl = $('f_debugurl').value;
+				if($('f_allowurlnull').checked) {
+					debugurl = '';
+					allowurlnull = $('f_allowurlnull').checked;
+				}
+			}
+			closedebugframe();
+			objnode.parentNode.insertBefore(objdebugframe, objnode.nextSibling);
+			editdoc = document.getElementById("debugframe").contentWindow.document;
+			editdoc.open('text/html', 'replace');
+			editdoc.write('loading...');
+			editdoc.close();
+			$('f_debugurl').value = debugurl;
+			$('f_allowurlnull').checked = allowurlnull;
+			objsubmit = $('valuesubmit'); 
+			objsubmit.name = 'debug';
+			obj.form.target = 'debugframe';
+			$('debugurl').value = debugurl;
+			$('debugprocess').value = process;
+			obj.form.submit();
+			objsubmit.name = 'valuesubmit';
+			obj.form.target = '';
+			$('debugurl').value = '';
+			$('debugprocess').value = '';
+		}
+		function closedebugframe() {
+			var objnode = $('tr_debugframe');
+			if(objnode != null) {
+				objnode.parentNode.removeChild(objnode);
+			}
+		}
+		
+		var r = 0;
+		function addreplace(str, replace, replaceto) {
+			objtd = $('td_'+str+'_title');
+			if(objtd.lastChild != null) {
+				pn = objtd.lastChild
+				pn.appendChild(document.createTextNode(' '));
+				oBody = document.createElement('input');
+				oBody.type = 'button';
+				oBody.value = '$alang[robot_delete]';
+				if(window.document.all != null) {
+					oBody.attachEvent('onclick', new Function('delreplace(\''+pn.id+'\');'));
+				} else {
+					oBody.addEventListener('click', new Function('delreplace(\''+pn.id+'\');'), false);
+				}
+				pn.appendChild(oBody);
+			}
+			pn = document.createElement('div');
+			pn.id = 'replace_'+(r+1);
+			pn.appendChild(document.createElement('br'));
+			pn.appendChild(document.createTextNode('$alang[robot_subjectreplace] '));
+			oBody = document.createElement("input");
+			oBody.id = str+'[]';
+			oBody.name = str+'[]';
+			oBody.type = 'text';
+			oBody.size = '40';
+			oBody.value = replace;
+			pn.appendChild(oBody);
+			pn.appendChild(document.createElement('br'));
+			pn.appendChild(document.createTextNode('$alang[robot_subjectreplace_exp]'));
+			pn.appendChild(document.createElement('br'));
+			pn.appendChild(document.createTextNode('$alang[robot_subjectreplaceto] '));
+			oBody = document.createElement("input");
+			oBody.id = str+'to[]';
+			oBody.name = str+'to[]';
+			oBody.type = 'text';
+			oBody.size = '40';
+			oBody.value = replaceto;
+			pn.appendChild(oBody);
+			pn.appendChild(document.createElement('br'));
+			pn.appendChild(document.createTextNode('$alang[robot_subjectreplaceto_exp]'));
+			objtd.appendChild(pn);
+			r++
+		}
+		function delreplace(str) {
+			pn = document.createElement("div");
+			pn.id = str;
+			pn.style.display = 'none';
+			$(str).parentNode.replaceChild(pn, $(str));
+		}
+		//-->
+		</script>
+</body>
+</html>

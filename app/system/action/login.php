@@ -38,7 +38,7 @@ switch ($ts) {
 		
 		if ($strAdminInfo ['isadmin'] != 1)
 			qiMsg ( "你无权登录后台管理！" );
-		
+
 		$_SESSION ['tsadmin'] = $strAdminInfo;
 		
 		header ( "Location: " . SITE_URL . "index.php?app=system" );
