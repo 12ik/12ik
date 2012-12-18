@@ -155,10 +155,8 @@ function addreplace(str, replace, replaceto) {
         <p>选择资讯分类，可以直接将采集的结果导入到资讯库中</p></th>
       <td><select name="import">
           <option value="0">-------</option>
-          <?php foreach((array)$arrCatename as $item) {?>
-         	 <option value="cateid_<?php echo $item['cateid'];?>"><?php echo $item['catename'];?></option>
-          <?php } ?>
-        </select></td>
+           <?php echo $arrSelect;?>
+          </select></td>
     </tr>
     <tr id="tr_dateline">
       <th>预定义发布时间

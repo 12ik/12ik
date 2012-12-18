@@ -1,0 +1,5 @@
+<?php
+
+$newurlarr=Array (0 => 'http://news.163.com/12/1217/05/8ITEC4OA00011229.html',1 => 'http://news.163.com/12/1217/04/8ITAV84L00011229.html',2 => 'http://news.163.com/12/1217/04/8ITA1JIC00011229.html',3 => 'http://news.163.com/12/1217/03/8IT7HC1400011229.html',4 => 'http://news.163.com/12/1217/03/8IT79P5800011229.html',5 => 'http://news.163.com/12/1217/03/8IT6NM4500011229.html',6 => 'http://news.163.com/12/1217/02/8IT54QAF00011229.html',7 => 'http://news.163.com/12/1217/01/8IT25EQ300014AED.html',8 => 'http://news.163.com/12/1217/01/8IT23BG700014AED.html',9 => 'http://news.163.com/12/1216/13/8IRMAD0000011229.html',10 => 'http://news.163.com/12/1216/12/8IRLBG0700014JB5.html',11 => 'http://news.163.com/12/1216/12/8IRKQA0V00014JB5.html',12 => 'http://news.163.com/12/1216/11/8IRHK7PA00011229.html',13 => 'http://news.163.com/12/1216/11/8IRHGU3A00011229.html',14 => 'http://news.163.com/12/1216/11/8IRF0U9B00014JB6.html')
+
+?>

@@ -34,6 +34,10 @@ if (is_file ( 'app/' . $app . '/action/' . $ac . '.php' )) {
 	
 	define ( 'SITE_URL', $IK_SITE ['base'] ['site_url'] );
 	
+	//定义全局附件路径默认 uploadfile/attachments
+	define ( 'IKUPLOADPATH', 'uploadfile/attachments' );//上传附件地址
+	define ( 'ATT_URL', SITE_URL.IKUPLOADPATH);
+	
 	//主题
 	$IK_theme = isset ( $_COOKIE ['ik_theme'] ) ? $_COOKIE ['ik_theme'] : '';
 	if ($IK_theme) {
@@ -96,6 +100,7 @@ if (is_file ( 'app/' . $app . '/action/' . $ac . '.php' )) {
 	
 	$runTime = $time_end - $time_start;
 	$runTime = number_format ( $runTime, 6 );
+	
 	
 	//用户自动登录
 	if ($IK_USER ['user'] == '' && $_COOKIE ['ik_email'] != '' && $_COOKIE ['ik_pwd'] != '') {

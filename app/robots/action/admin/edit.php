@@ -7,11 +7,27 @@ switch ($ts) {
 		$thevalue = $arrRobot = aac ( 'robots' )->find ( 'robots', array (
 				'robotid' => $robotid 
 		) );
-		
+		//获取资讯分类 //暂时只有管理员uid指定
+		$arrChannel = aac('article')->findAll('article_channels');
+		$arrSelect = '';//初始化下拉列表
+		$arrCatename = array();
+		foreach ($arrChannel as $key=>$item)
+		{
+			$arrCatename = aac('article')->find('article_categories',array('type'=>$item['nameid']));
+			if($thevalue['importcatid']==$arrCatename['catid'])
+			{
+				$ischecked = "selected";
+			}else{
+				$ischecked = "";
+			}
+			$arrSelect .='<optgroup label="'.$item['name'].'">';
+			$arrSelect .='<option '.$ischecked.' value="'.$arrCatename['type'].'_'.$arrCatename['catid'].'" >'.$arrCatename['name'].'</option>';
+			$arrSelect .='</optgroup>';
+		}
 		if ($thevalue) {
 			//先初始化url
 			$thevalue ['listurl_manual'] = $thevalue ['listurl_auto'] = '';
-			if($thevalue ['listurltype'] == 'note') {
+			if($thevalue ['listurltype'] == 'new') {
 				$thevalue ['listurl'] = unserialize ( $thevalue ['listurl'] );
 				$thevalue ['listurl_manual'] = $thevalue ['listurl'] ['manual'];
 				$thevalue ['listurl_auto'] = $thevalue ['listurl'] ['auto'];
@@ -48,35 +64,4 @@ switch ($ts) {
 		include template ( 'admin/add' );
 		break;
 
-}
-
-function sgmdate($timestamp, $dateformat = '', $format = 0) {
-	global $_SCONFIG, $_SGLOBAL, $lang;
-	
-	if (empty ( $dateformat )) {
-		$dateformat = 'Y-m-d H:i:s';
-	}
-	
-	if (empty ( $timestamp )) {
-		$timestamp = $_SGLOBAL ['timestamp'];
-	}
-	
-	$result = '';
-	if ($format) {
-		$time = $_SGLOBAL ['timestamp'] - $timestamp;
-		if ($time > 24 * 3600) {
-			$result = gmdate ( $dateformat, $timestamp + $_SCONFIG ['timeoffset'] * 3600 );
-		} elseif ($time > 3600) {
-			$result = intval ( $time / 3600 ) . $lang ['hour'] . $lang ['before'];
-		} elseif ($time > 60) {
-			$result = intval ( $time / 60 ) . $lang ['minute'] . $lang ['before'];
-		} elseif ($time > 0) {
-			$result = $time . $lang ['second'] . $lang ['before'];
-		} else {
-			$result = $lang ['now'];
-		}
-	} else {
-		$result = gmdate ( $dateformat, $timestamp + $_SCONFIG ['timeoffset'] * 3600 );
-	}
-	return $result;
 }

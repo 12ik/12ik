@@ -1,6 +1,5 @@
 <?php
 defined('IN_IK') or die('Access Denied.');
-echo $_SCONFIG['charset'];
 include_once('robot.func.php');
 include_once(IKCORE.'./IKCache.func.php');
 
@@ -12,7 +11,22 @@ switch ($ts) {
 
 		case "" :
 		//获取资讯分类 //暂时只有管理员uid指定
-		$arrCatename = aac('note')->findAll('note_cate', array('userid'=>'2'));
+		$arrChannel = aac('article')->findAll('article_channels');
+		$arrSelect = '';//初始化下拉列表
+		$arrCatename = array();
+		foreach ($arrChannel as $key=>$item)
+		{
+			$arrCatename = aac('article')->find('article_categories',array('type'=>$item['nameid']));
+			if($thevalue['importcatid']==$arrCatename['catid'])
+			{
+				$ischecked = "selected";
+			}else{
+				$ischecked = "";
+			}
+			$arrSelect .='<optgroup label="'.$item['name'].'">';
+			$arrSelect .='<option '.$ischecked.' value="'.$arrCatename['type'].'_'.$arrCatename['catid'].'" >'.$arrCatename['name'].'</option>';
+			$arrSelect .='</optgroup>';
+		}
 		
 		//添加新采集器初始值
 		$thevalue = array(
@@ -829,7 +843,7 @@ switch ($ts) {
 		$setsqlarr = array(
 			'name' => $_POST['name'],
 			'dateline' => $_SGLOBAL['timestamp'],
-			'listurltype'=> 'note',
+			'listurltype'=> 'new',
 			'listurl' => $postlisturl,
 			'listpagestart' => $_POST['listpagestart'],
 			'listpageend' => $_POST['listpageend'],

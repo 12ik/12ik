@@ -356,8 +356,122 @@ function getmicrotime() {
 	list ( $usec, $sec ) = explode ( " ", microtime () );
 	return (( float ) $usec + ( float ) $sec);
 }
+function strexists($haystack, $needle) {
+	return !(strpos($haystack, $needle) === FALSE);
+}
+//初始化 url
+function initurl($url) {
 
-//写文件
+	$newurl = '';
+	$blanks = array('url'=>'');
+	$urls = $blanks;
+
+	if(strlen($url)<10) return $blanks;
+	$urls = @parse_url($url);
+	if(empty($urls) || !is_array($urls)) return $blanks;
+	if(empty($urls['scheme'])) return $blanks;
+	if($urls['scheme'] == 'file') return $blanks;
+
+	if(empty($urls['path'])) $urls['path'] = '/';
+	$newurl .= $urls['scheme'].'://';
+	$newurl .= empty($urls['user'])?'':$urls['user'];
+	$newurl .= empty($urls['pass'])?'':':'.$urls['pass'];
+	$newurl .= empty($urls['host'])?'':((!empty($urls['user']) || !empty($urls['pass']))?'@':'').$urls['host'];
+	$newurl .= empty($urls['port'])?'':':'.$urls['port'];
+	$newurl .= empty($urls['path'])?'':$urls['path'];
+	$newurl .= empty($urls['query'])?'':'?'.$urls['query'];
+	$newurl .= empty($urls['fragment'])?'':'#'.$urls['fragment'];
+
+	$urls['port'] = empty($urls['port'])?'80':$urls['port'];
+	$urls['url'] = $newurl;
+
+	return $urls;
+}
+//读文件 借用 super site 的方法
+function sreadfile($filename, $mode='r', $remote=0, $maxsize=0, $jumpnum=0) {
+	if($jumpnum > 5) return '';
+	$contents = '';
+
+	if($remote) {
+		$httpstas = '';
+		$urls = initurl($filename);
+		if(empty($urls['url'])) return '';
+
+		$fp = @fsockopen($urls['host'], $urls['port'], $errno, $errstr, 20);
+		if($fp) {
+			if(!empty($urls['query'])) {
+				fputs($fp, "GET $urls[path]?$urls[query] HTTP/1.1\r\n");
+			} else {
+				fputs($fp, "GET $urls[path] HTTP/1.1\r\n");
+			}
+			fputs($fp, "Host: $urls[host]\r\n");
+			fputs($fp, "Accept: */*\r\n");
+			fputs($fp, "Referer: $urls[url]\r\n");
+			fputs($fp, "User-Agent: Mozilla/4.0 (compatible; MSIE 5.00; Windows 98)\r\n");
+			fputs($fp, "Pragma: no-cache\r\n");
+			fputs($fp, "Cache-Control: no-cache\r\n");
+			fputs($fp, "Connection: Close\r\n\r\n");
+
+			$httpstas = explode(" ", fgets($fp, 128));
+			if($httpstas[1] == 302 || $httpstas[1] == 302) {
+				$jumpurl = explode(" ", fgets($fp, 128));
+				return sreadfile(trim($jumpurl[1]), 'r', 1, 0, ++$jumpnum);
+			} elseif($httpstas[1] != 200) {
+				fclose($fp);
+				return '';
+			}
+
+			$length = 0;
+			$size = 1024;
+			while (!feof($fp)) {
+				$line = trim(fgets($fp, 128));
+				$size = $size + 128;
+				if(empty($line)) break;
+				if(strexists($line, 'Content-Length')) {
+					$length = intval(trim(str_replace('Content-Length:', '', $line)));
+					if(!empty($maxsize) && $length > $maxsize) {
+						fclose($fp);
+						return '';
+					}
+				}
+				if(!empty($maxsize) && $size > $maxsize) {
+					fclose($fp);
+					return '';
+				}
+			}
+			fclose($fp);
+
+			if(@$handle = fopen($urls['url'], $mode)) {
+				if(function_exists('stream_get_contents')) {
+					$contents = stream_get_contents($handle);
+				} else {
+					$contents = '';
+					while (!feof($handle)) {
+						$contents .= fread($handle, 8192);
+					}
+				}
+				fclose($handle);
+			} elseif(@$ch = curl_init()) {
+				curl_setopt($ch, CURLOPT_URL, $urls['url']);
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+				curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);//timeout
+				$contents = curl_exec($ch);
+				curl_close($ch);
+			} else {
+				//无法远程上传
+			}
+		}
+	} else {
+		if(@$handle = fopen($filename, $mode)) {
+			$contents = fread($handle, filesize($filename));
+			fclose($handle);
+		}
+	}
+
+	return $contents;
+}
+
+//写文件 借用 super site 的方法
 function writefile($filename, $writetext, $filemod='text', $openmod='w', $eixt=1) {
 	if(!@$fp = fopen($filename, $openmod)) {
 		if($eixt) {
@@ -1374,4 +1488,42 @@ function srealpath($path) {
 		$path = str_replace('\\', '/', $path);
 	}
 	return $path;
+}
+//取8位md5
+function smd5($str) {
+	return substr(md5($str), 8, 16);
+}
+//获取文件名后缀
+function fileext($filename) {
+	return strtolower(trim(substr(strrchr($filename, '.'), 1)));
+}
+function sgmdate($timestamp, $dateformat='', $format=0) {
+	global $_SCONFIG, $_SGLOBAL, $lang;
+
+	if(empty($dateformat)) {
+		$dateformat = 'Y-m-d H:i:s';
+	}
+
+	if(empty($timestamp)) {
+		$timestamp = $_SGLOBAL['timestamp'];
+	}
+
+	$result = '';
+	if($format) {
+		$time = $_SGLOBAL['timestamp'] - $timestamp;
+		if($time > 24*3600) {
+			$result = gmdate($dateformat, $timestamp + $_SCONFIG['timeoffset'] * 3600);
+		} elseif ($time > 3600) {
+			$result = intval($time/3600).'小时前';
+		} elseif ($time > 60) {
+			$result = intval($time/60).'分钟前';
+		} elseif ($time > 0) {
+			$result = $time.'秒前';
+		} else {
+			$result = '现在';
+		}
+	} else {
+		$result = gmdate($dateformat, $timestamp + $_SCONFIG['timeoffset'] * 3600);
+	}
+	return $result;
 }

@@ -1,0 +1,73 @@
+.note_list{}
+.note_list dl{ margin:10px 0px 20px 0px}
+.note_list dl dt{ background-color:#eeffee; line-height:25px; display:block; clear:both; font-size:14px}
+.note_list dl dt span{ float:right; margin-right:10px; padding-top:2px}
+.open a, .close a{ background-image:url(arrow.png); background-repeat:no-repeat}
+.note_list dl dt .open a{ display:inline-block; height:15px; width:30px; text-align:center; line-height:15px; overflow:hidden; background-position:center 3px; text-indent:-999px}
+.note_list dl dt .open a:hover{ background-color:#fff; border-radius:3px;}
+.note_list dl dt .close a{ display:inline-block; height:15px; width:30px; text-align:center; line-height:15px; overflow:hidden; background-position:center -13px; text-indent:-999px}
+.note_list dl dt .close a:hover{ background-color:#fff; border-radius:3px;}
+
+.note_list dd,.note_list dt{ display:block; clear:both; padding:0px 5px;}
+.note_list dd.addtime{ color:#666666; margin:5px 0px;}
+.note_list dd.note_des{ color:#000; word-wrap: break-word; white-space: pre-wrap; font-size:14px;}
+.note_list dd.action{ margin-top:5px; color:#777; display:none; text-align:right}
+
+.art-body{}
+.art-text{font-size:14px;line-height:25px; margin-bottom:10px}
+.options-bar{ text-align:right; line-height:30px;}
+/*comment评论列表*/
+.comment{width: 100%;overflow:hidden;}
+.comment li {margin: 0 0 0px 0px;overflow:hidden; display:block;}
+.comment li .user-face {float: left;height: 48px;overflow: hidden;width: 48px; margin-top:0px;}
+.comment li .reply-doc {float: right;width: 570px;overflow: hidden;}
+.comment li .reply-doc p img{max-width:450px;}
+.comment li .reply-doc h4 {font-weight:normal;font-size:12px;height: 22px;line-height: 22px;margin: 0 0 5px 0px;color: #666666;display: block;overflow: hidden; background-color:#F8F8F8; padding:0px 10px}
+.comment li .reply-doc p {margin: 0 0 25px;overflow: hidden;word-wrap: break-word;line-height:23px; padding:0px 10px}
+.comment li .reply-doc .recomment {background: #F8F8F8;border: 1px dashed #DDDDDD;color: #666666;font-size: 12px;padding: 10px;}
+.comment li .group_banned {text-align: right;}
+/*签名显示*/
+.signed {
+    background: url("sigline.gif") no-repeat scroll 0 0 transparent;
+    line-height: 1.6em;
+    overflow: hidden;
+    padding: 20px 0 10px;
+	margin-top:10px;
+	color:#999999;
+}
+/**taglist**/
+.result {
+    border-bottom: 1px dashed #CCCCCC;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    position: relative;
+    width: 100%;
+}
+.result:after {
+    clear: both;
+    content: " ";
+    display: block;
+}
+.result .pic {
+    float: left;
+}
+.result .content {
+    display: table-cell;
+    padding-left: 20px;
+}
+.result .content h3 {
+    background: none repeat scroll 0 0 transparent;
+    float: left;
+    height: auto;
+    margin: 0 0 5px;
+}
+.result .info {
+    color: #999999;
+    position: absolute;
+    right: 10px;
+}
+.result .content p {
+    clear: both;
+    color: #666666;
+    margin: 0 0 5px;
+}

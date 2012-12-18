@@ -1558,3 +1558,169 @@ CREATE TABLE IF NOT EXISTS `ik_robots` (
   defaultdateline int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (robotid)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='采集器' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+
+--
+-- 表的结构 'ik_article_categories'
+--
+DROP TABLE IF EXISTS ik_article_categories;
+CREATE TABLE ik_article_categories (
+  catid smallint(6) unsigned NOT NULL auto_increment,
+  upid smallint(6) unsigned NOT NULL default '0',
+  `name` varchar(50) NOT NULL default '',
+  note text NOT NULL,
+  `type` varchar(30) NOT NULL default '',
+  ischannel tinyint(1) NOT NULL default '0',
+  displayorder mediumint(6) unsigned NOT NULL default '0',
+  tpl varchar(80) NOT NULL default '',
+  viewtpl varchar(80) NOT NULL default '',
+  thumb varchar(150) NOT NULL default '',
+  image varchar(150) NOT NULL default '',
+  haveattach tinyint(1) NOT NULL default '0',
+  bbsmodel tinyint(1) NOT NULL default '0',
+  bbsurltype varchar(15) NOT NULL default '',
+  blockmodel tinyint(1) NOT NULL default '1',
+  blockparameter text NOT NULL,
+  blocktext text NOT NULL,
+  url varchar(255) NOT NULL default '',
+  subcatid text NOT NULL,
+  htmlpath varchar(80) NOT NULL default '',
+  domain varchar(50) NOT NULL default '',
+  perpage smallint(6)  NOT NULL default '0',
+  prehtml varchar(20) NOT NULL,
+  PRIMARY KEY  (catid),
+  KEY `type` (`type`),
+  KEY upid (upid)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='文章分类';
+-- --------------------------------------------------------
+
+INSERT INTO `ik_article_categories` (`name`, `type`) VALUES
+('互联网络','article'),
+('明星娱乐','article');
+-- --------------------------------------------------------
+
+--
+-- 表的结构 'ik_article_channels'
+--
+DROP TABLE IF EXISTS ik_article_channels;
+CREATE TABLE ik_article_channels (
+  nameid char(30) NOT NULL default '',
+  `name` char(50) NOT NULL default '',
+  url char(200) NOT NULL default '',
+  tpl char(50) NOT NULL default '',
+  categorytpl char(50) NOT NULL default '',
+  viewtpl char(50) NOT NULL default '',
+  `type` char(20) NOT NULL default '',
+  path char(30) NOT NULL default '',
+  domain char(50) NOT NULL default '',
+  upnameid char(30) NOT NULL default '',
+  displayorder smallint(3) unsigned NOT NULL default '0',
+  `status` tinyint(1) NOT NULL default '1',
+  allowpost text NOT NULL,
+  allowview text NOT NULL,
+  allowcomment text NOT NULL,
+  allowgetattach text NOT NULL,
+  allowpostattach text NOT NULL,
+  allowmanage text NOT NULL,
+  PRIMARY KEY  (nameid)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='文章频道';
+-- --------------------------------------------------------
+--
+-- 表的结构 'ik_article_spaceitems'
+--
+
+DROP TABLE IF EXISTS ik_article_spaceitems;
+CREATE TABLE ik_article_spaceitems (
+  itemid mediumint(8) unsigned NOT NULL auto_increment,
+  catid smallint(6) unsigned NOT NULL default '0',
+  uid mediumint(8) unsigned NOT NULL default '0',
+  tid mediumint(8) unsigned NOT NULL default '0',
+  username char(15) NOT NULL default '',
+  itemtypeid mediumint(8) unsigned NOT NULL default '0',
+  `type` char(30) NOT NULL default '',
+  subtype char(10) NOT NULL default '',
+  `subject` char(80) NOT NULL default '',
+  dateline int(10) unsigned NOT NULL default '0',
+  lastpost int(10) unsigned NOT NULL default '0',
+  viewnum mediumint(8) unsigned NOT NULL default '0',
+  replynum mediumint(8) unsigned NOT NULL default '0',
+  digest tinyint(1) NOT NULL default '0',
+  top tinyint(1) NOT NULL default '0',
+  allowreply tinyint(1) NOT NULL default '1',
+  `hash` char(16) NOT NULL default '',
+  haveattach tinyint(1) NOT NULL default '0',
+  grade tinyint(1) NOT NULL default '0',
+  gid mediumint(8) unsigned NOT NULL default '0',
+  gdigest tinyint(1) NOT NULL default '0',
+  `password` char(10) NOT NULL default '',
+  `styletitle` char(11) NOT NULL default '',
+  picid mediumint(8) unsigned NOT NULL default '0',
+  fromtype char(10) NOT NULL default 'adminpost',
+  fromid mediumint(8) unsigned NOT NULL default '0',
+  hot mediumint(8) unsigned NOT NULL default '0',
+  click_1 smallint(6) unsigned NOT NULL default '0',
+  click_2 smallint(6) unsigned NOT NULL default '0',
+  click_3 smallint(6) unsigned NOT NULL default '0',
+  click_4 smallint(6) unsigned NOT NULL default '0',
+  click_5 smallint(6) unsigned NOT NULL default '0',
+  click_6 smallint(6) unsigned NOT NULL default '0',
+  click_7 smallint(6) unsigned NOT NULL default '0',
+  click_8 smallint(6) unsigned NOT NULL default '0',
+  click_9 smallint(6) unsigned NOT NULL default '0',
+  click_10 smallint(6) unsigned NOT NULL default '0',
+  click_11 smallint(6) unsigned NOT NULL default '0',
+  click_12 smallint(6) unsigned NOT NULL default '0',
+  click_13 smallint(6) unsigned NOT NULL default '0',
+  click_14 smallint(6) unsigned NOT NULL default '0',
+  click_15 smallint(6) unsigned NOT NULL default '0',
+  click_16 smallint(6) unsigned NOT NULL default '0',
+  click_17 smallint(6) unsigned NOT NULL default '0',
+  click_18 smallint(6) unsigned NOT NULL default '0',
+  click_19 smallint(6) unsigned NOT NULL default '0',
+  click_20 smallint(6) unsigned NOT NULL default '0',
+  click_21 smallint(6) unsigned NOT NULL default '0',
+  click_22 smallint(6) unsigned NOT NULL default '0',
+  click_23 smallint(6) unsigned NOT NULL default '0',
+  click_24 smallint(6) unsigned NOT NULL default '0',
+  click_25 smallint(6) unsigned NOT NULL default '0',
+  click_26 smallint(6) unsigned NOT NULL default '0',
+  click_27 smallint(6) unsigned NOT NULL default '0',
+  click_28 smallint(6) unsigned NOT NULL default '0',
+  click_29 smallint(6) unsigned NOT NULL default '0',
+  click_30 smallint(6) unsigned NOT NULL default '0',
+  click_31 smallint(6) unsigned NOT NULL default '0',
+  click_32 smallint(6) unsigned NOT NULL default '0',
+  PRIMARY KEY  (itemid),
+  KEY `uid` (uid,`type`,top,dateline),
+  KEY catid (catid,dateline),
+  KEY `type` (`type`),
+  KEY gid (gid)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='信息表';
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 'supe_spacenews'
+--
+
+DROP TABLE IF EXISTS ik_article_spacenews;
+CREATE TABLE ik_article_spacenews (
+  nid mediumint(8) unsigned NOT NULL auto_increment,
+  itemid mediumint(8) unsigned NOT NULL default '0',
+  message text NOT NULL,
+  relativetags text NOT NULL,
+  postip varchar(15) NOT NULL default '',
+  relativeitemids varchar(255) NOT NULL default '',
+  customfieldid smallint(6) unsigned NOT NULL default '0',
+  customfieldtext text NOT NULL,
+  includetags text NOT NULL,
+  newsauthor varchar(20) NOT NULL default '',
+  newsfrom varchar(50) NOT NULL default '',
+  newsfromurl varchar(150) NOT NULL default '',
+  newsurl varchar(255) NOT NULL default '',
+  pageorder smallint(6) unsigned NOT NULL default '0',
+  PRIMARY KEY  (nid),
+  KEY itemid (itemid, pageorder, nid)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='文章内容表';

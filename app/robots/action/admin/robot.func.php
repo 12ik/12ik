@@ -655,10 +655,11 @@ function messageaddtodb($msgarr, $robotid, $itemid=0) {
 
 	if(!$itemid) { 
 		$uid = empty($msgarr['uid']) ? $_SGLOBAL['supe_uid'] : $msgarr['uid'];
-		echo $_SGLOBAL['supe_username']; die;
 		$username = empty($cacheinfo['uids'][$msgarr['uid']]) ? $_SGLOBAL['supe_username'] : $cacheinfo['uids'][$msgarr['uid']];
 		//判断是否直接入库操作
 		if(empty($msgarr['importcatid'])) {
+				echo '没有指定栏目';
+		/* 
 			$insertsqlarr = array(
 				'uid' => $uid,
 				'username' => saddslashes($username),
@@ -671,7 +672,7 @@ function messageaddtodb($msgarr, $robotid, $itemid=0) {
 			if(!empty($msgarr['dateline'])) $insertsqlarr['dateline'] = $msgarr['dateline'];
 			if(!empty($msgarr['patharr'])) $insertsqlarr['haveattach'] = 1;
 			$itemid = inserttable('robotitems', $insertsqlarr, 1);
-		} else {
+		 */} else {
 			$hashstr = smd5($_SGLOBAL['supe_uid'].'/'.rand(1000, 9999).$_SGLOBAL['timestamp']);
 			$insertsqlarr = array(
 				'catid' => $msgarr['importcatid'],
@@ -686,14 +687,15 @@ function messageaddtodb($msgarr, $robotid, $itemid=0) {
 				'fromid' => $robotid,
 				'haveattach' => (!empty($msgarr['patharr'])?1:0)
 			);
-			$itemid = inserttable('spaceitems', $insertsqlarr, 1);
+			//入库
+			//$itemid = aac('robots')->create('article_spaceitems', $insertsqlarr);
 		}
 		$hash = md5($msgarr['subject']);
-		$_SGLOBAL['db']->query('REPLACE INTO '.tname('robotlog')." (hash) VALUES ('$hash')");	//插入起防重复操作
+		//$_SGLOBAL['db']->query('REPLACE INTO '.tname('robotlog')." (hash) VALUES ('$hash')");	//插入起防重复操作
 	}
 
 	//INSERT MESSAGE
-	if(empty($msgarr['importcatid'])) {
+	if(empty($msgarr['importcatid'])) {/* 
 		$insertsqlarr = array(
 			'itemid' => $itemid,
 			'robotid' => $robotid
@@ -702,18 +704,22 @@ function messageaddtodb($msgarr, $robotid, $itemid=0) {
 		if(!empty($msgarr['picarr'])) $insertsqlarr['picurls'] = saddslashes(serialize($msgarr['picarr']));
 		if(!empty($msgarr['flasharr'])) $insertsqlarr['flashurls'] = saddslashes(serialize($msgarr['flasharr']));
 		inserttable('robotmessages', $insertsqlarr, 0, 1);
-	} else {
+	 */} else {
 		$insertsqlarr = array(
 			'itemid' => $itemid,
 			'message' => saddslashes($msgarr['message']),
 			'newsauthor' => saddslashes($msgarr['author']),
 			'newsfrom' => saddslashes($msgarr['itemfrom'])
 		);
-		inserttable('spacenews', $insertsqlarr);
+		
+		//aac('robots')->create('article_spacenews', $insertsqlarr);
 	}
 
-
 	if(!empty($msgarr['patharr'])) {
+
+		var_dump($msgarr['patharr']); echo 123; die;
+		
+		/* 
 		$attacharr['hash'] = 'R'.$robotid.'I'.$itemid;
 		$thevalue = array();
 		if(empty($msgarr['importcatid'])) {
@@ -753,7 +759,7 @@ function messageaddtodb($msgarr, $robotid, $itemid=0) {
 			$attvalue = $_SGLOBAL['db']->fetch_array($query);
 			$_SGLOBAL['db']->query("UPDATE ".tname('spaceitems')." SET haveattach='1',picid='$attvalue[aid]' WHERE itemid='$itemid'");
 		}
-	}
+	 */}
 	return $itemid;
 }
 
@@ -993,7 +999,7 @@ function pregmessagearray($messagetext, $rulearr, $mnum, $getpage=0, $getsubject
 	}
 	
 	//LOCAL FLASH URL
-	if($nextprogress && (!empty($rulearr['picurllinkpre']) || $rulearr['saveflash'])) {
+	if($nextprogress && (!empty($rulearr['picurllinkpre']) || $rulearr['saveflash'])) {/* 
 		preg_match_all("/\<embed\s+.*?src=[\'\"]*([a-z0-9\/\-_+=.~!%@?#%&;:$\\()|])[\'\"\s\>]+/is", $msgarr['message'], $flashurlarr);
 		if(!empty($flashurlarr[1])) $msgarr['flasharr'] = sarray_unique($flashurlarr[1]);
 		if(!empty($rulearr['picurllinkpre'])) {
@@ -1027,10 +1033,10 @@ function pregmessagearray($messagetext, $rulearr, $mnum, $getpage=0, $getsubject
 			$msgarr = saveurlarr($msgarr, 'flasharr');
 			showprogress('['.$mnum.'] '.$alang['robot_robot_deal'].'<b>'.$alang['robot_robot_flasharr'].'</b>'.$alang['robot_robot_success']);
 		}
-	}
+	 */}
 
 	//PAGE URL
-	if($getpage && $nextprogress && !empty($rulearr['messagepagerule'])) {
+	if($getpage && $nextprogress && !empty($rulearr['messagepagerule'])) {/* 
 		$messagepagearr = pregmessage($messagetext, $rulearr['messagepagerule'], 'pagearea');
 		$messagepage = $messagepagearr[0];
 		if($messagepage && !empty($rulearr['messagepageurlrule'])) {
@@ -1074,6 +1080,52 @@ function pregmessagearray($messagetext, $rulearr, $mnum, $getpage=0, $getsubject
 		} else {
 			showprogress('['.$mnum.'] '.$alang['robot_robot_deal'].'<b>'.$alang['robot_robot_pagearr'].'</b>'.$alang['robot_robot_failed']);
 		}
+	 */}
+	return $msgarr;
+}
+function saveurlarr($msgarr, $varname) {
+	global $_SGLOBAL;
+	global $thevalue, $_SCONFIG;
+
+	include_once(IKCORE.'/function/IKUpload.php');
+	$isimage = 0;
+	if($varname == 'picarr') {
+		$isimage = 1; 
+	}
+	
+	if(!empty($msgarr[$varname]) && is_array($msgarr[$varname])) {	
+	
+		foreach ($msgarr[$varname] as $ukey => $url) {
+			//保存图片
+			if($isimage) {
+				
+				$patharr = saveremotefile($url, $_SCONFIG['thumbarray']['news']);
+				 
+			} else {
+				$patharr = saveremotefile($url, array(), 0);
+			}
+			$subject = strtolower(trim(substr($patharr['name'], 0, strrpos($patharr['name'], '.'))));
+			$msgarr['patharr'][] = array(
+					'uid' => $_SGLOBAL['supe_uid'],
+					'dateline' => $_SGLOBAL['timestamp'],
+					'catid' => $msgarr['importcatid'],
+					'itemid' => 0,
+					'filename' => saddslashes($patharr['name']),
+					'subject' => trim(shtmlspecialchars($subject)),
+					'attachtype' => $patharr['type'],
+					'type' => 'news',
+					'isimage' => (in_array($patharr['type'], array('jpg','jpeg','gif','png'))?1:0),
+					'size' => $patharr['size'],
+					'filepath' => $patharr['file'],
+					'thumbpath' => $patharr['thumb'],
+					'isavailable' => 1,
+					'hash' => ''
+			);
+			if(!empty($patharr['file'])) {
+				$msgarr['message'] = str_replace($url, A_URL.'/'.$patharr['file'], $msgarr['message']);
+				$msgarr[$varname][$ukey] = str_replace($url, A_DIR.'/'.$patharr['file'], $msgarr[$varname][$ukey]);
+			}
+		} 
 	}
 	return $msgarr;
 }

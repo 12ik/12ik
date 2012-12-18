@@ -155,10 +155,8 @@ function addreplace(str, replace, replaceto) {
         <p>选择资讯分类，可以直接将采集的结果导入到资讯库中</p></th>
       <td><select name="import">
           <option value="0">-------</option>
-          {loop $arrCatename $item}
-         	 <option value="cateid_{$item[cateid]}">{$item[catename]}</option>
-          {/loop}
-        </select></td>
+           {$arrSelect}
+          </select></td>
     </tr>
     <tr id="tr_dateline">
       <th>预定义发布时间

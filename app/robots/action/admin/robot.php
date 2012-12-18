@@ -1,7 +1,6 @@
 <?php
 
 $theurl = SITE_URL."index.php?app=robots&ac=admin";
-
 include_once('robot.func.php');
 
 switch ($ts) {
@@ -28,13 +27,14 @@ switch ($ts) {
 		// 对采集数组进行整理
 		$thevalue ['listurl_manual'] = $thevalue ['listurl_auto'] = '';	
 	
-		if ($thevalue ['listurltype'] == 'note') {
+		//定义 new
+		if ($thevalue ['listurltype'] == 'new') {
 			$thevalue ['listurl'] = unserialize ( $thevalue ['listurl'] );
 			$thevalue ['listurl_manual'] = $thevalue ['listurl'] ['manual'];
 			$thevalue ['listurl_auto'] = $thevalue ['listurl'] ['auto'];
 		}
 		
-		
+
 
 		$urlorder = 0;
 		if (! empty ( $thevalue ['listurl_auto'] )) {
@@ -278,7 +278,7 @@ switch ($ts) {
 							$messagetext = '';
 						}
 						if (! empty ( $messagetext )) {
-							showprogress ( '处理内容  <a href="' . $msgurl . '" target="_blank">' . $msgurl . '</a> ' . '</b>成功', 1 );
+							showprogress ( '<font color=green> 处理内容  <a href="' . $msgurl . '" target="_blank">' . $msgurl . '</a> ' . '成功</font>', 1 );
 								
 							// 采集次数累加1并结整采集程序
 							if (empty ( $status )) {
@@ -296,7 +296,7 @@ switch ($ts) {
 								$mnum ++;
 							}
 							
-							echo $mnum; die;
+							
 								
 							// 对文章列表页的处理
 							if (! empty ( $msgarr ['pagearr'] ) && $thevalue ['messagepagetype'] == 'page') {
@@ -338,7 +338,7 @@ switch ($ts) {
 					// LIST NUM
 					showprogress ( '当前索引页面文章采集完毕，进入下一个索引页面' );
 					showprogress ( '<a href="' . $theurl . '&mg=robot&robotid=' . $_GET ['robotid'] . '&lpage=' . $lpage . '&mpage=' . $mpage . '&mnum=' . $mnum . '&status=' . $status . '"><b>' . '正在采集下一个文章列表...' . "</b></a>", 1 );
-					include_once template ( 'admin/tpl/footer.htm', 1 );
+					//include_once template ( 'admin/tpl/footer.htm', 1 );
 					jumpurl ( $theurl . '&mg=robot&robotid=' . $_GET ['robotid'] . '&lpage=' . $lpage . '&mpage=' . $mpage . '&mnum=' . $mnum . '&status=' . $status, 1 );
 				}
 			} 

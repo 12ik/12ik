@@ -1,0 +1,13 @@
+<h2>配置管理</h2>
+<div class="tabnav">
+<ul>
+<li  {if $mg=='options'} class="select"  {/if} ><a href="{SITE_URL}index.php?app=article&ac=admin&mg=options">配置</a></li>
+
+<li  {if $mg=='article' && $ts=='list'} class="select" {/if} ><a href="{SITE_URL}index.php?app=article&ac=admin&mg=article&ts=list">文章管理</a></li>
+
+<li  {if $mg=='cate' && $ts=='list'} class="select" {/if} ><a href="{SITE_URL}index.php?app=article&ac=admin&mg=cate&ts=list">频道分类</a></li>
+
+<li  {if $mg=='channel' && $ts=='add'} class="select" {/if} ><a href="{SITE_URL}index.php?app=article&ac=admin&mg=channel&ts=add">添加频道</a></li>
+
+</ul>
+</div>
