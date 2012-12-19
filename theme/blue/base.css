@@ -14,7 +14,7 @@
 /**定义HTML5 css3 全局样式**/
 article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{ display:block;}
 
-body{ background:#fff; color:#333; font:12px/1.5em Arial,Helvetica,sans-serif,Microsoft YaHei; direction:ltr;}
+body{ background:#fff; color:#333; font:12px/1.5  Arial,Helvetica,sans-serif,Microsoft YaHei; direction:ltr;}
 h1, h2, h3, h4, h5, h6 {
     font-size: 100%;
     font-weight: normal;

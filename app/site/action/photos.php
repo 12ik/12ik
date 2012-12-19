@@ -105,8 +105,8 @@ switch ($ts) {
 		$prev = $arrPhotoId[$nowkey - 1];
 		$next = $arrPhotoId[$nowkey +1];			
 		
-		//更新浏览量		
-		aac('site')->update('site_photos_pic',array('photoid'=>$photoid),array('count_view'=>'count_view + 1'));
+		//更新浏览量
+		$db->query("update ".dbprefix."site_photos_pic set `count_view`=count_view+1 where photoid='$photoid'");		
 
 		$title = $strPhotos['title'].'-第'.$nowPage.'张';
 		include template('photos_photo');

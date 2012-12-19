@@ -13,16 +13,22 @@ switch ($ts) {
 		$arrCatename = array();
 		foreach ($arrChannel as $key=>$item)
 		{
-			$arrCatename = aac('article')->find('article_categories',array('type'=>$item['nameid']));
-			if($thevalue['importcatid']==$arrCatename['catid'])
-			{
-				$ischecked = "selected";
-			}else{
-				$ischecked = "";
-			}
+			$arrCatename = aac('article')->findAll('article_categories',array('type'=>$item['nameid']));
 			$arrSelect .='<optgroup label="'.$item['name'].'">';
-			$arrSelect .='<option '.$ischecked.' value="'.$arrCatename['type'].'_'.$arrCatename['catid'].'" >'.$arrCatename['name'].'</option>';
+			foreach($arrCatename as $key1=>$item1)
+			{
+				if($thevalue['importcatid']==$item1['catid'])
+				{
+					$ischecked = "selected";
+				}else{
+					$ischecked = "";
+				}
+				
+				$arrSelect .='<option '.$ischecked.' value="'.$item1['type'].'_'.$item1['catid'].'" >'.$item1['name'].'</option>';
+				
+			}
 			$arrSelect .='</optgroup>';
+
 		}
 		if ($thevalue) {
 			//先初始化url

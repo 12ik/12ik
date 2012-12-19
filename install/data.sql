@@ -1606,8 +1606,8 @@ CREATE TABLE ik_article_categories (
 -- --------------------------------------------------------
 
 INSERT INTO `ik_article_categories` (`name`, `type`) VALUES
-('互联网络','article'),
-('明星娱乐','article');
+('互联网络','news'),
+('明星娱乐','news');
 -- --------------------------------------------------------
 
 --

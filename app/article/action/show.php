@@ -2,13 +2,14 @@
 defined ( 'IN_IK' ) or die ( 'Access Denied.' );
 
 $id = intval ( $_GET ['id'] );
-echo $id;
+
 //根据id获取内容
 $strArticle = aac('article')-> find('article_spacenews',array('itemid'=>$id));
+$strArticleinfo = aac('article')->find('article_spaceitems',array('itemid'=>$strArticle['itemid']));
 
 //更新统计 被浏览数
-$arrData = array('viewnum'=> $strArticle['viewnum']+1);
-aac('article')->update('article_spaceitems',array('itemid'=>$itemid),$arrData);	
+
+$db->query("update ".dbprefix."article_spaceitems set `viewnum`=viewnum+1 where itemid='$strArticle[itemid]'");
 
 
 

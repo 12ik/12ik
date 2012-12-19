@@ -9,5 +9,6 @@ return array(
 	'author' => '小麦',
 	'author_url' => 'http://www.12ik.com',
 	'isoption'	=> '1',
-	'isinstall'	=> '1'
+	'isinstall'	=> '1',
+	'isappnav'	=> '1',
 );

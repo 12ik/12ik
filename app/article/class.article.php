@@ -9,7 +9,7 @@ class article extends IKApp{
 	
 	//根据userid获取所有分类
 	function getAllArticle(){
-		$arr =  $this->findAll('article_spaceitems');
+		$arr =  $this->findAll('article_spacenews');
 		return $arr;
 	}
 	
