@@ -1527,3 +1527,7 @@ function sgmdate($timestamp, $dateformat='', $format=0) {
 	}
 	return $result;
 }
+//获得表
+function tname($name, $mode=0) {
+	return 'ik_'.$name;
+}

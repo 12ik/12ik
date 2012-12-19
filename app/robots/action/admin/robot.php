@@ -214,7 +214,7 @@ switch ($ts) {
 							// LIST NUM
 							showprogress ('当前索引页面文章采集完毕，进入下一个索引页面');
 							$jumptourl = $theurl . '&mg=robot&robotid=' . $_GET ['robotid'] . '&lpage=' . $lpage . '&mpage=' . $mpage . '&mnum=' . $mnum . '&clearcache=1&status=' . $status;
-							showprogress ( '<a href="' . $jumptourl . '">'.'<b>正在采集下一个文章列表...</b></a>', 1 );
+							showprogress ( '<font color=green><a href="' . $jumptourl . '">'.'<b>正在采集下一个文章列表...</b></a></font>', 1 );
 							jumpurl ( $jumptourl, 1 );
 						} else {
 							break;
@@ -244,7 +244,7 @@ switch ($ts) {
 								$_GET ['pagekey'] = $_GET ['pageurl'] = '';
 							} else {
 								$pageurl = $msgmsgarr ['pagearr'] [0];
-								showprogress ( '[' . $mnum . '] ' . '[' . $pagekey . '] 处理<b>文章分页页面</b>完成', 1 );
+								showprogress ( '<font color=green>[' . $mnum . '] ' . '[' . $pagekey . '] 处理<b>文章分页页面</b>完成</font>', 1 );
 								$pagekey ++;
 								include_once template ( 'admin/tpl/footer.htm', 1 );
 								jumpurl ( $theurl . '&mg=robot&robotid=' . $_GET ['robotid'] . '&lpage=' . $lpage . '&mpage=' . $mpage . '&mnum=' . $mnum . '&status=' . $status . '&itemid=' . $itemid . '&pagekey=' . $pagekey . '&pageurl=' . rawurlencode ( $pageurl ), 1 );
@@ -263,7 +263,7 @@ switch ($ts) {
 								$msgmsgarr = pregmessagearray ( $messagemsgtext, $thevalue, $mnum, 0, 0, $pageurl );
 								if (! empty ( $msgmsgarr ['message'] ))
 									$itemid = messageaddtodb ( $msgmsgarr, $_GET ['robotid'], $itemid );
-								showprogress ( '[' . $mnum . '] ' . '[' . $pagekey . '] 处理文章分页页面成功', 1 );
+								showprogress ( '<font color=green>[' . $mnum . '] ' . '[' . $pagekey . '] 处理文章分页页面成功</font>', 1 );
 								$pagekey ++;
 								include_once template ( 'admin/tpl/footer.htm', 1 );
 								jumpurl ( $theurl . '&mg=robot&robotid=' . $_GET ['robotid'] . '&lpage=' . $lpage . '&mpage=' . $mpage . '&mnum=' . $mnum . '&status=' . $status . '&itemid=' . $itemid . '&pagekey=' . $pagekey, 1 );
@@ -283,7 +283,7 @@ switch ($ts) {
 							// 采集次数累加1并结整采集程序
 							if (empty ( $status )) {
 								$times = $_SGLOBAL ['timestamp'];
-								$db->query("update ".dbprefix."robots set `lasttime`='$times',`robotnum`='robotnum+1' where `robotid`='$robotid'");
+								$_SGLOBAL['db']->query("update ".dbprefix."robots set `lasttime`='$times',`robotnum`=robotnum+1 where `robotid`='$robotid'");
 								$status = 1;
 							}
 								
@@ -337,7 +337,7 @@ switch ($ts) {
 					$mpage = 0;
 					// LIST NUM
 					showprogress ( '当前索引页面文章采集完毕，进入下一个索引页面' );
-					showprogress ( '<a href="' . $theurl . '&mg=robot&robotid=' . $_GET ['robotid'] . '&lpage=' . $lpage . '&mpage=' . $mpage . '&mnum=' . $mnum . '&status=' . $status . '"><b>' . '正在采集下一个文章列表...' . "</b></a>", 1 );
+					showprogress ( '<font color=green><a href="' . $theurl . '&mg=robot&robotid=' . $_GET ['robotid'] . '&lpage=' . $lpage . '&mpage=' . $mpage . '&mnum=' . $mnum . '&status=' . $status . '"><b>' . '正在采集下一个文章列表...' . "</b></a></font>", 1 );
 					//include_once template ( 'admin/tpl/footer.htm', 1 );
 					jumpurl ( $theurl . '&mg=robot&robotid=' . $_GET ['robotid'] . '&lpage=' . $lpage . '&mpage=' . $mpage . '&mnum=' . $mnum . '&status=' . $status, 1 );
 				}
@@ -346,7 +346,7 @@ switch ($ts) {
 			showprogress ( '无法链接到指定的URL地址', 1 );
 		}
 		
-		showprogress ( '<a href="' . CPURL . '?action=robotmessages&robotid=' . $_GET ['robotid'] . '">' . '采集完成，点击此处查看采集结果' . '</a>', 1 );
+		showprogress ( '<font color=green>采集完成，点击此处查看采集结果</font>', 1 );
 		$listarr = array ();
 		$thevalue = array ();
 		$importvalue = array ();

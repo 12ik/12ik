@@ -3,18 +3,18 @@
 <div class="mc">
 <div class="cleft">
     <div class="art-body">
-    	<h1 class="title">{$strNote[title]}</h1>
-        <div style="text-align:center;color:#999999;padding-bottom: 10px;border-bottom: 1px solid #DDDDDD; margin-bottom:10px"><a href="{SITE_URL}{tsUrl('hi','',array('id'=>$strNote[user][doname]))}">{$strNote[user][username]}</a> 发表于 {php echo date('Y-m-d H:i:s',$strNote[addtime])} <a href="#comments">{$strNote[count_comment]}条回复</a> 浏览{$strNote[count_view]}次 <a href="#formMini">我要回复</a> 
+    	<h1 class="title">{$strArticle[title]}</h1>
+        <div style="text-align:center;color:#999999;padding-bottom: 10px;border-bottom: 1px solid #DDDDDD; margin-bottom:10px"><a href="{SITE_URL}{tsUrl('hi','',array('id'=>$strArticle[user][doname]))}">{$strArticle[user][username]}</a> 发表于 {php echo date('Y-m-d H:i:s',$strArticle[addtime])} <a href="#comments">{$strArticle[count_comment]}条回复</a> 浏览{$strArticle[count_view]}次 <a href="#formMini">我要回复</a> 
         </div>
     
         <div class="art-text">
-            {$strNote[content]}
+            {$strArticle[message]}
         </div>
     
     <div class="options-bar">    
-    <!--{if intval($IK_USER[user][userid])==$strNote[userid]}-->
-    &gt;&nbsp; <a href="{SITE_URL}index.php?app=note&ac=do&ts=edit&noteid={$strNote[noteid]}">修改</a> 
-    &gt;&nbsp; <a href="{SITE_URL}index.php?app=note&ac=do&ts=del&noteid={$strNote[noteid]}">删除</a>
+    <!--{if intval($IK_USER[user][userid])==$strArticle[userid]}-->
+    &gt;&nbsp; <a href="{SITE_URL}index.php?app=note&ac=do&ts=edit&noteid={$strArticle[noteid]}">修改</a> 
+    &gt;&nbsp; <a href="{SITE_URL}index.php?app=note&ac=do&ts=del&noteid={$strArticle[noteid]}">删除</a>
     <!--{/if}-->
     </div>
     
@@ -24,10 +24,10 @@
 
 <!--tag标签-->
 <div class="tags">
-    <!--{loop $strNote[tags] $key $item}-->
+    <!--{loop $strArticle[tags] $key $item}-->
     <a rel="tag" title="" class="post-tag" href="{SITE_URL}{tsUrl('note','note_tag',array(tagname=>$item[tagname]))}">{$item[tagname]}</a>
     <!--{/loop}-->
-    <!--{if intval($IK_USER[user][userid])==$strNote[userid]}-->
+    <!--{if intval($IK_USER[user][userid])==$strArticle[userid]}-->
     <a rel="tag" href="javascript:void(0);" onclick="showTagFrom()">+标签</a>
     <p id="tagFrom" style="display:none">
     <input class="tagtxt" type="text" name="tags" id="tags" /> <button type="submit" class="subab" onclick="savaTag({$noteid})">添加</button> <a href="javascript:void(0);" onclick="showTagFrom()">取消</a>
@@ -100,7 +100,7 @@
 
 <form method="POST" action="{SITE_URL}index.php?app=note&ac=comment&ts=add" onSubmit="return checkComment('#formMini');" id="formMini">
 	<textarea  style="width:100%;height:100px;" id="editor_mini" name="content" class="txt" onkeydown="keyComment('#formMini',event)"></textarea>
-	<input type="hidden" name="noteid" value="{$strNote[noteid]}" />
+	<input type="hidden" name="noteid" value="{$strArticle[noteid]}" />
 	<input class="submit" type="submit" value="加上去(Crtl+Enter)" style="margin:10px 0px">
 </form>
 
@@ -111,10 +111,10 @@
 </div>
 
 <div class="cright">
-<!--{if $strNote[user][userid] == $IK_USER[user][userid] }-->
-<p class="pl2"><a href="{SITE_URL}{tsUrl('note','list',array('userid'=>$strNote[user][userid]))}">&gt; 返回到我的日志</a></p>
+<!--{if $strArticle[user][userid] == $IK_USER[user][userid] }-->
+<p class="pl2"><a href="{SITE_URL}{tsUrl('note','list',array('userid'=>$strArticle[user][userid]))}">&gt; 返回到我的日志</a></p>
 <!--{else}-->
-<p class="pl2"><a href="{SITE_URL}{tsUrl('note','list',array('userid'=>$strNote[user][userid]))}">&gt; 返回到$strNote[user][username]的日志</a></p>
+<p class="pl2"><a href="{SITE_URL}{tsUrl('note','list',array('userid'=>$strArticle[user][userid]))}">&gt; 返回到$strArticle[user][username]的日志</a></p>
 <!--{/if}-->
 
 

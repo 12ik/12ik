@@ -14,4 +14,9 @@ return array (
   'isgzip' => '0',
   'timezone' => 'Asia/Hong_Kong',
   'isinvite' => '0',
+  'charset' => 'UTF-8',
+  'thumbwidth' => '400',
+  'thumbheight' => '300',
+  'attachmentdirtype' => 'month',
+  'attachmentdir' => 'uploadfile/attachments',
 );

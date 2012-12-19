@@ -70,6 +70,7 @@ class IKApp {
 	 * $new['group']->update('group',array('groupid'=>$groupid,),array('path'=>$arrUpload['path']));
 	 */
 	public function update($table, $conditions, $row) {
+		
 		$where = "";
 		//$row = $this->__prepera_format($row);
 		if (empty ( $row ))

@@ -1148,7 +1148,12 @@ INSERT INTO `ik_system_options` (`optionname`, `optionvalue`) VALUES
 ('site_urltype', '1'),
 ('isgzip', '0'),
 ('timezone', 'Asia/Hong_Kong'),
-('isinvite', '0');
+('isinvite', '0'),
+('charset', 'UTF-8'),
+('thumbwidth', '400'),
+('thumbheight', '300'),
+('attachmentdir', 'uploadfile/attachments'),
+('attachmentdirtype', 'month');
 
 -- --------------------------------------------------------
 
@@ -1560,8 +1565,12 @@ CREATE TABLE IF NOT EXISTS `ik_robots` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='采集器' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
-
-
+DROP TABLE IF EXISTS ik_robotlog;
+CREATE TABLE ik_robotlog (
+  hash  char(32) NOT NULL default '',
+  PRIMARY KEY (hash)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='采集器日志' AUTO_INCREMENT=1 ;
+-- --------------------------------------------------------
 --
 -- 表的结构 'ik_article_categories'
 --
@@ -1724,3 +1733,28 @@ CREATE TABLE ik_article_spacenews (
   PRIMARY KEY  (nid),
   KEY itemid (itemid, pageorder, nid)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='文章内容表';
+
+DROP TABLE IF EXISTS ik_attachments;
+CREATE TABLE ik_attachments (
+  aid mediumint(8) unsigned NOT NULL auto_increment,
+  isavailable tinyint(1) NOT NULL default '0',
+  `type` char(30) NOT NULL default '',
+  itemid mediumint(8) unsigned NOT NULL default '0',
+  catid smallint(6) unsigned NOT NULL default '0',
+  uid mediumint(8) unsigned NOT NULL default '0',
+  dateline int(10) unsigned NOT NULL default '0',
+  filename char(150) NOT NULL default '',
+  `subject` char(80) NOT NULL default '',
+  attachtype char(10) NOT NULL default '',
+  isimage tinyint(1) NOT NULL default '0',
+  size int(10) unsigned NOT NULL default '0',
+  filepath char(200) NOT NULL default '',
+  thumbpath char(200) NOT NULL default '',
+  downloads mediumint(8) unsigned NOT NULL default '0',
+  `hash` char(16) NOT NULL default '',
+  PRIMARY KEY  (aid),
+  KEY `hash` (`hash`),
+  KEY itemid (itemid),
+  KEY uid (uid,`type`,dateline),
+  KEY `type` (`type`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='附件表';

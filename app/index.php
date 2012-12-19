@@ -26,6 +26,17 @@ if (is_file ( 'app/' . $app . '/action/' . $ac . '.php' )) {
 	//加载系统缓存文件 
 	$IK_SITE ['base'] = fileRead ( 'data/system_options.php' );
 	
+	$_SGLOBAL = $_SCONFIG = $IK_SITE ['base'];
+	$_SGLOBAL['db'] = $db;
+	$_SGLOBAL['timestamp'] = time();
+	$_SGLOBAL['supe_uid'] = $IK_USER['admin']['userid'];
+	$_SGLOBAL['supe_username'] = $IK_USER['admin']['username'];
+	
+	//配置
+	$_SCONFIG['timeoffset'] = 8;//设置时区 默认中国香港
+	$_SCONFIG['thumbarray'] = array('news' => array($_SCONFIG['thumbwidth'],$_SCONFIG['thumbheight']));//设置文章页面图片高宽
+
+	
 	//设置时区
 	date_default_timezone_set ( $IK_SITE ['base'] ['timezone'] );
 	
@@ -35,8 +46,9 @@ if (is_file ( 'app/' . $app . '/action/' . $ac . '.php' )) {
 	define ( 'SITE_URL', $IK_SITE ['base'] ['site_url'] );
 	
 	//定义全局附件路径默认 uploadfile/attachments
-	define ( 'IKUPLOADPATH', 'uploadfile/attachments' );//上传附件地址
+	define ( 'IKUPLOADPATH', $_SCONFIG['attachmentdir'] );//上传附件地址
 	define ( 'ATT_URL', SITE_URL.IKUPLOADPATH);
+	
 	
 	//主题
 	$IK_theme = isset ( $_COOKIE ['ik_theme'] ) ? $_COOKIE ['ik_theme'] : '';

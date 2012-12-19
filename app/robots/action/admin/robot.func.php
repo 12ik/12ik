@@ -688,10 +688,10 @@ function messageaddtodb($msgarr, $robotid, $itemid=0) {
 				'haveattach' => (!empty($msgarr['patharr'])?1:0)
 			);
 			//入库
-			//$itemid = aac('robots')->create('article_spaceitems', $insertsqlarr);
+			$itemid = aac('robots')->create('article_spaceitems', $insertsqlarr);
 		}
 		$hash = md5($msgarr['subject']);
-		//$_SGLOBAL['db']->query('REPLACE INTO '.tname('robotlog')." (hash) VALUES ('$hash')");	//插入起防重复操作
+		$_SGLOBAL['db']->query('REPLACE INTO '.dbprefix.'robotlog'." (hash) VALUES ('$hash')");	//插入起防重复操作
 	}
 
 	//INSERT MESSAGE
@@ -712,22 +712,22 @@ function messageaddtodb($msgarr, $robotid, $itemid=0) {
 			'newsfrom' => saddslashes($msgarr['itemfrom'])
 		);
 		
-		//aac('robots')->create('article_spacenews', $insertsqlarr);
+		aac('robots')->create('article_spacenews', $insertsqlarr);
 	}
 
+	//如果附件不为空
 	if(!empty($msgarr['patharr'])) {
-
-		var_dump($msgarr['patharr']); echo 123; die;
 		
-		/* 
 		$attacharr['hash'] = 'R'.$robotid.'I'.$itemid;
 		$thevalue = array();
 		if(empty($msgarr['importcatid'])) {
-			$query = $_SGLOBAL['db']->query("SELECT haveattach, uid FROM ".tname('robotitems')." WHERE itemid='$itemid'");
+			//暂时不用
+			//$query = $_SGLOBAL['db']->query("SELECT haveattach, uid FROM ".tname('robotitems')." WHERE itemid='$itemid'");
 		} else {
-			$query = $_SGLOBAL['db']->query("SELECT haveattach, hash, uid FROM ".tname('spaceitems')." WHERE itemid='$itemid'");
+			$thevalue = aac('robots')->find('article_spaceitems',array('itemid'=>$itemid),'haveattach, hash, uid');
 		}
-		$thevalue = $_SGLOBAL['db']->fetch_array($query);
+		
+		//如果没有hash则插入
 		if(!empty($thevalue['hash'])) {
 			$attacharr['hash'] = $thevalue['hash'];
 		}
@@ -753,13 +753,17 @@ function messageaddtodb($msgarr, $robotid, $itemid=0) {
 		}
 		$insertvaluesql .= ')';
 
-		$_SGLOBAL['db']->query('INSERT INTO '.tname('attachments').' ('.$insertkeysql.') VALUES '.$insertvaluesql);
+
+		$_SGLOBAL['db']->query('INSERT INTO '.dbprefix.'attachments'.' ('.$insertkeysql.') VALUES '.$insertvaluesql);
+		
 		if(isset($thevalue['hash'])) {
-			$query = $_SGLOBAL['db']->query("SELECT aid FROM ".tname('attachments')." WHERE itemid='$itemid' AND isimage='1' LIMIT 0 ,1");
-			$attvalue = $_SGLOBAL['db']->fetch_array($query);
-			$_SGLOBAL['db']->query("UPDATE ".tname('spaceitems')." SET haveattach='1',picid='$attvalue[aid]' WHERE itemid='$itemid'");
+			
+			$attvalue = aac('robots')->find('attachments',array('itemid'=>$itemid,'isimage'=>'1'),'aid');
+			//更新
+			aac('robots')->update('article_spaceitems',array('itemid'=>$itemid),array('haveattach'=>'1','picid'=>$attvalue[aid]));
+			
 		}
-	 */}
+	}
 	return $itemid;
 }
 
@@ -994,7 +998,7 @@ function pregmessagearray($messagetext, $rulearr, $mnum, $getpage=0, $getsubject
 		}
 		if($rulearr['savepic']) {
 			$msgarr = saveurlarr($msgarr, 'picarr');
-			showprogress('['.$mnum.'] '.$alang['robot_robot_deal'].'<b>'.$alang['robot_robot_picarr'].'</b>'.$alang['robot_robot_success']);
+			showprogress('['.$mnum.'] '.'<font color=green>处理<b>图片链接</b>成功！</font>');
 		}
 	}
 	
@@ -1122,8 +1126,10 @@ function saveurlarr($msgarr, $varname) {
 					'hash' => ''
 			);
 			if(!empty($patharr['file'])) {
-				$msgarr['message'] = str_replace($url, A_URL.'/'.$patharr['file'], $msgarr['message']);
-				$msgarr[$varname][$ukey] = str_replace($url, A_DIR.'/'.$patharr['file'], $msgarr[$varname][$ukey]);
+				
+				$msgarr['message'] = str_replace($url, ATT_URL.'/'.$patharr['file'], $msgarr['message']);
+				$msgarr[$varname][$ukey] = str_replace($url, IKUPLOADPATH.'/'.$patharr['file'], $msgarr[$varname][$ukey]);
+
 			}
 		} 
 	}

@@ -7,45 +7,29 @@
 	
     
    <div class="note_list">
-   	
-       <!--{if $arrNote}-->
-       <!--{loop $arrNote $key $item}-->
+
+       <!--{loop $arrArticle $key $item}-->
         <dl>
-            <dt><a href="{SITE_URL}{tsUrl('note','show',array('noteid'=>$item[noteid]))}" title="{$item[title]}">{$item[title]}</a><span class="open"><a href="javascript:;">开关</a></span></dt>
-            <dd class="addtime"><a href="{SITE_URL}{tsUrl('user','space',array('id'=>$item[user][userid]))}">{$item[user][username]}</a> 发表于 {php echo date('Y-m-d H:i:s',$item[addtime])}</dd>
-            <dd class="note_des">{$item[content]}</dd>
-            
-            <dd class="action">
-             {$item[count_view]} 人浏览  &nbsp;&nbsp;<a href="{SITE_URL}{tsUrl('note','show',array('noteid'=>$item[noteid]))}#comments" title="回应">{$item[count_comment]} 条回应</a>
-             <!--{if $item[userid] == $IK_USER[user][userid]}-->
-            &gt; <a href="{SITE_URL}{tsUrl('note','do',array('ts'=>'edit', 'noteid'=>$item[noteid]))}" title="">修改</a> &gt; <a href="{SITE_URL}{tsUrl('note','do',array('ts'=>'del', 'noteid'=>$item[noteid]))}" title="">删除</a>
-            <!--{/if}-->
-            </dd>
+            <dt><a href="{SITE_URL}{tsUrl('article','show',array('id'=>$item[itemid]))}" title="{$item[subject]}">{$item[subject]}</a></dt>
+            <dd class="addtime">发表于 {php echo date('Y-m-d H:i:s',$item[dateline])}</dd>
         </dl>
 	  <!--{/loop}-->
-	  <!--{else}-->
-      <p class="pl">你可以在这里记录您日记了，马上就 <a href="{SITE_URL}{tsUrl('note','add')}">开始</a> 写吧。</p>
-      <!--{/if}-->
+	 
    </div>
    <div class="page">{$pageUrl}</div>   
      
 </div>
 
     <div class="cright">
- 		    <!--{if $userid == $IK_USER[user][userid] }-->
-            <p class="pl2">&gt; <a href="{SITE_URL}{tsUrl('note','add')}">写 日 志</a></p>
-            <p class="pl2">&gt; <a href="{SITE_URL}{tsUrl('note','cate',array('ts'=>'edit'))}">日志分类管理</a></p>
-            <!--{/if}-->
+  
             
-            <h2>{$userCateName}</h2>
+            <h2>文章栏目</h2>
 
             
             <div class="cate">
-            <ul>
-            <!--{loop $arrCate $key $item}-->
-            <li  {if $item[cateid]==$cateid} class="select" {/if}  ><a  href="{SITE_URL}{tsUrl('note','cate',array('ts'=>'list','userid'=>$item[userid], 'cateid'=>$item[cateid]))}">{$item[catename]}</a></li>
-            <!--{/loop}-->
-            </ul>
+                <ul>
+              
+                </ul>
             </div>
             
     </div>

@@ -5,4 +5,5 @@ return array (
   'location' => '同城',
   'group' => '小组',
   'site' => '小站',
+  'article' => '文章',  
 );

@@ -15,34 +15,12 @@ error_reporting ( E_ALL & ~ E_NOTICE & ~ E_WARNING );
 @set_magic_quotes_runtime ( 0 );
 
 session_start ();
+//定义全局配置
+$_SGLOBAL = $_SBLOCK  = $_SCONFIG = $_SHTML = $_DCACHE = $_SGET = array();
 
 //前台用户基本数据,$IK_USER数组
 $IK_USER = array ('user' => isset ( $_SESSION ['tsuser'] ) ? $_SESSION ['tsuser'] : '', 'admin' => isset ( $_SESSION ['tsadmin'] ) ? $_SESSION ['tsadmin'] : '' );
 
-//定义全局配置
-$_SGLOBAL = $_SBLOCK  = $_SCONFIG = $_SHTML = $_DCACHE = $_SGET = array();
-$_SGLOBAL['timestamp'] = time();
-$_SGLOBAL['supe_uid'] = $IK_USER['admin']['userid'];
-$_SGLOBAL['supe_username'] = $IK_USER['admin']['username'];
-
-//配置
-$_SCONFIG['charset'] = 'UTF-8';//合并配置
-$_SCONFIG['timeoffset'] = 8;
-$_SCONFIG['thumbarray'] = array('news' => array('400','300'));//设置文章页面图片高宽
-$_SCONFIG['attachmentdirtype'] = 'month'; //附件目录按月创建
-
-
-
-
-
-/* 以后使用
- * $attachmentdirtypearr = array(
-		'all' => $alang['setting_attachmentdirtype_all'],
-		'year' => $alang['setting_attachmentdirtype_year'],
-		'month' => $alang['setting_attachmentdirtype_month'],
-		'day' => $alang['setting_attachmentdirtype_day'],
-		'md5' => $alang['setting_attachmentdirtype_md5']
-); */
 //加载基础函数
 require_once 'IKFunction.php';
 
@@ -51,24 +29,9 @@ reurl ();
 
 //处理过滤
 if (! get_magic_quotes_gpc ()) {
-	Add_S ( $_POST );
-	Add_S ( $_GET );
+	saddslashes ( $_POST );
+	saddslashes ( $_GET );
 }
-/*
- *过滤post,get
- */
-function Add_S(&$array) {
-	if (is_array ( $array )) {
-		foreach ( $array as $key => $value ) {
-			if (! is_array ( $value )) {
-				$array [$key] = addslashes ( $value );
-			} else {
-				Add_S ( $array [$key] );
-			}
-		}
-	}
-}
-
 //系统Url参数变量
 //APP专用
 $app = isset($_GET['app']) ? $_GET['app'] : 'home';

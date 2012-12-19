@@ -7,13 +7,18 @@ switch($ts){
 		
 		//列表 
 		$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-		$url = SITE_URL.'index.php?app=note&ac=admin&mg=note&ts=list&page=';
+		$url = SITE_URL.'index.php?app=article&ac=admin&mg=article&ts=list&page=';
 		$lstart = $page*10-10;
 
 		//获取全部日志
-		$arrList = $db->fetch_all_assoc("select * from ".dbprefix."article_spaceitems ");
+		$arrList = $db->fetch_all_assoc("select * from ".dbprefix."article_spaceitems order by itemid desc limit $lstart,10");
 
-//		$Num = $db->once_num_rows("select * from ".dbprefix."article_spaceitems");
+ 		$Num = aac('article')->findCount('article_spaceitems');
+		
+
+
+		$pageUrl = pagination($Num, 10, $page, $url);		
+		
 		
 		include template("admin/article_list");
 		

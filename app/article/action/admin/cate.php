@@ -4,16 +4,17 @@ defined('IN_IK') or die('Access Denied.');
 switch($ts){
 	
 	case "list":
-		
+		$nameid = $_GET['nameid'];
 		//列表 
-		$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-		$url = SITE_URL.'index.php?app=article&ac=admin&mg=cate&ts=list&page=';
-		$lstart = $page*10-10;
+		//$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+		//$url = SITE_URL.'index.php?app=article&ac=admin&mg=cate&ts=list&page=';
+		//$lstart = $page*10-10;
 
-		$arrCate = $db->fetch_all_assoc("select * from ".dbprefix."article_categories order by catid desc limit $lstart, 10");
-		$cateNum = $db->once_fetch_assoc("select count(*) from ".dbprefix."article_categories");
+		$arrCate = $db->fetch_all_assoc("select * from ".dbprefix."article_categories where type='".$nameid."' order by catid desc");
+		
+		//$cateNum = $db->once_fetch_assoc("select count(*) from ".dbprefix."article_categories");
 
-		$pageUrl = pagination($cateNum['count(*)'], 10, $page, $url);
+		//$pageUrl = pagination($cateNum['count(*)'], 10, $page, $url);
 		
 		include template("admin/cate_list");
 		
@@ -38,7 +39,7 @@ switch($ts){
 	case "edit":
 		$cateid = $_GET['cateid'];
 		
-		$strCate = $db->once_fetch_assoc("select * from ".dbprefix."article_cate where `cateid`='$cateid'");
+		$strCate = aac('article')->find('article_categories',array('catid'=>$cateid));
 		
 		include template("admin/cate_edit");
 		break;
@@ -46,11 +47,12 @@ switch($ts){
 	case "edit_do":
 		
 		$cateid = $_POST['cateid'];
-		$catename = trim($_POST['catename']);
+		$name = trim($_POST['name']);
+		$type = trim($_POST['type']);
 		
-		$db->query("update ".dbprefix."article_cate set `catename`='$catename' where `cateid`='$cateid'");
+		$db->query("update ".dbprefix."article_categories set `name`='$name' where `catid`='$cateid'");
 		
-		qiMsg("修改成功！");
+		qiMsg("添加成功",'返回到列表',SITE_URL.'index.php?app=article&ac=admin&mg=cate&ts=list&nameid='.$type);
 		
 		break;
 	

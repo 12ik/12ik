@@ -77,7 +77,8 @@
                 </li>
                 <li>
                 <a href="<?php echo SITE_URL;?><?php echo tsurl('haomiwo')?>" target="_blank">好米窝</a>
-                </li>                                              
+                </li> 
+                <li><a href="<?php echo SITE_URL;?><?php echo tsurl('article')?>">文章</a></li>                                             
 
         </ul>
     </div>
@@ -123,6 +124,7 @@
                 <li><a href="<?php echo SITE_URL;?><?php echo tsurl('hi','',array('id'=>$globalUser['doname']))?>">我的爱客</a></li>
                 <li><a href="<?php echo SITE_URL;?><?php echo tsurl('group')?>">我的小组</a></li>
                 <li><a href="<?php echo SITE_URL;?><?php echo tsurl('site')?>">我的小站</a></li>
+                <li><a href="<?php echo SITE_URL;?><?php echo tsurl('article')?>">文章</a></li>
             </ul>
            <form action="<?php echo SITE_URL;?>index.php?app=search&ac=s" method="get" onsubmit="return searchForm(this);">
             <ul id="search_bar">

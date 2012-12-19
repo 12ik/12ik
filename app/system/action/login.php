@@ -41,6 +41,10 @@ switch ($ts) {
 
 		$_SESSION ['tsadmin'] = $strAdminInfo;
 		
+		$_SGLOBAL['supe_uid'] = $strAdminInfo['userid'];
+		$_SGLOBAL['supe_username'] = $strAdminInfo['username'];
+
+		
 		header ( "Location: " . SITE_URL . "index.php?app=system" );
 		
 		break;

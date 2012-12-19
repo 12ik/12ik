@@ -13,7 +13,7 @@
 </tr>
 
 <?php foreach((array)$arrCate as $key=>$item) {?>
-<tr><td><?php echo $item['catid'];?></td><td><?php echo $item['name'];?></td><td><a href="<?php echo SITE_URL;?>index.php?app=article&ac=admin&mg=cate&ts=edit&cateid=<?php echo $item['cateid'];?>">修改</a></td></tr>
+<tr><td><?php echo $item['catid'];?></td><td><?php echo $item['name'];?></td><td><a href="<?php echo SITE_URL;?>index.php?app=article&ac=admin&mg=cate&ts=edit&cateid=<?php echo $item['catid'];?>">修改</a></td></tr>
 <?php }?>
 
 </table>

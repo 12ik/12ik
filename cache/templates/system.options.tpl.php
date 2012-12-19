@@ -3,6 +3,7 @@
 <!--main-->
 <div class="midder"><?php include template('menu'); ?>
 <form method="POST" action="index.php?app=system&ac=do&ts=options">
+<h3>基本配置</h3>
 <table cellpadding="0" cellspacing="0">
 
 	<tr>
@@ -34,6 +35,11 @@
 		<td><input style="width: 300px;" name="site_url"
 			value="<?php echo $strOption['site_url'];?>" />(必须以http://开头，以/结尾)</td>
 	</tr>
+	<tr>
+		<td>网站编码:</td>
+		<td><input style="width: 300px;" name="charset"
+			value="<?php echo $strOption['charset'];?>" readonly /> （默认UTF-8）请勿更改</td>
+	</tr>    
 	<tr>
 		<td>电子邮件 :</td>
 		<td><input style="width: 300px;" name="site_email"
@@ -79,12 +85,50 @@
 			<?php }?>
 		</select></td>
 	</tr>
+</table>
+
+<h3>缩略图设置</h3>
+<table cellpadding="0" cellspacing="0">
 
 	<tr>
-		<td></td>
-		<td><input type="submit" value="提 交" class="submit" /></td>
+		<td>缩略图宽:</td>
+		<td><input style="width: 300px;" name="thumbwidth"
+			value="<?php echo $strOption['thumbwidth'];?>" /> （默认规格400）</td>
+	</tr>
+	<tr>
+		<td>缩略图高:</td>
+		<td><input style="width: 300px;" name="thumbheight"
+			value="<?php echo $strOption['thumbheight'];?>" /> （默认规格300）</td>
 	</tr>
 </table>
+
+<h3>本地路径设置</h3>
+<table cellpadding="0" cellspacing="0">
+
+	<tr>
+		<td>站点附件目录:</td>
+		<td><input style="width: 300px;" name="attachmentdir"
+			value="<?php echo $strOption['attachmentdir'];?>" /> （默认：uploadfile/attachments <font color="red">注意：开头和末尾不要加 / </font>）</td>
+	</tr>
+     <tr>
+		<td>站点附件归类方式:</td>
+		<td>
+        
+        <select name="attachmentdirtype">
+            <option value="all" <?php if($strOption['attachmentdirtype']== all) { ?> selected<?php } ?>>不归类</option>
+            <option value="year" <?php if($strOption['attachmentdirtype']== year) { ?> selected<?php } ?>>按年归类</option>
+            <option value="month" <?php if($strOption['attachmentdirtype']== month) { ?> selected<?php } ?>>按月归类</option>
+            <option value="day" <?php if($strOption['attachmentdirtype']== day) { ?> selected<?php } ?>>按天归类</option>
+            <option value="md5" <?php if($strOption['attachmentdirtype']== md5) { ?> selected<?php } ?>>随机归类</option>
+        </select>
+         （如：2012/12/11/1_a.jpg）
+       </td>
+	</tr>
+    
+</table>
+
+<div  style="padding-left:200px; padding-top:10px"><input type="submit" value="提 交" class="submit" /></div>
+
 </form>
 </div>
 
