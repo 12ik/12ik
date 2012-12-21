@@ -18,5 +18,5 @@ return array (
   'thumbwidth' => '400',
   'thumbheight' => '300',
   'attachmentdirtype' => 'month',
-  'attachmentdir' => 'uploadfile/attachments',
+  'attachmentdir' => 'uploadfile/attachments/',
 );

@@ -246,7 +246,7 @@ switch ($ts) {
 								$pageurl = $msgmsgarr ['pagearr'] [0];
 								showprogress ( '<font color=green>[' . $mnum . '] ' . '[' . $pagekey . '] 处理<b>文章分页页面</b>完成</font>', 1 );
 								$pagekey ++;
-								include_once template ( 'admin/tpl/footer.htm', 1 );
+								//include_once template ( 'admin/tpl/footer.htm', 1 );
 								jumpurl ( $theurl . '&mg=robot&robotid=' . $_GET ['robotid'] . '&lpage=' . $lpage . '&mpage=' . $mpage . '&mnum=' . $mnum . '&status=' . $status . '&itemid=' . $itemid . '&pagekey=' . $pagekey . '&pageurl=' . rawurlencode ( $pageurl ), 1 );
 							}
 						} elseif (! empty ( $_GET ['pagekey'] )) {
@@ -265,7 +265,7 @@ switch ($ts) {
 									$itemid = messageaddtodb ( $msgmsgarr, $_GET ['robotid'], $itemid );
 								showprogress ( '<font color=green>[' . $mnum . '] ' . '[' . $pagekey . '] 处理文章分页页面成功</font>', 1 );
 								$pagekey ++;
-								include_once template ( 'admin/tpl/footer.htm', 1 );
+								//include_once template ( 'admin/tpl/footer.htm', 1 );
 								jumpurl ( $theurl . '&mg=robot&robotid=' . $_GET ['robotid'] . '&lpage=' . $lpage . '&mpage=' . $mpage . '&mnum=' . $mnum . '&status=' . $status . '&itemid=' . $itemid . '&pagekey=' . $pagekey, 1 );
 							}
 						}

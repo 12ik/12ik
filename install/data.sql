@@ -1152,7 +1152,7 @@ INSERT INTO `ik_system_options` (`optionname`, `optionvalue`) VALUES
 ('charset', 'UTF-8'),
 ('thumbwidth', '400'),
 ('thumbheight', '300'),
-('attachmentdir', 'uploadfile/attachments'),
+('attachmentdir', 'uploadfile/attachments/'),
 ('attachmentdirtype', 'month');
 
 -- --------------------------------------------------------

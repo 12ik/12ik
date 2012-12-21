@@ -18,8 +18,7 @@ switch($ts){
 
 
 		$pageUrl = pagination($Num, 10, $page, $url);		
-		
-		
+
 		include template("admin/article_list");
 		
 		break;

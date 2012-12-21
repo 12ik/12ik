@@ -1,8 +1,8 @@
-
 section h3{font-size:18px;color:#666; font-weight:bold}
 section .hd{margin-bottom:15px}
 section{margin-bottom:20px}
-.btn,.btn:hover{display:inline-block;*display:inline;*zoom:1;font-size:13px;color:#fff;padding:4px 12px;margin-bottom:0;line-height:1.1;background-color:#6e3939;border:1px solid #6e3939;-webkit-border-radius:3px;border-radius:3px;cursor:pointer;vertical-align:middle;text-decoration:none}
+.btn,.btn:hover{display:inline-block;*display:inline;*zoom:1;font-size:13px;color:#fff;padding:4px 12px;
+margin-bottom:0;line-height:1.1;background-color:#6DBC1D;border:1px solid #5AA710;-webkit-border-radius:3px;border-radius:3px;cursor:pointer;vertical-align:middle;text-decoration:none}
 .btn-info,.btn-info:hover{color:#6e3939;border-color:#d3d3cc;background-color:#e5e5dd}
 .btn-info:hover{background-color:#dbdbd4}
 .btn-minor,.btn-minor:hover{color:#888;border-color:#ddd;background-color:#ddd}
@@ -138,9 +138,9 @@ a.helper-link{position:relative;font-weight:normal;z-index:233;font-size:12px;ma
 a.helper-link .works-tips{display:none;top:23px;left:0;_left:5px;position:absolute;width:290px;color:#666;padding:20px 20px 10px;-webkit-box-shadow:0 0 10px #aaa;box-shadow:0 0 10px #aaa}
 a.helper-link:hover .works-tips{display:block;border:1px solid #999;background-color:#fffff9}
 
-section .tag-heading{border-bottom:1px solid #ddd;padding-bottom:12px;margin-bottom:18px;color:#333;}
+section .tag-heading{border-bottom:1px solid #ddd; padding-bottom:5px}
 section .tag-heading p{margin:12px 0 0;padding-bottom:31px;font-size:12px}
-section .tag-heading .hd-nav{float:right;margin-top:-21px}
+section .tag-heading .hd-nav{float:right;}
 .filter-tabs{display:inline-block;*display:inline;*zoom:1}
 .filter-type-tabs{margin-right:20px;padding-right:10px;border-right:1px solid #999}
 .filter-tabs .tab{float:left;_display:inline;margin-right:10px}
@@ -162,3 +162,8 @@ section .tag-heading .hd-nav{float:right;margin-top:-21px}
 .article-list .cover img{height:90px;width:120px}
 .article-list .cover {float: left; margin-right: 13px;width: 120px;}
 .article-list .type{display:inline-block;*display:inline;*zoom:1;font-size:12px;font-weight:normal;color:#999;vertical-align:top;margin-left:6px;line-height:26px}
+
+/*************show**************/
+.art-body{}
+.art-text{font-size:14px;line-height:25px; margin-bottom:10px}
+.art-text p img{ display:block; margin:10px auto}

@@ -4,12 +4,12 @@
     <aside class="col col3">
       <section class="categories">
         <div class="hd">
-          <h3>分类</h3>
+          <h3>全部分类</h3>
         </div>
         <ul class="list categories-list">
-        
-          <li><a href="/tag/%E5%B0%8F%E8%AF%B4/">小说</a></li>
-          
+        {loop $arrCate  $item}
+          <li><a href="#">{$item[name]}</a></li>
+        {/loop}  
         </ul>
       </section>
       <section class="personal-publish">
@@ -25,35 +25,44 @@
     <article class="col11 fr">
       <section>
                 <div class="hd tag-heading">
-                  <h3 class="the-tag-name">最新发表</h3>
-                  <div class="hd-nav">
+                    <div class="hd-nav">
                     <ul class="filter-tabs filter-type-tabs">
-                      <li class="tab on"><a href="?sort=top&amp;cat=all">全部</a></li>
+                    <li class="tab on"><a href="#">全部</a></li>
                     </ul>
                     <ul class="filter-tabs">
-                      <li class="tab on"><a href="?sort=top&amp;cat=all">热门</a></li>
+                    <li class="tab on"><a href="#">热门</a></li>
                     </ul>
-                  </div>
+                    </div>
+                   <h3 class="the-tag-name">{$title}</h3>
+             
                 </div>
                 
                 <div class="bd">
-                	<ul class="list-lined article-list">
-{loop $arrArticle $item}
+<ul class="list-lined article-list">
+<!-- {loop $arrArticle $item} -->
 <li class="item" id="article-407582">
-  <div class="cover"><a  target="_self" class="pic" href="{SITE_URL}{tsUrl('article','show',array('id'=>$item[nid]))}"></a></div>
+  <div class="cover">
+  {if $item[items][attach]}
+  <a class="pic" href="{SITE_URL}{tsUrl('article','show',array('id'=>$item[nid]))}">
+  	<img src="{ATT_URL}{$item[items][attach][thumbpath]}" />
+  </a>
+  {else}
+  <a class="pic" href="{SITE_URL}{tsUrl('article','show',array('id'=>$item[nid]))}">
+  	<img src="{SITE_URL}public/images/defimg.gif" />
+  </a>  
+  {/if}
+  </div>
   <div class="info">
     <div class="title"><a href="{SITE_URL}{tsUrl('article','show',array('id'=>$item[nid]))}">{$item[items][subject]}</a></div>
-    <div class="article-desc-brief">{php echo getsubstrutf8(t($item[message]),0,200);}...<a onclick="moreurl(this, {'aid': '407582', 'src': 'tag'}, true, 'read.douban.com')" href="/ebook/407582/">（更多）</a></div>
-
+    <div class="article-desc-brief">{php echo getsubstrutf8(t($item[message]),0,200);}...<a href="{SITE_URL}{tsUrl('article','show',array('id'=>$item[nid]))}">（更多）</a></div>
   </div>
 </li>
-{/loop}
-                    </ul>
+<!--{/loop}-->
+
+</ul>
                 </div>
                 
-                <div class="ft">
-                
-                </div>
+               
       </section>
     </article>
   </div>
