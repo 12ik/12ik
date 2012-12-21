@@ -33,6 +33,20 @@ switch ($ts) {
 			$arrSelect .='</optgroup>';
 
 		}
+		//图片导入
+		//获取相册分类 //暂时只到到管理员 2 相册下
+		$arrAlbum = aac('photo')->findAll('photo_album', array('userid'=>'2'),null,'albumid,albumname');
+		$arrSelect .='<optgroup label="相册">';
+		foreach ($arrAlbum as $item){
+			if($thevalue['importcatid']==$item['albumid'])
+			{
+				$ischecked = "selected";
+			}else{
+				$ischecked = "";
+			}
+			$arrSelect .='<option '.$ischecked.' value="album_'.$item['albumid'].'" >'.$item['albumname'].'</option>';
+		}
+		$arrSelect .='</optgroup>';		
 		
 		//添加新采集器初始值
 		$thevalue = array(
@@ -40,7 +54,7 @@ switch ($ts) {
 				'name' => '',
 				'encode' => '',
 				'reverseorder' => '0',
-				'listurltype'=>'cateid',
+				'listurltype'=>'new',
 				'listurl' => '',
 				'listpagestart' => '0',
 				'listpageend' => '0',

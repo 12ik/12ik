@@ -96,7 +96,7 @@ switch ($ts) {
 			} else {
 				showprogress ('处理索引列表页面结束' );
 			}
-		 
+	
 			// GET SUBJECT URL LIST
 			$subjecturl = array ();
 			if (! $listcache && ! empty ( $listtext )) {
@@ -110,7 +110,7 @@ switch ($ts) {
 				$subjecturl = $subjecturlarr [0];
 			}
 			if (! $listcache && ! empty ( $subjecturl )) {
-				showprogress ( '处理处理索引列表页面 <b style="color:green">链接区域成功</b>' );
+				showprogress ( '<font color=green>处理处理索引列表页面链接区域成功</font>' );
 				// 文章链接URL识别
 				$urlarr = array ();
 				if (empty ( $thevalue ['subjecturllinkrule'] )) {
@@ -130,7 +130,7 @@ switch ($ts) {
 				}
 		
 				if (! empty ( $urlarr )) {
-					showprogress ( '处理处理索引列表页面 <b style="color:green">链接成功</b>' );
+					showprogress ( '<font color=green>处理处理索引列表页面链接成功</font>' );
 					// 文章链接URL剔除
 					if (! empty ( $thevalue ['subjecturllinkcancel'] )) {
 						$tmparr = array ();
@@ -197,13 +197,13 @@ switch ($ts) {
 					}
 				}
 			}
-	
+			
 			if (! empty ( $newurlarr )) {
 				$thevalue ['pernum'] = empty ( $thevalue ['pernum'] ) ? 5 : $thevalue ['pernum'];
 				$thevalue ['allnum'] = empty ( $thevalue ['allnum'] ) ? 65535 : $thevalue ['allnum'];
 				if (! $listcache)
 					cacherobotlist ( 'make', $lurl, $_GET ['robotid'], $newurlarr ); // 生成文章列表数列表URL地址
-			
+				
 				while ( true ) { // 死循环采集文章
 					$nextpage = false;
 					if ($mpage >= count ( $newurlarr )) { // 文章列表页数是否大于单个索引页整理出来的文章列表总数
@@ -214,7 +214,8 @@ switch ($ts) {
 							// LIST NUM
 							showprogress ('当前索引页面文章采集完毕，进入下一个索引页面');
 							$jumptourl = $theurl . '&mg=robot&robotid=' . $_GET ['robotid'] . '&lpage=' . $lpage . '&mpage=' . $mpage . '&mnum=' . $mnum . '&clearcache=1&status=' . $status;
-							showprogress ( '<font color=green><a href="' . $jumptourl . '">'.'<b>正在采集下一个文章列表...</b></a></font>', 1 );
+							showprogress ( '<font color=green><a href="' . $jumptourl . '">'.'正在采集下一个文章列表...</a></font>', 1 );
+							
 							jumpurl ( $jumptourl, 1 );
 						} else {
 							break;
@@ -244,12 +245,13 @@ switch ($ts) {
 								$_GET ['pagekey'] = $_GET ['pageurl'] = '';
 							} else {
 								$pageurl = $msgmsgarr ['pagearr'] [0];
-								showprogress ( '<font color=green>[' . $mnum . '] ' . '[' . $pagekey . '] 处理<b>文章分页页面</b>完成</font>', 1 );
+								showprogress ( '<font color=green>[' . $mnum . '] ' . '[' . $pagekey . '] 处理文章分页页面完成</font>', 1 );
 								$pagekey ++;
 								//include_once template ( 'admin/tpl/footer.htm', 1 );
 								jumpurl ( $theurl . '&mg=robot&robotid=' . $_GET ['robotid'] . '&lpage=' . $lpage . '&mpage=' . $mpage . '&mnum=' . $mnum . '&status=' . $status . '&itemid=' . $itemid . '&pagekey=' . $pagekey . '&pageurl=' . rawurlencode ( $pageurl ), 1 );
 							}
 						} elseif (! empty ( $_GET ['pagekey'] )) {
+							//处理分页内容
 							$pagekey = $_GET ['pagekey'];
 							$itemid = $_GET ['itemid'];
 							$pagearr = cacherobotlist ( 'get', $msgurl, $_GET ['robotid'], array (), 'pagearr' );
@@ -286,14 +288,25 @@ switch ($ts) {
 								$_SGLOBAL['db']->query("update ".dbprefix."robots set `lasttime`='$times',`robotnum`=robotnum+1 where `robotid`='$robotid'");
 								$status = 1;
 							}
-								
+							
 							$msgarr = pregmessagearray ( $messagetext, $thevalue, $mnum, 1, 1, $msgurl ); // 解析文章内容
-							if (! empty ( $msgarr ['subject'] ) && ! empty ( $msgarr ['message'] )) {
-								// 插入到库中
+							
+							//对相册处理
+							if($msgarr['album']=='album')
+							{
 								$itemid = messageaddtodb ( $msgarr, $_GET ['robotid'], 0 );
 								$mnum ++;
-							} else {
-								$mnum ++;
+								
+							}else{
+								//如果内容标题不为空插入到库
+								if (! empty ( $msgarr ['subject'] ) && ! empty ( $msgarr ['message'] ) )
+								{
+									// 插入到库中
+									$itemid = messageaddtodb ( $msgarr, $_GET ['robotid'], 0 );
+									$mnum ++;
+								} else {
+									$mnum ++;
+								}								
 							}
 							
 							
@@ -319,14 +332,15 @@ switch ($ts) {
 							}
 		
 						} elseif ($gotonext) {
-							showprogress ( '处理<b>内容 (<a href="' . $msgurl . '" target="_blank">' . $msgurl . '</a>) ' . '</b>失败', 1 );
+							showprogress ( '<font color=red>处理内容 (<a href="' . $msgurl . '" target="_blank">' . $msgurl . '</a>) ' . '失败</font>', 1 );
 						}
 					}
 					$mpage ++;
 					if ($nextpage) {
 						// PER NUM
 						showprogress ( '单次采集数目达到最大限制，进入下一个采集操作' . ' (' . $thevalue ['pernum'] . ')', 1 );
-						showprogress ( '<a href="' . $theurl . '&mg=robot&robotid=' . $_GET ['robotid'] . '&lpage=' . $lpage . '&mpage=' . $mpage . '&mnum=' . $mnum . '&status=' . $status . '"><b>' . '正在采集下一个文章列表...' . "</b></a>", 1 );
+						$nexturl = $theurl . '&mg=robot&robotid=' . $_GET ['robotid'] . '&lpage=' . $lpage . '&mpage=' . $mpage . '&mnum=' . $mnum . '&status=' . $status;
+						showprogress ( '<a href="'.$nexturl.'">正在采集下一个文章列表...</a>', 1 );
 						//include_once template ( 'admin/tpl/footer.htm', 1 );
 						jumpurl ( $theurl . '&mg=robot&robotid=' . $_GET ['robotid'] . '&lpage=' . $lpage . '&mpage=' . $mpage . '&mnum=' . $mnum . '&status=' . $status, 1 );
 					}
@@ -337,7 +351,8 @@ switch ($ts) {
 					$mpage = 0;
 					// LIST NUM
 					showprogress ( '当前索引页面文章采集完毕，进入下一个索引页面' );
-					showprogress ( '<font color=green><a href="' . $theurl . '&mg=robot&robotid=' . $_GET ['robotid'] . '&lpage=' . $lpage . '&mpage=' . $mpage . '&mnum=' . $mnum . '&status=' . $status . '"><b>' . '正在采集下一个文章列表...' . "</b></a></font>", 1 );
+					$nexturl2 = $theurl . '&mg=robot&robotid=' . $_GET ['robotid'] . '&lpage=' . $lpage . '&mpage=' . $mpage . '&mnum=' . $mnum . '&status=' . $status;
+					showprogress ( '<font color=green><a href="'.$nexturl2.'">正在采集下一个文章列表...</a></font>', 1 );
 					//include_once template ( 'admin/tpl/footer.htm', 1 );
 					jumpurl ( $theurl . '&mg=robot&robotid=' . $_GET ['robotid'] . '&lpage=' . $lpage . '&mpage=' . $mpage . '&mnum=' . $mnum . '&status=' . $status, 1 );
 				}

@@ -182,7 +182,8 @@ a.bn-post:hover span{ color:#FFF; background-color:#63AB1A; border: 1px solid #5
 .midder .mc{overflow:hidden;display: block;}
 .midder .mc .cleft{float: left;padding-right: 10px; width: 640px;}
 .midder .mc .cright{float: right;width: 310px;}
-
+.w190{width:190px}
+.w770{width:770px}
 
 /*底部*/
 #footer{height:162px; padding-top:43px;  margin-top:40px; }

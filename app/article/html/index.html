@@ -1,70 +1,73 @@
 {template header}
 <div class="midder">
-  <div class="mc">
-    <aside class="col col3">
-      <section class="categories">
-        <div class="hd">
-          <h3>全部分类</h3>
-        </div>
-        <ul class="list categories-list">
-        {loop $arrCate  $item}
-          <li><a href="#">{$item[name]}</a></li>
-        {/loop}  
-        </ul>
-      </section>
-      <section class="personal-publish">
-        <div class="hd">
-          <h3>作品投稿</h3>
-        </div>
-        <div class="bd">
-          <p> 个人作者可以在爱客上直接发布作品。 内容领域不限，唯一要求是保证质量优秀。 发表后，作者可直接从中获得分成。 </p>
-          <p class="entrance"><a href="/submit/" class="btn btn-large">去投稿<i class="arrow-right"></i></a></p>
-        </div>
-      </section>
-    </aside>
-    <article class="col11 fr">
-      <section>
-                <div class="hd tag-heading">
-                    <div class="hd-nav">
-                    <ul class="filter-tabs filter-type-tabs">
-                    <li class="tab on"><a href="#">全部</a></li>
-                    </ul>
-                    <ul class="filter-tabs">
-                    <li class="tab on"><a href="#">热门</a></li>
-                    </ul>
-                    </div>
-                   <h3 class="the-tag-name">{$title}</h3>
-             
-                </div>
-                
-                <div class="bd">
-<ul class="list-lined article-list">
-<!-- {loop $arrArticle $item} -->
-<li class="item" id="article-407582">
-  <div class="cover">
-  {if $item[items][attach]}
-  <a class="pic" href="{SITE_URL}{tsUrl('article','show',array('id'=>$item[nid]))}">
-  	<img src="{ATT_URL}{$item[items][attach][thumbpath]}" />
-  </a>
-  {else}
-  <a class="pic" href="{SITE_URL}{tsUrl('article','show',array('id'=>$item[nid]))}">
-  	<img src="{SITE_URL}public/images/defimg.gif" />
-  </a>  
-  {/if}
-  </div>
-  <div class="info">
-    <div class="title"><a href="{SITE_URL}{tsUrl('article','show',array('id'=>$item[nid]))}">{$item[items][subject]}</a></div>
-    <div class="article-desc-brief">{php echo getsubstrutf8(t($item[message]),0,200);}...<a href="{SITE_URL}{tsUrl('article','show',array('id'=>$item[nid]))}">（更多）</a></div>
-  </div>
-</li>
-<!--{/loop}-->
+	<div class="mc">
+		<aside class="w190 fl">
+			<section class="categories">
+				<div class="hd">
+					<h3>全部分类</h3>
+				</div>
+				<ul class="list categories-list">
+					<!--         {loop $arrCate  $item} -->
+					<li><a href="{SITE_URL}{tsUrl('article','list',array('cateid'=>$item[catid]))}">{$item[name]}</a></li>
+					<!--         {/loop}   -->
+				</ul>
+			</section>
+			<section class="personal-publish">
+				<div class="hd">
+					<h3>作品投稿</h3>
+				</div>
+				<div class="bd">
+					<p>个人作者可以在爱客上直接发布作品。 内容领域不限，唯一要求是保证质量优秀。 发表后，作者可直接从中获得分成。</p>
+					<p class="entrance">
+						<a href="#" class="btn btn-large">去投稿<i
+							class="arrow-right"></i></a>
+					</p>
+				</div>
+			</section>
+		</aside>
+		<article class="w770 fr">
+			<section>
+				<div class="hd tag-heading">
+					<h3 class="the-tag-name">{$title}</h3>
+				</div>
 
-</ul>
-                </div>
-                
-               
-      </section>
-    </article>
-  </div>
+				<div class="bd">
+					<ul class="list-lined article-list">
+						<!-- {loop $arrArticle $item} -->
+						<li class="item" id="article-407582">
+							<div class="title">
+								<a href="{SITE_URL}{tsUrl('article','show',array('id'=>$item[news][nid]))}">{$item[subject]} 
+                                {if $item[attach]}
+                                [图文]
+                                {/if}
+                                </a>
+							</div>
+                            {if $item[attach]} 
+							<div class="cover">
+                                <a class="pic" href="{SITE_URL}{tsUrl('article','show',array('id'=>$item[news][nid]))}">
+									<img src="{ATT_URL}{$item[attach][thumbpath]}" />
+								</a> 
+							</div>
+                            {/if}                            
+							<div class="info">
+								<div class="article-desc-brief">
+									{php echo getsubstrutf8(t($item[news][message]),0,150);}...<a
+										href="{SITE_URL}{tsUrl('article','show',array('id'=>$item[news][nid]))}">（更多）</a>
+								</div>
+							</div>
+							<span class="time"> {php echo date('Y-m-d H:i:s',$item[dateline])}</span> 
+						</li>
+						<!-- {/loop} -->
+
+					</ul>
+				</div>
+
+
+			</section>
+            
+             <div class="page">{$pageUrl}</div>   
+             
+		</article>
+	</div>
 </div>
 {template footer}

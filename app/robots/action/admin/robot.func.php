@@ -672,11 +672,12 @@ function messageaddtodb($msgarr, $robotid, $itemid=0) {
 			if(!empty($msgarr['dateline'])) $insertsqlarr['dateline'] = $msgarr['dateline'];
 			if(!empty($msgarr['patharr'])) $insertsqlarr['haveattach'] = 1;
 			$itemid = inserttable('robotitems', $insertsqlarr, 1);
-		 */} else {
+		 */} else if($msgarr['importtype']=='album') {
+		 	//相册
 			$hashstr = smd5($_SGLOBAL['supe_uid'].'/'.rand(1000, 9999).$_SGLOBAL['timestamp']);
 			$insertsqlarr = array(
-				'catid' => $msgarr['importcatid'],
-				'uid' => $uid,
+				'album' => $msgarr['importcatid'],
+				'userid' => $uid,
 				'username' => saddslashes($username),
 				'type' => $msgarr['importtype'],
 				'subject' => saddslashes($msgarr['subject']),
@@ -688,7 +689,25 @@ function messageaddtodb($msgarr, $robotid, $itemid=0) {
 				'haveattach' => (!empty($msgarr['patharr'])?1:0)
 			);
 			//入库
-			$itemid = aac('robots')->create('article_spaceitems', $insertsqlarr);
+			$itemid = aac('photo')->create('photo', $insertsqlarr);
+		}else{
+			//文章
+			$hashstr = smd5($_SGLOBAL['supe_uid'].'/'.rand(1000, 9999).$_SGLOBAL['timestamp']);
+			$insertsqlarr = array(
+					'catid' => $msgarr['importcatid'],
+					'uid' => $uid,
+					'username' => saddslashes($username),
+					'type' => $msgarr['importtype'],
+					'subject' => saddslashes($msgarr['subject']),
+					'dateline' => $msgarr['dateline'],
+					'lastpost' => $msgarr['dateline'],
+					'hash' => $hashstr,
+					'fromtype' => 'robotpost',
+					'fromid' => $robotid,
+					'haveattach' => (!empty($msgarr['patharr'])?1:0)
+			);
+			//入库
+			$itemid = aac('robots')->create('article_spaceitems', $insertsqlarr);			
 		}
 		$hash = md5($msgarr['subject']);
 		$_SGLOBAL['db']->query('REPLACE INTO '.dbprefix.'robotlog'." (hash) VALUES ('$hash')");	//插入起防重复操作
@@ -808,7 +827,7 @@ function pregmessagearray($messagetext, $rulearr, $mnum, $getpage=0, $getsubject
 		$rule = convertrule($rulearr['subjectkey']);
 		$newsubject = preg_replace("/($rule)/s", '', $msgarr['subject']);
 		if($newsubject == $msgarr['subject']) {
-			showprogress('['.$mnum.'] '.$msgarr['subject'].' '.$alang['robot_robot_subject_no_key']);
+			showprogress('['.$mnum.'] '.$msgarr['subject'].' 标题不包含关键字，跳过');
 			$nextprogress = false;
 			$msgarr['subject'] = '';
 		}					
@@ -818,25 +837,25 @@ function pregmessagearray($messagetext, $rulearr, $mnum, $getpage=0, $getsubject
 		$rule = convertrule($rulearr['subjectkeycancel']);
 		$newsubject = preg_replace("/($rule)/s", '', $msgarr['subject']);
 		if($newsubject != $msgarr['subject']) {
-			showprogress('['.$mnum.'] '.$msgarr['subject'].' '.$alang['robot_robot_subject_key_cancel']);
+			showprogress('['.$mnum.'] '.$msgarr['subject'].' 标题包含关键字，跳过');
 			$nextprogress = false;
 			$msgarr['subject'] = '';
 		}				
 	}
 	$msgarr['subject'] = trim($msgarr['subject']);
 	if($getsubject && $nextprogress && empty($msgarr['subject'])) {
-		showprogress('['.$mnum.'] '.$alang['robot_robot_subject_null']);
+		showprogress('['.$mnum.'] 标题经处理后为空，跳过');
 		$nextprogress = false;
 	}
 	if($getsubject && $nextprogress && !$rulearr['subjectallowrepeat']) {
 		$query = $_SGLOBAL['db']->query('SELECT COUNT(*) FROM '.tname('robotlog').' WHERE hash=\''.md5($msgarr['subject']).'\'');
 		if($_SGLOBAL['db']->result($query, 0)) {
-			showprogress('['.$mnum.'] '.$msgarr['subject'].' '.$alang['robot_robot_subject_exists']);
+			showprogress('['.$mnum.'] '.$msgarr['subject'].' 文章已经存在，跳过');
 			$nextprogress = false;
 		}
 	}
 	if($nextprogress && $getsubject && $msgarr['subject']) {
-		showprogress('['.$mnum.'] [<b>'.$msgarr['subject'].'</b>] '.$alang['robot_robot_deal'].'<b>'.'<b>'.$alang['robot_robot_subject'].'</b>'.$alang['robot_robot_success']);
+		showprogress('<font color=green>['.$mnum.'] ['.$msgarr['subject'].'] 处理标题成功</font>');
 	}
 	if(!$nextprogress) {
 		$msgarr['subject'] = '';
@@ -858,9 +877,9 @@ function pregmessagearray($messagetext, $rulearr, $mnum, $getpage=0, $getsubject
 		}
 		$msgarr['itemfrom'] = $fromarr[0];
 		if($msgarr['itemfrom']) {
-			showprogress('['.$mnum.'] [<b>'.$msgarr['itemfrom'].'</b>] '.$alang['robot_robot_deal'].'<b>'.$alang['robot_robot_itemfrom'].'</b>'.$alang['robot_robot_success']);
+			showprogress('<font color=green>['.$mnum.'] ['.$msgarr['itemfrom'].'] 处理文章来源成功</font>');
 		} else {
-			showprogress('['.$mnum.'] '.$alang['robot_robot_deal'].'<b>'.'<b>'.$alang['robot_robot_itemfrom'].'</b>'.$alang['robot_robot_failed']);
+			showprogress('<font color=red>['.$mnum.'] 处理文章来源失败</font>');
 		}
 	}
 	//作者识别
@@ -885,9 +904,9 @@ function pregmessagearray($messagetext, $rulearr, $mnum, $getpage=0, $getsubject
 		}
 		$msgarr['author'] = $authorarr[0];
 		if($msgarr['author']) {
-			showprogress('['.$mnum.'] [<b>'.$msgarr['author'].'</b>] '.$alang['robot_robot_deal'].'<b>'.$alang['robot_robot_author'].'</b>'.$alang['robot_robot_success']);
+			showprogress('<font color=green>['.$mnum.'] ['.$msgarr['author'].'] 处理作者成功</font>');
 		} else {
-			showprogress('['.$mnum.'] '.$alang['robot_robot_deal'].'<b>'.$alang['robot_robot_author'].'</b>'.$alang['robot_robot_failed']);
+			showprogress('<font color=red>['.$mnum.'] 处理作者失败</font>');
 		}
 	}
 	//发布者UID
@@ -934,7 +953,7 @@ function pregmessagearray($messagetext, $rulearr, $mnum, $getpage=0, $getsubject
 		$rule = convertrule($rulearr['messagekey']);
 		$newmessage = preg_replace("/($rule)/s", '', $msgarr['message']);
 		if($newmessage == $msgarr['message']) {
-			showprogress('['.$mnum.'] '.$msgarr['subject'].' '.$alang['robot_robot_message_no_key']);
+			showprogress('['.$mnum.'] '.$msgarr['subject'].' 内容不包含关键字，跳过');
 			$nextprogress = false;
 			$msgarr['message'] = '';
 		}					
@@ -944,7 +963,7 @@ function pregmessagearray($messagetext, $rulearr, $mnum, $getpage=0, $getsubject
 		$rule = convertrule($rulearr['messagekeycancel']);
 		$newmessage = preg_replace("/($rule)/s", '', $msgarr['message']);
 		if(md5($newmessage) != md5($msgarr['message'])) {
-			showprogress('['.$mnum.'] '.$msgarr['subject'].' '.$alang['robot_robot_message_key_cancel']);
+			showprogress('['.$mnum.'] '.$msgarr['subject'].' 内容包含关键字，跳过');
 			$nextprogress = false;
 			$msgarr['message'] = '';
 		}					
@@ -957,11 +976,11 @@ function pregmessagearray($messagetext, $rulearr, $mnum, $getpage=0, $getsubject
 	
 	if($nextprogress) {
 		if($msgarr['message']) {
-			showprogress('['.$mnum.'] '.$alang['robot_robot_deal'].'<b>'.$alang['robot_robot_message'].'</b>'.$alang['robot_robot_success']);
+			showprogress('<font color=green>['.$mnum.'] 处理内容成功</font>');
 		} else {
 			$msgarr['subject'] = '';
 			$nextprogress = false;
-			showprogress('['.$mnum.'] '.$alang['robot_robot_deal'].'<b>'.$alang['robot_robot_message'].'</b>'.$alang['robot_robot_failed']);
+			showprogress('<font color=red>['.$mnum.'] 处理内容失败</font>');
 		}
 	}
 	
@@ -998,7 +1017,7 @@ function pregmessagearray($messagetext, $rulearr, $mnum, $getpage=0, $getsubject
 		}
 		if($rulearr['savepic']) {
 			$msgarr = saveurlarr($msgarr, 'picarr');
-			showprogress('['.$mnum.'] '.'<font color=green>处理<b>图片链接</b>成功！</font>');
+			showprogress('<font color=green>['.$mnum.'] '.'处理图片链接成功！</font>');
 		}
 	}
 	

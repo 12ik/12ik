@@ -10,7 +10,7 @@
 .degbugh3{ display:block; margin:5px 0px}
 .colorarea02{ margin-bottom:10px}
 </style>
-
+<script type="text/javascript" src="<?php echo SITE_URL;?>public/js/date/WdatePicker.js"></script>
 <script language="javascript">
 //定义提交地址
 function submitForm(obj)
@@ -19,7 +19,10 @@ function submitForm(obj)
 	obj = $(obj);
 	if($('#name').val()=='')
 	{
-		$('#name').focus(); $('#name').after('&nbsp;&nbsp;<font color=red>采集器名称不能为空！</font>')
+		$('#name').focus(); $('#name').after('&nbsp;&nbsp;<font color=red>采集器名称不能为空！</font>');
+		return false;
+	}else if($('#import').val()==0){
+		$('#import').focus(); $('#import').after('&nbsp;&nbsp;<font color=red>你想导入到哪里！</font>');
 		return false;
 	}else{
 		obj.attr('action',addurl);
@@ -140,7 +143,7 @@ function addreplace(str, replace, replaceto) {
     <tr id="tr_name">
       <th>机器人名</th>
       <td><input type="text" value="<?php echo $thevalue['name'];?>" size="30" id="name" name="name"></td>
-    </tr>
+    </tr>   
     <tr id="tr_allnum">
       <th>采集总个数</th>
       <td><input type="text" value="<?php echo $thevalue['allnum'];?>" size="10" id="allnum" name="allnum"></td>
@@ -153,7 +156,7 @@ function addreplace(str, replace, replaceto) {
     <tr id="tr_import">
       <th>自动导入到
         <p>选择资讯分类，可以直接将采集的结果导入到资讯库中</p></th>
-      <td><select name="import">
+      <td><select name="import" id="import">
           <option value="0">-------</option>
            <?php echo $arrSelect;?>
           </select></td>
@@ -162,7 +165,7 @@ function addreplace(str, replace, replaceto) {
       <th>预定义发布时间
         <p>导入资讯分类以后，定义的发布时间</p></th>
       <td><input type="text" readonly="" value="<?php echo $thevalue['defaultdateline'];?>" size="30" id="defaultdateline" name="defaultdateline">
-        <img src="<?php echo SITE_URL;?>/app/robots/skins/default/time.gif" onclick="getDatePicker('defaultdateline', event, 21)">&nbsp;<a onclick="$('defaultdateline').value='';" href="javascript:;">清空</a></td>
+        <img src="<?php echo SITE_URL;?>/app/robots/skins/default/time.gif" onclick="WdatePicker({el:'defaultdateline',dateFmt:'yyyy-MM-dd HH:mm:ss'});">&nbsp;<a onclick="$('defaultdateline').value='';" href="javascript:;">清空</a></td>
     </tr>
   </tbody>
 </table>

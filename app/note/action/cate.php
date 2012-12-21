@@ -8,7 +8,7 @@ switch($ts){
 
 	//列表 
 	$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-	$url = SITE_URL.tsUrl('note','cate',array('cateid'=>$cateid,'page'=>''));
+	$url = SITE_URL.tsUrl('note','cate',array('ts'=>'list','cateid'=>$cateid,'page'=>''));
 	$lstart = $page*10-10;
 	
 	$arrNotes = $db->fetch_all_assoc("select * from ".dbprefix."note where `cateid`='$cateid' and `isaudit`='0' order by addtime desc limit $lstart, 10");

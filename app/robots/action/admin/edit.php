@@ -11,6 +11,7 @@ switch ($ts) {
 		$arrChannel = aac('article')->findAll('article_channels');
 		$arrSelect = '';//初始化下拉列表
 		$arrCatename = array();
+		//文章
 		foreach ($arrChannel as $key=>$item)
 		{
 			$arrCatename = aac('article')->findAll('article_categories',array('type'=>$item['nameid']));
@@ -30,6 +31,21 @@ switch ($ts) {
 			$arrSelect .='</optgroup>';
 
 		}
+		//图片导入
+		//获取相册分类 //暂时只到到管理员 2 相册下
+		$arrAlbum = aac('photo')->findAll('photo_album', array('userid'=>'2'),null,'albumid,albumname');
+		$arrSelect .='<optgroup label="相册">';
+		foreach ($arrAlbum as $item){
+			if($thevalue['importcatid']==$item['albumid'])
+			{
+				$ischecked = "selected";
+			}else{
+				$ischecked = "";
+			}			
+			$arrSelect .='<option '.$ischecked.' value="album_'.$item['albumid'].'" >'.$item['albumname'].'</option>';
+		}
+		$arrSelect .='</optgroup>';
+		
 		if ($thevalue) {
 			//先初始化url
 			$thevalue ['listurl_manual'] = $thevalue ['listurl_auto'] = '';

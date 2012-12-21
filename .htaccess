@@ -1,6 +1,6 @@
 RewriteEngine On
-RewriteBase /
+RewriteBase /12ik/
 RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.php [L]
+RewriteRule . /12ik/index.php [L]

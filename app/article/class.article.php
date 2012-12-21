@@ -7,11 +7,5 @@ class article extends IKApp{
 		parent::__construct($db);
 	}
 	
-	//根据userid获取所有分类
-	function getAllArticle(){
-		$arr =  $this->findAll('article_spacenews');
-		return $arr;
-	}
-	
 	
 }
