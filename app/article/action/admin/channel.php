@@ -11,6 +11,7 @@ switch($ts){
 		break;
 		
 	case "add":
+
 	
 		include template("admin/channel_add");
 	
@@ -18,6 +19,7 @@ switch($ts){
 		
 	case "edit":
 		$nameid = $_GET['nameid'];
+		
 		$arrChannel = aac('article')->find('article_channels',array('nameid'=>$nameid));
 		
 		include template("admin/channel_edit");
@@ -28,7 +30,8 @@ switch($ts){
 
 		$_POST['category'] = trim($_POST['category']);
 		$nameid = trim(strtolower($_POST['nameid']));
-		if(empty($nameid) || !preg_match("^[a-zA-Z]+$", $nameid)) {
+	
+		if(empty($nameid) || !preg_match('/^[a-zA-Z]+$/', $nameid)) { 
 			qiMsg('指定的频道英文ID包含非英文字母，请返回检查');
 		}
 		//添加

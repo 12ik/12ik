@@ -51,7 +51,7 @@
                             <?php } ?>                            
 							<div class="info">
 								<div class="article-desc-brief">
-									<?php echo getsubstrutf8($item['news'][message],0,150);?>...<a
+									<?php echo getsubstrutf8(t($item['news'][message]),0,150);?>...<a
 										href="<?php echo SITE_URL;?><?php echo tsurl('article','show',array('id'=>$item['news'][nid]))?>">（更多）</a>
 								</div>
 							</div>

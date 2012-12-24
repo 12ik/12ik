@@ -40,7 +40,7 @@ $app = isset($_GET['app']) ? $_GET['app'] : 'home';
 $ac = isset($_GET['ac']) ? $_GET['ac'] : 'index';
 //安装
 $install = isset($_GET['install']) ? $_GET['install'] : 'index';
-//ThinkSAAS专用
+//IK专用
 $ts	= isset($_GET['ts']) ? $_GET['ts'] : '';
 //Admin管理专用
 $mg	= isset($_GET['mg']) ? $_GET['mg'] : 'index';
