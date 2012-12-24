@@ -108,7 +108,7 @@
 	<tr>
 		<td>站点附件目录:</td>
 		<td><input style="width: 300px;" name="attachmentdir"
-			value="<?php echo $strOption['attachmentdir'];?>" /> （默认：uploadfile/attachments <font color="red">注意：开头和末尾不要加 / </font>）</td>
+			value="<?php echo $strOption['attachmentdir'];?>" /> （默认：uploadfile/attachments <font color="red">注意：开头不加/ 末尾必须加 / </font>）</td>
 	</tr>
      <tr>
 		<td>站点附件归类方式:</td>

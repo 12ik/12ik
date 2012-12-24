@@ -672,42 +672,56 @@ function messageaddtodb($msgarr, $robotid, $itemid=0) {
 			if(!empty($msgarr['dateline'])) $insertsqlarr['dateline'] = $msgarr['dateline'];
 			if(!empty($msgarr['patharr'])) $insertsqlarr['haveattach'] = 1;
 			$itemid = inserttable('robotitems', $insertsqlarr, 1);
-		 */} else if($msgarr['importtype']=='album') {
-		 	//相册
-			$hashstr = smd5($_SGLOBAL['supe_uid'].'/'.rand(1000, 9999).$_SGLOBAL['timestamp']);
-			$insertsqlarr = array(
-				'album' => $msgarr['importcatid'],
-				'userid' => $uid,
-				'username' => saddslashes($username),
-				'type' => $msgarr['importtype'],
-				'subject' => saddslashes($msgarr['subject']),
-				'dateline' => $msgarr['dateline'],
-				'lastpost' => $msgarr['dateline'],
-				'hash' => $hashstr,
-				'fromtype' => 'robotpost',
-				'fromid' => $robotid,
-				'haveattach' => (!empty($msgarr['patharr'])?1:0)
-			);
-			//入库
-			$itemid = aac('photo')->create('photo', $insertsqlarr);
-		}else{
-			//文章
-			$hashstr = smd5($_SGLOBAL['supe_uid'].'/'.rand(1000, 9999).$_SGLOBAL['timestamp']);
-			$insertsqlarr = array(
-					'catid' => $msgarr['importcatid'],
-					'uid' => $uid,
-					'username' => saddslashes($username),
-					'type' => $msgarr['importtype'],
-					'subject' => saddslashes($msgarr['subject']),
-					'dateline' => $msgarr['dateline'],
-					'lastpost' => $msgarr['dateline'],
-					'hash' => $hashstr,
-					'fromtype' => 'robotpost',
-					'fromid' => $robotid,
-					'haveattach' => (!empty($msgarr['patharr'])?1:0)
-			);
-			//入库
-			$itemid = aac('robots')->create('article_spaceitems', $insertsqlarr);			
+		 */} else{
+
+				if($msgarr['importtype']=='album') {
+				 	//相册
+					$hashstr = smd5($_SGLOBAL['supe_uid'].'/'.rand(1000, 9999).$_SGLOBAL['timestamp']);
+					$arrpath = explode('/', $msgarr['patharr'][0]['filepath']);
+					for($i=0; $i<count($arrpath)-1; $i++)
+					{
+						$path .= $arrpath[$i].'/'; 
+					}
+					
+				    $path = substr($path, 0,strlen($path)-1);
+					$insertsqlarr = array(
+						'albumid' => $msgarr['importcatid'],
+						'userid' => $uid,
+						'addtime' => $msgarr['dateline'],
+						'hash' => $hashstr,
+						//'photodesc' => saddslashes($msgarr['subject']),
+						'photoname' => $msgarr['patharr'][0]['filename'],
+						'phototype' => $msgarr['patharr'][0]['attachtype'],
+						'photosize' => $msgarr['patharr'][0]['size'],
+						'path' => $path,
+					    'photourl' => $msgarr['patharr'][0]['filepath'],
+					);
+					
+					//入库
+					$itemid = aac('photo')->create('photo', $insertsqlarr);
+					//开始上传图片
+						
+									
+				}else{
+					//文章
+					$hashstr = smd5($_SGLOBAL['supe_uid'].'/'.rand(1000, 9999).$_SGLOBAL['timestamp']);
+					$insertsqlarr = array(
+							'catid' => $msgarr['importcatid'],
+							'uid' => $uid,
+							'username' => saddslashes($username),
+							'type' => $msgarr['importtype'],
+							'subject' => saddslashes($msgarr['subject']),
+							'dateline' => $msgarr['dateline'],
+							'lastpost' => $msgarr['dateline'],
+							'hash' => $hashstr,
+							'fromtype' => 'robotpost',
+							'fromid' => $robotid,
+							'haveattach' => (!empty($msgarr['patharr'])?1:0)
+					);
+					//入库
+					$itemid = aac('robots')->create('article_spaceitems', $insertsqlarr);			
+				}				
+				
 		}
 		$hash = md5($msgarr['subject']);
 		$_SGLOBAL['db']->query('REPLACE INTO '.dbprefix.'robotlog'." (hash) VALUES ('$hash')");	//插入起防重复操作
@@ -724,18 +738,24 @@ function messageaddtodb($msgarr, $robotid, $itemid=0) {
 		if(!empty($msgarr['flasharr'])) $insertsqlarr['flashurls'] = saddslashes(serialize($msgarr['flasharr']));
 		inserttable('robotmessages', $insertsqlarr, 0, 1);
 	 */} else {
-		$insertsqlarr = array(
-			'itemid' => $itemid,
-			'message' => saddslashes($msgarr['message']),
-			'newsauthor' => saddslashes($msgarr['author']),
-			'newsfrom' => saddslashes($msgarr['itemfrom'])
-		);
 		
-		aac('robots')->create('article_spacenews', $insertsqlarr);
+		if($msgarr['importtype']!='album') {
+			
+				$insertsqlarr = array(
+					'itemid' => $itemid,
+					'message' => saddslashes($msgarr['message']),
+					'newsauthor' => saddslashes($msgarr['author']),
+					'newsfrom' => saddslashes($msgarr['itemfrom'])
+				);
+				
+				aac('robots')->create('article_spacenews', $insertsqlarr);
+					
+		}
+
 	}
 
-	//如果附件不为空
-	if(!empty($msgarr['patharr'])) {
+	//如果附件不为空 并且导入的是 文章不是相册
+	if(!empty($msgarr['patharr']) && $msgarr['importtype']!='album') {
 		
 		$attacharr['hash'] = 'R'.$robotid.'I'.$itemid;
 		$thevalue = array();
@@ -843,7 +863,8 @@ function pregmessagearray($messagetext, $rulearr, $mnum, $getpage=0, $getsubject
 		}				
 	}
 	$msgarr['subject'] = trim($msgarr['subject']);
-	if($getsubject && $nextprogress && empty($msgarr['subject'])) {
+
+	if($getsubject && $nextprogress && empty($msgarr['subject']) && $msgarr['importtype']!='album') {
 		showprogress('['.$mnum.'] 标题经处理后为空，跳过');
 		$nextprogress = false;
 	}
@@ -1136,7 +1157,7 @@ function saveurlarr($msgarr, $varname) {
 					'filename' => saddslashes($patharr['name']),
 					'subject' => trim(shtmlspecialchars($subject)),
 					'attachtype' => $patharr['type'],
-					'type' => 'news',
+					'type' => $msgarr['importtype'],//news
 					'isimage' => (in_array($patharr['type'], array('jpg','jpeg','gif','png'))?1:0),
 					'size' => $patharr['size'],
 					'filepath' => $patharr['file'],

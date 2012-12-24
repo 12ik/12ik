@@ -121,6 +121,16 @@
     <!--{/loop}-->
     <br clear="all"/>
 </div>
+
+<h2>最新文章&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·<span class="pl">&nbsp;(<a href="{SITE_URL}{tsUrl('article','')}">全部</a>) </span></h2>
+<div class="line23">
+<!--{if $arrArticle}-->
+<!--{loop $arrArticle $key $item}-->
+<a href="{SITE_URL}{tsUrl('article','show',array('id'=>$item[news][nid]))}">{$item[subject]}</a><br>
+<!--{/loop}-->
+<!--{/if}-->
+</div>
+
     
 <h2>最新创建小组&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·<span class="pl">&nbsp;(<a href="{SITE_URL}{tsUrl('group','all')}">全部</a>) </span></h2>
 <div class="line23">

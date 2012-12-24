@@ -15,7 +15,8 @@
 <?php foreach((array)$arrList as $key=>$item) {?>
 <tr><td><?php echo $item['nameid'];?></td><td><?php echo $item['name'];?></td><td>
 <a href="<?php echo SITE_URL;?>index.php?app=article&ac=admin&mg=channel&ts=edit&nameid=<?php echo $item['nameid'];?>">修改</a> 
-<a href="<?php echo SITE_URL;?>index.php?app=article&ac=admin&mg=cate&ts=list&nameid=<?php echo $item['nameid'];?>">分类管理</a>
+<a href="<?php echo SITE_URL;?>index.php?app=article&ac=admin&mg=cate&ts=list&nameid=<?php echo $item['nameid'];?>">分类</a>
+<a href="<?php echo SITE_URL;?>index.php?app=article&ac=admin&mg=cate&ts=add&nameid=<?php echo $item['nameid'];?>">添加分类</a>
 </td></tr>
 <?php }?>
 

@@ -21,6 +21,7 @@ switch($ts){
 		break;
 		
 	case "add":
+		$nameid = $_GET['nameid'];
 	
 		include template("admin/cate_add");
 	
@@ -28,11 +29,13 @@ switch($ts){
 		
 	case "add_do":
 	
-		$catename = trim($_POST['catename']);
+		$nameid = trim($_POST['nameid']);
+		$name = trim($_POST['catename']);
+		$catid = aac('article')->create('article_categories',array('name'=>$name, 'type'=>$nameid));
+		aac('article')->update('article_categories', array('catid'=>$catid),array('blockmodel'=>1, 'subcatid'=>$catid));
 		
-		$db->query("insert into ".dbprefix."article_cate (`catename`) values ('$catename')");
+		qiMsg("添加成功",'返回到列表',SITE_URL.'index.php?app=article&ac=admin&mg=cate&ts=list&nameid='.$nameid);
 		
-		header("Location: ".SITE_URL.'index.php?app=article&ac=admin&mg=cate&ts=list');
 	
 		break;
 		

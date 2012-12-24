@@ -17,8 +17,9 @@ function updaterobot($id) {
 		}
 		$results['uidrule'] = saddslashes(shtmlspecialchars($results['uidrule']));
 		$uids = simplode($results['uidrule']);
-		$userquery = $db->once_fetch_assoc("select  userid, username from ".dbprefix."user_info where userid in ('.$uids.')");
-		while ($userquery) {
+		$userquery = $db->fetch_all_assoc('SELECT userid, username FROM '.tname('user_info').' WHERE userid IN ('.$uids.')');
+		
+		foreach ($userquery as $item) {
 			$userarr[$item['userid']] = $item['username'];
 		}
 
@@ -26,7 +27,7 @@ function updaterobot($id) {
 				'uids'	=>	$userarr
 		);
 
-		$cachefile = IKROOT.'./data/robot/robot_'.$id.'.cache.php';
+		$cachefile = IKROOT.'/data/robot/robot_'.$id.'.cache.php';
 		$text = '$cacheinfo = '.arrayeval($tarr).';';
 		writefile($cachefile, $text, 'php');
 		return $tarr;

@@ -28,7 +28,12 @@
 <?php if($nowPage < $conutPage) { ?>
 <a title="点击查看下一张" href="<?php echo SITE_URL;?><?php echo tsurl('photo','show',array(photoid=>$next))?>" class="mainphoto">
 <?php } ?>
-    <img src="<?php echo SITE_URL;?><?php echo tsXimg($strPhoto['photourl'],'photo',600,600,$strPhoto['path'])?>">
+  
+        <?php if($strPhoto['hash']) { ?>
+        <img src="<?php echo SITE_URL;?><?php echo tsXimg($strPhoto['photourl'],'attachments',600,600,$strPhoto['path'],1)?>">
+        <?php } else { ?>
+        <img src="<?php echo SITE_URL;?><?php echo tsXimg($strPhoto['photourl'],'photo',600,600,$strPhoto['path'],1)?>">
+        <?php } ?>
 <?php if($nowPage < $conutPage) { ?>
 </a>
 <?php } ?>
@@ -42,7 +47,13 @@
 </div>
 
 <div style="color:#999;margin-bottom:5px">
-    <?php echo $strPhoto['count_view'];?>人浏览　上传于<?php echo date('Y-m-d',$strPhoto['addtime'])?>　<a class="thickbox" target="_blank" href="<?php echo SITE_URL;?>uploadfile/photo/<?php echo $strPhoto['photourl'];?>">查看原图</a>
+    <?php echo $strPhoto['count_view'];?>人浏览　上传于<?php echo date('Y-m-d',$strPhoto['addtime'])?>　
+     <?php if($strPhoto['hash']) { ?>
+     <a class="thickbox" target="_blank" href="<?php echo SITE_URL;?>uploadfile/attachments/<?php echo $strPhoto['photourl'];?>">查看原图</a>
+     <?php } else { ?>
+     <a class="thickbox" target="_blank" href="<?php echo SITE_URL;?>uploadfile/photo/<?php echo $strPhoto['photourl'];?>">查看原图</a>
+     <?php } ?>
+    
 
 　<?php if($IK_USER['user'][userid] == $strPhoto['userid'] || $IK_USER['user'][isadmin]==1) { ?><span class="gact">&gt;&nbsp;<a class="j a_confirm_link" title="删除这张照片" rel="nofollow" href="<?php echo SITE_URL;?>index.php?app=photo&ac=do&ts=photo_del&photoid=<?php echo $strPhoto['photoid'];?>">删除照片</a>&nbsp;&nbsp;</span><?php } ?>
 </div>

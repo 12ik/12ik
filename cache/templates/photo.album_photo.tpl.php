@@ -17,8 +17,13 @@
 <?php if($arrPhoto) { ?>
 <?php foreach((array)$arrPhoto as $key=>$item) {?>
     <div class="box photo_wrap">
+    	
         <a title="<?php echo $item['photodesc'];?>" class="photolst_photo" href="<?php echo SITE_URL;?><?php echo tsurl('photo','show',array(photoid=>$item['photoid']))?>">
+        <?php if($item['hash']) { ?>
+        <img src="<?php echo SITE_URL;?><?php echo tsXimg($item['photourl'],'attachments',170,170,$item['path'],1)?>">
+        <?php } else { ?>
         <img src="<?php echo SITE_URL;?><?php echo tsXimg($item['photourl'],'photo',170,170,$item['path'],1)?>">
+        <?php } ?>
         </a><br>
         <div class="pl"><?php echo $item['photodesc'];?></div>
         <div style="color:#999">

@@ -290,14 +290,16 @@ switch ($ts) {
 							}
 							
 							$msgarr = pregmessagearray ( $messagetext, $thevalue, $mnum, 1, 1, $msgurl ); // 解析文章内容
-							
+
+							//var_dump(!empty($msgarr['patharr']));
 							//对相册处理
-							if($msgarr['album']=='album')
+							if($msgarr['importtype']=='album' && !empty($msgarr['patharr']))
 							{
+								
 								$itemid = messageaddtodb ( $msgarr, $_GET ['robotid'], 0 );
 								$mnum ++;
 								
-							}else{
+							}else if ($msgarr['importtype']!='album'){
 								//如果内容标题不为空插入到库
 								if (! empty ( $msgarr ['subject'] ) && ! empty ( $msgarr ['message'] ) )
 								{

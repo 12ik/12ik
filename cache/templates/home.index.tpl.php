@@ -121,6 +121,16 @@
     <?php }?>
     <br clear="all"/>
 </div>
+
+<h2>最新文章&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·<span class="pl">&nbsp;(<a href="<?php echo SITE_URL;?><?php echo tsurl('article','')?>">全部</a>) </span></h2>
+<div class="line23">
+<?php if($arrArticle) { ?>
+<?php foreach((array)$arrArticle as $key=>$item) {?>
+<a href="<?php echo SITE_URL;?><?php echo tsurl('article','show',array('id'=>$item['news'][nid]))?>"><?php echo $item['subject'];?></a><br>
+<?php }?>
+<?php } ?>
+</div>
+
     
 <h2>最新创建小组&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·<span class="pl">&nbsp;(<a href="<?php echo SITE_URL;?><?php echo tsurl('group','all')?>">全部</a>) </span></h2>
 <div class="line23">

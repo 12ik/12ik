@@ -28,7 +28,12 @@
 <!--{if $nowPage < $conutPage}-->
 <a title="点击查看下一张" href="{SITE_URL}{tsUrl('photo','show',array(photoid=>$next))}" class="mainphoto">
 <!--{/if}-->
-    <img src="{SITE_URL}{php echo tsXimg($strPhoto[photourl],'photo',600,600,$strPhoto[path])}">
+  
+        {if $strPhoto[hash]}
+        <img src="{SITE_URL}{php echo tsXimg($strPhoto[photourl],'attachments',600,600,$strPhoto[path],1)}">
+        {else}
+        <img src="{SITE_URL}{php echo tsXimg($strPhoto[photourl],'photo',600,600,$strPhoto[path],1)}">
+        {/if}
 <!--{if $nowPage < $conutPage}-->
 </a>
 <!--{/if}-->
@@ -42,7 +47,13 @@
 </div>
 
 <div style="color:#999;margin-bottom:5px">
-    {$strPhoto[count_view]}人浏览　上传于{php echo date('Y-m-d',$strPhoto[addtime])}　<a class="thickbox" target="_blank" href="{SITE_URL}uploadfile/photo/{$strPhoto[photourl]}">查看原图</a>
+    {$strPhoto[count_view]}人浏览　上传于{php echo date('Y-m-d',$strPhoto[addtime])}　
+     {if $strPhoto[hash]}
+     <a class="thickbox" target="_blank" href="{SITE_URL}uploadfile/attachments/{$strPhoto[photourl]}">查看原图</a>
+     {else}
+     <a class="thickbox" target="_blank" href="{SITE_URL}uploadfile/photo/{$strPhoto[photourl]}">查看原图</a>
+     {/if}
+    
 
 　<!--{if $IK_USER[user][userid] == $strPhoto[userid] || $IK_USER[user][isadmin]==1}--><span class="gact">&gt;&nbsp;<a class="j a_confirm_link" title="删除这张照片" rel="nofollow" href="{SITE_URL}index.php?app=photo&ac=do&ts=photo_del&photoid={$strPhoto[photoid]}">删除照片</a>&nbsp;&nbsp;</span><!--{/if}-->
 </div>

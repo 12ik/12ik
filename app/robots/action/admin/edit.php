@@ -7,6 +7,7 @@ switch ($ts) {
 		$thevalue = $arrRobot = aac ( 'robots' )->find ( 'robots', array (
 				'robotid' => $robotid 
 		) );
+		
 		//获取资讯分类 //暂时只有管理员uid指定
 		$arrChannel = aac('article')->findAll('article_channels');
 		$arrSelect = '';//初始化下拉列表
@@ -18,7 +19,8 @@ switch ($ts) {
 			$arrSelect .='<optgroup label="'.$item['name'].'">';
 			foreach($arrCatename as $key1=>$item1)
 			{
-				if($thevalue['importcatid']==$item1['catid'])
+				
+				if($thevalue['importcatid']==$item1['catid'] && $thevalue['importtype']==$item1['type'])
 				{
 					$ischecked = "selected";
 				}else{
@@ -36,7 +38,7 @@ switch ($ts) {
 		$arrAlbum = aac('photo')->findAll('photo_album', array('userid'=>'2'),null,'albumid,albumname');
 		$arrSelect .='<optgroup label="相册">';
 		foreach ($arrAlbum as $item){
-			if($thevalue['importcatid']==$item['albumid'])
+			if($thevalue['importcatid']==$item['albumid'] && $thevalue['importtype']=='album')
 			{
 				$ischecked = "selected";
 			}else{
@@ -54,9 +56,10 @@ switch ($ts) {
 				$thevalue ['listurl_manual'] = $thevalue ['listurl'] ['manual'];
 				$thevalue ['listurl_auto'] = $thevalue ['listurl'] ['auto'];
 			}
+			
 			$thevalue ['listurl'] = '';
 			$thevalue ['defaultdateline'] = sgmdate ( $thevalue ['defaultdateline'] );
-			if (! empty ( $thevalue ['listurl_manual'] )) {
+			if (! empty ( $thevalue ['listurl_manual'] )) { 
 				foreach ( $thevalue ['listurl_manual'] as $tmpkey => $tmpvalue ) {
 					$tmpvalue = trim ( $tmpvalue );
 					if (! empty ( $tmpvalue )) {
@@ -69,6 +72,8 @@ switch ($ts) {
 					}
 				}
 			}
+			
+			
 			$thevalue ['listurl_manual'] = $thevalue ['listurl'];
 			$thevalue ['subjectreplace'] = explode ( "\n", $thevalue ['subjectreplace'] );
 			$thevalue ['subjectreplaceto'] = explode ( "\n", $thevalue ['subjectreplaceto'] );

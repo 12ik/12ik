@@ -45,6 +45,17 @@ if ($IK_USER ['user'] == '') {
 	//最新小站日志
 	$arrSiteNote = aac('site')->findAll('site_notes_content',null,'addtime desc');
 
+	//最新文章
+	$arrArticles = aac('article')->findAll('article_spaceitems',null,'dateline desc',null,'0,8');
+	foreach($arrArticles as $key=>$item)
+	{
+		$arrArticle[] = $item;
+		$arrArticle[$key]['news'] = aac('article')->find('article_spacenews',array('itemid'=>$item['itemid']));
+		if($item['haveattach']==1)
+		{
+			$arrArticle[$key]['attach'] = aac('article')->find('attachments',array('itemid'=>$item['itemid']));
+		}
+	}	
 
 
 } else {

@@ -9,8 +9,9 @@
 
 <li  <?php if($mg=='channel' && $ts=='add') { ?> class="select" <?php } ?> ><a href="<?php echo SITE_URL;?>index.php?app=article&ac=admin&mg=channel&ts=add">添加频道</a></li>
 
-<?php if($mg=='channel' && $ts=='edit') { ?><li class="select"><a href="<?php echo SITE_URL;?>index.php?app=location&ac=admin&mg=channel&ts=edit}">编辑频道</a></li><?php } ?>
-<?php if($mg=='cate' && $ts=='list') { ?><li class="select"><a href="<?php echo SITE_URL;?>index.php?app=location&ac=admin&mg=cate&ts=list}">分类管理</a></li><?php } ?>
+<?php if($mg=='channel' && $ts=='edit') { ?><li class="select"><a href="<?php echo SITE_URL;?>index.php?app=location&ac=admin&mg=channel&ts=edit">编辑频道</a></li><?php } ?>
+<?php if($mg=='cate' && $ts=='list') { ?><li class="select"><a href="#">分类管理</a></li><?php } ?>
+
 <?php if($mg=='cate' && $ts=='edit') { ?><li class="select"><a href="#">编辑分类</a></li><?php } ?>
 
 

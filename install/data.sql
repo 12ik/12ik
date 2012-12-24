@@ -1015,6 +1015,7 @@ CREATE TABLE IF NOT EXISTS `ik_photo` (
   `photourl` char(120) NOT NULL DEFAULT '',
   `photosize` char(32) NOT NULL DEFAULT '',
   `photodesc` char(120) NOT NULL DEFAULT '',
+  `hash` char(16) NOT NULL DEFAULT '',  
   `count_view` int(11) NOT NULL DEFAULT '0',
   `isrecommend` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0不推荐1推荐',
   `addtime` int(11) NOT NULL DEFAULT '0',
@@ -1711,7 +1712,7 @@ CREATE TABLE ik_article_spaceitems (
 -- --------------------------------------------------------
 
 --
--- 表的结构 'supe_spacenews'
+-- 表的结构 'ik_article_spacenews'
 --
 
 DROP TABLE IF EXISTS ik_article_spacenews;

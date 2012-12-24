@@ -1,7 +1,7 @@
 <?php
 defined('IN_IK') or die('Access Denied.');
 include_once('robot.func.php');
-include_once(IKCORE.'./IKCache.func.php');
+include_once(IKCORE.'/IKCache.func.php');
 
 $listarr = array();
 $thevalue = array();
@@ -20,7 +20,7 @@ switch ($ts) {
 			$arrSelect .='<optgroup label="'.$item['name'].'">';
 			foreach($arrCatename as $key1=>$item1)
 			{
-				if($thevalue['importcatid']==$item1['catid'])
+				if($thevalue['importcatid']==$item1['catid'] && $thevalue['importtype']==$item1['type'])
 				{
 					$ischecked = "selected";
 				}else{
@@ -38,7 +38,7 @@ switch ($ts) {
 		$arrAlbum = aac('photo')->findAll('photo_album', array('userid'=>'2'),null,'albumid,albumname');
 		$arrSelect .='<optgroup label="相册">';
 		foreach ($arrAlbum as $item){
-			if($thevalue['importcatid']==$item['albumid'])
+			if($thevalue['importcatid']==$item['albumid'] && $thevalue['importtype']=='album')
 			{
 				$ischecked = "selected";
 			}else{
@@ -851,7 +851,7 @@ switch ($ts) {
 	
 	case "do" :
 		
-		$postlisturl = addslashes(serialize(array('manual'=>$_POST['listurl_manual'], 'auto'=>$_POST['listurl_auto'])));
+		$postlisturl = serialize(array('manual'=>$_POST['listurl_manual'], 'auto'=>$_POST['listurl_auto']));
 		$_POST['autotype'] = !empty($_POST['autotype']) && intval($_POST['autotype']) == 2 ? 2 : 1;
 		if(empty($_POST['name'])) qiMsg("采集器名称不能为空",'返回',SITE_URL.'index.php?app=robots&ac=admin&mg=add');
 		$_POST['subjectreplace'] = !empty($_POST['subjectreplace']) ? implode("\n", $_POST['subjectreplace']) : '';
