@@ -17,7 +17,7 @@ if($from == 2)
 if($from == 3)
 {
 	aac('home')->create('downcount',array('userip'=>getIp(),'downfrom'=>'github','downtime'=>time()));
-	header("Location: https://github.com/12ik/12ik/archive/master.zip");
+	header("Location: https://github.com/12ik/12ik.git");
 }
 
 
