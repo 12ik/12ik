@@ -170,9 +170,9 @@ a.bn-post:hover span{ color:#FFF; background-color:#63AB1A; border: 1px solid #5
 #nav_bar li a:hover{  color:#43b0e6}
 
 #search_bar{ float:right; width:260px;}
-#search_bar li{ float:left; position:relative}
+#search_bar li{ float:left; position:relative; height:26px}
 #search_bar li .key{ border-style:none;height:24px; border:#4bb3e6 solid 1px; border-right:medium none; font-size:12px;  width:180px; color:#d4d4d4; line-height:24px; padding:0px 2px}
-#search_bar li .search-button{ height:26px; display:block;   width:26px; cursor:pointer; border:none; outline-width:0px; text-indent:-999px; overflow:hidden;background:url(search_bg.gif) no-repeat right 0px; position:absolute; left:0px; top:5px}
+#search_bar li .search-button{ height:26px; display:block;   width:26px; cursor:pointer; border:none; outline-width:0px; text-indent:-999px; overflow:hidden;background:url(search_bg.gif) no-repeat right 0px; position:absolute; left:0px; top:5px;top:6px\0;}
 /*APP导航*/
 
 

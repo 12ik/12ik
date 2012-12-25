@@ -6,6 +6,17 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- 数据库: `12ik`
 --
 
+--
+-- 表的结构 `ik_downcount`
+--
+
+CREATE TABLE IF NOT EXISTS `ik_downcount` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `userip` char(64) NOT NULL DEFAULT '' COMMENT '下载者ip',    
+  `downfrom` char(64) NOT NULL DEFAULT '' COMMENT '下载来源',       
+  `downtime` int(11) NOT NULL DEFAULT '0' COMMENT '时间',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='统计12ik下载次数';
 
 --
 -- 表的结构 `ik_site`
@@ -1708,6 +1719,27 @@ CREATE TABLE ik_article_spaceitems (
   KEY `type` (`type`),
   KEY gid (gid)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='信息表';
+
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `ik_article_comments`
+--
+
+CREATE TABLE IF NOT EXISTS `ik_article_comments` (
+  `commentid` int(11) NOT NULL AUTO_INCREMENT COMMENT '评论ID',
+  `referid` int(11) NOT NULL DEFAULT '0',
+  `nid` int(11) NOT NULL DEFAULT '0' COMMENT '文章ID',
+  `itemid` int(11) NOT NULL DEFAULT '0' COMMENT '文章属性ID',  
+  `userid` int(11) NOT NULL DEFAULT '0' COMMENT '用户ID',
+  `content` text NOT NULL COMMENT '回复内容',
+  `addtime` int(11) DEFAULT '0' COMMENT '回复时间',
+  PRIMARY KEY (`commentid`),
+  KEY `nid` (`nid`),
+  KEY `userid` (`userid`),
+  KEY `referid` (`referid`,`nid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='文章回复/评论' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 

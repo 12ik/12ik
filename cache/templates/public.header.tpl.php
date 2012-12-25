@@ -78,7 +78,8 @@
                 <li>
                 <a href="<?php echo SITE_URL;?><?php echo tsurl('haomiwo')?>" target="_blank">好米窝</a>
                 </li> 
-                <li><a href="<?php echo SITE_URL;?><?php echo tsurl('article')?>">文章</a></li>                                             
+                <li><a href="<?php echo SITE_URL;?><?php echo tsurl('article')?>">文章</a></li>
+                <li><a href="<?php echo SITE_URL;?><?php echo tsurl('home','down')?>">源码下载</a></li>                                              
 
         </ul>
     </div>
@@ -107,6 +108,7 @@
                 <?php foreach((array)$IK_SITE['appnav'] as $key=>$item) {?>
                 <li  <?php if($app==$key) { ?> class="select" <?php } ?> ><a href="<?php echo SITE_URL;?><?php echo tsurl($key)?>"><?php echo $item;?></a></li>
                 <?php }?>
+                <li><a href="<?php echo SITE_URL;?><?php echo tsurl('home','down')?>">源码下载</a></li>
             </ul>
            <form action="<?php echo SITE_URL;?>index.php?app=search&ac=s" method="get" onsubmit="return searchForm(this);">
             <ul id="search_bar">
@@ -125,6 +127,7 @@
                 <li><a href="<?php echo SITE_URL;?><?php echo tsurl('group')?>">我的小组</a></li>
                 <li><a href="<?php echo SITE_URL;?><?php echo tsurl('site')?>">我的小站</a></li>
                 <li><a href="<?php echo SITE_URL;?><?php echo tsurl('article')?>">文章</a></li>
+                
             </ul>
            <form action="<?php echo SITE_URL;?>index.php?app=search&ac=s" method="get" onsubmit="return searchForm(this);">
             <ul id="search_bar">

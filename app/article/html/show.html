@@ -5,7 +5,7 @@
     <div class="art-body">
     	<h1 class="title">{$strArticleinfo[subject]}</h1>
         <div style="text-align:center;color:#999999;padding-bottom: 10px;border-bottom: 1px solid #DDDDDD; margin-bottom:10px">
-        发表于 {php echo date('Y-m-d H:i:s',$strArticleinfo[dateline])}  浏览{$strArticleinfo[viewnum]}次 <a href="#formMini">我要回复</a> 
+        发表于 {php echo date('Y-m-d H:i:s',$strArticleinfo[dateline])} <a href="#comments">{$strArticleinfo[replynum]}条回复</a> 浏览{$strArticleinfo[viewnum]}次 <a href="#formMini">我要回复</a> 
         </div>
     
         <div class="art-text">
@@ -17,7 +17,81 @@
     <div class="clear"></div>
 
   </div>
+	
+    
 
+<!--comment评论-->
+<ul class="comment">
+<!--{if is_array($arrComment)}-->
+<!--{loop $arrComment $key $item}-->
+<li class="clearfix">
+<div class="user-face">
+<a href="{SITE_URL}{tsUrl('hi','',array('id'=>$item[user][doname]))}"><img title="{$item[user][username]}" alt="{$item[user][username]}" src="{$item[user][face]}"></a>
+</div>
+<div class="reply-doc">
+<h4>{php echo date('Y-m-d H:i:s',$item[addtime])}
+	<a href="{SITE_URL}{tsUrl('hi','',array('id'=>$item[user][doname]))}">{$item[user][username]}</a>
+</h4>
+
+<!--{if $item[referid] !='0'}-->
+<div class="recomment"><a href="{SITE_URL}{tsUrl('hi','',array('id'=>$item[recomment][user][doname]))}"><img src="{$item[recomment][user][face]}" width="24" align="absmiddle"></a> <strong><a href="{SITE_URL}{tsUrl('hi','',array('id'=>$item[recomment][user][doname]))}">{$item[recomment][user][username]}</a></strong>：{php echo nl2br($item[recomment][content])}</div>
+<!--{/if}-->
+
+<p>
+{php echo nl2br($item[content])}
+</p>
+
+<!--签名-->
+<!--{if $item[user][signed] != ''}-->
+<div class="signed">{$item[user][signed]}</div>
+<!--{/if}-->
+
+
+<div class="group_banned">
+<!--{if $IK_USER[user][userid] == $item[userid] || $IK_USER[user][isadmin]==1}-->
+<span>
+<a href="javascript:void(0)"  onclick="commentOpen({$item[commentid]},{$item[nid]})">回复</a>
+</span>
+
+<span>
+<a class="j a_confirm_link" href="{SITE_URL}index.php?app=article&ac=comment&ts=delete&commentid={$item[commentid]}" rel="nofollow" onclick="return confirm('确定删除?')">删除</a>
+</span>
+<!--{/if}-->
+</div>
+
+
+<div id="rcomment_{$item[commentid]}" style="display:none; clear:both; padding:0px 10px">
+<textarea style="width:550px;height:50px;font-size:12px; margin:0px auto;" id="recontent_{$item[commentid]}" type="text" onkeydown="keyRecomment({$item[commentid]},{$item[nid]},event)" class="txt"></textarea>
+
+
+<p style=" padding:5px 0px"><button onclick="recomment({$item[commentid]},{$item[nid]},{$item[itemid]})" id="recomm_btn_$item[commentid]" class="subab">提交</button>&nbsp;&nbsp;<a href="javascript:;" onclick="$('#rcomment_{$item[commentid]}').slideToggle('fast');">取消</a>
+</p>
+
+</div>
+</div>
+<div class="clear"></div>
+</li>
+<!--{/loop}-->
+<!--{/if}-->
+</ul>
+
+    
+<h2>你的回应&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·</h2>
+<div id="comments">
+<!--{if intval($IK_USER[user][userid])==0}-->
+<div style="border:solid 1px #DDDDDD; text-align:center;padding:20px 0"><a href="{SITE_URL}{tsUrl('user','login')}">登录</a> | <a href="{SITE_URL}{tsUrl('user','register')}">注册</a></div>
+<!--{else}-->
+
+<form method="POST" action="{SITE_URL}{tsUrl('article','comment',array('ts'=>'add'))}" onSubmit="return checkComment('#formMini');" id="formMini">
+	<textarea  style="width:100%;height:100px;" id="editor_mini" name="content" class="txt" onkeydown="keyComment('#formMini',event)"></textarea>
+	<input type="hidden" name="nid" value="{$strArticle[nid]}" />
+    <input type="hidden" name="itemid" value="{$strArticle[itemid]}" />
+	<input class="submit" type="submit" value="加上去(Crtl+Enter)" style="margin:10px 0px">
+</form>
+
+<!--{/if}-->
+
+</div>    
 
 </div>
 

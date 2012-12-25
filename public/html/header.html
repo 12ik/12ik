@@ -78,7 +78,8 @@
                 <li>
                 <a href="{SITE_URL}{tsUrl('haomiwo')}" target="_blank">好米窝</a>
                 </li> 
-                <li><a href="{SITE_URL}{tsUrl('article')}">文章</a></li>                                             
+                <li><a href="{SITE_URL}{tsUrl('article')}">文章</a></li>
+                <li><a href="{SITE_URL}{tsUrl('home','down')}">源码下载</a></li>                                              
 
         </ul>
     </div>
@@ -107,6 +108,7 @@
                 <!--{loop $IK_SITE[appnav] $key $item}-->
                 <li  {if $app==$key} class="select" {/if} ><a href="{SITE_URL}{tsUrl($key)}">{$item}</a></li>
                 <!--{/loop}-->
+                <li><a href="{SITE_URL}{tsUrl('home','down')}">源码下载</a></li>
             </ul>
            <form action="{SITE_URL}index.php?app=search&ac=s" method="get" onsubmit="return searchForm(this);">
             <ul id="search_bar">
@@ -125,6 +127,7 @@
                 <li><a href="{SITE_URL}{tsUrl('group')}">我的小组</a></li>
                 <li><a href="{SITE_URL}{tsUrl('site')}">我的小站</a></li>
                 <li><a href="{SITE_URL}{tsUrl('article')}">文章</a></li>
+                
             </ul>
            <form action="{SITE_URL}index.php?app=search&ac=s" method="get" onsubmit="return searchForm(this);">
             <ul id="search_bar">

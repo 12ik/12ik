@@ -27,7 +27,7 @@ if ($IK_USER ['user'] == '') {
 	$arrNewNote = aac('note')->getNewNote('15');
 	//热门10个热门话题
 	$arrHotTopics = aac('group')->findAll('group_topics',null,'count_comment desc','userid,topicid,title,content,count_comment,
-	count_view,addtime,uptime',10);
+	count_view,addtime,uptime',20);
 	if( is_array($arrHotTopics)){
 		foreach($arrHotTopics as $key=>$item){
 			$arrHotTopic[] = $item;

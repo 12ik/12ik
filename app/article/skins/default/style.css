@@ -1,4 +1,3 @@
-
 .btn,.btn:hover{display:inline-block;*display:inline;*zoom:1;font-size:13px;color:#fff;padding:4px 12px;
 margin-bottom:0;line-height:1.1;background-color:#6DBC1D;border:1px solid #5AA710;-webkit-border-radius:3px;border-radius:3px;cursor:pointer;vertical-align:middle;text-decoration:none}
 .btn-large,.btn-large:hover{padding:6px 14px}
@@ -41,3 +40,14 @@ section .hd{padding-bottom:5px;border-bottom:1px solid #ddd;margin-bottom:9px}
 .art-text{font-size:14px;line-height:25px; margin-bottom:10px}
 .art-text p{ text-indent:2em; line-height:23px; text-align:justify; word-wrap:break-word; }
 .art-text p img{ display:block; margin:10px auto}
+
+/*comment评论列表*/
+.comment{width: 100%;overflow:hidden;}
+.comment li {margin: 0 0 0px 0px;overflow:hidden; display:block;}
+.comment li .user-face {float: left;height: 48px;overflow: hidden;width: 48px; margin-top:0px;}
+.comment li .reply-doc {float: right;width: 570px;overflow: hidden;}
+.comment li .reply-doc p img{max-width:450px;}
+.comment li .reply-doc h4 {font-weight:normal;font-size:12px;height: 22px;line-height: 22px;margin: 0 0 5px 0px;color: #666666;display: block;overflow: hidden; background-color:#F8F8F8; padding:0px 10px}
+.comment li .reply-doc p {margin: 0 0 25px;overflow: hidden;word-wrap: break-word;line-height:23px; padding:0px 10px}
+.comment li .reply-doc .recomment {background: #F8F8F8;border: 1px dashed #DDDDDD;color: #666666;font-size: 12px;padding: 10px;}
+.comment li .group_banned {text-align: right;}
