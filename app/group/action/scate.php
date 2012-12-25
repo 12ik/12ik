@@ -1,6 +1,6 @@
 <?php 
 defined('IN_IK') or die('Access Denied.');
-switch($ts){
+switch($ik){
 	case "two":
 		$oneid = $_GET['oneid'];
 		$arrCate = $db->fetch_all_assoc("select * from ".dbprefix."group_cates where catereferid='$oneid'");

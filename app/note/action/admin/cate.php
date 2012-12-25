@@ -1,13 +1,13 @@
 <?php
 defined('IN_IK') or die('Access Denied.');
 
-switch($ts){
+switch($ik){
 	
 	case "list":
 		
 		//列表 
 		$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-		$url = SITE_URL.'index.php?app=article&ac=admin&mg=cate&ts=list&page=';
+		$url = SITE_URL.'index.php?app=article&ac=admin&mg=cate&ik=list&page=';
 		$lstart = $page*10-10;
 
 		$arrCate = $db->fetch_all_assoc("select * from ".dbprefix."article_cate order by cateid desc limit $lstart, 10");
@@ -32,7 +32,7 @@ switch($ts){
 		
 		$db->query("insert into ".dbprefix."article_cate (`catename`) values ('$catename')");
 		
-		header("Location: ".SITE_URL.'index.php?app=article&ac=admin&mg=cate&ts=list');
+		header("Location: ".SITE_URL.'index.php?app=article&ac=admin&mg=cate&ik=list');
 	
 		break;
 		

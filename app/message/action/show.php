@@ -11,7 +11,7 @@ $arrMessages['addtime'] = date('Y-m-d H:i',$arrMessages['addtime']);
 if($arrMessages['userid'] == $userid)
 {
 	//发往对方
-	if($arrMessages['isoutbox']==1){ header("Location: ".SITE_URL.tsUrl('message','ikmail',array('ts'=>'inbox')));  }
+	if($arrMessages['isoutbox']==1){ header("Location: ".SITE_URL.ikUrl('message','ikmail',array('ik'=>'inbox')));  }
 	$touser = aac('user')->getOneUser($arrMessages['touserid']);//来自哪位用户
 	$touserArea = aac('location')->getAreaForApp($touser['areaid']);//来自哪位用户的地址
 	$touserArea = empty($touserArea['three']['areaname']) ? '火星' : $touserArea['three']['areaname'];
@@ -23,7 +23,7 @@ if($arrMessages['userid'] == $userid)
 if($arrMessages['touserid'] == $userid)
 {
 	//接收的信息
-	if($arrMessages['isinbox']==1){ header("Location: ".SITE_URL.tsUrl('message','ikmail',array('ts'=>'inbox')));  }
+	if($arrMessages['isinbox']==1){ header("Location: ".SITE_URL.ikUrl('message','ikmail',array('ik'=>'inbox')));  }
 	$touser = aac('user')->getOneUser($arrMessages['userid']);//来自哪位用户
 	$touserArea = aac('location')->getAreaForApp($touser['areaid']);//来自哪位用户的地址
 	$touserArea = empty($touserArea['three']['areaname']) ? '火星' : $touserArea['three']['areaname'];
@@ -38,7 +38,7 @@ if($arrMessages['touserid'] == $userid)
 if($arrMessages['userid'] == 0 && $arrMessages['touserid']==$userid)
 {
 	//接收的信息 系统消息
-	if($arrMessages['isinbox']==1){ header("Location: ".SITE_URL.tsUrl('message','ikmail',array('ts'=>'inbox'))); }
+	if($arrMessages['isinbox']==1){ header("Location: ".SITE_URL.ikUrl('message','ikmail',array('ik'=>'inbox'))); }
 	$strUserinfo = '<span class="m">来自：<span class="sys_doumail_big">系统邮件</span> </span>';
 	$touser = aac('user')->getOneUser($arrMessages['userid']);//来自哪位用户;
 	//isread设为已读

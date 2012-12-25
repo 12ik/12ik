@@ -7,10 +7,10 @@
 
 <div class="cleft">
 <div class="pl photitle">
-<!--{if $strAlbum[userid] == $IK_USER[user][userid] || $IK_USER[user][isadmin]==1}-->    &nbsp;&gt;&nbsp;<a href="{SITE_URL}{tsUrl('photo','album',array('ts'=>'edit','albumid'=>$strAlbum[albumid]))}">修改相册属性</a>
-    &nbsp;&gt;&nbsp;<a href="{SITE_URL}{tsUrl('photo','upload',array('albumid'=>$strAlbum[albumid]))}">添加照片</a>
-    <!--{if $strAlbum[count_photo]>'0'}-->&nbsp;&gt;&nbsp;<a href="{SITE_URL}{tsUrl('photo','album',array('ts'=>'info','albumid'=>$strAlbum[albumid]))}">批量修改</a><!--{/if}--><!--{/if}-->
-    &nbsp;&gt;&nbsp;<a href="{SITE_URL}{tsUrl('photo','album',array(userid=>$strAlbum[userid]))}">返回<!--{if $strAlbum[userid] == $IK_USER[user][userid]}-->我<!--{else}-->{$strUser[username]}<!--{/if}-->的相册首页</a>
+<!--{if $strAlbum[userid] == $IK_USER[user][userid] || $IK_USER[user][isadmin]==1}-->    &nbsp;&gt;&nbsp;<a href="{SITE_URL}{ikUrl('photo','album',array('ik'=>'edit','albumid'=>$strAlbum[albumid]))}">修改相册属性</a>
+    &nbsp;&gt;&nbsp;<a href="{SITE_URL}{ikUrl('photo','upload',array('albumid'=>$strAlbum[albumid]))}">添加照片</a>
+    <!--{if $strAlbum[count_photo]>'0'}-->&nbsp;&gt;&nbsp;<a href="{SITE_URL}{ikUrl('photo','album',array('ik'=>'info','albumid'=>$strAlbum[albumid]))}">批量修改</a><!--{/if}--><!--{/if}-->
+    &nbsp;&gt;&nbsp;<a href="{SITE_URL}{ikUrl('photo','album',array(userid=>$strAlbum[userid]))}">返回<!--{if $strAlbum[userid] == $IK_USER[user][userid]}-->我<!--{else}-->{$strUser[username]}<!--{/if}-->的相册首页</a>
 </div>
 
 <div id="container" class="photolst clearfix">
@@ -18,11 +18,11 @@
 <!--{loop $arrPhoto $key $item}-->
     <div class="box photo_wrap">
     	
-        <a title="{$item[photodesc]}" class="photolst_photo" href="{SITE_URL}{tsUrl('photo','show',array(photoid=>$item[photoid]))}">
+        <a title="{$item[photodesc]}" class="photolst_photo" href="{SITE_URL}{ikUrl('photo','show',array(photoid=>$item[photoid]))}">
         {if $item[hash]}
-        <img src="{SITE_URL}{php echo tsXimg($item[photourl],'attachments',170,170,$item[path],1)}">
+        <img src="{SITE_URL}{php echo ikXimg($item[photourl],'attachments',170,170,$item[path],1)}">
         {else}
-        <img src="{SITE_URL}{php echo tsXimg($item[photourl],'photo',170,170,$item[path],1)}">
+        <img src="{SITE_URL}{php echo ikXimg($item[photourl],'photo',170,170,$item[path],1)}">
         {/if}
         </a><br>
         <div class="pl">{$item[photodesc]}</div>
@@ -57,7 +57,7 @@
 &nbsp;{php echo date('Y-m-d',$strAlbum[addtime])}&nbsp;创建
 </span>
 <!--{if $strAlbum[userid] == $IK_USER[user][userid] || $IK_USER[user][isadmin]==1}-->
-<span class="gact">&nbsp;&gt;&nbsp;<a  class="j a_confirm_link" rel="nofollow" href="{SITE_URL}index.php?app=photo&ac=album&ts=del&albumid={$strAlbum[albumid]}">删除相册</a></span>
+<span class="gact">&nbsp;&gt;&nbsp;<a  class="j a_confirm_link" rel="nofollow" href="{SITE_URL}index.php?app=photo&ac=album&ik=del&albumid={$strAlbum[albumid]}">删除相册</a></span>
 <!--{/if}-->
 </div>
 

@@ -7,10 +7,10 @@ defined ( 'IN_IK' ) or die ( 'Access Denied.' );
  * @Email:160780470@qq.com
  */
 
-switch ($ts) {
+switch ($ik) {
 	//app列表
 	case "list" :
-		$applists = tsScanDir ( 'app' );
+		$applists = ikScanDir ( 'app' );
 		foreach ( $applists as $key => $item ) {
 			if (is_file ( 'app/' . $item . '/about.php' )) {
 				$arrApps [$key] ['name'] = $item;

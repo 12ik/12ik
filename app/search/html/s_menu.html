@@ -1,8 +1,8 @@
 <div class="s_menu">
-<a <!--{if $ts==''}-->class="s_select"<!--{/if}--> href="{SITE_URL}{tsUrl('search','s',array(kw=>urldecode($kw)))}">全部</a> | 
-<a <!--{if $ts=='group'}-->class="s_select"<!--{/if}--> href="{SITE_URL}{tsUrl('search','s',array(ts=>group,kw=>urldecode($kw)))}">小组</a> | 
-<a <!--{if $ts=='topic'}-->class="s_select"<!--{/if}--> href="{SITE_URL}{tsUrl('search','s',array(ts=>topic,kw=>urldecode($kw)))}">帖子</a> | 
-<a <!--{if $ts=='user'}-->class="s_select"<!--{/if}--> href="{SITE_URL}{tsUrl('search','s',array(ts=>user,kw=>urldecode($kw)))}">用户</a>
+<a <!--{if $ik==''}-->class="s_select"<!--{/if}--> href="{SITE_URL}{ikUrl('search','s',array(kw=>urldecode($kw)))}">全部</a> | 
+<a <!--{if $ik=='group'}-->class="s_select"<!--{/if}--> href="{SITE_URL}{ikUrl('search','s',array(ik=>group,kw=>urldecode($kw)))}">小组</a> | 
+<a <!--{if $ik=='topic'}-->class="s_select"<!--{/if}--> href="{SITE_URL}{ikUrl('search','s',array(ik=>topic,kw=>urldecode($kw)))}">帖子</a> | 
+<a <!--{if $ik=='user'}-->class="s_select"<!--{/if}--> href="{SITE_URL}{ikUrl('search','s',array(ik=>user,kw=>urldecode($kw)))}">用户</a>
 </div>
 
 <div>
@@ -10,12 +10,12 @@
 <input type="hidden" name="app" value="search" />
 <input type="hidden" name="ac" value="s" />
 
-<!--{if $ts=='group'}-->
-<input type="hidden" name="ts" value="group" />
-<!--{elseif $ts=='topic'}-->
-<input type="hidden" name="ts" value="topic" />
-<!--{elseif $ts=='user'}-->
-<input type="hidden" name="ts" value="user" />
+<!--{if $ik=='group'}-->
+<input type="hidden" name="ik" value="group" />
+<!--{elseif $ik=='topic'}-->
+<input type="hidden" name="ik" value="topic" />
+<!--{elseif $ik=='user'}-->
+<input type="hidden" name="ik" value="user" />
 <!--{else}-->
 <!--{/if}-->
 

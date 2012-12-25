@@ -15,7 +15,7 @@
 					{template setting_nav}
             </div>
 
-<form class="pt10 mb30" method="post" action="{SITE_URL}{tsUrl('site','admins',array('ts'=>'postpermission','siteid'=>$siteid))}">
+<form class="pt10 mb30" method="post" action="{SITE_URL}{ikUrl('site','admins',array('ik'=>'postpermission','siteid'=>$siteid))}">
         <ul class="setting-list">
         	{if $isaction==0}
             <li><input type="radio" value="0" name="isaction" id="ac1" checked="checked"><label for="ac1">任何人都能参与小站互动</label></li>

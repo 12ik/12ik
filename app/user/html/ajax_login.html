@@ -9,7 +9,7 @@
 </head>
 <body style="background:#FFFFFF;">
 <div style="background:#FFFFFF;padding:10px 20px;">
-<form action="{SITE_URL}index.php?app=user&ac=login&ts=do" method="post" target="_top">
+<form action="{SITE_URL}index.php?app=user&ac=login&ik=do" method="post" target="_top">
 <table>
 <tr><td>Email：</td><td><input style="width:150px;"  name="email" type="text"></td></tr>
 <tr><td>密 码：</td><td><input style="width:150px;" name="pwd" type="password"></td></tr>
@@ -19,7 +19,7 @@
 <input type="hidden" name="jump" value="{$jump}" />
 <input type="hidden" name="cktime" value="2592000"><input class="submit" type="submit" value="登录" />
 
-<a target="_blank" href="{SITE_URL}{tsUrl('user','register')}">注册</a>
+<a target="_blank" href="{SITE_URL}{ikUrl('user','register')}">注册</a>
 
 </td></tr>
 </table>

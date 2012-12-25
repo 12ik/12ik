@@ -38,8 +38,8 @@ switch ($kind) {
 		//更新该房间组件布局
 		aac('site')->updateLayout($roomid,'bulletin-'.$bulletinid);
 		
-		$updateUrl = SITE_URL.tsUrl('site','bulletin',array('ts'=>'update','bulletinid'=>$bulletinid));
-		$settingUrl = SITE_URL.tsUrl('site','bulletin',array('ts'=>'settings','bulletinid'=>$bulletinid));
+		$updateUrl = SITE_URL.ikUrl('site','bulletin',array('ik'=>'update','bulletinid'=>$bulletinid));
+		$settingUrl = SITE_URL.ikUrl('site','bulletin',array('ik'=>'settings','bulletinid'=>$bulletinid));
 
 		$html_data = array(
 			'table'	    => 'bulletin',
@@ -79,9 +79,9 @@ switch ($kind) {
 		//更新该房间组件布局
 		aac('site')->updateLayout($roomid,'notes-'.$notesid);
 
-		$listUrl    = SITE_URL.tsUrl('site','notes',array('ts'=>'list','siteid'=>$siteid,'notesid'=>$notesid));		
-		$createUrl  = SITE_URL.tsUrl('site','notes',array('ts'=>'create','siteid'=>$siteid,'notesid'=>$notesid));
-		$settingUrl = SITE_URL.tsUrl('site','notes',array('ts'=>'settings','siteid'=>$siteid,'notesid'=>$notesid));
+		$listUrl    = SITE_URL.ikUrl('site','notes',array('ik'=>'list','siteid'=>$siteid,'notesid'=>$notesid));		
+		$createUrl  = SITE_URL.ikUrl('site','notes',array('ik'=>'create','siteid'=>$siteid,'notesid'=>$notesid));
+		$settingUrl = SITE_URL.ikUrl('site','notes',array('ik'=>'settings','siteid'=>$siteid,'notesid'=>$notesid));
 		
 		$html_data = array(
 			'table'	    => 'notes',
@@ -118,9 +118,9 @@ switch ($kind) {
 		//更新该房间组件布局
 		aac('site')->updateLayout($roomid,'forum-'.$forumid);
 		
-		$listUrl    = SITE_URL.tsUrl('site','forum',array('ts'=>'list','forumid'=>$forumid));		
-		$createUrl  = SITE_URL.tsUrl('site','forum',array('ts'=>'create','forumid'=>$forumid));
-		$settingUrl = SITE_URL.tsUrl('site','forum',array('ts'=>'settings','forumid'=>$forumid));
+		$listUrl    = SITE_URL.ikUrl('site','forum',array('ik'=>'list','forumid'=>$forumid));		
+		$createUrl  = SITE_URL.ikUrl('site','forum',array('ik'=>'create','forumid'=>$forumid));
+		$settingUrl = SITE_URL.ikUrl('site','forum',array('ik'=>'settings','forumid'=>$forumid));
 		
 		$html_data = array(
 			'table'	    => 'forum',
@@ -156,9 +156,9 @@ switch ($kind) {
 		//更新该房间组件布局
 		aac('site')->updateLayout($roomid,'photos-'.$photosid);
 		
-		$listUrl    = SITE_URL.tsUrl('site','photos',array('ts'=>'list','photosid'=>$photosid));		
-		$createUrl  = SITE_URL.tsUrl('site','photos',array('ts'=>'upload','photosid'=>$photosid));
-		$settingUrl = SITE_URL.tsUrl('site','photos',array('ts'=>'settings','photosid'=>$photosid));
+		$listUrl    = SITE_URL.ikUrl('site','photos',array('ik'=>'list','photosid'=>$photosid));		
+		$createUrl  = SITE_URL.ikUrl('site','photos',array('ik'=>'upload','photosid'=>$photosid));
+		$settingUrl = SITE_URL.ikUrl('site','photos',array('ik'=>'settings','photosid'=>$photosid));
 		
 		$html_data = array(
 			'table'	    => 'photos',

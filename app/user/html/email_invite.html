@@ -11,7 +11,7 @@
         <h2 style="letter-spacing:normal; margin-top:0px">{$strUser[username]}朋友们的email：</h2>
         <p>多个email用逗号隔开</p>
         
-        <form name="lzform" method="post" action="{SITE_URL}{tsUrl('user','contacts',array('ts'=>'sendmail'))}">
+        <form name="lzform" method="post" action="{SITE_URL}{ikUrl('user','contacts',array('ik'=>'sendmail'))}">
           <div style="display:none;">
             <input  name="ck" value="" type="hidden">
           </div>

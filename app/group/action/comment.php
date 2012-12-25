@@ -4,7 +4,7 @@ defined('IN_IK') or die('Access Denied.');
 //用户是否登录
 $userid = aac('user')->isLogin();
 
-switch($ts){
+switch($ik){
 
 	//添加评论
 	case "do":
@@ -17,11 +17,11 @@ switch($ts){
 		
 		if($content==''){
 		
-			tsNotice('没有任何内容是不允许你通过滴^_^');
+			ikNotice('没有任何内容是不允许你通过滴^_^');
 			
 		}else if(mb_strlen($content,'utf8')>10000){
 			
-			tsNotice('发这么多内容干啥,最多只能写1000千个字^_^,回去重写哇！');
+			ikNotice('发这么多内容干啥,最多只能写1000千个字^_^,回去重写哇！');
 			
 		}else{
 		
@@ -35,7 +35,7 @@ switch($ts){
 			$commentid = $db->insertArr($arrData,dbprefix.'group_topics_comments');
 			
 			//上传图片开始
-		/**	$arrUpload = tsUpload($_FILES['picfile'],$commentid,'comment',array('jpg','gif','png'));
+		/**	$arrUpload = ikUpload($_FILES['picfile'],$commentid,'comment',array('jpg','gif','png'));
 			if($arrUpload){
 
 				$new['group']->update('group_topics_comments',array(
@@ -48,7 +48,7 @@ switch($ts){
 			//上传图片结束
 			
 			//上传附件开始
-			$attUpload = tsUpload($_FILES['attfile'],$commentid,'comment',array('zip','rar','doc','txt','pdf','ppt','docx','xls','xlsx'));
+			$attUpload = ikUpload($_FILES['attfile'],$commentid,'comment',array('zip','rar','doc','txt','pdf','ppt','docx','xls','xlsx'));
 			if($attUpload){
 
 				$new['group']->update('group_topics_comments',array(
@@ -87,7 +87,7 @@ switch($ts){
 				$msg_touserid = $strTopic['userid'];
 				$msg_title = '你的帖子：《'.$strTopic['title'].'》新增一条评论，快去看看给个回复吧';
 				$msg_content = '你的帖子：《'.$strTopic['title'].'》新增一条评论，快去看看给个回复吧^_^ <br />'
-											.SITE_URL.tsUrl('group','topic',array('id'=>$topicid));
+											.SITE_URL.ikUrl('group','topic',array('id'=>$topicid));
 				aac('message')->sendmsg($msg_userid,$msg_touserid,$msg_title,$msg_content);
 				
 			}
@@ -97,14 +97,14 @@ switch($ts){
 			$feed_template = '<span class="pl">评论了帖子：<a href="{link}">{title}</a></span><div class="quote"><span class="inq">{content}</span> <span><a class="j a_saying_reply" href="{link}" rev="unfold">回应</a>
 	</span></div>';
 			$feed_data = array(
-				'link'	=> SITE_URL.tsUrl('group','topic',array('id'=>$topicid)),
+				'link'	=> SITE_URL.ikUrl('group','topic',array('id'=>$topicid)),
 				'title'	=> $strTopic['title'],
 				'content'	=>getsubstrutf8(htmlspecialchars($content),0,100),
 			);
 			aac('feed')->add($userid,$feed_template,$feed_data);
 			//feed结束
 			
-			header("Location: ".SITE_URL.tsUrl('group','topic',array('id'=>$topicid)));
+			header("Location: ".SITE_URL.ikUrl('group','topic',array('id'=>$topicid)));
 		}	
 	
 		break;
@@ -135,7 +135,7 @@ switch($ts){
 		}
 		
 		//跳转回到帖子页
-		header("Location: ".SITE_URL.tsUrl('group','topic',array('id'=>$strComment['topicid'])));
+		header("Location: ".SITE_URL.ikUrl('group','topic',array('id'=>$strComment['topicid'])));
 		
 		break;
 

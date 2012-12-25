@@ -7,7 +7,7 @@ $userid = aac('user')->isLogin();
 $strUser = $db->once_fetch_assoc("select * from ".dbprefix."user_info where userid='$userid'");
 
 //邀请好友
-switch($ts){
+switch($ik){
 	case "":
 		
 		$codeNum = $db->once_num_rows("select * from ".dbprefix."user_invites where isused='0'");

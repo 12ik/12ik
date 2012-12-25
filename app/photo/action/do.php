@@ -1,6 +1,6 @@
 <?php
 defined('IN_IK') or die('Access Denied.');
-switch($ts){
+switch($ik){
 	case "flash":
 		
 		$userid = intval($_POST['userid']);
@@ -20,7 +20,7 @@ switch($ts){
 		$photoid = $db->insertArr($arrData,dbprefix.'photo');
 		
 		//上传
-		$arrUpload = tsUpload($_FILES['Filedata'],$photoid,'photo',array('jpg','gif','png'));
+		$arrUpload = ikUpload($_FILES['Filedata'],$photoid,'photo',array('jpg','gif','png'));
 		
 		if($arrUpload){
 
@@ -46,7 +46,7 @@ switch($ts){
 		//用户是否登录
 		$userid = intval($IK_USER['user']['userid']);
 		if($userid == 0){
-			header("Location: ".SITE_URL.tsUrl('user','login'));
+			header("Location: ".SITE_URL.ikUrl('user','login'));
 			exit;
 		}
 		
@@ -66,7 +66,7 @@ switch($ts){
 		
 		$db->query("update ".dbprefix."photo_album set `count_photo`='$count_photo' where albumid='$albumid'");
 		
-		qiMsg("照片删除成功！",'点击返回','index.php?app=photo&ac=album&ts=photo&albumid='.$albumid);
+		qiMsg("照片删除成功！",'点击返回','index.php?app=photo&ac=album&ik=photo&albumid='.$albumid);
 		
 		break;
 	
@@ -78,7 +78,7 @@ switch($ts){
 		//用户是否登录
 		$userid = intval($IK_USER['user']['userid']);
 		if($userid == 0){
-			header("Location: ".SITE_URL.tsUrl('user','login'));
+			header("Location: ".SITE_URL.ikUrl('user','login'));
 			exit;
 		}
 		
@@ -120,7 +120,7 @@ switch($ts){
 		//用户是否登录
 		$userid = intval($IK_USER['user']['userid']);
 		if($userid == 0){
-			header("Location: ".SITE_URL.tsUrl('user','login'));
+			header("Location: ".SITE_URL.ikUrl('user','login'));
 			exit;
 		}
 	

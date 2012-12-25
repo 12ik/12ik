@@ -6,7 +6,7 @@ $userid = aac('user')->isLogin();
 $strUser = aac('user')->getOneUser($userid);
 
 //邀请好友
-switch($ts){
+switch($ik){
 	
 	case "invite":
 	
@@ -37,9 +37,9 @@ switch($ts){
 			$saltmail = substr(md5($item),8,16);	//16位加密
 			//发送邮件
 			$subject = '你的朋友'.$strUser['username'].'邀请你来爱客网';
-			$inviteurl = SITE_URL.tsUrl('user','invited',array('confirmation'=>$saltmail));
+			$inviteurl = SITE_URL.ikUrl('user','invited',array('confirmation'=>$saltmail));
 			$content = '爱客网站的成员'.$strUser['username'].'('.$strUser['email'].')邀请您去看看，<br/>'.$message.'<br/>请点击以下链接接受邀请加入我们：<br/>(Your friend at '.$strUser['email'].' invites you to join him/her at 12ik.com. Please click this link to accept the invitation:)
-	<a href="'.$inviteurl.'">'.$inviteurl.'</a><br/>如果您愿意先去随便逛逛，点<a href="http://www.12ik.com">http://www.12ik.com</a> 。你的朋友的爱客主页在 '.SITE_URL.tsUrl('hi','',array('id'=>$strUser['doname'])).' 。想注册请直接用以上链接，这样你和小麦狼会自动加入彼此的友邻行列。<br/>
+	<a href="'.$inviteurl.'">'.$inviteurl.'</a><br/>如果您愿意先去随便逛逛，点<a href="http://www.12ik.com">http://www.12ik.com</a> 。你的朋友的爱客主页在 '.SITE_URL.ikUrl('hi','',array('id'=>$strUser['doname'])).' 。想注册请直接用以上链接，这样你和小麦狼会自动加入彼此的友邻行列。<br/>
 	如果您的email程序不支持链接点击，请将上面的地址拷贝至您的浏览器(例如IE)的地址栏进入爱客网。<br/>
 	希望您在爱客网的体验有益和愉快。<br/>----爱客网<br/>(这是一封自动产生的email，请勿回复。)';	
 	

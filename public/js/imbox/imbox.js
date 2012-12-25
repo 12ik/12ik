@@ -38,7 +38,7 @@
 					$('#newmsg').html('新消息（<font color="red">'+msg.num+'</font>）');
 					newMessageRemind.show();
 				}else if(msg.r == '1'){
-					$('#newmsg').html('<a href="'+siteUrl+'index.php?app=message&ac=ikmail&ts=inbox">新消息</a>');
+					$('#newmsg').html('<a href="'+siteUrl+'index.php?app=message&ac=ikmail&ik=inbox">新消息</a>');
 				}
 			}
 		});

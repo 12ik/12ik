@@ -9,7 +9,7 @@
 <!--{if $isGroupUser == '0'}-->
 <div style="font-size:14px;padding-top:50px;text-align:center;">不好意思，你不是本组成员不能发表帖子，请加入后再发帖</div>
 <!--{else}-->
-<form method="POST" action="{SITE_URL}{tsUrl('group','add',array('ts'=>'do'))}" onsubmit="return newTopicFrom(this)"  enctype="multipart/form-data">
+<form method="POST" action="{SITE_URL}{ikUrl('group','add',array('ik'=>'do'))}" onsubmit="return newTopicFrom(this)"  enctype="multipart/form-data">
 <table width="100%" cellpadding="0" cellspacing="0" class="table_1">
 
 	<tr>
@@ -26,7 +26,7 @@
         
         <input type="hidden" name="groupid" value="{$strGroup[groupid]}" />
         
-        <input class="submit" type="submit" value="好啦，发布"> <a href="{SITE_URL}{tsUrl('group','show',array('id'=>$strGroup[groupid]))}">返回</a>
+        <input class="submit" type="submit" value="好啦，发布"> <a href="{SITE_URL}{ikUrl('group','show',array('id'=>$strGroup[groupid]))}">返回</a>
         </td>
     </tr>
 </table>

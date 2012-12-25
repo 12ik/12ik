@@ -87,13 +87,13 @@ if (is_file ( 'app/' . $app . '/action/' . $ac . '.php' )) {
 	
 	//控制后台访问权限
 	if ($IK_USER ['admin'] ['isadmin'] != 1 && $app == 'system' && $ac != 'login') {
-		header ( "Location: " . SITE_URL . tsUrl ( 'system', 'login' ) );
+		header ( "Location: " . SITE_URL . ikUrl ( 'system', 'login' ) );
 		exit ();
 	}
 	
 	//控制插件设置权限
 	if ($IK_USER ['admin'] ['isadmin'] != 1 && $in == 'edit') {
-		header ( "Location: " . SITE_URL . tsUrl ( 'system', 'login' ) );
+		header ( "Location: " . SITE_URL . ikUrl ( 'system', 'login' ) );
 		exit ();
 	}
 	
@@ -102,8 +102,8 @@ if (is_file ( 'app/' . $app . '/action/' . $ac . '.php' )) {
 		
 		$faceUser = $new [$app]->find ( 'user_info', array ('userid' => intval ( $IK_USER ['user'] ['userid'] ) ) );
 		
-		if ($faceUser ['face'] == '' && $ts != 'face') {
-			header ( "Location: " . SITE_URL . tsUrl ( 'user', 'set', array ('ts' => 'face' ) ) );
+		if ($faceUser ['face'] == '' && $ik != 'face') {
+			header ( "Location: " . SITE_URL . ikUrl ( 'user', 'set', array ('ik' => 'face' ) ) );
 		}
 	}
 	
@@ -124,8 +124,8 @@ if (is_file ( 'app/' . $app . '/action/' . $ac . '.php' )) {
 			$loginUserData = $new [$app]->find ( 'user_info', array ('email' => $_COOKIE ['ik_email'] ), 'userid,username,areaid,path,face,count_score,isadmin,uptime' );
 			
 			//用户session信息
-			$_SESSION ['tsuser'] = $loginUserData;
-			$IK_USER = array ('user' => $_SESSION ['tsuser'] );
+			$_SESSION ['ikuser'] = $loginUserData;
+			$IK_USER = array ('user' => $_SESSION ['ikuser'] );
 			
 			//更新登录时间
 			$new [$app]->update ( 'user_info', array ('uptime' => time () ), array ('userid' => $loginUserData ['userid'] ) );
@@ -133,7 +133,7 @@ if (is_file ( 'app/' . $app . '/action/' . $ac . '.php' )) {
 		}
 	}
 	
-	$tsHooks = array ();
+	$ikHooks = array ();
 	
 	if ($app != 'system' && $app != 'pubs') {
 		

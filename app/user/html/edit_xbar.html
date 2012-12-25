@@ -1,6 +1,6 @@
 <div id="db-usr-profile">
 <div class="pic">
-<a href="{SITE_URL}{tsUrl('hi','',array('id'=>$strUser[doname]))}">
+<a href="{SITE_URL}{ikUrl('hi','',array('id'=>$strUser[doname]))}">
 <img alt="{$strUser[username]}" src="{$strUser[face]}">
 </a>
 </div>
@@ -10,11 +10,11 @@
 </h1>
 
 <ul>
-	<li><a href="{SITE_URL}{tsUrl('note','index',array(ts=>user,userid=>$strUser[userid]))}">日志</a></li>
-    <li><a href="{SITE_URL}{tsUrl('photo','album',array(ts=>user,userid=>$strUser[userid]))}">相册</a></li>
+	<li><a href="{SITE_URL}{ikUrl('note','index',array(ik=>user,userid=>$strUser[userid]))}">日志</a></li>
+    <li><a href="{SITE_URL}{ikUrl('photo','album',array(ik=>user,userid=>$strUser[userid]))}">相册</a></li>
     <li><a href="{SITE_URL}index.php?app=feed">广播</a></li>
-    <li><a href="{SITE_URL}{tsUrl('message','ikmail',array(ts=>inbox))}">站内信</a></li>
-    <li><a href="{SITE_URL}{tsUrl('user','set',array(ts=>base))}">设置</a></li>
+    <li><a href="{SITE_URL}{ikUrl('message','ikmail',array(ik=>inbox))}">站内信</a></li>
+    <li><a href="{SITE_URL}{ikUrl('user','set',array(ik=>base))}">设置</a></li>
 </ul>
 
 </div>

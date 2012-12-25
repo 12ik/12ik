@@ -24,12 +24,12 @@
     <div class="main"> 
          
         <div class="content-nav">
-        <a href="{SITE_URL}{tsUrl('site','room',array('siteid'=>$siteid,'roomid'=>$roomid))}">&gt; 回{$strSite[sitename]}</a>
+        <a href="{SITE_URL}{ikUrl('site','room',array('siteid'=>$siteid,'roomid'=>$roomid))}">&gt; 回{$strSite[sitename]}</a>
         </div>  
         <h1>{$strNotes[title]}</h1> 
         {if $userid>0 && $strNotes[userid]==$userid}
         <div class="title-link">
-        <a class="lnk-flat" href="{SITE_URL}{tsUrl('site','notes',array('ts'=>'create','notesid'=>$notesid))}">+ 写新日记</a>
+        <a class="lnk-flat" href="{SITE_URL}{ikUrl('site','notes',array('ik'=>'create','notesid'=>$notesid))}">+ 写新日记</a>
         </div> 
         {/if}            
         <div class="mod">
@@ -51,7 +51,7 @@ function openfn(id,obj)
   <div class="note-hd">
   	<a class="lnk-more" href="javascript:;" onClick="openfn($item[contentid],this)">展开</a>
     <h3>
-    <a href="{SITE_URL}{tsUrl('site','notes',array('notesid'=>$item[notesid],'noteid'=>$item[contentid]))}" title="{$item[title]}">
+    <a href="{SITE_URL}{ikUrl('site','notes',array('notesid'=>$item[notesid],'noteid'=>$item[contentid]))}" title="{$item[title]}">
     {$item[title]}
     </a>
     </h3>
@@ -64,10 +64,10 @@ function openfn(id,obj)
   <br>
   <div class="note-ft" style="display:none" id="note_$item[contentid]_footer">
   	<span class="count">&nbsp;{$item[count_view]}人阅读</span>
-    <span class="reply"><a href="{SITE_URL}{tsUrl('site','notes',array('notesid'=>$item[notesid],'noteid'=>$item[contentid]))}#note_{$item[contentid]}_footer">({$item[count_comment]}回应)</a></span>
+    <span class="reply"><a href="{SITE_URL}{ikUrl('site','notes',array('notesid'=>$item[notesid],'noteid'=>$item[contentid]))}#note_{$item[contentid]}_footer">({$item[count_comment]}回应)</a></span>
     {if $userid>0 && $strNotes[userid]==$userid}
-    <a href="{SITE_URL}{tsUrl('site','notes',array('ts'=>'edit','notesid'=>$item[notesid],'noteid'=>$item[contentid]))}">&gt; 修改</a>
-    <a title="真的要删除这篇日记吗？" onClick="return confirm('真的要删除这篇日记吗？')" class="a_confirm_link" href="{SITE_URL}{tsUrl('site','notes',array('ts'=>'delnote','notesid'=>$item[notesid],'noteid'=>$item[contentid]))}">&gt; 删除</a>
+    <a href="{SITE_URL}{ikUrl('site','notes',array('ik'=>'edit','notesid'=>$item[notesid],'noteid'=>$item[contentid]))}">&gt; 修改</a>
+    <a title="真的要删除这篇日记吗？" onClick="return confirm('真的要删除这篇日记吗？')" class="a_confirm_link" href="{SITE_URL}{ikUrl('site','notes',array('ik'=>'delnote','notesid'=>$item[notesid],'noteid'=>$item[contentid]))}">&gt; 删除</a>
     {/if}
     <div class="sns-bar"></div>
   </div>

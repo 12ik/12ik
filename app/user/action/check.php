@@ -1,6 +1,6 @@
 <?php 
 
-switch($ts){
+switch($ik){
 
 	//验证Email是否唯一
 	case "inemail":

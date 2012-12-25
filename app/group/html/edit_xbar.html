@@ -1,9 +1,9 @@
 <h1>更改{$strGroup[groupname]}设置</h1>
 <div class="tabnav">
 <ul>
-<li <!--{if $ts=="base"}-->class="select"<!--{/if}-->><a href="{SITE_URL}{tsUrl('group','edit',array('ts'=>'base','groupid'=>$strGroup['groupid']))}">基本信息</a></li>
+<li <!--{if $ik=="base"}-->class="select"<!--{/if}-->><a href="{SITE_URL}{ikUrl('group','edit',array('ik'=>'base','groupid'=>$strGroup['groupid']))}">基本信息</a></li>
 
-<li <!--{if $ts=="icon"}-->class="select"<!--{/if}-->><a href="{SITE_URL}{tsUrl('group','edit',array('ts'=>'icon','groupid'=>$strGroup['groupid']))}">小组图标</a></li>
+<li <!--{if $ik=="icon"}-->class="select"<!--{/if}-->><a href="{SITE_URL}{ikUrl('group','edit',array('ik'=>'icon','groupid'=>$strGroup['groupid']))}">小组图标</a></li>
 
 </ul>
 </div>

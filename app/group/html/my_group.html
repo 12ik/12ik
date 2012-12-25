@@ -26,7 +26,7 @@
             <!--{if $arrTopic}-->
             <!--{loop $arrTopic $key $item}-->
                             <tr class="pl">
-                                <td><a title="{$item[title]}" href="{SITE_URL}{tsUrl('group','topic',array('id'=>$item[topicid]))}">{$item[title]}</a>
+                                <td><a title="{$item[title]}" href="{SITE_URL}{ikUrl('group','topic',array('id'=>$item[topicid]))}">{$item[title]}</a>
             <!--{if $item[istop]=='1'}-->
             <img src="{SITE_URL}app/{$app}/skins/{$skin}/headtopic_1.gif" title="[置顶]" alt="[置顶]" />
             <!--{/if}-->
@@ -42,8 +42,8 @@
             <!--{if $item[isposts] == '1'}-->
             <img src="{SITE_URL}public/images/posts.gif" title="[精华]" alt="[精华]" />
             <!--{/if}--></td>
-                                <td nowrap="nowrap"><a href="{SITE_URL}{tsUrl('group','show',array('id'=>$item[groupid]))}">{$item[group][groupname]}</a></td>
-                                <td nowrap="nowrap"><a href="{SITE_URL}{tsUrl('hi','',array('id'=>$item[user][doname]))}">{$item[user][username]}</a></td>
+                                <td nowrap="nowrap"><a href="{SITE_URL}{ikUrl('group','show',array('id'=>$item[groupid]))}">{$item[group][groupname]}</a></td>
+                                <td nowrap="nowrap"><a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[user][doname]))}">{$item[user][username]}</a></td>
                                 <td align="right"><!--{if $item[count_comment]>0}-->{$item[count_comment]}<!--{/if}--></td>
                                 <td nowrap="nowrap" align="right">&nbsp;&nbsp;&nbsp;&nbsp;{php echo getTime($item[uptime],time())}</td>
                             </tr>
@@ -86,9 +86,9 @@
 						function searchApp(value)
 						{
 							if(value=='group')						
-						    { $('#searchApp').append('<input type="hidden" name="ts" value="group" />'); }
+						    { $('#searchApp').append('<input type="hidden" name="ik" value="group" />'); }
 							else
-							{ $('#searchApp').append('<input type="hidden" name="ts" value="topic" />'); }
+							{ $('#searchApp').append('<input type="hidden" name="ik" value="topic" />'); }
 							 
 							$('#searchApp').submit();
 						}
@@ -106,8 +106,8 @@
             
             <!--{loop $arrMyAdminGroup $key $item}-->
             <dl class="ob">
-            <dt><a href="{SITE_URL}{tsUrl('group','show',array('id'=>$item[groupid]))}"><img alt="{$item[groupname]}" class="m_sub_img" src="{$item[icon_48]}" width="48" /></a></dt>
-            <dd><a href="{SITE_URL}{tsUrl('group','show',array('id'=>$item[groupid]))}">{$item[groupname]}</a> <span>({$item[count_user]})</span></dd>
+            <dt><a href="{SITE_URL}{ikUrl('group','show',array('id'=>$item[groupid]))}"><img alt="{$item[groupname]}" class="m_sub_img" src="{$item[icon_48]}" width="48" /></a></dt>
+            <dd><a href="{SITE_URL}{ikUrl('group','show',array('id'=>$item[groupid]))}">{$item[groupname]}</a> <span>({$item[count_user]})</span></dd>
             </dl>
             <!--{/loop}-->
             </div>
@@ -122,8 +122,8 @@
             
             <!--{loop $arrMyGroup $key $item}-->
             <dl class="ob">
-            <dt><a href="{SITE_URL}{tsUrl('group','show',array('id'=>$item[groupid]))}"><img alt="{$item[groupname]}" class="m_sub_img" src="{$item[icon_48]}" width="48" /></a></dt>
-            <dd><a href="{SITE_URL}{tsUrl('group','show',array('id'=>$item[groupid]))}">{$item[groupname]}</a> <span>({$item[count_user]})</span>
+            <dt><a href="{SITE_URL}{ikUrl('group','show',array('id'=>$item[groupid]))}"><img alt="{$item[groupname]}" class="m_sub_img" src="{$item[icon_48]}" width="48" /></a></dt>
+            <dd><a href="{SITE_URL}{ikUrl('group','show',array('id'=>$item[groupid]))}">{$item[groupname]}</a> <span>({$item[count_user]})</span>
             </dd>
             </dl>
             <!--{/loop}-->
@@ -133,10 +133,10 @@
                   
     
             <!--{if $IK_APP[options][iscreate]==0 || $IK_USER[user][isadmin]==1}-->
-            <p class="pl2">&gt; <a href="{SITE_URL}{tsUrl('group','create')}">创建小组</a></p>
+            <p class="pl2">&gt; <a href="{SITE_URL}{ikUrl('group','create')}">创建小组</a></p>
             <!--{/if}-->
             
-            <p class="pl2">&gt; <a href="{SITE_URL}{tsUrl('group','all')}">全部小组</a></p>
+            <p class="pl2">&gt; <a href="{SITE_URL}{ikUrl('group','all')}">全部小组</a></p>
     
     </div>
     
@@ -149,7 +149,7 @@
 $(document).ready(function() {
 	$.ajax({
 		type: "GET",
-		url:  "{SITE_URL}index.php?app=group&ac=task&ts=istask",
+		url:  "{SITE_URL}index.php?app=group&ac=task&ik=istask",
 		success: function(msg){
 			$('#cright').prepend(msg);
 		}

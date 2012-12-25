@@ -8,7 +8,7 @@ $roomid = intval($_GET['roomid']);
 //$strSite = aac('site')->getOneSite($siteid);
 
 //页面
-switch ($ts) {
+switch ($ik) {
 	case "update" :
 		$arrdata = array();
 		$arrdata['leftmod'] = $_POST['mods'];

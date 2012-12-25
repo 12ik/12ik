@@ -1,9 +1,9 @@
 <?php
 defined('IN_IK') or die('Access Denied.');
 //程序主体
-switch($ts){
+switch($ik){
 	case "":
-		if(intval($IK_USER['user']['userid']) > 0) tsNotice("已经登陆啦!");
+		if(intval($IK_USER['user']['userid']) > 0) ikNotice("已经登陆啦!");
 		
 		//记录上次访问地址
 		$jump = $_SERVER['HTTP_REFERER'];
@@ -25,19 +25,19 @@ switch($ts){
 		
 		$cktime = $_POST['cktime'];
 		
-		if($email=='' || $pwd=='') tsNotice('Email和密码都不能为空！');
+		if($email=='' || $pwd=='') ikNotice('Email和密码都不能为空！');
 		
 		$isEmail = $new['user']->findCount('user',array(
 			'email'=>$email,
 		));
 		
-		if($isEmail == 0) tsNotice('Email不存在，你可能还没有注册！');
+		if($isEmail == 0) ikNotice('Email不存在，你可能还没有注册！');
 		
 		$strUser = $new['user']->find('user',array(
 			'email'=>$email,
 		));
 			
-		if(md5($strUser['salt'].$pwd)!==$strUser['pwd']) tsNotice('密码错误！');	
+		if(md5($strUser['salt'].$pwd)!==$strUser['pwd']) ikNotice('密码错误！');	
 		
 		//用户信息
 		$userData = $new['user']->find('user_info',array(
@@ -69,7 +69,7 @@ switch($ts){
 			'isadmin'	=> $userData['isadmin'],
 			'uptime'	=> $userData['uptime'],
 		);
-		$_SESSION['tsuser']	= $sessionData;
+		$_SESSION['ikuser']	= $sessionData;
 		
 		//用户userid
 		$userid = $userData['userid'];
@@ -131,7 +131,7 @@ switch($ts){
 		//ck
 		setcookie("ck", '', time()+3600,'/');
 
-		header('Location: '.SITE_URL.tsUrl('user','login'));
+		header('Location: '.SITE_URL.ikUrl('user','login'));
 		
 		break;
 }

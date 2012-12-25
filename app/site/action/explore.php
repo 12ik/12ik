@@ -2,12 +2,12 @@
 defined ( 'IN_IK' ) or die ( 'Access Denied.' );
 
 
-switch ($ts) {
+switch ($ik) {
 	case "site" :
 		//发现更多小站
 		//分页
 		$page = isset($_GET['page']) ? $_GET['page'] : '1';
-		$url = SITE_URL."index.php?app=site&ac=explore&ts=site&page=";
+		$url = SITE_URL."index.php?app=site&ac=explore&ik=site&page=";
 		$lstart = $page*30-30;
 		
 		$arrSites = $db->fetch_all_assoc ( "select * from " . dbprefix . "site order by addtime desc limit $lstart, 30" );
@@ -44,14 +44,14 @@ switch ($ts) {
 		
 		$site_num = $db->once_fetch_assoc("select count(siteid) from ".dbprefix."tag_site_index where tagid='$tagid'");
 		
-		$url = SITE_URL.tsUrl('site','site_tag',array('siteid'=>$siteid,'page'=>''));
+		$url = SITE_URL.ikUrl('site','site_tag',array('siteid'=>$siteid,'page'=>''));
 		
 		foreach($arrTagId as $item){
 			$arrSites[] = aac('site')->getOneSite($item['siteid']);
 		}
 		foreach($arrSites as $key=>$item){
 			$arrSite[] = $item;
-			$arrSite[$key]['url'] = SITE_URL.tsUrl('site','mine',array('siteid'=>$item[siteid]) );
+			$arrSite[$key]['url'] = SITE_URL.ikUrl('site','mine',array('siteid'=>$item[siteid]) );
 			$arrSite[$key]['sitedesc'] = getsubstrutf8(t($item['sitedesc']),0,30);
 			$arrSite[$key]['tagname'] = $tagname;
 			$arrSite[$key]['page'] =  @ceil($site_num['count(siteid)']/10) ;

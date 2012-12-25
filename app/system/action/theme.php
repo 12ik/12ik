@@ -6,9 +6,9 @@ defined ( 'IN_IK' ) or die ( 'Access Denied.' );
  * @author wanglijun
  * @Email:160780470@qq.com
  */
-switch ($ts) {
+switch ($ik) {
 	case "" :
-		$arrTheme = tsScanDir ( 'theme' );
+		$arrTheme = ikScanDir ( 'theme' );
 		$title = '系统主题';
 		include template ( "theme" );
 		break;

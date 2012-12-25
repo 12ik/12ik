@@ -25,7 +25,7 @@ $NavOrderId = $db->updateArr(array('ordertext'=>$ordertext),dbprefix.'site_room_
 if($roomid > 0 && $NavOrderId > 0)
 {
 	$arrJson['r'] = 0;
-	$arrJson['room'] = SITE_URL.tsUrl('site','room',array('roomid'=>$roomid, 'siteid'=>$siteid));
+	$arrJson['room'] = SITE_URL.ikUrl('site','room',array('roomid'=>$roomid, 'siteid'=>$siteid));
 	header("Content-Type: application/json", true);
 	echo json_encode($arrJson); 
 }

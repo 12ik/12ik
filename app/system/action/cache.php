@@ -6,7 +6,7 @@ defined ( 'IN_IK' ) or die ( 'Access Denied.' );
  * @author wanglijun
  * @Email:160780470@qq.com
  */
-switch ($ts) {
+switch ($ik) {
 	case "" :
 
 		include template ( 'cache' );

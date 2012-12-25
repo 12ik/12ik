@@ -15,12 +15,12 @@ var cateOptions = {
 		},
 		addPost : function()
 		{
-			var url = siteUrl+'index.php?app=note&ac=cate_ajax&ts=add';
+			var url = siteUrl+'index.php?app=note&ac=cate_ajax&ik=add';
 			var catename = $('#cate_input :input[name=catename]').val();
 			$.post(url,{catename: catename},function(rs){ 
 					if(rs==0)
 					{
-						 $.dialog.open(siteUrl+'index.php?app=user&ac=ajax&ts=login', {title: '登录'});
+						 $.dialog.open(siteUrl+'index.php?app=user&ac=ajax&ik=login', {title: '登录'});
 						 
 					}else if(rs == 1){
 						  error('分类名称不能为空^_^');
@@ -59,14 +59,14 @@ var cateOptions = {
 		},
 		update: function(obj,cateid)
 		{
-			var url = siteUrl+'index.php?app=note&ac=cate_ajax&ts=update';
+			var url = siteUrl+'index.php?app=note&ac=cate_ajax&ik=update';
 			var catename = $('#info_'+cateid).find('input[name=catename]').val();
 			if(catename=='') {tips("分类名称不能为空");return false;}
 			if(catename.length>15){ tips("分类名称太长了；不能超过15个字");return false;}
 			$.post(url,{catename:catename, cateid:cateid},function(rs){
 				if(rs==0)
 				{
-					$.dialog.open(siteUrl+'index.php?app=user&ac=ajax&ts=login', {title: '登录'});
+					$.dialog.open(siteUrl+'index.php?app=user&ac=ajax&ik=login', {title: '登录'});
 				}else if(rs==1)
 				{
 				    tips("分类名不能为空，且长度不能超过15个字");
@@ -129,7 +129,7 @@ function recomment(rid,tid){
 
 	c = $('#recontent_'+rid).val();
 	if(c==''){tips('回复内容不能为空');return false;}
-	var url = siteUrl+'index.php?app=note&ac=comment&ts=recomment';
+	var url = siteUrl+'index.php?app=note&ac=comment&ik=recomment';
 	$('#recomm_btn_'+rid).hide();
 	$.post(url,{referid:rid,noteid:tid,content:c} ,function(rs){
 				if(rs == 0)
@@ -157,7 +157,7 @@ function savaTag(tid)
 {
 	var tag = $('#tags').val();
 		if(tag ==''){ tips('请输入标签哟^_^');$('#tagFrom').show('fast');}else{
-			var url = siteUrl+'index.php?app=tag&ac=add_ajax&ts=do';
+			var url = siteUrl+'index.php?app=tag&ac=add_ajax&ik=do';
 			$.post(url,{objname:'note',idname:'noteid',tags:tag,objid:tid},function(rs){  window.location.reload()   })
 		}
 	

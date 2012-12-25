@@ -2,7 +2,7 @@
 defined ( 'IN_IK' ) or die ( 'Access Denied.' );
 
 
-switch ($ts) {
+switch ($ik) {
 	case "" :
 		//未创建小站
 		//$userid = aac('user')->isLogin();

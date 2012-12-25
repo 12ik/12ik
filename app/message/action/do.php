@@ -6,7 +6,7 @@ $userid = aac('user')->isLogin();
 $messageid = empty($_POST['messageid']) ? $_GET['messageid'] : $_POST['messageid'];
 
 
-switch($ts){
+switch($ik){
 
 	//删除
 	case "del":
@@ -23,7 +23,7 @@ switch($ts){
 	
 	case "spam":
 		$status = aac('message')->update('message',array('messageid'=>$messageid,'touserid'=>$userid),array('isspam'=>1));
-		header("Location: ".SITE_URL.tsUrl('message','ikmail',array('ts'=>'spam')));
+		header("Location: ".SITE_URL.ikUrl('message','ikmail',array('ik'=>'spam')));
 	break;	
 
 	case "all":
@@ -53,7 +53,7 @@ switch($ts){
 			{
 				aac('message')->update('message',array('messageid'=>$messageid[$i],'touserid'=>$userid),array('isspam'=>1));
 			}
-			header("Location: ".SITE_URL.tsUrl('message','ikmail',array('ts'=>'spam')));
+			header("Location: ".SITE_URL.ikUrl('message','ikmail',array('ik'=>'spam')));
 		}
 		if(trim($_POST['mc_submit'])=='标记为已读')
 		{

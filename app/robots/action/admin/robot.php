@@ -3,7 +3,7 @@
 $theurl = SITE_URL."index.php?app=robots&ac=admin";
 include_once('robot.func.php');
 
-switch ($ts) {
+switch ($ik) {
 	
 	case "" :
 

@@ -1,6 +1,6 @@
 <?php 
 
-switch($ts){
+switch($ik){
 	case "one":
 		$arrOne = $db->fetch_all_assoc("select * from ".dbprefix."area where referid='0'");
 		

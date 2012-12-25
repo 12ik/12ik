@@ -37,14 +37,14 @@ class user extends IKApp{
 		//头像
 		if($strUser['face']){
 			
-			$strUser['face_120'] = SITE_URL.tsXimg($strUser['face'],'user',120,120,$strUser['path']);
-			$strUser['face_32'] = SITE_URL.tsXimg($strUser['face'],'user',32,32,$strUser['path'],1);
-			$strUser['face'] = SITE_URL.tsXimg($strUser['face'],'user',48,48,$strUser['path'],1);
+			$strUser['face_120'] = SITE_URL.ikXimg($strUser['face'],'user',120,120,$strUser['path']);
+			$strUser['face_32'] = SITE_URL.ikXimg($strUser['face'],'user',32,32,$strUser['path'],1);
+			$strUser['face'] = SITE_URL.ikXimg($strUser['face'],'user',48,48,$strUser['path'],1);
 			/*
-			$bigFace = tsXimg($strUser['face'],'user',120,120,$strUser['path']);
+			$bigFace = ikXimg($strUser['face'],'user',120,120,$strUser['path']);
 			$strUser['face_120'] = SITE_URL.$bigFace;
-			$strUser['face_32'] = SITE_URL.tsXimg($strUser['face'],'user',32,32,$strUser['path'],1);
-			$strUser['face'] = SITE_URL.tsXimg($bigFace,'user',48,48,$strUser['path'],1,array(
+			$strUser['face_32'] = SITE_URL.ikXimg($strUser['face'],'user',32,32,$strUser['path'],1);
+			$strUser['face'] = SITE_URL.ikXimg($bigFace,'user',48,48,$strUser['path'],1,array(
 				'X'=>20, 'Y'=>20,'W'=>60,'H'=>60,'R'=>1
 			));		
 			*/				
@@ -89,19 +89,19 @@ class user extends IKApp{
 	//是否登录 
 	public function isLogin(){
 	
-		$userid = intval($_SESSION['tsuser']['userid']);
+		$userid = intval($_SESSION['ikuser']['userid']);
 		
 		
 		if($userid>0){
 			if($this->isUser($userid)){
 				return $userid;
 			}else{
-				header("Location: ".SITE_URL.tsUrl('user','login',array('ts'=>'out')));
+				header("Location: ".SITE_URL.ikUrl('user','login',array('ik'=>'out')));
 				exit;
 			}
 		}else{
 			
-			header("Location: ".SITE_URL.tsUrl('user','login',array('ts'=>'out')));
+			header("Location: ".SITE_URL.ikUrl('user','login',array('ik'=>'out')));
 			exit;
 		}
 	}

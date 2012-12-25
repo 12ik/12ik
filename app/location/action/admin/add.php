@@ -1,6 +1,6 @@
 <?php 
 
-switch($ts){
+switch($ik){
 	case "one":
 		
 		include template("admin/add_one");
@@ -13,7 +13,7 @@ switch($ts){
 		
 		$db->query("insert into ".dbprefix."area (`areaname`,`zm`) values ('$areaname','$zm')");
 		
-		qiMsg("顶级区域添加成功",'返回顶级区域列表',SITE_URL.'index.php?app=location&ac=admin&mg=list&ts=one');
+		qiMsg("顶级区域添加成功",'返回顶级区域列表',SITE_URL.'index.php?app=location&ac=admin&mg=list&ik=one');
 		break;
 		
 	case "two":
@@ -33,7 +33,7 @@ switch($ts){
 		
 		$db->query("insert into ".dbprefix."area (`areaname`,`zm`,`referid`) values ('$areaname','$zm','$referid')");
 		
-		qiMsg("二级区域添加成功",'返回二级区域列表',SITE_URL.'index.php?app=location&ac=admin&mg=list&ts=two&referid='.$referid);
+		qiMsg("二级区域添加成功",'返回二级区域列表',SITE_URL.'index.php?app=location&ac=admin&mg=list&ik=two&referid='.$referid);
 		break;
 		
 	case "three":
@@ -53,6 +53,6 @@ switch($ts){
 		
 		$db->query("insert into ".dbprefix."area (`areaname`,`zm`,`referid`) values ('$areaname','$zm','$referid')");
 		
-		qiMsg("三级区域添加成功",'返回三级区域列表',SITE_URL.'index.php?app=location&ac=admin&mg=list&ts=three&referid='.$referid);
+		qiMsg("三级区域添加成功",'返回三级区域列表',SITE_URL.'index.php?app=location&ac=admin&mg=list&ik=three&referid='.$referid);
 		break;
 }

@@ -26,15 +26,15 @@
 <!--{loop $arrComment $key $item}-->
 <li class="clearfix">
 <div class="user-face">
-<a href="{SITE_URL}{tsUrl('hi','',array('id'=>$item[user][doname]))}"><img title="{$item[user][username]}" alt="{$item[user][username]}" src="{$item[user][face]}"></a>
+<a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[user][doname]))}"><img title="{$item[user][username]}" alt="{$item[user][username]}" src="{$item[user][face]}"></a>
 </div>
 <div class="reply-doc">
 <h4>{php echo date('Y-m-d H:i:s',$item[addtime])}
-	<a href="{SITE_URL}{tsUrl('hi','',array('id'=>$item[user][doname]))}">{$item[user][username]}</a>
+	<a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[user][doname]))}">{$item[user][username]}</a>
 </h4>
 
 <!--{if $item[referid] !='0'}-->
-<div class="recomment"><a href="{SITE_URL}{tsUrl('hi','',array('id'=>$item[recomment][user][doname]))}"><img src="{$item[recomment][user][face]}" width="24" align="absmiddle"></a> <strong><a href="{SITE_URL}{tsUrl('hi','',array('id'=>$item[recomment][user][doname]))}">{$item[recomment][user][username]}</a></strong>：{php echo nl2br($item[recomment][content])}</div>
+<div class="recomment"><a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[recomment][user][doname]))}"><img src="{$item[recomment][user][face]}" width="24" align="absmiddle"></a> <strong><a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[recomment][user][doname]))}">{$item[recomment][user][username]}</a></strong>：{php echo nl2br($item[recomment][content])}</div>
 <!--{/if}-->
 
 <p>
@@ -54,7 +54,7 @@
 </span>
 
 <span>
-<a class="j a_confirm_link" href="{SITE_URL}index.php?app=article&ac=comment&ts=delete&commentid={$item[commentid]}" rel="nofollow" onclick="return confirm('确定删除?')">删除</a>
+<a class="j a_confirm_link" href="{SITE_URL}index.php?app=article&ac=comment&ik=delete&commentid={$item[commentid]}" rel="nofollow" onclick="return confirm('确定删除?')">删除</a>
 </span>
 <!--{/if}-->
 </div>
@@ -79,10 +79,10 @@
 <h2>你的回应&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·</h2>
 <div id="comments">
 <!--{if intval($IK_USER[user][userid])==0}-->
-<div style="border:solid 1px #DDDDDD; text-align:center;padding:20px 0"><a href="{SITE_URL}{tsUrl('user','login')}">登录</a> | <a href="{SITE_URL}{tsUrl('user','register')}">注册</a></div>
+<div style="border:solid 1px #DDDDDD; text-align:center;padding:20px 0"><a href="{SITE_URL}{ikUrl('user','login')}">登录</a> | <a href="{SITE_URL}{ikUrl('user','register')}">注册</a></div>
 <!--{else}-->
 
-<form method="POST" action="{SITE_URL}{tsUrl('article','comment',array('ts'=>'add'))}" onSubmit="return checkComment('#formMini');" id="formMini">
+<form method="POST" action="{SITE_URL}{ikUrl('article','comment',array('ik'=>'add'))}" onSubmit="return checkComment('#formMini');" id="formMini">
 	<textarea  style="width:100%;height:100px;" id="editor_mini" name="content" class="txt" onkeydown="keyComment('#formMini',event)"></textarea>
 	<input type="hidden" name="nid" value="{$strArticle[nid]}" />
     <input type="hidden" name="itemid" value="{$strArticle[itemid]}" />
@@ -97,7 +97,7 @@
 
 
 <div class="cright">
-	<p class="pl2"><a href="{SITE_URL}{tsUrl('article')}">&gt; 返回</a></p>
+	<p class="pl2"><a href="{SITE_URL}{ikUrl('article')}">&gt; 返回</a></p>
     
 </div>
 

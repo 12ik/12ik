@@ -15,7 +15,7 @@
     <div class="main"> 
          
         <div class="content-nav">
-        <a href="{SITE_URL}{tsUrl('site','forum',array('ts'=>'list','forumid'=>$forumid))}">&gt; 返回{$strForum[title]}</a>
+        <a href="{SITE_URL}{ikUrl('site','forum',array('ik'=>'list','forumid'=>$forumid))}">&gt; 返回{$strForum[title]}</a>
         </div>
         
         <h1>{$title}</h1>
@@ -23,7 +23,7 @@
         <div class="mod">
             	
 
-<form id="db-frm-discuss" method="post" action="{SITE_URL}{tsUrl('site','forum',array('ts'=>'updatediscuss','forumid'=>$forumid,'discussid'=>$discussid))}">
+<form id="db-frm-discuss" method="post" action="{SITE_URL}{ikUrl('site','forum',array('ik'=>'updatediscuss','forumid'=>$forumid,'discussid'=>$discussid))}">
 <div style="display:none;"><input type="hidden" name="ck" value="_qHl"/></div>
 <div class="attn" id="errordiv"></div>
 

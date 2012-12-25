@@ -50,8 +50,8 @@ class group extends IKApp{
 				$strGroup['icon_48'] = SITE_URL.'public/images/group.jpg';
 				$strGroup['icon_16'] = SITE_URL.'public/images/group.jpg';
 			}else{
-				$strGroup['icon_48'] = SITE_URL.tsXimg($strGroup['groupicon'],'group',48,48,$strGroup['path'],1);
-				$strGroup['icon_16'] = SITE_URL.tsXimg($strGroup['groupicon'],'group',16,16,$strGroup['path'],1);
+				$strGroup['icon_48'] = SITE_URL.ikXimg($strGroup['groupicon'],'group',48,48,$strGroup['path'],1);
+				$strGroup['icon_16'] = SITE_URL.ikXimg($strGroup['groupicon'],'group',16,16,$strGroup['path'],1);
 			}
 			
 			return $strGroup;

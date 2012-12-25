@@ -4,7 +4,7 @@ defined ( 'IN_IK' ) or die ( 'Access Denied.' );
 $userid = aac('user')->isLogin();
 
 //个人小站
-switch ($ts) {
+switch ($ik) {
 	case "savetheme" :
 		//保存theme
 		$siteid = intval($_GET['siteid']);
@@ -75,7 +75,7 @@ switch ($ts) {
 			echo json_encode(array('r'=> 1 , 'error' => '文件大小不得超过800k' )); 
 		}else
 		{
-			$arrUpload = tsUpload($_FILES['picfile'],$userid,'site/custom/theme/'.$ver.'/',array('jpg','gif','png','jpeg'));
+			$arrUpload = ikUpload($_FILES['picfile'],$userid,'site/custom/theme/'.$ver.'/',array('jpg','gif','png','jpeg'));
 			if($arrUpload) $status = 0;//成功上传
 			
 			if($status ==0)
@@ -90,7 +90,7 @@ switch ($ts) {
 					'path' => $arrUpload['path'],
 					'url' => $arrUpload['url'],
 					'pic' => SITE_URL.'uploadfile/site/custom/theme/'.$ver.'/'.$arrUpload['url'].'?ver='.$ver,
-					//'pic' => tsXimg($arrUpload['url'],'site/custom/theme',$imgsize[0],$imgsize[1],$arrUpload['path'],1)
+					//'pic' => ikXimg($arrUpload['url'],'site/custom/theme',$imgsize[0],$imgsize[1],$arrUpload['path'],1)
 				));
 			}else{
 				header("Content-Type: application/json", true);

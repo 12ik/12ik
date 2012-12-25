@@ -4,12 +4,12 @@ $notesid = intval($_GET['notesid']);
 $strNotes = aac('site')->getOneNotes($notesid);
 $siteid = $strNotes['siteid'];
 $roomid = $strNotes['roomid']; //导航
-$userid = $_SESSION['tsuser']['userid'];
+$userid = $_SESSION['ikuser']['userid'];
 //加载风格
 include_once 'theme.php';
 
 //页面
-switch ($ts) {
+switch ($ik) {
 	case "" :
 		//日记显示
 		$noteid = intval($_GET['noteid']);
@@ -67,15 +67,15 @@ switch ($ts) {
 		
 		$strRoom = aac('site')->getOneRoom($strNotes['roomid']);
 		
-		$actionUrl = SITE_URL.tsUrl('site','notes',array('ts'=>'settings','notesid'=>$notesid));
-		$deleteUrl = SITE_URL.tsUrl('site','notes',array('ts'=>'delete','notesid'=>$notesid));
+		$actionUrl = SITE_URL.ikUrl('site','notes',array('ik'=>'settings','notesid'=>$notesid));
+		$deleteUrl = SITE_URL.ikUrl('site','notes',array('ik'=>'delete','notesid'=>$notesid));
 		//判断是否是存档
 		if($strNotes['isarchive']==1)
 		{
-		 	$archiveUrl = SITE_URL.tsUrl('site','notes',array('ts'=>'unarchive','notesid'=>$notesid));//恢复url
+		 	$archiveUrl = SITE_URL.ikUrl('site','notes',array('ik'=>'unarchive','notesid'=>$notesid));//恢复url
 			$archiveName = "恢复此应用";
 		}else{
-		 	$archiveUrl = SITE_URL.tsUrl('site','notes',array('ts'=>'archive','notesid'=>$notesid));//存档url
+		 	$archiveUrl = SITE_URL.ikUrl('site','notes',array('ik'=>'archive','notesid'=>$notesid));//存档url
 			$archiveName = "存档此应用";			
 		}
 				
@@ -168,17 +168,17 @@ switch ($ts) {
 					$html .= '
 						<div class="item-entry">
 							<div class="title">
-								<a href="'.SITE_URL.tsUrl('site','notes',array('notesid'=>$item['notesid'],'noteid'=>$item['contentid'])).'" title="'.$item['title'].'">'.$item['title'].'</a>
+								<a href="'.SITE_URL.ikUrl('site','notes',array('notesid'=>$item['notesid'],'noteid'=>$item['contentid'])).'" title="'.$item['title'].'">'.$item['title'].'</a>
 							</div>
 							<div class="datetime">'.date('Y-m-d H:i:s',$item['addtime']).'</div>
-							<div id="note_'.$item['contentid'].'_short" class="summary">'.getsubstrutf8(t($item['content']),0,120).'<a href="'.SITE_URL.tsUrl('site','notes',array('notesid'=>$item['notesid'],'noteid'=>$item['contentid'])).'#note_'.$item['contentid'].'_footer">('.$item['count_comment'].'回应)</a>
+							<div id="note_'.$item['contentid'].'_short" class="summary">'.getsubstrutf8(t($item['content']),0,120).'<a href="'.SITE_URL.ikUrl('site','notes',array('notesid'=>$item['notesid'],'noteid'=>$item['contentid'])).'#note_'.$item['contentid'].'_footer">('.$item['count_comment'].'回应)</a>
 							</div>
 						</div> 				
 					';
 					}
 				}else{
-					$html ='<div class="createnew">记录你的最新动向 <a href="'.SITE_URL.tsUrl('site','notes',
-					array('ts'=>'create','notesid'=>$notesid)).'"> &gt; 提笔写日记</a></div>';
+					$html ='<div class="createnew">记录你的最新动向 <a href="'.SITE_URL.ikUrl('site','notes',
+					array('ik'=>'create','notesid'=>$notesid)).'"> &gt; 提笔写日记</a></div>';
 				}
 		 
 				$arrJson = array('r'=>0, 'html'=>$html);
@@ -301,9 +301,9 @@ switch ($ts) {
 		//提交按钮
 		if($note_submit)
 		{
-			if($note_title=='' || $note_content=='') tsNotice("标题和内容都不能为空！");
-			if(mb_strlen($title,'utf8')>64) tsNotice('标题很长很长很长很长...^_^');
-			if(mb_strlen($content,'utf8')>50000) tsNotice('发这么多内容干啥^_^');
+			if($note_title=='' || $note_content=='') ikNotice("标题和内容都不能为空！");
+			if(mb_strlen($title,'utf8')>64) ikNotice('标题很长很长很长很长...^_^');
+			if(mb_strlen($content,'utf8')>50000) ikNotice('发这么多内容干啥^_^');
 			//执行添加
 			aac('site')->update('site_notes_content',
 				array('contentid'=>$noteid),
@@ -327,7 +327,7 @@ switch ($ts) {
 			}
 			
 			////////////////////////////////////////////////////////////
-			header("Location: ".SITE_URL.tsUrl('site','notes',array('notesid'=>$notesid,'noteid'=>$note_id)));
+			header("Location: ".SITE_URL.ikUrl('site','notes',array('notesid'=>$notesid,'noteid'=>$note_id)));
 		}
 
 		$title = '新加日记';
@@ -352,9 +352,9 @@ switch ($ts) {
 		//提交按钮
 		if($note_submit)
 		{
-			if($note_title=='' || $note_content=='') tsNotice("标题和内容都不能为空！");
-			if(mb_strlen($title,'utf8')>64) tsNotice('标题很长很长很长很长...^_^');
-			if(mb_strlen($content,'utf8')>50000) tsNotice('发这么多内容干啥^_^');
+			if($note_title=='' || $note_content=='') ikNotice("标题和内容都不能为空！");
+			if(mb_strlen($title,'utf8')>64) ikNotice('标题很长很长很长很长...^_^');
+			if(mb_strlen($content,'utf8')>50000) ikNotice('发这么多内容干啥^_^');
 			//执行更新
 			aac('site')->update('site_notes_content',
 				array('contentid'=>$noteid),
@@ -378,7 +378,7 @@ switch ($ts) {
 			}
 			
 			////////////////////////////////////////////////////////////
-			header("Location: ".SITE_URL.tsUrl('site','notes',array('notesid'=>$notesid,'noteid'=>$note_id)));
+			header("Location: ".SITE_URL.ikUrl('site','notes',array('notesid'=>$notesid,'noteid'=>$note_id)));
 		}
 	
 		$title = '编辑日记';
@@ -396,7 +396,7 @@ switch ($ts) {
 		//删除帖子	
 		aac('site')->delete('site_notes_content',array('contentid'=>$noteid,'notesid'=>$notesid));
 		
-	    header("Location: ".SITE_URL.tsUrl('site','notes',array('ts'=>'list','notesid'=>$notesid)));
+	    header("Location: ".SITE_URL.ikUrl('site','notes',array('ik'=>'list','notesid'=>$notesid)));
 
 		break;				
 	case "list" :
@@ -413,7 +413,7 @@ switch ($ts) {
 		$content = trim($_POST['content']);
 		if($content=='')
 		{
-			tsNotice('没有任何内容是不允许你通过滴^_^');		
+			ikNotice('没有任何内容是不允许你通过滴^_^');		
 		}
 		$commentid =aac('site')->create('site_note_comment',
 				array('referid'=>'0','noteid'=>$noteid, 'userid'=>$userid,'content'=>htmlspecialchars($content),'addtime'=>time())
@@ -426,7 +426,7 @@ switch ($ts) {
 				array('count_comment'=>$strCount['count_comment']+1)
 			);
 		}
-		header("Location: ".SITE_URL.tsUrl('site','notes',array('notesid'=>$notesid,'noteid'=>$noteid)));
+		header("Location: ".SITE_URL.ikUrl('site','notes',array('notesid'=>$notesid,'noteid'=>$noteid)));
 
 		break;		
 	case "del_comment" :	
@@ -436,11 +436,11 @@ switch ($ts) {
 		//判断权限
 		if($strNotes['userid']!=$userid && $strComment['userid']!=$userid)
 		{	
-			tsNotice('你没有执行该操作(del_comment)的权限！');	
+			ikNotice('你没有执行该操作(del_comment)的权限！');	
 			
 		}else if(empty($userid)){
 			
-			tsNotice('你没有执行该操作(del_comment)的权限！','请登录后重试',SITE_URL.tsUrl('user','login'));	
+			ikNotice('你没有执行该操作(del_comment)的权限！','请登录后重试',SITE_URL.ikUrl('user','login'));	
 		}
 				
 		aac('site')->delete('site_note_comment',array('commentid'=>$commentid,'noteid'=>$noteid));		
@@ -452,7 +452,7 @@ switch ($ts) {
 			array('count_comment'=>$strCount['count_comment']-1)
 		);
 		
-		header("Location: ".SITE_URL.tsUrl('site','notes',array('notesid'=>$notesid,'noteid'=>$noteid)));
+		header("Location: ".SITE_URL.ikUrl('site','notes',array('notesid'=>$notesid,'noteid'=>$noteid)));
 
 		break;
 	case "add_photo" :
@@ -462,7 +462,7 @@ switch ($ts) {
 		//$ck = $_POST['ck'];
 		$photonum = aac('site')->findCount('site_note_photo',array('noteid'=>$note_id));
 
-		$arrUpload = tsUpload($_FILES['image_file'],$photonum+1,'site/note/'.$note_id,array('jpg','gif','png'));
+		$arrUpload = ikUpload($_FILES['image_file'],$photonum+1,'site/note/'.$note_id,array('jpg','gif','png'));
 		
 		if($arrUpload)
 		{	

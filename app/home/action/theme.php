@@ -1,13 +1,13 @@
 <?php 
 defined('IN_IK') or die('Access Denied.');
 
-switch($ts){
+switch($ik){
 	
 	case "":
 	
 		$title = '更换主题';
 
-		$arrTheme	= tsScanDir('theme');
+		$arrTheme	= ikScanDir('theme');
 
 		include template("theme");
 		

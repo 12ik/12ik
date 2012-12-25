@@ -24,7 +24,7 @@
             <!--{if $arrTopic}-->
             <!--{loop $arrTopic $key $item}-->
                             <tr class="pl">
-                                <td><a title="{$item[title]}" href="{SITE_URL}{tsUrl('group','topic',array('id'=>$item[topicid]))}">{$item[title]}</a>
+                                <td><a title="{$item[title]}" href="{SITE_URL}{ikUrl('group','topic',array('id'=>$item[topicid]))}">{$item[title]}</a>
             <!--{if $item[istop]=='1'}-->
             <img src="{SITE_URL}app/{$app}/skins/{$skin}/headtopic_1.gif" title="[置顶]" alt="[置顶]" />
             <!--{/if}-->
@@ -40,8 +40,8 @@
             <!--{if $item[isposts] == '1'}-->
             <img src="{SITE_URL}public/images/posts.gif" title="[精华]" alt="[精华]" />
             <!--{/if}--></td>
-                                <td><a href="{SITE_URL}{tsUrl('group','show',array('id'=>$item[groupid]))}">{$item[group][groupname]}</a></td>
-                                <td><a href="{SITE_URL}{tsUrl('hi','',array('id'=>$item[user][doname]))}">{$item[user][username]}</a></td>
+                                <td><a href="{SITE_URL}{ikUrl('group','show',array('id'=>$item[groupid]))}">{$item[group][groupname]}</a></td>
+                                <td><a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[user][doname]))}">{$item[user][username]}</a></td>
                                 <td align="right"><!--{if $item[count_comment]>0}-->{$item[count_comment]}<!--{/if}--></td>
                                 <td nowrap="nowrap" align="right">&nbsp;&nbsp;&nbsp;&nbsp;{php echo getTime($item[uptime],time())}</td>
                             </tr>
@@ -57,7 +57,7 @@
 
 <div class="cright">
 
-<p class="pl2">&gt; <a href="{SITE_URL}{tsUrl('group')}">返回我的小组</a></p>
+<p class="pl2">&gt; <a href="{SITE_URL}{ikUrl('group')}">返回我的小组</a></p>
 
 </div>
 </div>

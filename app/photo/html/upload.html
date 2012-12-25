@@ -7,9 +7,9 @@
 <link type="text/css" rel="stylesheet" href="{SITE_URL}public/js/uploadify/uploadify.css" />
 
 <script type="text/javascript">
-    var loadurl = "{SITE_URL}{tsUrl('photo','do',array('ts'=>'flash',albumid=>$albumid))}";
+    var loadurl = "{SITE_URL}{ikUrl('photo','do',array('ik'=>'flash',albumid=>$albumid))}";
 	var objdata = {'userid': '{$IK_USER[user][userid]}','albumid': '{$albumid}'};
-	var jumpurl = "{SITE_URL}{tsUrl('photo','album',array('ts'=>'info',albumid=>$albumid,'addtime'=>$addtime))}";
+	var jumpurl = "{SITE_URL}{ikUrl('photo','album',array('ik'=>'info',albumid=>$albumid,'addtime'=>$addtime))}";
 $(document).ready(function()
 {		
 	$("#uploadify").uploadify({
@@ -62,7 +62,7 @@ $(document).ready(function()
     <div class="cright">
         所有相册空间的总容量为 1G，现在还剩1023M。
         <br><br>
-        <p class="pl2">&gt; <a href="{SITE_URL}{tsUrl('photo','album',array(ts=>photo,albumid=>$strAlbum[albumid]))}">回相册"{$strAlbum[albumname]}"</a></p>
+        <p class="pl2">&gt; <a href="{SITE_URL}{ikUrl('photo','album',array(ik=>photo,albumid=>$strAlbum[albumid]))}">回相册"{$strAlbum[albumname]}"</a></p>
     </div>
 
 </div>

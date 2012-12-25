@@ -6,12 +6,12 @@
 <div class="infobox">
 
 <div class="bd"><img align="left" alt="{$strGroup[groupname]}" src="{$strGroup[icon_48]}" class="pil groupicon" valign="top" />
-<p>创建于：{php echo date('Y-m-d',$strGroup[addtime])}&nbsp; &nbsp; 组长：<a href="{SITE_URL}{tsUrl('hi','',array('id'=>$strLeader[doname]))}">{$strLeader[username]}</a><br></p>
+<p>创建于：{php echo date('Y-m-d',$strGroup[addtime])}&nbsp; &nbsp; 组长：<a href="{SITE_URL}{ikUrl('hi','',array('id'=>$strLeader[doname]))}">{$strLeader[username]}</a><br></p>
 {$strGroup[groupdesc]}
 <div class="clearfix" style="margin-top: 10px;">
 
 
-<span class="fright mr5 color-gray"><a rel="nofollow" class="j a_show_login submit" href="{SITE_URL}{tsUrl('group','do',array('ts'=>'join','groupid'=>$strGroup['groupid']))}" ><span>加入</span></a></span>
+<span class="fright mr5 color-gray"><a rel="nofollow" class="j a_show_login submit" href="{SITE_URL}{ikUrl('group','do',array('ik'=>'join','groupid'=>$strGroup['groupid']))}" ><span>加入</span></a></span>
 
 
 </div>
@@ -29,7 +29,7 @@
 
 <div class="cright">
 
-<p class="pl">本页永久链接：<a href="{SITE_URL}{tsUrl('group','show',array('id'=>$strGroup[groupid]))}">{$IK_SITE[base][site_url]}{tsUrl('group','show',array('id'=>$strGroup[groupid]))}</a></p>
+<p class="pl">本页永久链接：<a href="{SITE_URL}{ikUrl('group','show',array('id'=>$strGroup[groupid]))}">{$IK_SITE[base][site_url]}{ikUrl('group','show',array('id'=>$strGroup[groupid]))}</a></p>
 
 </div>
 </div>

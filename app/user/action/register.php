@@ -1,9 +1,9 @@
 <?php
 defined('IN_IK') or die('Access Denied.');
 //用户注册
-switch($ts){
+switch($ik){
 	case "":
-		if(intval($IK_USER['user']['userid']) > 0) tsNotice("请退出后再注册！");
+		if(intval($IK_USER['user']['userid']) > 0) ikNotice("请退出后再注册！");
 		
 		//邀请用户ID
 		$fuserid = intval($_GET['fuserid']);
@@ -27,14 +27,14 @@ switch($ts){
 		if($IK_SITE['base']['isinvite']=='1'){
 		
 			$invitecode = trim($_POST['invitecode']);
-			if($invitecode == '') tsNotice("邀请码不能为空！");
+			if($invitecode == '') ikNotice("邀请码不能为空！");
 
 			$codeNum = $new['user']->findCount('user_invites',array(
 				'invitecode'=>$invitecode,
 				'isused'=>0,
 			));
 			
-			if($codeNum == 0) tsNotice("邀请码已经被使用，请更换其他邀请码！");
+			if($codeNum == 0) ikNotice("邀请码已经被使用，请更换其他邀请码！");
 		
 		}
 
@@ -48,22 +48,22 @@ switch($ts){
 		
 		if($email=='' || $pwd=='' || $repwd=='' || $username==''){
 		
-			tsNotice('所有必选项都不能为空！');
+			ikNotice('所有必选项都不能为空！');
 		
 		}elseif(valid_email($email) == false){
 		
-			tsNotice('Email邮箱输入有误!');
+			ikNotice('Email邮箱输入有误!');
 			
 		}elseif($isEmail > 0){
-			tsNotice('Email已经注册^_^');
+			ikNotice('Email已经注册^_^');
 		}elseif($pwd != $repwd){
-			tsNotice('两次输入密码不正确！');
+			ikNotice('两次输入密码不正确！');
 		}elseif(strlen($username) < 4 || strlen($username) > 20){
-			tsNotice('姓名长度必须在4和20之间!');
+			ikNotice('姓名长度必须在4和20之间!');
 		}elseif($isUserName > 0){
-			tsNotice("用户名已经存在，请换个用户名！");
+			ikNotice("用户名已经存在，请换个用户名！");
 		}elseif($authcode != $_SESSION['authcode']){
-			tsNotice("验证码输入有误，请重新输入！");
+			ikNotice("验证码输入有误，请重新输入！");
 		}else{
 			
 			$salt = md5(rand());
@@ -130,7 +130,7 @@ switch($ts){
 				'isadmin'	=> $userData['isadmin'],
 				'uptime'	=> $userData['uptime'],
 			);
-			$_SESSION['tsuser']	= $sessionData;
+			$_SESSION['ikuser']	= $sessionData;
 			
 			//发送系统消息(恭喜注册成功)
 			$msg_userid = '0';
@@ -164,7 +164,7 @@ switch($ts){
 		));
 		
 		if($isEmail > 0){
-			tsNotice('Email已经注册^_^');
+			ikNotice('Email已经注册^_^');
 		}else{
 			
 			$salt = md5(rand());
@@ -201,7 +201,7 @@ switch($ts){
 				'isadmin'	=> $userData['isadmin'],
 				'uptime'	=> $userData['uptime'],
 			);
-			$_SESSION['tsuser']	= $sessionData;
+			$_SESSION['ikuser']	= $sessionData;
 			
 			//发送系统消息(恭喜注册成功)
 			$msg_userid = '0';

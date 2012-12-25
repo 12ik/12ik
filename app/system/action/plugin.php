@@ -6,15 +6,15 @@ defined ( 'IN_IK' ) or die ( 'Access Denied.' );
  * @author wanglijun
  * @Email:160780470@qq.com
  */
-switch ($ts) {
+switch ($ik) {
 	//插件列表
 	case "list" :
 		
-		$arrApps = tsScanDir ( 'plugins' );
+		$arrApps = ikScanDir ( 'plugins' );
 		
 		$apps = $_GET ['apps'];
 		
-		$arrPlugins = tsScanDir ( 'plugins/' . $apps );
+		$arrPlugins = ikScanDir ( 'plugins/' . $apps );
 		
 		foreach ( $arrPlugins as $key => $item ) {
 			if (is_file ( 'plugins/' . $apps . '/' . $item . '/about.php' )) {

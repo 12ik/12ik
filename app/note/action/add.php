@@ -5,7 +5,7 @@ defined('IN_IK') or die('Access Denied.');
 $userid = aac('user')->isLogin();
 
 
-switch($ts){
+switch($ik){
 	
 	case "":
 		
@@ -28,8 +28,8 @@ switch($ts){
 		$addtime = time();
 		
 		if($title=='' || $content=='') qiMsg("标题和内容都不能为空！");
-		if(mb_strlen($title,'utf8')>64) tsNotice('标题很长很长很长很长...^_^');
-		if(mb_strlen($content,'utf8')>50000) tsNotice('发这么多内容干啥^_^');
+		if(mb_strlen($title,'utf8')>64) ikNotice('标题很长很长很长很长...^_^');
+		if(mb_strlen($content,'utf8')>50000) ikNotice('发这么多内容干啥^_^');
 		
 		$isphoto = 0;
 		$isattach = 0;
@@ -53,7 +53,7 @@ switch($ts){
 		//处理标签
 		aac('tag')->addTag('note','noteid',$noteid,trim($_POST['tag']));
 		
-		header("Location: ".SITE_URL.tsUrl('note','show',array('noteid'=>$noteid)));
+		header("Location: ".SITE_URL.ikUrl('note','show',array('noteid'=>$noteid)));
 	
 		break;
 	}

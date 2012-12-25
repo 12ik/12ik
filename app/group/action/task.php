@@ -4,7 +4,7 @@ defined('IN_IK') or die('Access Denied.');
 //用户是否登录
 $userid = aac('user')->isLogin();
 
-switch($ts){
+switch($ik){
 	case "":
 		/*
 		 1、Email验证  500积分
@@ -45,7 +45,7 @@ switch($ts){
 		if($strUser['face']=='' || $strUser['isverify']==0 || $strTopic['ct'] == 0 || $strReply['cr']==0){
 			echo '<div style=" overflow: hidden;padding: 5px 0;">
 					<span style="background:#FFFFCC;border:solid 1px #FFCC99;padding:2px 10px;">
-					<a href="'.SITE_URL.tsUrl('group','task').'">亲，你有新任务啦！快去看看吧！</a>
+					<a href="'.SITE_URL.ikUrl('group','task').'">亲，你有新任务啦！快去看看吧！</a>
 					</span>
 					</div>
 					<br />';

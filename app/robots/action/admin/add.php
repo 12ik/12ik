@@ -7,7 +7,7 @@ $listarr = array();
 $thevalue = array();
 $importvalue = array();
 
-switch ($ts) {
+switch ($ik) {
 
 		case "" :
 		//获取资讯分类 //暂时只有管理员uid指定

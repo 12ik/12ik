@@ -4,7 +4,7 @@ defined ( 'IN_IK' ) or die ( 'Access Denied.' );
 //判断用户是否登录
 $userid = aac('user') -> islogin();
 
-switch ($ts) {
+switch ($ik) {
 	case "" :
 		//创建小站
 		$title = "创建小站";
@@ -16,14 +16,14 @@ switch ($ts) {
 		$sitename = trim($_POST['sitename']);
 		$sitedesc = trim($_POST['sitedesc']);
 		//安全新检查
-		if(mb_strlen($sitename,'utf8') > 15) tsNotice(mb_strlen($sitename,'utf8').'小站名称最多15个汉字或30个英文字母^_^');
-		if(mb_strlen($sitename,'utf8') > 250) tsNotice(mb_strlen($sitename,'utf8').'小站描述最多250个汉字^_^');
+		if(mb_strlen($sitename,'utf8') > 15) ikNotice(mb_strlen($sitename,'utf8').'小站名称最多15个汉字或30个英文字母^_^');
+		if(mb_strlen($sitename,'utf8') > 250) ikNotice(mb_strlen($sitename,'utf8').'小站描述最多250个汉字^_^');
 		
 		//配置文件是否需要审核 0: 未审核 1： 已审核
 		$isaudit = intval($IK_APP['options']['isaudit']);
 		//重复性检查
 		$isSite = $db->once_fetch_assoc("select count(siteid) from ".dbprefix."site where sitename='$sitename'");
-		if($isSite['count(siteid)'] > 0) tsNotice("小站名称已经存在，请更换其他名称！");
+		if($isSite['count(siteid)'] > 0) ikNotice("小站名称已经存在，请更换其他名称！");
 		//插入
 		$arrData = array(
 				'userid'	=> $userid,

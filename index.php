@@ -23,7 +23,7 @@ include 'core/core.php';
 $time_start = getmicrotime ();
 $_SGLOBAL['supe_starttime'] = $time_start;
 
-if (is_file ( 'data/config.inc.php' )) {
+if (is_file ( 'data/config.inc.php' )) { 
 	//装载APP应用
 	include 'app/index.php';
 } else {

@@ -1,5 +1,5 @@
 <?php 
-switch ($ts){
+switch ($ik){
 	
 	//禁用-启用
 	case "isenable":

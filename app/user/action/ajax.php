@@ -1,6 +1,6 @@
 <?php 
 defined('IN_IK') or die('Access Denied.');
-switch($ts){
+switch($ik){
 	case "login":
 	
 		$jump = $_SERVER['HTTP_REFERER'];

@@ -37,18 +37,18 @@ class site extends IKApp{
 			}else if($strSite['imgpos']!=''){
 				//如果截图位置不为空 说明是切图 x y width
 				$arrPos = explode('_',$strSite['imgpos']);
-				$bigImg = tsXimg($strSite['siteicon'],'site',180,220,$strSite['iconpath'],0);
+				$bigImg = ikXimg($strSite['siteicon'],'site',180,220,$strSite['iconpath'],0);
 				$strSite['icon_180'] = SITE_URL.$bigImg;
-				$strSite['icon_75'] = SITE_URL.tsXimg($strSite['siteicon'],'site',75,75,$strSite['iconpath'],1);
-				$strSite['icon_48'] = SITE_URL.tsXimg($strSite['siteicon'],'site',48,48,$strSite['iconpath'],1);
-				//$strSite['icon_75'] = SITE_URL.tsXimg($bigImg,'site',75,75,$strSite['iconpath'],1,array(
+				$strSite['icon_75'] = SITE_URL.ikXimg($strSite['siteicon'],'site',75,75,$strSite['iconpath'],1);
+				$strSite['icon_48'] = SITE_URL.ikXimg($strSite['siteicon'],'site',48,48,$strSite['iconpath'],1);
+				//$strSite['icon_75'] = SITE_URL.ikXimg($bigImg,'site',75,75,$strSite['iconpath'],1,array(
 				//'X'=>$arrPos[0], 'Y'=>$arrPos[1],'W'=>$arrPos[2],'H'=>$arrPos[2],'R'=>1));
-				//$strSite['icon_48'] = SITE_URL.tsXimg($bigImg,'site',48,48,$strSite['iconpath'],1,array(
+				//$strSite['icon_48'] = SITE_URL.ikXimg($bigImg,'site',48,48,$strSite['iconpath'],1,array(
 				//'X'=>$arrPos[0], 'Y'=>$arrPos[1],'W'=>$arrPos[2],'H'=>$arrPos[2],'R'=>1));
 			}else{
-				$strSite['icon_180'] = SITE_URL.tsXimg($strSite['siteicon'],'site',180,220,$strSite['iconpath'],0);
-				$strSite['icon_75'] = SITE_URL.tsXimg($strSite['siteicon'],'site',75,75,$strSite['iconpath'],0);
-				$strSite['icon_48'] = SITE_URL.tsXimg($strSite['siteicon'],'site',48,48,$strSite['iconpath'],0);
+				$strSite['icon_180'] = SITE_URL.ikXimg($strSite['siteicon'],'site',180,220,$strSite['iconpath'],0);
+				$strSite['icon_75'] = SITE_URL.ikXimg($strSite['siteicon'],'site',75,75,$strSite['iconpath'],0);
+				$strSite['icon_48'] = SITE_URL.ikXimg($strSite['siteicon'],'site',48,48,$strSite['iconpath'],0);
 			}
 			return $strSite;
 			
@@ -237,11 +237,11 @@ class site extends IKApp{
 	{
 		if($obj_userid!=$userid && $userid)
 		{	
-			tsNotice('你没有执行该操作('.$type.')的权限！');	
+			ikNotice('你没有执行该操作('.$type.')的权限！');	
 			
 		}else if(empty($userid)){
 			
-			tsNotice('你没有执行该操作('.$type.')的权限！','请登录后重试',SITE_URL.tsUrl('user','login'));	
+			ikNotice('你没有执行该操作('.$type.')的权限！','请登录后重试',SITE_URL.ikUrl('user','login'));	
 		}
 		return;		
 	}
@@ -252,8 +252,8 @@ class site extends IKApp{
 		foreach($arrPhotos as $key=>$item)
 		{
 			$arrPhoto[] = $item;
-			$arrPhoto[$key]['photo_140'] = SITE_URL.tsXimg($item['photourl'],'site',140,170,$item['path'],0);
-			$arrPhoto[$key]['photo_600'] = SITE_URL.tsXimg($item['photourl'],'site',600,730,$item['path'],0);			
+			$arrPhoto[$key]['photo_140'] = SITE_URL.ikXimg($item['photourl'],'site',140,170,$item['path'],0);
+			$arrPhoto[$key]['photo_600'] = SITE_URL.ikXimg($item['photourl'],'site',600,730,$item['path'],0);			
 		}
 		return $arrPhoto;	
 	}
@@ -261,8 +261,8 @@ class site extends IKApp{
 	function getPhotoByseq($noteid,$seq)
 	{
 		$arrPhoto = $this->find('site_note_photo',array('seqid'=>$seq, 'noteid'=>$noteid));
-		$arrPhoto['photo_140'] = SITE_URL.tsXimg($arrPhoto['photourl'],'site',140,170,$arrPhoto['path'],0);
-		$arrPhoto['photo_600'] = SITE_URL.tsXimg($arrPhoto['photourl'],'site',600,730,$arrPhoto['path'],0);			
+		$arrPhoto['photo_140'] = SITE_URL.ikXimg($arrPhoto['photourl'],'site',140,170,$arrPhoto['path'],0);
+		$arrPhoto['photo_600'] = SITE_URL.ikXimg($arrPhoto['photourl'],'site',600,730,$arrPhoto['path'],0);			
 		return $arrPhoto;	
 	}
 	//获取最新推荐小站

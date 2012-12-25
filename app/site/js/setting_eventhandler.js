@@ -153,8 +153,8 @@
     mod = el.parents('.mod'),
     hd = mod.find('.hd').first(),
 	url = el.attr('rel');
-   // url = siteUrl + 'index.php?app=site&siteid=' + siteId +'&ac=' + mod.attr('id').split('-')[0] + "&ts=settings&"+ mod.attr('id').split('-')[0] +'id='+ mod.attr('id').split('-')[1], 
-    //url = siteUrl + 'index.php?app=site&ac=' + mod.attr('id').split('-')[0] + "&ts=settings&"+ mod.attr('id').split('-')[0] +'id='+ mod.attr('id').split('-')[1], 
+   // url = siteUrl + 'index.php?app=site&siteid=' + siteId +'&ac=' + mod.attr('id').split('-')[0] + "&ik=settings&"+ mod.attr('id').split('-')[0] +'id='+ mod.attr('id').split('-')[1], 
+    //url = siteUrl + 'index.php?app=site&ac=' + mod.attr('id').split('-')[0] + "&ik=settings&"+ mod.attr('id').split('-')[0] +'id='+ mod.attr('id').split('-')[1], 
     setting = mod.find('.setting-panel'); 
     // can't click while loading.
     if (el.hasClass('lnk_setting_loading')){

@@ -3,7 +3,7 @@
 	 * 配置选项
 	 */
 
-switch ($ts) {
+switch ($ik) {
 	//配置
 	case "" :
 		$arrOptions = $db->fetch_all_assoc ( "select * from " . dbprefix . "user_options" );

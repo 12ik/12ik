@@ -11,7 +11,7 @@ $strNote ['user'] = aac ( 'user' )->getOneUser ( $strNote ['userid'] );
 
 //获取评论
 $page = isset ( $_GET ['page'] ) ? intval ( $_GET ['page'] ) : 1;
-$url = SITE_URL . tsUrl ( 'note', 'show', array ('noteid' => $noteid, 'page' => '' ) );
+$url = SITE_URL . ikUrl ( 'note', 'show', array ('noteid' => $noteid, 'page' => '' ) );
 $lstart = $page * 10 - 10;
 $arrComments = $db->fetch_all_assoc("select * from ".dbprefix."note_comment where `noteid`='$noteid' order by addtime desc limit $lstart,10");
 
@@ -32,7 +32,7 @@ if ($page > 1) {
 }
 
 //更新统计 被浏览数
-$userid = intval($_SESSION['tsuser']['userid']); //回话userid
+$userid = intval($_SESSION['ikuser']['userid']); //回话userid
 if($userid != $strNote['userid']){
 	$arrData = array('count_view'=> $strNote['count_view']+1);
 	$new['note']->update('note',array('noteid'=>$noteid),$arrData);	

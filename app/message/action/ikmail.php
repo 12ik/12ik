@@ -17,7 +17,7 @@ if(is_array($arrToUsers)){
 //统计系统消息
 $systemNum = $db->once_num_rows("select * from ".dbprefix."message where userid='0' and touserid='$userid' and isread='0'");
 **/
-switch($ts){
+switch($ik){
 
 	//收件箱
 	case "inbox":

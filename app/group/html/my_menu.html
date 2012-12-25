@@ -1,9 +1,9 @@
 <div class="tabnav">
 <ul>
-<li <!--{if $ac=='index'}-->class="select"<!--{/if}-->><a href="{SITE_URL}{tsUrl('group','index')}">最新话题</a></li>
-<li <!--{if $ac=='my' && $ts=='topic'}-->class="select"<!--{/if}-->><a href="{SITE_URL}{tsUrl('group','my',array('ts'=>'topic'))}">我发起的话题</a></li>
-<li <!--{if $ac=='my' && $ts=='reply'}-->class="select"<!--{/if}-->><a href="{SITE_URL}{tsUrl('group','my',array('ts'=>'reply'))}">我回复的话题</a></li>
-<li <!--{if $ac=='my' && $ts=='collect'}-->class="select"<!--{/if}-->><a href="{SITE_URL}{tsUrl('group','my',array('ts'=>'collect'))}">我收藏的话题</a></li>
+<li <!--{if $ac=='index'}-->class="select"<!--{/if}-->><a href="{SITE_URL}{ikUrl('group','index')}">最新话题</a></li>
+<li <!--{if $ac=='my' && $ik=='topic'}-->class="select"<!--{/if}-->><a href="{SITE_URL}{ikUrl('group','my',array('ik'=>'topic'))}">我发起的话题</a></li>
+<li <!--{if $ac=='my' && $ik=='reply'}-->class="select"<!--{/if}-->><a href="{SITE_URL}{ikUrl('group','my',array('ik'=>'reply'))}">我回复的话题</a></li>
+<li <!--{if $ac=='my' && $ik=='collect'}-->class="select"<!--{/if}-->><a href="{SITE_URL}{ikUrl('group','my',array('ik'=>'collect'))}">我收藏的话题</a></li>
 </ul>
 </div>
 <div class="clear"></div>

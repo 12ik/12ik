@@ -12,7 +12,7 @@ if($from == 1)
 if($from == 2)
 {
 	aac('home')->create('downcount',array('userip'=>getIp(),'downfrom'=>'本地下载','downtime'=>time()));
-	header("Location: http://www.12ik.com/uploadfile/12ik/12ik-v1.0.zip");
+	header("Location: http://www.12ik.com/uploadfile/12ik/12ik-v1.1.rar");
 }
 if($from == 3)
 {

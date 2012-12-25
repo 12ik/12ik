@@ -9,7 +9,7 @@ $strUser = $new['user']->getOneUser($userid);
 if($userid != $strUser['userid']) header("Location: ".SITE_URL."index.php");
 
 
-switch($ts){
+switch($ik){
 	case "base":
 	
 		$strArea = aac('location')->getAreaForApp($strUser['areaid']);

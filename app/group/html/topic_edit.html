@@ -5,7 +5,7 @@
 <div class="mc">
 <h1>编辑：{$strTopic[title]}</h1>
 <div class="cleft">
-<form method="POST" action="{SITE_URL}index.php?app=group&ac=topic_edit&ts=do">
+<form method="POST" action="{SITE_URL}index.php?app=group&ac=topic_edit&ik=do">
 <table cellpadding="0" cellspacing="0" class="table_1">
 	<tr>
     <th width="50">标题：</tg>
@@ -28,7 +28,7 @@
     <th>&nbsp;</th>
     <td>
 	<input type="hidden" name="topicid" value="{$strTopic[topicid]}" />
-    <input type="submit" class="submit" value="修改">&nbsp;&nbsp;<a href="{SITE_URL}{tsUrl('group','topic',array('id'=>$strTopic[topicid]))}">返回</a>
+    <input type="submit" class="submit" value="修改">&nbsp;&nbsp;<a href="{SITE_URL}{ikUrl('group','topic',array('id'=>$strTopic[topicid]))}">返回</a>
 	</td>
     </tr>
 </table>
@@ -36,7 +36,7 @@
 </div>
 
     <div class="cright">
-        <p class="pl2">&gt; <a href="{SITE_URL}{tsUrl('group','show',array('id'=>$strGroup[groupid]))}">返回{$strGroup[groupname]}</a></p>
+        <p class="pl2">&gt; <a href="{SITE_URL}{ikUrl('group','show',array('id'=>$strGroup[groupid]))}">返回{$strGroup[groupname]}</a></p>
     </div>
 
 

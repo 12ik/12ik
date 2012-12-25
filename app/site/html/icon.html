@@ -13,7 +13,7 @@
         <div class="mod" id="sp-setting">
             <div class="hd"></div>
             <div class="bd">
-                <form enctype="multipart/form-data" method="post" action="{SITE_URL}{tsUrl('site','admins',array('ts'=>'icon','siteid'=>$siteid))}" id="sp-setting-icon" target="iframe-post-form">
+                <form enctype="multipart/form-data" method="post" action="{SITE_URL}{ikUrl('site','admins',array('ik'=>'icon','siteid'=>$siteid))}" id="sp-setting-icon" target="iframe-post-form">
                     <div style="display:none;"><input type="hidden" value="oVDl" name="ck"></div>
                     <div class="sp-icon" id="icon_{$strSite[px]}_{$strSite[py]}_{$strSite[pw]}">
                          <img alt="" src="{$strSite[icon_180]}?v={php echo rand();}" id="cropbox" style="display: none;" rel='{$strSite[iconpath]}'/> 
@@ -34,7 +34,7 @@
                             </p>
                             <p class="submit-icon">
                                 <span class="bn-flat-hot"><input type="submit" value="保存图标设置" hidefocus="1" name="pf_submit" id="submit-crop"></span>
-                                <a name="pf_cancel" href="{SITE_URL}{tsUrl('site','admins',array('ts'=>'info','siteid'=>$siteid))}">取消</a>
+                                <a name="pf_cancel" href="{SITE_URL}{ikUrl('site','admins',array('ik'=>'info','siteid'=>$siteid))}">取消</a>
                             </p>
                         </li>
                     </ul>
@@ -72,7 +72,7 @@
                 siteName = $('body').attr('id'),
                 currSize = $('.sp-icon').attr('id').split('_').slice(1, 4),
                 //settingUrl = postUrl.split('/').slice(0, 3).join('/') + '/',
-				settingUrl = "{SITE_URL}{tsUrl('site','admins',array('ts'=>'info','siteid'=>$strSite[siteid]))}",
+				settingUrl = "{SITE_URL}{ikUrl('site','admins',array('ik'=>'info','siteid'=>$strSite[siteid]))}",
                 tmpl_upload_tips = '<p id="upload-tips">上传中，请稍候...</p>',
                 tmpl_error_tips = '<p class="error-tips">图片短边尺寸不能小于100像素，请重新上传。</p>',
                 initJcrop = function () {

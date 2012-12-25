@@ -1,7 +1,7 @@
 <?php
 defined('IN_IK') or die('Access Denied.');
 
-switch($ts){
+switch($ik){
 	
 	case "list":
 		
@@ -63,7 +63,7 @@ switch($ts){
 			$_SGLOBAL['db']->query("UPDATE ".tname('article_categories')." SET subcatid=catid");
 		}
 		
-		qiMsg("添加成功",'返回到频道列表',SITE_URL.'index.php?app=article&ac=admin&mg=channel&ts=list');
+		qiMsg("添加成功",'返回到频道列表',SITE_URL.'index.php?app=article&ac=admin&mg=channel&ik=list');
 		
 		break;
 		

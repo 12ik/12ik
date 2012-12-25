@@ -2,9 +2,9 @@
 <div class="tabnav">
 <ul>
 <li <!--{if $mg=='options'}-->class="select"<!--{/if}-->><a href="{SITE_URL}index.php?app=user&ac=admin&mg=options">用户配置</a></li>
-<li <!--{if $mg=='user' && $ts=='list'}-->class="select"<!--{/if}-->><a href="{SITE_URL}index.php?app=user&ac=admin&mg=user&ts=list">用户管理</a></li>
+<li <!--{if $mg=='user' && $ik=='list'}-->class="select"<!--{/if}-->><a href="{SITE_URL}index.php?app=user&ac=admin&mg=user&ik=list">用户管理</a></li>
 
-<!--{if $mg=='user' && $ts=='view'}--><li class="select"><a href="{SITE_URL}index.php?app=user&ac=admin&mg=user&ts=list">{$strUser[username]}用户信息</a></li>
+<!--{if $mg=='user' && $ik=='view'}--><li class="select"><a href="{SITE_URL}index.php?app=user&ac=admin&mg=user&ik=list">{$strUser[username]}用户信息</a></li>
 <!--{/if}-->
 </ul>
 </div>

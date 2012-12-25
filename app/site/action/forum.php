@@ -4,12 +4,12 @@ $forumid = intval($_GET['forumid']);
 $strForum = aac('site')->find('site_forum',array('forumid'=>$forumid));;
 $siteid = $strForum['siteid'];
 $roomid = $strForum['roomid']; //导航
-$userid = $_SESSION['tsuser']['userid'];
+$userid = $_SESSION['ikuser']['userid'];
 //加载风格
 include_once 'theme.php';
 
 //页面
-switch ($ts) {
+switch ($ik) {
 	case "" :
 		//显示
 		$discussid = intval($_GET['discussid']);
@@ -41,15 +41,15 @@ switch ($ts) {
 		//当前房间
 		$strRoom = aac('site')->getOneRoom($strForum['roomid']);
 		
-		$actionUrl = SITE_URL.tsUrl('site','forum',array('ts'=>'settings','forumid'=>$forumid));
-		$deleteUrl = SITE_URL.tsUrl('site','forum',array('ts'=>'delete','forumid'=>$forumid));
+		$actionUrl = SITE_URL.ikUrl('site','forum',array('ik'=>'settings','forumid'=>$forumid));
+		$deleteUrl = SITE_URL.ikUrl('site','forum',array('ik'=>'delete','forumid'=>$forumid));
 		//判断是否是存档
 		if($strForum['isarchive']==1)
 		{
-		 	$archiveUrl = SITE_URL.tsUrl('site','forum',array('ts'=>'unarchive','forumid'=>$forumid));//恢复url
+		 	$archiveUrl = SITE_URL.ikUrl('site','forum',array('ik'=>'unarchive','forumid'=>$forumid));//恢复url
 			$archiveName = "恢复此应用";
 		}else{
-		 	$archiveUrl = SITE_URL.tsUrl('site','forum',array('ts'=>'archive','forumid'=>$forumid));//存档url
+		 	$archiveUrl = SITE_URL.ikUrl('site','forum',array('ik'=>'archive','forumid'=>$forumid));//存档url
 			$archiveName = "存档此应用";			
 		}			
 		//显示个数
@@ -152,8 +152,8 @@ switch ($ts) {
 					$istop = $item['istop'] == 1 ? $topimg : '';
 					$html .= '
 							<tr>
-								<td>'.$istop.' <a title="'.$item['title'].'" href="'.SITE_URL.tsUrl('site','forum',array('forumid'=>$item['forumid'],'discussid'=>$item['discussid'])).'">'.$item['title'].'</a></td>	
-								<td>来自 <a href='.SITE_URL.tsUrl('hi','',array('id'=>$struser['doname'])).'"">'.$struser['username'].'</a></td>
+								<td>'.$istop.' <a title="'.$item['title'].'" href="'.SITE_URL.ikUrl('site','forum',array('forumid'=>$item['forumid'],'discussid'=>$item['discussid'])).'">'.$item['title'].'</a></td>	
+								<td>来自 <a href='.SITE_URL.ikUrl('hi','',array('id'=>$struser['doname'])).'"">'.$struser['username'].'</a></td>
 								<td class="count" nowrap="nowrap">'.$item['count_comment'].'</td>
 								<td class="date">'.date('Y-m-d H:i:s',$item['addtime']).'</td>
 							</tr> 				
@@ -263,15 +263,15 @@ switch ($ts) {
 		$strUser = aac('user')->getOneUser($userid);
 		if($submit)
 		{
-			if($title=='' || $content=='') tsNotice("标题和内容都不能为空！");
-			if(mb_strlen($title,'utf8')>64) tsNotice('标题很长很长很长很长...^_^');
-			if(mb_strlen($content,'utf8')>50000) tsNotice('发这么多内容干啥^_^');
+			if($title=='' || $content=='') ikNotice("标题和内容都不能为空！");
+			if(mb_strlen($title,'utf8')>64) ikNotice('标题很长很长很长很长...^_^');
+			if(mb_strlen($content,'utf8')>50000) ikNotice('发这么多内容干啥^_^');
 			//执行添加
 			$discussid = aac('site')->create('site_forum_discuss',
 				array('forumid'=>$forumid,'userid'=>$userid, 'title'=>$title,'content'=>htmlspecialchars($content),'addtime'=>time())
 			);
 			
-			header("Location: ".SITE_URL.tsUrl('site','forum',array('forumid'=>$forumid,'discussid'=>$discussid)));
+			header("Location: ".SITE_URL.ikUrl('site','forum',array('forumid'=>$forumid,'discussid'=>$discussid)));
 		}
 
 		$title = '在"'.$strForum['title'].'"发言';
@@ -309,9 +309,9 @@ switch ($ts) {
 		$discussid = trim($_GET['discussid']);
 		if($submit)
 		{
-			if($title=='' || $content=='') tsNotice("标题和内容都不能为空！");
-			if(mb_strlen($title,'utf8')>64) tsNotice('标题很长很长很长很长...^_^');
-			if(mb_strlen($content,'utf8')>50000) tsNotice('发这么多内容干啥^_^');
+			if($title=='' || $content=='') ikNotice("标题和内容都不能为空！");
+			if(mb_strlen($title,'utf8')>64) ikNotice('标题很长很长很长很长...^_^');
+			if(mb_strlen($content,'utf8')>50000) ikNotice('发这么多内容干啥^_^');
 			//执行update
 			 aac('site')->update('site_forum_discuss',
 				array('forumid'=>$forumid,'discussid'=>$discussid),
@@ -319,7 +319,7 @@ switch ($ts) {
 			);
 			
 		}
-		header("Location: ".SITE_URL.tsUrl('site','forum',array('forumid'=>$forumid,'discussid'=>$discussid)));
+		header("Location: ".SITE_URL.ikUrl('site','forum',array('forumid'=>$forumid,'discussid'=>$discussid)));
 		
 		break;	
 		
@@ -332,7 +332,7 @@ switch ($ts) {
 		//删除帖子
 		aac('site')->delete('site_forum_discuss',array('discussid'=>$discussid));
 		
-	    header("Location: ".SITE_URL.tsUrl('site','forum',array('ts'=>'list','forumid'=>$forumid)));
+	    header("Location: ".SITE_URL.ikUrl('site','forum',array('ik'=>'list','forumid'=>$forumid)));
 
 		break;	
 	case "istop" :
@@ -345,7 +345,7 @@ switch ($ts) {
 			array('forumid'=>$forumid,'discussid'=>$discussid),
 			array('istop'=>$istop)
 		);
-		header("Location: ".SITE_URL.tsUrl('site','forum',array('forumid'=>$forumid,'discussid'=>$discussid)));
+		header("Location: ".SITE_URL.ikUrl('site','forum',array('forumid'=>$forumid,'discussid'=>$discussid)));
 
 		break;
 			
@@ -356,7 +356,7 @@ switch ($ts) {
 		$content = trim($_POST['content']);
 		if($content=='')
 		{
-			tsNotice('没有任何内容是不允许你通过滴^_^');		
+			ikNotice('没有任何内容是不允许你通过滴^_^');		
 		}
 		$commentid =aac('site')->create('site_discuss_comment',
 				array('referid'=>'0','discussid'=>$discussid, 'userid'=>$userid,'content'=>htmlspecialchars($content),'addtime'=>time())
@@ -369,7 +369,7 @@ switch ($ts) {
 				array('count_comment'=>$strdiscuss['count_comment']+1)
 			);
 		}
-		header("Location: ".SITE_URL.tsUrl('site','forum',array('forumid'=>$forumid,'discussid'=>$discussid)));
+		header("Location: ".SITE_URL.ikUrl('site','forum',array('forumid'=>$forumid,'discussid'=>$discussid)));
 
 		break;
 		
@@ -380,11 +380,11 @@ switch ($ts) {
 		//判断权限
 		if($strForum['userid']!=$userid && $strComment['userid']!=$userid)
 		{	
-			tsNotice('你没有执行该操作(del_comment)的权限！');	
+			ikNotice('你没有执行该操作(del_comment)的权限！');	
 			
 		}else if(empty($userid)){
 			
-			tsNotice('你没有执行该操作(del_comment)的权限！','请登录后重试',SITE_URL.tsUrl('user','login'));	
+			ikNotice('你没有执行该操作(del_comment)的权限！','请登录后重试',SITE_URL.ikUrl('user','login'));	
 		}
 		
 		aac('site')->delete('site_discuss_comment',array('commentid'=>$commentid,'discussid'=>$discussid));		
@@ -396,7 +396,7 @@ switch ($ts) {
 			array('count_comment'=>$strdiscuss['count_comment']-1)
 		);
 		
-		header("Location: ".SITE_URL.tsUrl('site','forum',array('forumid'=>$forumid,'discussid'=>$discussid)));
+		header("Location: ".SITE_URL.ikUrl('site','forum',array('forumid'=>$forumid,'discussid'=>$discussid)));
 
 		break;
 		

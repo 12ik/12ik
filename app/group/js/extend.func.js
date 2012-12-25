@@ -54,7 +54,7 @@ function savaTag(tid)
 {
 	var tag = $('#tags').val();
 		if(tag ==''){ tips('请输入标签哟^_^');$('#tagFrom').show('fast');}else{
-			var url = siteUrl+'index.php?app=tag&ac=add_ajax&ts=do';
+			var url = siteUrl+'index.php?app=tag&ac=add_ajax&ik=do';
 			$.post(url,{objname:'topic',idname:'topicid',tags:tag,objid:tid},function(rs){  window.location.reload()   })
 		}
 	
@@ -62,10 +62,10 @@ function savaTag(tid)
 
 //加入小组Ajax
 function joinGroup(gid){
-	var url = siteUrl+'index.php?app=group&ac=do&ts=joingroup';
+	var url = siteUrl+'index.php?app=group&ac=do&ik=joingroup';
 		$.post(url,{groupid:gid},function(rs){
 			  if(rs == 0){
-				  $.dialog.open(siteUrl+'index.php?app=user&ac=ajax&ts=login', {title: '登录'});
+				  $.dialog.open(siteUrl+'index.php?app=user&ac=ajax&ik=login', {title: '登录'});
 			  }else if(rs == 1){
 				  error('你已经加入该小组，请不要再次加入^_^');
 			  }else if(rs == 2){
@@ -78,7 +78,7 @@ function joinGroup(gid){
 //退出小组Ajax
 function exitGroup(gid){
 	art.dialog.confirm('你确认退出小组吗？', function(){								 
-		var url = siteUrl+'index.php?app=group&ac=do&ts=exitgroup';
+		var url = siteUrl+'index.php?app=group&ac=do&ik=exitgroup';
 		$.post(url,{groupid:gid},function(rs){
 			  if(rs == 0){
 				  error('组长责任重于泰山^_^');
@@ -93,7 +93,7 @@ function exitGroup(gid){
 //删除帖子
 function topic_del(gid,tid){
 	art.dialog.confirm('确定删除吗？', function(){							  
-		var url = siteUrl+'index.php?app=group&ac=do&ts=topic_del';
+		var url = siteUrl+'index.php?app=group&ac=do&ik=topic_del';
 		$.post(url,{groupid:gid,topicid:tid},function(rs){
 					if(rs == 0){
 						succ('删除成功^_^');
@@ -106,10 +106,10 @@ function topic_del(gid,tid){
 //收藏帖子
 function topic_collect(tid){
 	
-	var url = siteUrl+'index.php?app=group&ac=do&ts=topic_collect';
+	var url = siteUrl+'index.php?app=group&ac=do&ik=topic_collect';
 	$.post(url,{topicid:tid},function(rs){
 			if(rs == 0){
-				$.dialog.open(siteUrl+'index.php?app=user&ac=ajax&ts=login', {title: '登录'});
+				$.dialog.open(siteUrl+'index.php?app=user&ac=ajax&ik=login', {title: '登录'});
 			}else if(rs == 1){
 				tips('自己不能收藏自己的帖子哦^_^');
 			}else if(rs == 2){
@@ -123,7 +123,7 @@ function topic_collect(tid){
 
 //谁收藏了这篇帖子
 function topic_collect_user(topicid){
-	var url = siteUrl+'index.php?app=group&ac=topic_collect_user&ts=ajax&topicid='+topicid;
+	var url = siteUrl+'index.php?app=group&ac=topic_collect_user&ik=ajax&topicid='+topicid;
 	$.post(url,function(rs){ $('#collects').html(rs); });
 }
 
@@ -171,7 +171,7 @@ function recomment(rid,tid){
 
 	c = $('#recontent_'+rid).val();
 	if(c==''){tips('回复内容不能为空');return false;}
-	var url = siteUrl+'index.php?app=group&ac=do&ts=recomment';
+	var url = siteUrl+'index.php?app=group&ac=do&ik=recomment';
 	$('#recomm_btn_'+rid).hide();
 	$.post(url,{referid:rid,topicid:tid,content:c} ,function(rs){
 				if(rs == 0)

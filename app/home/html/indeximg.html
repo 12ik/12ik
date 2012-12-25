@@ -10,11 +10,11 @@
 <div>
 <b>12ik创新社区新体验，内容互动性强，交流更方便</b><br><em>简单</em><em>快捷</em><em>方便</em><em>建设本地化，垂直型社区；目前已有<cite>{$count_user}</cite>位用户加入！</em>
 </div>
-<a class="submit" href="{SITE_URL}{tsUrl('user','register')}">加入我们</a>
+<a class="submit" href="{SITE_URL}{ikUrl('user','register')}">加入我们</a>
 </div>
 
 <div class="login">
-<form action="{SITE_URL}{tsUrl('user','login',array('ts'=>'do'))}" method="post" name="lzform" id="lzform">
+<form action="{SITE_URL}{ikUrl('user','login',array('ik'=>'do'))}" method="post" name="lzform" id="lzform">
 <fieldset>
 <legend>登录</legend>
 <div class="item">
@@ -51,12 +51,12 @@
 		</h2>
         <div id="container">
 			<!--{loop $arrPhoto $key $item}-->      
-            <div class="item"><a href="{SITE_URL}{tsUrl('photo','album',array(ts=>photo,albumid=>$item[albumid]))}" target="_blank"><img src="{SITE_URL}{php echo tsXimg($item[photourl],'photo',210,0,$item[path])}" /></a></div>
+            <div class="item"><a href="{SITE_URL}{ikUrl('photo','album',array(ik=>photo,albumid=>$item[albumid]))}" target="_blank"><img src="{SITE_URL}{php echo ikXimg($item[photourl],'photo',210,0,$item[path])}" /></a></div>
 			<!--{/loop}-->                                                          
         </div>
     
         <nav id="page-nav">
-           <a href="{SITE_URL}{tsUrl('home','homepage',array('page'=>'2'))}"></a>
+           <a href="{SITE_URL}{ikUrl('home','homepage',array('page'=>'2'))}"></a>
         </nav>
     </div>	
 </div>

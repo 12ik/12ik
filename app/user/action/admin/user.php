@@ -3,7 +3,7 @@
 	 * 用户管理
 	 */
 
-switch ($ts) {
+switch ($ik) {
 	
 	//用户列表
 	case "list" :
@@ -12,7 +12,7 @@ switch ($ts) {
 		
 		$lstart = $page * 20 - 20;
 		
-		$url = 'index.php?app=user&ac=admin&mg=user&ts=list&page=';
+		$url = 'index.php?app=user&ac=admin&mg=user&ik=list&page=';
 		
 		$arrAllUser = $new ['user']->findAll ( 'user_info', null, 'userid desc', null, $lstart . ',20' );
 		
@@ -46,6 +46,6 @@ switch ($ts) {
 		$userid = $_GET ['userid'];
 		$isenable = $_GET ['isenable'];
 		$db->query ( "update " . dbprefix . "user_info set `isenable`='$isenable' where userid='$userid'" );
-		header ( "Location: " . SITE_URL . "index.php?app=user&ac=admin&mg=user&ts=list" );
+		header ( "Location: " . SITE_URL . "index.php?app=user&ac=admin&mg=user&ik=list" );
 		break;
 }

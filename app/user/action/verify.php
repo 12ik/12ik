@@ -2,7 +2,7 @@
 //用户是否登录
 $userid = aac('user')->isLogin();
 
-switch($ts){
+switch($ik){
 	//发送验证
 	case "post":
 
@@ -19,14 +19,14 @@ switch($ts){
 
 		//发送邮件
 		$subject = $IK_SITE['base']['site_title'].'会员真实性验证';
-		$content = '尊敬的'.$strUser['username'].'，<br />请点击以下链接进行会员验证：<a href="'.$IK_SITE['base']['site_url'].'index.php?app=user&ac=verify&ts=do&email='.$email.'&verifycode='.$verifycode.'">'.$IK_SITE['base']['site_url'].'index.php?app=user&ac=verify&ts=do&email='.$email.'&verifycode='.$verifycode.'</a>';
+		$content = '尊敬的'.$strUser['username'].'，<br />请点击以下链接进行会员验证：<a href="'.$IK_SITE['base']['site_url'].'index.php?app=user&ac=verify&ik=do&email='.$email.'&verifycode='.$verifycode.'">'.$IK_SITE['base']['site_url'].'index.php?app=user&ac=verify&ik=do&email='.$email.'&verifycode='.$verifycode.'</a>';
 
 		$result = aac('mail')->postMail($email,$subject,$content);
 
 		if($result == '0'){
-			tsNotice("验证失败，可能是你的Email邮箱错误哦^_^");
+			ikNotice("验证失败，可能是你的Email邮箱错误哦^_^");
 		}elseif($result == '1'){
-			tsNotice("系统已经向你的邮箱发送了验证邮件，请尽快查收^_^");
+			ikNotice("系统已经向你的邮箱发送了验证邮件，请尽快查收^_^");
 		}
 		break;
 		
@@ -39,9 +39,9 @@ switch($ts){
 		
 		if($verify['count(*)'] > 0){
 			$db->query("update ".dbprefix."user_info set `isverify`='1' where `email`='$email'");
-			tsNotice("Email验证成功！点击返回首页！",'点击回首页！',SITE_URL);
+			ikNotice("Email验证成功！点击返回首页！",'点击回首页！',SITE_URL);
 		}else{
-			tsNotice("Email验证失败！");
+			ikNotice("Email验证失败！");
 		}
 		
 		break;

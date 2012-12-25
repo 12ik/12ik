@@ -8,7 +8,7 @@
 				</div>
 				<ul class="list categories-list">
 					<!--         {loop $arrCate  $item} -->
-					<li><a href="{SITE_URL}{tsUrl('article','list',array('cateid'=>$item[catid]))}">{$item[name]}</a></li>
+					<li><a href="{SITE_URL}{ikUrl('article','list',array('cateid'=>$item[catid]))}">{$item[name]}</a></li>
 					<!--         {/loop}   -->
 				</ul>
 			</section>
@@ -36,7 +36,7 @@
 						<!-- {loop $arrArticle $item} -->
 						<li class="item" id="article-407582">
 							<div class="title">
-								<a href="{SITE_URL}{tsUrl('article','show',array('id'=>$item[news][nid]))}">{$item[subject]} 
+								<a href="{SITE_URL}{ikUrl('article','show',array('id'=>$item[news][nid]))}">{$item[subject]} 
                                 {if $item[attach]}
                                 [图文]
                                 {/if}
@@ -44,7 +44,7 @@
 							</div>
                             {if $item[attach]} 
 							<div class="cover">
-                                <a class="pic" href="{SITE_URL}{tsUrl('article','show',array('id'=>$item[news][nid]))}">
+                                <a class="pic" href="{SITE_URL}{ikUrl('article','show',array('id'=>$item[news][nid]))}">
 									<img src="{ATT_URL}{$item[attach][thumbpath]}" />
 								</a> 
 							</div>
@@ -52,7 +52,7 @@
 							<div class="info">
 								<div class="article-desc-brief">
 									{php echo getsubstrutf8(t($item[news][message]),0,150);}...<a
-										href="{SITE_URL}{tsUrl('article','show',array('id'=>$item[news][nid]))}">（更多）</a>
+										href="{SITE_URL}{ikUrl('article','show',array('id'=>$item[news][nid]))}">（更多）</a>
 								</div>
 							</div>
 							<span class="time"> {php echo date('Y-m-d H:i:s',$item[dateline])}</span> 

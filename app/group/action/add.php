@@ -4,7 +4,7 @@ defined('IN_IK') or die('Access Denied.');
 //用户是否登录
 $userid = aac('user')->isLogin();
 
-switch($ts){
+switch($ik){
 
 	//发布帖子
 	case "":
@@ -27,13 +27,13 @@ switch($ts){
 		//允许小组成员发帖
 		if($strGroup['ispost']==0 && $isGroupUser['count(*)'] == 0 && $userid != $strGroup['userid']){
 			
-			tsNotice("本小组只允许小组成员发贴，请加入小组后再发帖！");
+			ikNotice("本小组只允许小组成员发贴，请加入小组后再发帖！");
 			
 		}
 
 		//不允许小组成员发帖
 		if($strGroup['ispost'] == 1 && $userid != $strGroup['userid']){
-			tsNotice("本小组只允许小组组长发帖！");
+			ikNotice("本小组只允许小组组长发帖！");
 		}
 
 		//帖子类型 暂时屏蔽这个功能
@@ -68,19 +68,19 @@ switch($ts){
 		
 		
 		if($title==''){
-			tsNotice('不要这么偷懒嘛，多少请写一点内容哦^_^');
+			ikNotice('不要这么偷懒嘛，多少请写一点内容哦^_^');
 			
 		}elseif($content==''){
 
-			tsNotice('没有任何内容是不允许你通过滴^_^');
+			ikNotice('没有任何内容是不允许你通过滴^_^');
 			
 		}elseif(mb_strlen($title,'utf8')>64){//限制发表内容多长度，默认为30
 			
-		 	tsNotice('标题很长很长很长很长...^_^');
+		 	ikNotice('标题很长很长很长很长...^_^');
 		
 		}elseif(mb_strlen($content,'utf8')>20000){//限制发表内容多长度，默认为1w
 			
-		 	tsNotice('发这么多内容干啥^_^');
+		 	ikNotice('发这么多内容干啥^_^');
 		
 		}else{
 			
@@ -130,7 +130,7 @@ switch($ts){
 			$db->query("update ".dbprefix."user_info set `count_score`='".$strScore['score']."' where userid='$userid'");
 	
 		
-			header("Location: ".SITE_URL.tsUrl('group','topic',array('id'=>$topicid)));
+			header("Location: ".SITE_URL.ikUrl('group','topic',array('id'=>$topicid)));
 
 			
 		}

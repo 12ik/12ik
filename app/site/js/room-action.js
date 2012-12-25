@@ -8,7 +8,7 @@
 			init='',
 			site_is_commercial = el.attr('commercial')==null ? false : true;//是否是推广
 		$.post_withck(
-			siteacurl,{'siteid':siteid,'ts':'like'},
+			siteacurl,{'siteid':siteid,'ik':'like'},
 			function(res){
 				var res = $.parseJSON(res);
 				if(res.r==1)
@@ -31,10 +31,10 @@
 										var fllowdata ='';
 										if($('#is_follow').attr('checked') == 'checked'){
 											//收听
-											fllowdata = {'ts':'follow','siteid':siteid,'isfollow':'0'};
+											fllowdata = {'ik':'follow','siteid':siteid,'isfollow':'0'};
 										}
 										else{
-											fllowdata = {'ts':'unfollow','siteid':siteid,'isfollow':'1'};
+											fllowdata = {'ik':'unfollow','siteid':siteid,'isfollow':'1'};
 										}
 										$.post_withck(
 											url,fllowdata,
@@ -73,13 +73,13 @@
 			site_is_commercial = el.attr('commercial')==null ? false : true;//是否是推广
 						
 		$.post_withck(
-			siteacurl,{'siteid':siteid,'ts':'unlike'},
+			siteacurl,{'siteid':siteid,'ik':'unlike'},
 			function(res){
 				var res = $.parseJSON(res);
 				
 				if (site_is_commercial){
 					//推广
-                        $.post_withck(siteacurl,{'ts':'unfollow'},function (o) {location.reload();});
+                        $.post_withck(siteacurl,{'ik':'unfollow'},function (o) {location.reload();});
 
                 }else{
 					
@@ -98,7 +98,7 @@
 											if($('#un_follow').attr('checked') == 'checked')
 											{
 												//不收听广播
-												fllowdata = {'ts':'unfollow','siteid':siteid,'isfollow':'1'};
+												fllowdata = {'ik':'unfollow','siteid':siteid,'isfollow':'1'};
 											}else{
 												location.reload(1);
 											}

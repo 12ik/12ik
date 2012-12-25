@@ -4,13 +4,13 @@ defined('IN_IK') or die('Access Denied.');
 //用户是否登录
 $userid = aac('user')->isLogin();
 
-switch($ts){
+switch($ik){
 	
 	//设置头像
 	case "setface":
 
 		//上传
-		$arrUpload = tsUpload($_FILES['picfile'],$userid,'user/face',array('jpg','gif','png'));
+		$arrUpload = ikUpload($_FILES['picfile'],$userid,'user/face',array('jpg','gif','png'));
 		
 		if($arrUpload){
 
@@ -25,10 +25,10 @@ switch($ts){
 			ClearAppCache($app.'/face/'.$arrUpload['path']);
 
 			
-			tsNotice("头像修改成功！","点击返回",$_SERVER['HTTP_REFERER']);
+			ikNotice("头像修改成功！","点击返回",$_SERVER['HTTP_REFERER']);
 			
 		}else{
-			tsNotice("上传出问题啦！");
+			ikNotice("上传出问题啦！");
 		}
 
 		break;
@@ -39,13 +39,13 @@ switch($ts){
 		$strUser = $db->once_fetch_assoc("select username from ".dbprefix."user_info where userid='$userid'");
 		$username = t($_POST['username']);
 
-		if($IK_USER['user'] == '') tsNotice("机房重地，闲人免进！");
-		if($username == '') tsNotice("不管做什么都需要有一个名号吧^_^");
-		if(mb_strlen($username,'utf8') < 2 || mb_strlen($username,'utf8') > 14) tsNotice("名字长度必须在 2 到 14 汉字之间!");
+		if($IK_USER['user'] == '') ikNotice("机房重地，闲人免进！");
+		if($username == '') ikNotice("不管做什么都需要有一个名号吧^_^");
+		if(mb_strlen($username,'utf8') < 2 || mb_strlen($username,'utf8') > 14) ikNotice("名字长度必须在 2 到 14 汉字之间!");
 		
 		if($username != $strUser['username']){
 			$isusername = $db->once_num_rows("select * from ".dbprefix."user_info where username='$username'");
-			if($isusername > 0) tsNotice("用户名已经存在，请换个用户名！");
+			if($isusername > 0) ikNotice("用户名已经存在，请换个用户名！");
 		}
 		
 		//更新数据
@@ -60,7 +60,7 @@ switch($ts){
 			'about'			=> h($_POST['about']),
 		));
 
-		tsNotice("基本资料更新成功！");
+		ikNotice("基本资料更新成功！");
 
 		break;
 		
@@ -83,9 +83,9 @@ switch($ts){
 
 		$db->query("update ".dbprefix."user_info set `areaid`='$areaid' where userid='$userid'");
 		
-		$_SESSION['tsuser']['areaid'] = $areaid;
+		$_SESSION['ikuser']['areaid'] = $areaid;
 
-		tsNotice("常居地更新成功！");
+		ikNotice("常居地更新成功！");
 		
 		break;
 		
@@ -94,21 +94,21 @@ switch($ts){
 		
 		$userid = intval($IK_USER['user']['userid']);
 		
-		if($userid == 0) tsNotice('你应该出发去火星报到啦。');
+		if($userid == 0) ikNotice('你应该出发去火星报到啦。');
 		
 		$oldpwd = trim($_POST['oldpwd']);
 		$newpwd = trim($_POST['newpwd']);
 		$renewpwd = trim($_POST['renewpwd']);
 		
-		if($oldpwd == '' || $newpwd=='' || $renewpwd=='') tsNotice("所有项都不能为空！");
+		if($oldpwd == '' || $newpwd=='' || $renewpwd=='') ikNotice("所有项都不能为空！");
 		
 		$strUser = $new['user']->find('user',array(
 			'userid'=>$userid,
 		));
 		
-		if(md5($strUser['salt'].$oldpwd) != $strUser['pwd']) tsNotice("旧密码输入有误！");
+		if(md5($strUser['salt'].$oldpwd) != $strUser['pwd']) ikNotice("旧密码输入有误！");
 		
-		if($newpwd != $renewpwd) tsNotice('两次输入新密码密码不一样！');
+		if($newpwd != $renewpwd) ikNotice('两次输入新密码密码不一样！');
 		
 		//更新密码
 		$salt = md5(rand());
@@ -120,7 +120,7 @@ switch($ts){
 			'userid'=>$userid
 		));
 		
-		tsNotice("密码修改成功！");
+		ikNotice("密码修改成功！");
 		
 		break;
 	
@@ -140,7 +140,7 @@ switch($ts){
 		
 		if($followNum > '0'){
 			
-			tsNotice("请不要重复关注同一用户！");
+			ikNotice("请不要重复关注同一用户！");
 			
 		}else{
 			
@@ -164,7 +164,7 @@ switch($ts){
 			$msg_userid = '0';
 			$msg_touserid = $userid_follow;
 			$msg_title = '恭喜，您被人跟随啦！看看他是谁吧';
-			$msg_content = '恭喜，您被人跟随啦！看看他是谁吧<br />'.SITE_URL.tsUrl('hi','',array('id'=>$strdoname['doname']));
+			$msg_content = '恭喜，您被人跟随啦！看看他是谁吧<br />'.SITE_URL.ikUrl('hi','',array('id'=>$strdoname['doname']));
 			aac('message')->sendmsg($msg_userid,$msg_touserid,$msg_title,$msg_content);
 			
 			$strUser = $db->once_fetch_assoc("select userid,username,path,face from ".dbprefix."user_info where `userid`='$userid_follow'");
@@ -175,12 +175,12 @@ switch($ts){
 			
 			$strdoname = aac('user')->find('user_info',array('userid'=>$userid_follow));
 			$feed_data = array(
-				'link'	=> SITE_URL.tsUrl('hi','',array('id'=>$strdoname['doname'])),
+				'link'	=> SITE_URL.ikUrl('hi','',array('id'=>$strdoname['doname'])),
 				'username'	=> $strUser['username'],
 			);
 			
 			if($strUser['face']!=''){
-				$feed_data['face'] = SITE_URL.tsXimg($strUser['face'],'user',48,48,$strUser['path']);
+				$feed_data['face'] = SITE_URL.ikXimg($strUser['face'],'user',48,48,$strUser['path']);
 			}else{
 				$feed_data['face'] = SITE_URL.'public/images/user_normal.jpg';
 			}
@@ -191,7 +191,7 @@ switch($ts){
 			
 			$strdoname = aac('user')->find('user_info',array('userid'=>$userid_follow));
 
-			header("Location: ".SITE_URL.tsUrl('hi','',array('id'=>$strdoname['doname'])));
+			header("Location: ".SITE_URL.ikUrl('hi','',array('id'=>$strdoname['doname'])));
 			
 		}
 		
@@ -218,7 +218,7 @@ switch($ts){
 		$db->query("update ".dbprefix."user_info set `count_follow`='$count_follow_userid',`count_followed`='$count_followed_userid' where userid='$userid_follow'");
 		
 		$strdoname = aac('user')->find('user_info',array('userid'=>$userid_follow));
-		header("Location: ".SITE_URL.tsUrl('hi','',array('id'=>$strdoname['doname'])));
+		header("Location: ".SITE_URL.ikUrl('hi','',array('id'=>$strdoname['doname'])));
 		
 		break;
 		
@@ -254,22 +254,22 @@ switch($ts){
 		$doname = trim($_POST['doname']);
 		if(empty($doname))
 		{
-		  tsNotice("个性域名不能为空！");
+		  ikNotice("个性域名不能为空！");
 		}else if(strlen($doname)<2)
 		{
-		  tsNotice("个性域名至少要2位数字、字母、或下划线(_)组成！");	
+		  ikNotice("个性域名至少要2位数字、字母、或下划线(_)组成！");	
 		  
 		}else if(!preg_match ( '/^[A-Za-z0-9]+([._\-\+]*[A-Za-z0-9]+)*$/', $doname ))
 		{
-		   tsNotice("个性域名必须是数字、字母或下划线(_)组成！");	
+		   ikNotice("个性域名必须是数字、字母或下划线(_)组成！");	
 		}
 		$ishave = aac('user')->haveDoname($doname);
 		if($ishave)
 		{
-			tsNotice("该域名已经被其他人抢注了,请试试别的吧！");
+			ikNotice("该域名已经被其他人抢注了,请试试别的吧！");
 		}else{
 			aac('user')->update('user_info',array('userid'=>$userid), array('doname'=>$doname));
-			tsNotice("个性域名修改成功！");
+			ikNotice("个性域名修改成功！");
 		}
 		break;
 }

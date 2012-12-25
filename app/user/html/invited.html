@@ -15,7 +15,7 @@ $(document).ready(function() {
 				required: true,
 				minlength: 2,
 				maxlength: 15,
-				remote:"{SITE_URL}index.php?app=user&ac=check&ts=isusername"
+				remote:"{SITE_URL}index.php?app=user&ac=check&ik=isusername"
 			}
 		},
 		messages: {
@@ -51,7 +51,7 @@ $(document).ready(function() {
 	<div class="cleft">
     
 <div class="invitedbd">
-<form id="signupform" method="post" action="{SITE_URL}{tsUrl('user','register',array('ts'=>'from_invite_user'))}">
+<form id="signupform" method="post" action="{SITE_URL}{ikUrl('user','register',array('ik'=>'from_invite_user'))}">
     <h3>请给自己选一个名号和密码，然后马上进入爱客网</h3>
     <div class="indent">
         <br>你的名号(以后大家怎么称呼你。建议五字内的中文名。<br>

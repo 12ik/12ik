@@ -18,19 +18,19 @@
                             <div class="sub-item">
                               
                                     <div class="pic">
-                                        <a href="{SITE_URL}{tsUrl('group','show',array('id'=>$item[groupid]))}">
+                                        <a href="{SITE_URL}{ikUrl('group','show',array('id'=>$item[groupid]))}">
                                         <img data-defer-src="{$item[icon_48]}" src="{$item[icon_48]}" alt="{$item[groupname]}">
                                         </a>
                                         {if in_array($item['groupid'],$myGroup)}
                                         <span class="joined">已加入</span>
                                         {else}
-                                        <a class="joingroup" href="{SITE_URL}{tsUrl('group','do',array('ts'=>'join','groupid'=>$item['groupid']))}">+加入</a>
+                                        <a class="joingroup" href="{SITE_URL}{ikUrl('group','do',array('ik'=>'join','groupid'=>$item['groupid']))}">+加入</a>
                                         {/if}
                                         
                                     </div>
                                     <div class="info">
                                             <div class="title">
-                                                <a href="{SITE_URL}{tsUrl('group','show',array('id'=>$item[groupid]))}" title="{$item[groupname]}" target="_blank">{$item[groupname]}</a>
+                                                <a href="{SITE_URL}{ikUrl('group','show',array('id'=>$item[groupid]))}" title="{$item[groupname]}" target="_blank">{$item[groupname]}</a>
                                                 <span class="follow-num">{$item[count_user]}个成员</span>
                                             </div>
                                                         
@@ -50,12 +50,12 @@
         <div class="cright">
         
                 <!--{if $IK_APP[options][iscreate]==0 || $IK_USER[user][isadmin]==1}-->
-                <p class="pl2">&gt; <a href="{SITE_URL}{tsUrl('group','create')}">创建小组</a></p>
+                <p class="pl2">&gt; <a href="{SITE_URL}{ikUrl('group','create')}">创建小组</a></p>
                 <!--{/if}-->
                 <h2>热门帖子</h2>
                 <div class="line23">
                 {loop $arrTopic $key $item}
-                <a href="{SITE_URL}{tsUrl('group','topic',array('id'=>$item[topicid]))}">{$item[title]}</a> ({$item[count_comment]})
+                <a href="{SITE_URL}{ikUrl('group','topic',array('id'=>$item[topicid]))}">{$item[title]}</a> ({$item[count_comment]})
                 <br />
                 {/loop}
                 </div>
@@ -65,7 +65,7 @@
                 <div class="line23">
                 <!--{if $arrNewGroup}-->
                 <!--{loop $arrNewGroup $key $item}-->
-                <a href="{SITE_URL}{tsUrl('group','show',array('id'=>$item[groupid]))}">{$item[groupname]}</a> ({$item[count_user]}<!--{if $item[uptime]>strtotime(date('Y-m-d 00:00:00'))}-->/<font color="orange">{$item[count_topic_today]}</font><!--{else}--><!--{/if}-->)<br>
+                <a href="{SITE_URL}{ikUrl('group','show',array('id'=>$item[groupid]))}">{$item[groupname]}</a> ({$item[count_user]}<!--{if $item[uptime]>strtotime(date('Y-m-d 00:00:00'))}-->/<font color="orange">{$item[count_topic_today]}</font><!--{else}--><!--{/if}-->)<br>
                 <!--{/loop}-->
                 <!--{/if}-->
                 </div>

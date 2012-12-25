@@ -33,7 +33,7 @@ IK.add('uploadify', {path: '{SITE_URL}public/js/lib/jquery.uploadify.min.js', ty
     <div class="main"> 
          
         <div class="content-nav">
-        <a href="{SITE_URL}{tsUrl('site','photos',array('ts'=>'list','photosid'=>$photosid))}">&gt; 返回{$strPhotos[title]}</a>
+        <a href="{SITE_URL}{ikUrl('site','photos',array('ik'=>'list','photosid'=>$photosid))}">&gt; 返回{$strPhotos[title]}</a>
         </div>
         
         <h1>{$title}</h1>
@@ -59,13 +59,13 @@ IK.add('uploadify', {path: '{SITE_URL}public/js/lib/jquery.uploadify.min.js', ty
    
 </div>
 <div>
-    无法上传？<a href="{SITE_URL}{tsUrl('site','photos',array('ts'=>'baseupload','photosid'=>$photosid))}">使用普通方式上传照片 &gt;</a>
+    无法上传？<a href="{SITE_URL}{ikUrl('site','photos',array('ik'=>'baseupload','photosid'=>$photosid))}">使用普通方式上传照片 &gt;</a>
 </div>
 
 <script type="text/javascript">
-    var loadurl = "{SITE_URL}{tsUrl('site','photos',array('ts'=>'addphoto',photosid=>$photosid))}";
+    var loadurl = "{SITE_URL}{ikUrl('site','photos',array('ik'=>'addphoto',photosid=>$photosid))}";
 	var objdata = {'userid': '{$IK_USER[user][userid]}','photosid': '{$photosid}'};
-	var jumpurl = "{SITE_URL}{tsUrl('site','photos',array('ts'=>'complete',photosid=>$photosid,'addtime'=>$addtime))}";
+	var jumpurl = "{SITE_URL}{ikUrl('site','photos',array('ik'=>'complete',photosid=>$photosid,'addtime'=>$addtime))}";
 IK('uploadify', function() {
 
 	$("#uploadify").uploadify({

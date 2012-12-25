@@ -7,7 +7,7 @@ function isinstall(appname){
 	$('#isinstall_'+appname).html('<img src="public/images/loading.gif">');
 	$.ajax({
 		type: "GET",
-		url:  "index.php?app=system&ac=apps&ts=install&appname="+appname,
+		url:  "index.php?app=system&ac=apps&ik=install&appname="+appname,
 		success: function(result){
 			if(result=='1'){
 				window.location.reload(true); 
@@ -34,7 +34,7 @@ function isupdate(appkey,version){
 function isappnav(appkey,appname){
 	$.ajax({
 		type:"POST",
-		url:"index.php?app=system&ac=apps&ts=appnav",
+		url:"index.php?app=system&ac=apps&ik=appnav",
 		data:"&appkey="+appkey+"&appname="+appname,
 		beforeSend:function(){},
 		success:function(result){
@@ -49,7 +49,7 @@ function isappnav(appkey,appname){
 function unisappnav(appkey){
 	$.ajax({
 		type:"POST",
-		url:"index.php?app=system&ac=apps&ts=unappnav",
+		url:"index.php?app=system&ac=apps&ik=unappnav",
 		data:"&appkey="+appkey,
 		beforeSend:function(){},
 		success:function(result){
@@ -69,8 +69,8 @@ function unisappnav(appkey){
 
 <div class="tabnav">
 <ul>
-<li class="select"><a href="index.php?app=system&ac=apps&ts=list">APP列表</a></li>
-<!-- <li><a href="index.php?app=system&ac=installonline&ts=list">在线安装</a></li> -->
+<li class="select"><a href="index.php?app=system&ac=apps&ik=list">APP列表</a></li>
+<!-- <li><a href="index.php?app=system&ac=installonline&ik=list">在线安装</a></li> -->
 </ul>
 </div>
 

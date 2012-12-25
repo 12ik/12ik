@@ -33,7 +33,7 @@ function editor2html($str) {
 	foreach ( $photos [2] as $item ) {
 		$strPhoto = aac ( 'photo' )->getPhotoForApp ( $item );
 		$str = str_replace ( "[photo={$item}]", '<a href="' . SITE_URL . 'uploadfile/photo/' . $strPhoto ['photourl'] . '" target="_blank">
-							<img class="thumbnail" src="' . SITE_URL . tsXimg ( $strPhoto ['photourl'], 'photo', '500', '500', $strPhoto ['path'] ) . '" title="' . $strTopic ['title'] . $item . '" /></a>', $str );
+							<img class="thumbnail" src="' . SITE_URL . ikXimg ( $strPhoto ['photourl'], 'photo', '500', '500', $strPhoto ['path'] ) . '" title="' . $strTopic ['title'] . $item . '" /></a>', $str );
 	}
 	
 	//匹配附件
@@ -43,7 +43,7 @@ function editor2html($str) {
 			$strAttach = aac ( 'attach' )->getOneAttach ( $aitem );
 			if ($strAttach ['isattach'] == '1') {
 				$str = str_replace ( "[attach={$aitem}]", '<span class="attach_down">附件下载：
-									 <a href="' . SITE_URL . 'index.php?app=attach&ac=ajax&ts=down&attachid=' . $aitem . '" target="_blank">' . $strAttach ["attachname"] . '</a></span>', $str );
+									 <a href="' . SITE_URL . 'index.php?app=attach&ac=ajax&ik=down&attachid=' . $aitem . '" target="_blank">' . $strAttach ["attachname"] . '</a></span>', $str );
 			} else {
 				$str = str_replace ( "[attach={$aitem}]", '', $str );
 			}
@@ -96,7 +96,7 @@ function editor2html($str) {
 
 //12IK Notice
 
-function tsNotice($notice, $button = '点击返回', $url = 'javascript:history.back(-1);', $isAutoGo = false) {
+function ikNotice($notice, $button = '点击返回', $url = 'javascript:history.back(-1);', $isAutoGo = false) {
 	global $app;
 	global $IK_SITE;
 	global $IK_APP;
@@ -692,9 +692,9 @@ function pubTemplate($file) {
  * @return boolearn
  */
 function addAction($hook, $actionFunc) {
-	global $tsHooks;
-	if (! @in_array ( $actionFunc, $tsHooks [$hook] )) {
-		$tsHooks [$hook] [] = $actionFunc;
+	global $ikHooks;
+	if (! @in_array ( $actionFunc, $ikHooks [$hook] )) {
+		$ikHooks [$hook] [] = $actionFunc;
 	}
 	
 	return true;
@@ -706,10 +706,10 @@ function addAction($hook, $actionFunc) {
  * @param string $hook
  */
 function doAction($hook) {
-	global $tsHooks;
+	global $ikHooks;
 	$args = array_slice ( func_get_args (), 1 );
-	if (isset ( $tsHooks [$hook] )) {
-		foreach ( $tsHooks [$hook] as $function ) {
+	if (isset ( $ikHooks [$hook] )) {
+		foreach ( $ikHooks [$hook] as $function ) {
 			$string = call_user_func_array ( $function, $args );
 		}
 	}
@@ -773,7 +773,7 @@ function md10($str = '') {
  * $isRatio:1 安指定比例截图 0 等比截图
  * $conditions 数组形式 arrary('srcX'=>0, 'srcY'=>0, 'srcW'=>0, 'isRatio'=>0)
  */
-function tsXimg($file, $app, $w, $h, $path = '', $c = '0', $conditions='') {
+function ikXimg($file, $app, $w, $h, $path = '', $c = '0', $conditions='') {
 	
 	if (! $file) {
 		return;
@@ -841,16 +841,16 @@ function ob_gzip($content) {
 }
 
 /* tsUrl()  By 12ik
- * tsUrl提供至少4种的url展示方式
+ * ikUrl提供至少4种的url展示方式
  * (1)index.php?app=group&ac=topic&topicid=1 //标准默认模式
  * (2)index.php/group/topic/topicid-1   //path_info模式
  * (3)group-topic-topicid-1.html   //rewrite模式1
- * (4)group/topic/ts-user/topicid-1/   //rewrite模式2
+ * (4)group/topic/ik-user/topicid-1/   //rewrite模式2
  * (5)group/topic/1   //rewrite模式2
  * (6)group/topic/id/1   //rewrite模式2
  * (7)group/topic/1/   //rewrite模式2
  */
-function tsUrl($app, $ac = '', $params = array()) {
+function ikUrl($app, $ac = '', $params = array()) {
 	//global $IK_SITE;
 	//echo $IK_SITE['base']['site_urltype'];
 	if (is_file ( 'data/system_options.php' )) {
@@ -940,7 +940,7 @@ function tsUrl($app, $ac = '', $params = array()) {
 			$str .= '/'.$k.'/'.$v;
 		}
 		$str=str_replace('/id','',$str);
-		$str=str_replace('/ts','',$str);
+		$str=str_replace('/ik','',$str);
 		if($ac==''){
 			$ac='';
 		}else{
@@ -962,7 +962,7 @@ function tsUrl($app, $ac = '', $params = array()) {
 //reurl BY Charm 2012-4-10
 
 
-function reurl(){
+function reurl(){ 
 	$options = fileRead('data/system_options.php');	
 	$scriptName = explode('index.php',$_SERVER['SCRIPT_NAME']);
 	$rurl = substr($_SERVER['REQUEST_URI'], strlen($scriptName[0]));
@@ -1106,7 +1106,7 @@ function reurl(){
 								$paramid = substr($v, strlen($v)-2);
 								if($paramid!='id')
 								{
-									$_GET['ts']=$v;
+									$_GET['ik']=$v;
 									break;								
 								}
 
@@ -1180,7 +1180,7 @@ function delDirFile($dir) {
  *
  * 返回数组：array('name'=>'','path'=>'','url'=>'','path'=>'','size'=>'')
  */
-function tsUpload($files, $projectid, $dir, $uptypes) {
+function ikUpload($files, $projectid, $dir, $uptypes) {
 	
 	//ClearOptCache('group');
 
@@ -1224,7 +1224,7 @@ function tsUpload($files, $projectid, $dir, $uptypes) {
 }
 
 //扫描目录
-function tsScanDir($dir, $isDir = null) {
+function ikScanDir($dir, $isDir = null) {
 	
 	if ($isDir == null) {
 		$dirs = array_filter ( glob ( $dir . '/' . '*' ), 'is_dir' );

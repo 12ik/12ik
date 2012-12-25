@@ -1,13 +1,13 @@
 <?php
 defined('IN_IK') or die('Access Denied.');
 
-switch($ts){
+switch($ik){
 	
 	case "list":
 		$nameid = $_GET['nameid'];
 		//列表 
 		//$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-		//$url = SITE_URL.'index.php?app=article&ac=admin&mg=cate&ts=list&page=';
+		//$url = SITE_URL.'index.php?app=article&ac=admin&mg=cate&ik=list&page=';
 		//$lstart = $page*10-10;
 
 		$arrCate = $db->fetch_all_assoc("select * from ".dbprefix."article_categories where type='".$nameid."' order by catid desc");
@@ -34,7 +34,7 @@ switch($ts){
 		$catid = aac('article')->create('article_categories',array('name'=>$name, 'type'=>$nameid));
 		aac('article')->update('article_categories', array('catid'=>$catid),array('blockmodel'=>1, 'subcatid'=>$catid));
 		
-		qiMsg("添加成功",'返回到列表',SITE_URL.'index.php?app=article&ac=admin&mg=cate&ts=list&nameid='.$nameid);
+		qiMsg("添加成功",'返回到列表',SITE_URL.'index.php?app=article&ac=admin&mg=cate&ik=list&nameid='.$nameid);
 		
 	
 		break;
@@ -55,7 +55,7 @@ switch($ts){
 		
 		$db->query("update ".dbprefix."article_categories set `name`='$name' where `catid`='$cateid'");
 		
-		qiMsg("添加成功",'返回到列表',SITE_URL.'index.php?app=article&ac=admin&mg=cate&ts=list&nameid='.$type);
+		qiMsg("添加成功",'返回到列表',SITE_URL.'index.php?app=article&ac=admin&mg=cate&ik=list&nameid='.$type);
 		
 		break;
 	

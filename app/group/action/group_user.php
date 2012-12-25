@@ -8,7 +8,7 @@ $groupid = intval($_GET['groupid']);
 //判断是否存在这个群组
 $isGroup = $db->once_num_rows("select * from ".dbprefix."group where groupid='$groupid'");
 
-if($isGroup == '0') tsNotice("你是坏蛋吗？不是请返回！");
+if($isGroup == '0') ikNotice("你是坏蛋吗？不是请返回！");
 
 $strGroup = $db->once_fetch_assoc("select * from ".dbprefix."group where groupid='$groupid'");
 
@@ -30,7 +30,7 @@ if(is_array($strAdmin)){
 
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
-$url = SITE_URL.tsUrl('group','group_user',array('groupid'=>$groupid,'page'=>''));
+$url = SITE_URL.ikUrl('group','group_user',array('groupid'=>$groupid,'page'=>''));
 
 
 $lstart = $page*40-40;

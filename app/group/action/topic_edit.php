@@ -4,7 +4,7 @@ defined('IN_IK') or die('Access Denied.');
 //用户是否登录
 $userid = aac('user')->isLogin();
 
-switch($ts){
+switch($ik){
 	
 	//编辑帖子
 	case "":
@@ -60,22 +60,22 @@ switch($ts){
 		
 		$iscomment = $_POST['iscomment'];
 		
-		if($topicid == '' || $title=='' || $content=='') tsNotice("都不能为空的哦!");
+		if($topicid == '' || $title=='' || $content=='') ikNotice("都不能为空的哦!");
 		
 		if($title==''){
-			tsNotice('不要这么偷懒嘛，多少请写一点内容哦^_^');
+			ikNotice('不要这么偷懒嘛，多少请写一点内容哦^_^');
 			
 		}elseif($content==''){
 
-			tsNotice('没有任何内容是不允许你通过滴^_^');
+			ikNotice('没有任何内容是不允许你通过滴^_^');
 			
 		}elseif(mb_strlen($title,'utf8')>64){//限制发表内容多长度，默认为30
 			
-		 	tsNotice('标题很长很长很长很长...^_^');
+		 	ikNotice('标题很长很长很长很长...^_^');
 		
 		}elseif(mb_strlen($content,'utf8')>20000){//限制发表内容多长度，默认为1w
 			
-		 	tsNotice('发这么多内容干啥^_^');
+		 	ikNotice('发这么多内容干啥^_^');
 		
 		}
 		
@@ -101,7 +101,7 @@ switch($ts){
 			
 		
 
-			header("Location: ".SITE_URL.tsUrl('group','topic',array('id'=>$topicid)));
+			header("Location: ".SITE_URL.ikUrl('group','topic',array('id'=>$topicid)));
 			
 		}else{
 			header("Location: ".SITE_URL);

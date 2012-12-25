@@ -1,6 +1,6 @@
 <?php 
 
-switch($ts){
+switch($ik){
 	
 	case "":
 		

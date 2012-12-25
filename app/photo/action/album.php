@@ -1,6 +1,6 @@
 <?php 
 defined('IN_IK') or die('Access Denied.');
-switch($ts){
+switch($ik){
 
 	//我的相册/用户相册
 	case "":
@@ -10,7 +10,7 @@ switch($ts){
 		
 		$page = isset($_GET['page']) ? $_GET['page'] : '1';
 		
-		$url = SITE_URL."index.php?app=photo&ac=album&ts=user&userid=".$userid."&page-";
+		$url = SITE_URL."index.php?app=photo&ac=album&ik=user&userid=".$userid."&page-";
 		
 		$lstart = $page*6-6;
 		
@@ -69,7 +69,7 @@ switch($ts){
 		
 		$page = isset($_GET['page']) ? $_GET['page'] : '1';
 		
-		$url = SITE_URL."index.php?app=photo&ac=album&ts=photo&albumid=".$albumid."&page=";
+		$url = SITE_URL."index.php?app=photo&ac=album&ik=photo&albumid=".$albumid."&page=";
 		
 		$lstart = $page*20-20;
 		
@@ -117,7 +117,7 @@ switch($ts){
 		
 		$db->query("update ".dbprefix."photo_album set `albumname`='$albumname',`albumdesc`='$albumdesc' where `albumid`='$albumid'");
 		
-		header("Location: ".SITE_URL."index.php?app=photo&ac=album&ts=photo&albumid=".$albumid);
+		header("Location: ".SITE_URL."index.php?app=photo&ac=album&ik=photo&albumid=".$albumid);
 		
 		break;
 		
@@ -166,14 +166,14 @@ switch($ts){
 			
 			$feed_data = array(
 				'photonum' => $num['count(*)'],
-				'albumlink'	=> SITE_URL.tsUrl('photo','album',array('ts'=>'photo','albumid'=>$strAlbum['albumid'])),
+				'albumlink'	=> SITE_URL.ikUrl('photo','album',array('ik'=>'photo','albumid'=>$strAlbum['albumid'])),
 				'albumname'	=> $strAlbum['albumname'],
 			);
 			
 			foreach($arrPhoto as $key=>$item){
 				if($key < 4){
-					$feed_data['photolink'.$key] = SITE_URL.tsUrl('photo','show',array('photoid'=>$item['photoid']));
-					$feed_data['photo'.$key] = SITE_URL.tsXimg($item['photourl'],'photo',100,100,$item['path']);
+					$feed_data['photolink'.$key] = SITE_URL.ikUrl('photo','show',array('photoid'=>$item['photoid']));
+					$feed_data['photo'.$key] = SITE_URL.ikXimg($item['photourl'],'photo',100,100,$item['path']);
 				}
 			}
 			
@@ -211,7 +211,7 @@ switch($ts){
 			$db->query("update ".dbprefix."photo_album set `albumface`='$albumface' where `albumid`='$albumid'");
 		}
 		
-		header("Location: ".SITE_URL.tsUrl('photo','album',array('ts'=>'photo','albumid'=>$albumid)));
+		header("Location: ".SITE_URL.ikUrl('photo','album',array('ik'=>'photo','albumid'=>$albumid)));
 		
 		break;
 	
@@ -232,7 +232,7 @@ switch($ts){
 		
 		$db->query("delete from ".dbprefix."photo where albumid='$albumid'");
 		
-		header("Location: ".SITE_URL."index.php?app=photo&ac=album&ts=user&userid=".$userid);
+		header("Location: ".SITE_URL."index.php?app=photo&ac=album&ik=user&userid=".$userid);
 		
 		break;
 }

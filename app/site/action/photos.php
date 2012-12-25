@@ -4,12 +4,12 @@ $photosid = intval($_GET['photosid']);
 $strPhotos = aac('site')->find('site_photos',array('photosid'=>$photosid));;
 $siteid = $strPhotos['siteid'];
 $roomid = $strPhotos['roomid']; //导航
-$userid = $_SESSION['tsuser']['userid'];
+$userid = $_SESSION['ikuser']['userid'];
 //加载风格
 include_once 'theme.php';
 
 //页面
-switch ($ts) {
+switch ($ik) {
 	case "" :
 		//显示
 
@@ -38,7 +38,7 @@ switch ($ts) {
 		$photoid = aac('site')->create('site_photos_pic',$arrData);
 
 		//上传
-		$arrUpload = tsUpload($_FILES['Filedata'],$photoid,'site/photos',array('jpg','gif','png'));
+		$arrUpload = ikUpload($_FILES['Filedata'],$photoid,'site/photos',array('jpg','gif','png'));
 		
 		if($arrUpload){
 
@@ -71,7 +71,7 @@ switch ($ts) {
 
 	case "addinfo" :
 	
-		header("Location: ".SITE_URL.tsUrl('site','photos',array('ts'=>'list','photosid'=>$photosid)));
+		header("Location: ".SITE_URL.ikUrl('site','photos',array('ik'=>'list','photosid'=>$photosid)));
 		break;	
 		
 	case "list" :
@@ -83,12 +83,12 @@ switch ($ts) {
 	case "photo" :
 		$photoid = intval($_GET['pid']);//照片id
 		if($photoid == 0){
-			header("Location: ".SITE_URL.tsUrl('site','photos',array('ts'=>'list','photosid'=>$photosid)));
+			header("Location: ".SITE_URL.ikUrl('site','photos',array('ik'=>'list','photosid'=>$photosid)));
 			exit;
 		}
 		$photoNum = $db->once_fetch_assoc("select count(*) from ".dbprefix."site_photos_pic where `photoid`='$photoid'");
 		if($photoNum['count(*)']==0){
-			header("Location: ".SITE_URL.tsUrl('site','photos',array('ts'=>'list','photosid'=>$photosid)));
+			header("Location: ".SITE_URL.ikUrl('site','photos',array('ik'=>'list','photosid'=>$photosid)));
 			exit;
 		}	
 		$strPhoto = aac('site')->find('site_photos_pic',array('photoid'=>$photoid));

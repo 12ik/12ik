@@ -10,7 +10,7 @@ var loading = {
 function loadSite(text, page)
 {
 	//alert(text)
-	var url = siteUrl+'index.php?app=site&ac=explore&ts=tag';
+	var url = siteUrl+'index.php?app=site&ac=explore&ik=tag';
 	$.ajax({
 		async: false,//同步加载数据
 		type:"POST",

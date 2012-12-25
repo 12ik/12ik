@@ -6,7 +6,7 @@ defined('IN_IK') or die('Access Denied.');
 if(is_file('plugins/'.$app.'/'.$plugin.'/'.$in.'.php')){
 	require_once('plugins/'.$app.'/'.$plugin.'/'.$in.'.php');
 }else{
-	tsNotice('sorry:no plugin!');
+	ikNotice('sorry:no plugin!');
 }
 
 //形如这样

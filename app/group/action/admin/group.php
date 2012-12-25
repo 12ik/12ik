@@ -4,12 +4,12 @@ defined('IN_IK') or die('Access Denied.');
  * 小组管理
  */	
 
-switch($ts){
+switch($ik){
 
 	//小组列表
 	case "list":
 		$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-		$url = SITE_URL.'index.php?app=group&ac=admin&mg=group&ts=list&page=';
+		$url = SITE_URL.'index.php?app=group&ac=admin&mg=group&ik=list&page=';
 		$lstart = $page*10-10;
 		$arrGroup = $db->fetch_all_assoc("select * from ".dbprefix."group order by addtime desc limit $lstart,10");
 		$groupNum = $db->once_num_rows("select * from ".dbprefix."group");
@@ -55,7 +55,7 @@ switch($ts){
 			$db->query("update ".dbprefix."group set `count_user`='$groupUserNum' where groupid='$groupid'");
 		}
 		//回到小组管理首页
-		header("Location: ".SITE_URL."index.php?app=group&ac=admin&mg=group&ts=list");
+		header("Location: ".SITE_URL."index.php?app=group&ac=admin&mg=group&ik=list");
 		break;
 	
 	//小组编辑
@@ -115,7 +115,7 @@ switch($ts){
 		$msg_userid = '0';
 		$msg_touserid = $strGroup['userid'];
 		$msg_title = '恭喜你，你申请的小组《'.$strGroup['groupname'].'》审核通过！快去看看吧';
-		$msg_content = '恭喜你，你申请的小组《'.$strGroup['groupname'].'》审核通过！快去看看吧<br />'.SITE_URL.tsUrl('group','show',array('id'=>$groupid));
+		$msg_content = '恭喜你，你申请的小组《'.$strGroup['groupname'].'》审核通过！快去看看吧<br />'.SITE_URL.ikUrl('group','show',array('id'=>$groupid));
 		aac('message')->sendmsg($msg_userid,$msg_touserid,$msg_title,$msg_content);
 		
 		qiMsg("小组审核通过！");
@@ -135,7 +135,7 @@ switch($ts){
 			$msg_userid = '0';
 			$msg_touserid = $strGroup['userid'];
 			$msg_title = '恭喜你，你的小组《'.$strGroup['groupname'].'》被推荐啦！';
-			$msg_content = '恭喜你，你的小组《'.$strGroup['groupname'].'》被推荐啦！快去看看吧<br />'.SITE_URL.tsUrl('group','show',array('id'=>$groupid));
+			$msg_content = '恭喜你，你的小组《'.$strGroup['groupname'].'》被推荐啦！快去看看吧<br />'.SITE_URL.ikUrl('group','show',array('id'=>$groupid));
 			aac('message')->sendmsg($msg_userid,$msg_touserid,$msg_title,$msg_content);
 			
 		}else{

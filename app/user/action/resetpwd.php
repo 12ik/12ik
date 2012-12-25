@@ -5,7 +5,7 @@ defined('IN_IK') or die('Access Denied.');
 $title = '重设密码';
 
 
-switch($ts){
+switch($ik){
 	case "":
 	
 		$email = trim($_GET['mail']);
@@ -17,9 +17,9 @@ switch($ts){
 		));
 		
 		if($email=='' || $resetpwd==''){
-			tsNotice("你应该去火星生活啦！");
+			ikNotice("你应该去火星生活啦！");
 		}elseif($userNum == 0){
-			tsNotice("你应该去火星生活啦！");
+			ikNotice("你应该去火星生活啦！");
 		}else{
 
 			include template("resetpwd");
@@ -43,9 +43,9 @@ switch($ts){
 		));
 		
 		if($email=='' || $pwd=='' || $repwd=='' || $resetpwd==''){
-			tsNotice("所有输入项都不能为空！");
+			ikNotice("所有输入项都不能为空！");
 		}elseif($userNum == '0'){
-			tsNotice("你应该去火星生活啦！");
+			ikNotice("你应该去火星生活啦！");
 		}else{
 		
 			$new['user']->update('user',array(
@@ -55,7 +55,7 @@ switch($ts){
 				'email'=>$email,
 			));
 			
-			tsNotice("密码修改成功^_^","点击登陆",SITE_URL.tsUrl('user','login'));
+			ikNotice("密码修改成功^_^","点击登陆",SITE_URL.ikUrl('user','login'));
 		}
 	
 		

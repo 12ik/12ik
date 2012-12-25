@@ -8,7 +8,7 @@ defined ( 'IN_IK' ) or die ( 'Access Denied.' );
  */
 
 //登录
-switch ($ts) {
+switch ($ik) {
 	case "" :
 		
 		$title = '登录后台';
@@ -32,7 +32,7 @@ switch ($ts) {
 		$strAdmin = $db->once_fetch_assoc ( "select * from " . dbprefix . "user where `email`='$email'" );
 		
 		if (md5 ( $strAdmin ['salt'] . $pwd ) !== $strAdmin ['pwd'])
-			tsNotice ( '用户密码错误！' );
+			ikNotice ( '用户密码错误！' );
 		
 		$strAdminInfo = $db->once_fetch_assoc ( "select userid,username,isadmin from " . dbprefix . "user_info where email='$email'" );
 		

@@ -10,11 +10,11 @@
 <div>
 <b>12ik创新社区新体验，内容互动性强，交流更方便</b><br><em>简单</em><em>快捷</em><em>方便</em><em>建设本地化，垂直型社区；目前已有<cite>{$count_user}</cite>位用户加入！</em>
 </div>
-<a class="submit" href="{SITE_URL}{tsUrl('user','register')}">加入我们</a>
+<a class="submit" href="{SITE_URL}{ikUrl('user','register')}">加入我们</a>
 </div>
 
 <div class="login">
-<form action="{SITE_URL}{tsUrl('user','login',array('ts'=>'do'))}" method="post" name="lzform" id="lzform">
+<form action="{SITE_URL}{ikUrl('user','login',array('ik'=>'do'))}" method="post" name="lzform" id="lzform">
 <fieldset>
 <legend>登录</legend>
 <div class="item">
@@ -45,19 +45,19 @@
 
 <div class="cleft">
 
-<h2>推荐小组<span class="pl">&nbsp;(<a href="{SITE_URL}{tsUrl('group','all')}">全部</a>) </span></h2>
+<h2>推荐小组<span class="pl">&nbsp;(<a href="{SITE_URL}{ikUrl('group','all')}">全部</a>) </span></h2>
 
 <div style="overflow:hidden;">
 <!--{if $arrRecommendGroup}-->
 <!--{loop $arrRecommendGroup $key $item}-->
 <div class="sub-item">
 <div class="pic">
-<a href="{SITE_URL}{tsUrl('group','show',array('id'=>$item[groupid]))}">
+<a href="{SITE_URL}{ikUrl('group','show',array('id'=>$item[groupid]))}">
 <img src="{$item[icon_48]}" alt="{$item[groupname]}">
 </a>
 </div>
 <div class="info">
-<a href="{SITE_URL}{tsUrl('group','show',array('id'=>$item[groupid]))}">{$item[groupname]}</a> ({$item[count_user]}/<font color="orange">{$item[count_topic]}</font>)             
+<a href="{SITE_URL}{ikUrl('group','show',array('id'=>$item[groupid]))}">{$item[groupname]}</a> ({$item[count_user]}/<font color="orange">{$item[count_topic]}</font>)             
 <p>{$item[groupdesc]}</p>
 </div>
 </div>
@@ -66,15 +66,15 @@
 </div>
 <div class="clear"></div>
 
-<h2>最热话题<span class="pl">&nbsp;(<a href="{SITE_URL}{tsUrl('group','all')}">更多</a>) </span></h2>
+<h2>最热话题<span class="pl">&nbsp;(<a href="{SITE_URL}{ikUrl('group','all')}">更多</a>) </span></h2>
 <div class="topic-list">
     <!--{if $arrHotTopic}-->
     <!--{loop $arrHotTopic $key $item}-->
 	<dl>
-    	<dt><a href="{SITE_URL}{tsUrl('user','space',array('id'=>$item[user][userid]))}"><img src="{$item[user][face]}"/></a></dt>
+    	<dt><a href="{SITE_URL}{ikUrl('user','space',array('id'=>$item[user][userid]))}"><img src="{$item[user][face]}"/></a></dt>
         <dd>
-        	<header class="title"><span><a href="{SITE_URL}{tsUrl('group','topic',array('id'=>$item[topicid]))}#comment" title="回复数">{$item[count_comment]}</a></span><a href="{SITE_URL}{tsUrl('group','topic',array('id'=>$item[topicid]))}" title="{$time[title]}">{$item[title]}</a></header>
-             <a href="{SITE_URL}{tsUrl('user','space',array('id'=>$item[user][userid]))}">{$item[user][username]}</a> <summary>{php echo getTime($item[addtime],time())} {$item[count_view]}次阅读</summary>
+        	<header class="title"><span><a href="{SITE_URL}{ikUrl('group','topic',array('id'=>$item[topicid]))}#comment" title="回复数">{$item[count_comment]}</a></span><a href="{SITE_URL}{ikUrl('group','topic',array('id'=>$item[topicid]))}" title="{$time[title]}">{$item[title]}</a></header>
+             <a href="{SITE_URL}{ikUrl('user','space',array('id'=>$item[user][userid]))}">{$item[user][username]}</a> <summary>{php echo getTime($item[addtime],time())} {$item[count_view]}次阅读</summary>
             <p>{$item[content]}</p>
         </dd>
     </dl>
@@ -93,50 +93,50 @@
     <!--{loop $arrHotUser $key $item}-->
     <dl class="obu">
         <dt>
-            <a href="{SITE_URL}{tsUrl('hi','',array('id'=>$item[doname]))}">
+            <a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[doname]))}">
             <img alt="{$item[username]}" class="m_sub_img" src="{$item[face]}" width="48" />
             </a>
         </dt>
         <dd>
-            <a href="{SITE_URL}{tsUrl('hi','',array('id'=>$item[doname]))}">{$item[username]}</a>
+            <a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[doname]))}">{$item[username]}</a>
         </dd>
     </dl>
     <!--{/loop}-->
  	<br clear="all"/>
     </div>
     
-<h2>最新创建小站&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·<span class="pl">&nbsp;(<a href="{SITE_URL}{tsUrl('site','explore',array('ts'=>'site'))}">全部</a>) </span></h2>
+<h2>最新创建小站&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·<span class="pl">&nbsp;(<a href="{SITE_URL}{ikUrl('site','explore',array('ik'=>'site'))}">全部</a>) </span></h2>
 <div class="indent">
     <!--{loop $arrNewSite $key $item}-->
     <dl class="obu">
         <dt>
-            <a href="{SITE_URL}{tsUrl('site','mine',array('siteid'=>$item[siteid]))}" target="_blank" title="{$item[sitename]}">
+            <a href="{SITE_URL}{ikUrl('site','mine',array('siteid'=>$item[siteid]))}" target="_blank" title="{$item[sitename]}">
             <img  class="m_sub_img" alt="{$item[sitename]}" src="{$item[icon_48]}" width="48" />
             </a>
         </dt>
         <dd>
-            <a href="{SITE_URL}{tsUrl('site','mine',array('siteid'=>$item[siteid]))}" target="_blank" title="$item[sitename]">$item[sitename]</a>
+            <a href="{SITE_URL}{ikUrl('site','mine',array('siteid'=>$item[siteid]))}" target="_blank" title="$item[sitename]">$item[sitename]</a>
         </dd>
     </dl>
     <!--{/loop}-->
     <br clear="all"/>
 </div>
 
-<h2>最新文章&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·<span class="pl">&nbsp;(<a href="{SITE_URL}{tsUrl('article','')}">全部</a>) </span></h2>
+<h2>最新文章&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·<span class="pl">&nbsp;(<a href="{SITE_URL}{ikUrl('article','')}">全部</a>) </span></h2>
 <div class="line23">
 <!--{if $arrArticle}-->
 <!--{loop $arrArticle $key $item}-->
-<a href="{SITE_URL}{tsUrl('article','show',array('id'=>$item[news][nid]))}">{$item[subject]}</a><br>
+<a href="{SITE_URL}{ikUrl('article','show',array('id'=>$item[news][nid]))}">{$item[subject]}</a><br>
 <!--{/loop}-->
 <!--{/if}-->
 </div>
 
     
-<h2>最新创建小组&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·<span class="pl">&nbsp;(<a href="{SITE_URL}{tsUrl('group','all')}">全部</a>) </span></h2>
+<h2>最新创建小组&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·<span class="pl">&nbsp;(<a href="{SITE_URL}{ikUrl('group','all')}">全部</a>) </span></h2>
 <div class="line23">
 <!--{if $arrNewGroup}-->
 <!--{loop $arrNewGroup $key $item}-->
-<a href="{SITE_URL}{tsUrl('group','show',array('id'=>$item[groupid]))}">{$item[groupname]}</a> ({$item[count_user]}<!--{if $item[uptime]>strtotime(date('Y-m-d 00:00:00'))}-->/<font color="orange">{$item[count_topic_today]}</font><!--{else}--><!--{/if}-->)<br>
+<a href="{SITE_URL}{ikUrl('group','show',array('id'=>$item[groupid]))}">{$item[groupname]}</a> ({$item[count_user]}<!--{if $item[uptime]>strtotime(date('Y-m-d 00:00:00'))}-->/<font color="orange">{$item[count_topic_today]}</font><!--{else}--><!--{/if}-->)<br>
 <!--{/loop}-->
 <!--{/if}-->
 </div>
@@ -147,7 +147,7 @@
 <div class="line23">
 <!--{if $arrNewNote}-->
 <!--{loop $arrNewNote $key $item}-->
-<a href="{SITE_URL}{tsUrl('note','show',array('noteid'=>$item[noteid]))}">{$item[title]}</a><br>
+<a href="{SITE_URL}{ikUrl('note','show',array('noteid'=>$item[noteid]))}">{$item[title]}</a><br>
 <!--{/loop}-->
 <!--{/if}-->
 </div>
@@ -157,7 +157,7 @@
 <div class="line23">
 <!--{if $arrSiteNote}-->
 <!--{loop $arrSiteNote $key $item}-->
-    <a href="{SITE_URL}{tsUrl('site','notes',array('notesid'=>$item[notesid],'noteid'=>$item[contentid]))}" title="{$item[title]}">
+    <a href="{SITE_URL}{ikUrl('site','notes',array('notesid'=>$item[notesid],'noteid'=>$item[contentid]))}" title="{$item[title]}">
     {$item[title]}
     </a><br>
 <!--{/loop}-->

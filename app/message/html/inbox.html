@@ -8,24 +8,24 @@
             <div class="clear"></div>
             <div id="db-timeline-hd">
                 <ul class="menu-list">
-                    <li <!--{if $ts=="inbox"}--> class="on" <!--{/if}-->>
-                        <a href="{SITE_URL}{tsUrl('message','ikmail',array('ts'=>'inbox'))}">
+                    <li <!--{if $ik=="inbox"}--> class="on" <!--{/if}-->>
+                        <a href="{SITE_URL}{ikUrl('message','ikmail',array('ik'=>'inbox'))}">
                             所有消息
                         </a>
                     </li>
-                    <li <!--{if $ts=="unread"}--> class="on" <!--{/if}--> >
-                        <a href="{SITE_URL}{tsUrl('message','ikmail',array('ts'=>'unread'))}">
+                    <li <!--{if $ik=="unread"}--> class="on" <!--{/if}--> >
+                        <a href="{SITE_URL}{ikUrl('message','ikmail',array('ik'=>'unread'))}">
                             未读消息({$unreadnum})
                         </a>
                     </li>
-                    <li <!--{if $ts=="spam"}--> class="on" <!--{/if}--> >
-                        <a href="{SITE_URL}{tsUrl('message','ikmail',array('ts'=>'spam'))}">
+                    <li <!--{if $ik=="spam"}--> class="on" <!--{/if}--> >
+                        <a href="{SITE_URL}{ikUrl('message','ikmail',array('ik'=>'spam'))}">
                             垃圾消息({$spamnum})
                         </a>
                     </li>
                 </ul>
             </div>  
-		 <form  method="post" onSubmit="return isConfirmed" action="{SITE_URL}{tsUrl('message','do',array('ts'=>'all'))}">            
+		 <form  method="post" onSubmit="return isConfirmed" action="{SITE_URL}{ikUrl('message','do',array('ik'=>'all'))}">            
             <table class="olt">
               <tbody>
                 <tr>
@@ -40,22 +40,22 @@
                 <tr>
                   <td>{if $item[userid]==0}<span class="sys_doumail">系统邮件</span>{else} <span class="doumail_from">{$item[user][username]}</span> {/if}</td>
                   <td class="m" align="center">&gt;</td>
-                  <td><a href="{SITE_URL}{tsUrl('message','show',array('messageid'=>$item[messageid]))}">{$item[title]}</a></td>
+                  <td><a href="{SITE_URL}{ikUrl('message','show',array('messageid'=>$item[messageid]))}">{$item[title]}</a></td>
                   <td>{$item[addtime]}</td>
                   <td align="center"><input name="messageid[]" value="{$item[messageid]}" type="checkbox"></td>
                   <td style="display: none;" class="mail_options">
-                  {if $ts!="spam"}<a rel="direct" class="post_link" href="{SITE_URL}{tsUrl('message','do',array('ts'=>'spam','messageid'=>$item[messageid]))}">垃圾消息</a>{/if}
-                  <a onClick="return confirm('真的要删除消息吗？')" class="post_link" href="{SITE_URL}{tsUrl('message','do',array('ts'=>'del','type'=>'inbox','messageid'=>$item[messageid]))}">删除</a>
+                  {if $ik!="spam"}<a rel="direct" class="post_link" href="{SITE_URL}{ikUrl('message','do',array('ik'=>'spam','messageid'=>$item[messageid]))}">垃圾消息</a>{/if}
+                  <a onClick="return confirm('真的要删除消息吗？')" class="post_link" href="{SITE_URL}{ikUrl('message','do',array('ik'=>'del','type'=>'inbox','messageid'=>$item[messageid]))}">删除</a>
                   </td>
                 </tr>
                 <!--{/loop}-->
                 <tr>
                   <td colspan="4" align="right">
                     <input name="type" value="inbox" type="hidden">
-                   {if $ts=="spam"}
+                   {if $ik=="spam"}
                     <input name="mc_submit" value="删除" data-confirm="真的要删除短消息吗?" type="submit">
 				   {/if} 
-                   {if $ts=="inbox" || $ts=="unread"}
+                   {if $ik=="inbox" || $ik=="unread"}
                     <input name="mc_submit" value="删除" data-confirm="真的要删除短消息吗?" type="submit">
                     <input name="mc_submit" value="垃圾消息" 	type="submit">
                     <input name="mc_submit" value="标记为已读"  type="submit">

@@ -11,13 +11,13 @@ $(document).ready(function() {
 		<!--{if $IK_SITE['base']['isinvite']=='1'}-->
 			invitecode:{
 				required:true,
-				remote:"{SITE_URL}index.php?app=user&ac=check&ts=isinvitecode"
+				remote:"{SITE_URL}index.php?app=user&ac=check&ik=isinvitecode"
 			},
 		<!--{/if}-->
 			email: {
 				required: true,
 				email: true,
-				remote: "{SITE_URL}index.php?app=user&ac=check&ts=inemail"
+				remote: "{SITE_URL}index.php?app=user&ac=check&ik=inemail"
 			},
 			pwd: {
 				required: true,
@@ -32,7 +32,7 @@ $(document).ready(function() {
 				required: true,
 				minlength: 2,
 				maxlength: 12,
-				remote:"{SITE_URL}index.php?app=user&ac=check&ts=isusername"
+				remote:"{SITE_URL}index.php?app=user&ac=check&ik=isusername"
 			}
 		},
 		messages: {
@@ -101,7 +101,7 @@ obj.src = $(obj).attr('url') + '&nowtime=' + new Date().getTime();
 <!--{else}-->
 
 <div class="user_left">
-<form  id="signupform" method="POST" action="{SITE_URL}{tsUrl('user','register',array('ts'=>'do'))}">
+<form  id="signupform" method="POST" action="{SITE_URL}{ikUrl('user','register',array('ik'=>'do'))}">
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0"  class="Tabletext">
 <!--{if $IK_SITE['base']['isinvite']=='1'}-->
@@ -163,7 +163,7 @@ obj.src = $(obj).attr('url') + '&nowtime=' + new Date().getTime();
 
 <div class="aside">
             
-	<p class="pl2">&gt; 已经拥有12ik网帐号? <a href="{SITE_URL}{tsUrl('user','login')}" rel="nofollow">直接登录</a></p>
+	<p class="pl2">&gt; 已经拥有12ik网帐号? <a href="{SITE_URL}{ikUrl('user','login')}" rel="nofollow">直接登录</a></p>
 
 </div>
 <div class="cl"></div>

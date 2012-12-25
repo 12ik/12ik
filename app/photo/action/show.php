@@ -3,14 +3,14 @@ defined('IN_IK') or die('Access Denied.');
 $photoid = intval($_GET['photoid']);
 
 if($photoid == 0){
-	header("Location: ".SITE_URL.tsUrl('photo'));
+	header("Location: ".SITE_URL.ikUrl('photo'));
 	exit;
 }
 
 $photoNum = $db->once_fetch_assoc("select count(*) from ".dbprefix."photo where `photoid`='$photoid'");
 
 if($photoNum['count(*)']==0){
-	header("Location: ".SITE_URL.tsUrl('photo'));
+	header("Location: ".SITE_URL.ikUrl('photo'));
 	exit;
 }
 

@@ -15,7 +15,7 @@
 //定义提交地址
 function submitForm(obj)
 {	
-	var addurl = '{SITE_URL}index.php?app=robots&ac=admin&mg=add&ts=do';
+	var addurl = '{SITE_URL}index.php?app=robots&ac=admin&mg=add&ik=do';
 	obj = $(obj);
 	if($('#name').val()=='')
 	{
@@ -59,7 +59,7 @@ function debugsubmit(obj, nodename, process) {
 	editdoc.close();
 	obj.form.target = 'debugframe';
 	//跳转地址
-	$('#theform').attr('action','{SITE_URL}index.php?app=robots&ac=admin&mg=add&ts=debug');	
+	$('#theform').attr('action','{SITE_URL}index.php?app=robots&ac=admin&mg=add&ik=debug');	
 	
 	//$('#f_debugurl').val(debugurl);
 	//$('#f_allowurlnull').checked = allowurlnull;

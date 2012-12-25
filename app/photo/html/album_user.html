@@ -8,23 +8,23 @@
             <!--{if $arrAlbum}-->
             <!--{loop $arrAlbum $key $item}-->
                     <div class="albumlst">
-                    <a href="{SITE_URL}{tsUrl('photo','album',array(ts=>photo,albumid=>$item[albumid]))}" class="album_photo"><img src="<!--{if $item[albumface] == ''}-->{SITE_URL}app/{$app}/skins/{$skin}/photo_album.png<!--{else}-->{SITE_URL}{php echo tsXimg($item[albumface],'photo',170,170,$item[path],1)}<!--{/if}-->" class="album"></a>
+                    <a href="{SITE_URL}{ikUrl('photo','album',array(ik=>photo,albumid=>$item[albumid]))}" class="album_photo"><img src="<!--{if $item[albumface] == ''}-->{SITE_URL}app/{$app}/skins/{$skin}/photo_album.png<!--{else}-->{SITE_URL}{php echo ikXimg($item[albumface],'photo',170,170,$item[path],1)}<!--{/if}-->" class="album"></a>
                     <div class="albumlst_r">
-                        <div><a href="{SITE_URL}{tsUrl('photo','album',array(ts=>photo,albumid=>$item[albumid]))}">{$item[albumname]}</a></div>
+                        <div><a href="{SITE_URL}{ikUrl('photo','album',array(ik=>photo,albumid=>$item[albumid]))}">{$item[albumname]}</a></div>
                     <div class="albumlst_descri">{$item[albumdesc]}</div>
             
                     <span class="pl">
                     {$item[count_photo]}张照片&nbsp;
                        {php echo date('Y-m-d',$item[addtime])}创建<br>
                     </span>
-                    <!--{if $userid == $IK_USER[user][userid] || $IK_USER[user][isadmin]==1}-->&gt;<a href="{SITE_URL}index.php?app=photo&ac=album&ts=edit&albumid={$item[albumid]}">修改相册属性</a>
+                    <!--{if $userid == $IK_USER[user][userid] || $IK_USER[user][isadmin]==1}-->&gt;<a href="{SITE_URL}index.php?app=photo&ac=album&ik=edit&albumid={$item[albumid]}">修改相册属性</a>
                     &nbsp;&gt;<a href="{SITE_URL}index.php?app=photo&ac=upload&albumid={$item[albumid]}">添加照片</a><!--{/if}-->
                     </div>
                     <br>
                     </div>
             <!--{/loop}-->
             <!--{else}-->
-             <p class="pl">可以有自己的相册来存放照片了，你可以从 <a href="{SITE_URL}{tsUrl('photo','album',array('ts'=>'create'))}">创建一个相册</a> 开始。</p>
+             <p class="pl">可以有自己的相册来存放照片了，你可以从 <a href="{SITE_URL}{ikUrl('photo','album',array('ik'=>'create'))}">创建一个相册</a> 开始。</p>
             <!--{/if}-->
              <div class="clear"></div>
              <div class="page">{$pageUrl}</div>
@@ -34,7 +34,7 @@
 
         <div class="c_right">
            	<!--{if $userid == $IK_USER[user][userid] }-->
-            <p class="pl2">&gt; <a href="{SITE_URL}{tsUrl('photo','album',array('ts'=>'create'))}">创建相册</a></p>
+            <p class="pl2">&gt; <a href="{SITE_URL}{ikUrl('photo','album',array('ik'=>'create'))}">创建相册</a></p>
             <!--{/if}-->
         </div>
 

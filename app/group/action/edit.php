@@ -15,7 +15,7 @@ $strGroup = $new['group']->getOneGroup($groupid);
 //判断该用户是否有权限编辑
 if($userid != $strGroup['userid']) header("Location: ".SITE_URL);
 
-switch($ts){
+switch($ik){
 	
 	//编辑小组基本信息
 	case "base":

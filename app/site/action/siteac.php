@@ -1,11 +1,11 @@
 <?php
 defined ( 'IN_IK' ) or die ( 'Access Denied.' );
 
-$ts = isset($_POST['ts']) ? $_POST['ts'] : $ts;
-$userid = $_SESSION['tsuser']['userid'];
+$ik = isset($_POST['ik']) ? $_POST['ik'] : $ik;
+$userid = $_SESSION['ikuser']['userid'];
 
 //小站操作
-switch ($ts) {
+switch ($ik) {
 	case "like" :
 		
 		if($userid>0)

@@ -1,6 +1,6 @@
 <?php
 defined('IN_IK') or die('Access Denied.');
-switch ($ts) {
+switch ($ik) {
 	
 	case "" :
 		$robotid = $_GET ['robotid'];

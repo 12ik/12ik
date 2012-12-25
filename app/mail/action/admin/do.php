@@ -1,7 +1,7 @@
 <?php
 defined('IN_IK') or die('Access Denied.');
 
-switch($ts){
+switch($ik){
 	//APP配置选项
 	case "options":
 		$arrData = array(

@@ -8,7 +8,7 @@ $userid = aac('user')->isLogin();
 $siteid = intval($_GET['siteid']);
 	
 //个人小站
-switch ($ts) {
+switch ($ik) {
 	case "" :
 		//管理中心
 		$strSite = aac('site')->getOneSite($siteid);
@@ -126,7 +126,7 @@ switch ($ts) {
 			}else
 			{
 				//上传
-				$arrUpload = tsUpload($_FILES['picfile'],$siteid,'site/icon',array('jpg','gif','png'));
+				$arrUpload = ikUpload($_FILES['picfile'],$siteid,'site/icon',array('jpg','gif','png'));
 				if($arrUpload)
 				{
 		
@@ -139,7 +139,7 @@ switch ($ts) {
 					
 					//清除缓存图片
 					ClearAppCache($app.'/icon/'.$arrUpload['path']);
-					$pic = SITE_URL.tsXimg('icon/'.$arrUpload['url'],'site',180,220,'icon/'.$arrUpload['path'],0);
+					$pic = SITE_URL.ikXimg('icon/'.$arrUpload['url'],'site',180,220,'icon/'.$arrUpload['path'],0);
 					echo '{"r":0,"pic":"'.$pic.'"}';
 				}else{
 					echo '{"r":1,"error":"上传失败！请重新上传。"}';

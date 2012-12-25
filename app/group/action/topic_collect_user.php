@@ -6,7 +6,7 @@ defined('IN_IK') or die('Access Denied.');
 
 $topicid = intval($_GET['topicid']);
 
-switch($ts){
+switch($ik){
 	case "ajax":
 		
 		$arrCollectUser = $db->fetch_all_assoc("select * from ".dbprefix."group_topics_collects where topicid='$topicid'");

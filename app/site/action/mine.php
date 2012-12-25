@@ -5,7 +5,7 @@ defined ( 'IN_IK' ) or die ( 'Access Denied.' );
 include_once 'theme.php';
 include_once 'RoomFunction.php';
 //个人小站
-switch ($ts) {
+switch ($ik) {
 	case "" :
 		//个人小站
 		$roomid = $strNavs[0]['roomid'];
@@ -25,7 +25,7 @@ switch ($ts) {
 		$isRoomEmpty = 1 ;
 		
 		//查询是否被我关注
-		$userid = $_SESSION['tsuser']['userid'];
+		$userid = $_SESSION['ikuser']['userid'];
 		if($userid>0)
 		{
 			$ismyfollow = aac('site')->find('site_follow', array('userid'=>$userid,'follow_siteid'=>$siteid)); 

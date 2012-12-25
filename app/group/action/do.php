@@ -5,7 +5,7 @@ defined('IN_IK') or die('Access Denied.');
 $userid = aac('user')->isLogin();
 
 
-switch ($ts) {
+switch ($ik) {
 	
 	//加入该小组
 	case "join":
@@ -15,14 +15,14 @@ switch ($ts) {
 		//先统计用户有多少个小组了，20个封顶
 		$userGroupNum = $new['group']->findCount('group_users',array('userid'=>$userid));
 		
-		if($userGroupNum >= 20) tsNotice('你加入的小组总数已经到达20个，不能再加入小组！');
+		if($userGroupNum >= 20) ikNotice('你加入的小组总数已经到达20个，不能再加入小组！');
 		
 		$groupUserNum = $new['group']->findCount('group_users',array(
 			'userid'=>$userid,
 			'groupid'=>$groupid,
 		));
 		
-		if($groupUserNum > 0) tsNotice('你已经加入小组！');
+		if($groupUserNum > 0) ikNotice('你已经加入小组！');
 		
 		$new['group']->create('group_users',array(
 			'userid'=>$userid,
@@ -42,7 +42,7 @@ switch ($ts) {
 			'count_user'=>$count_user
 		));
 		
-		header('Location: '.SITE_URL.tsUrl('group','show',array('id'=>$groupid)));
+		header('Location: '.SITE_URL.ikUrl('group','show',array('id'=>$groupid)));
 
 		break;
 	
@@ -56,7 +56,7 @@ switch ($ts) {
 			'groupid'=>$groupid
 		));
 		
-		if($strGroup['userid'] == $userid) tsNotice('组长任务艰巨，请坚持到底！');
+		if($strGroup['userid'] == $userid) ikNotice('组长任务艰巨，请坚持到底！');
 		
 		$new['group']->delete('group_users',array(
 			'userid'=>$userid,
@@ -75,7 +75,7 @@ switch ($ts) {
 			'count_user'=>$count_user,
 		));
 	
-		header('Location: '.SITE_URL.tsUrl('group','show',array('id'=>$groupid)));
+		header('Location: '.SITE_URL.ikUrl('group','show',array('id'=>$groupid)));
 		
 		break;
 	
@@ -86,7 +86,7 @@ switch ($ts) {
 		$groupid = intval($_POST['groupid']);
 		
 		//上传
-		$arrUpload = tsUpload($_FILES['picfile'],$groupid,'group',array('jpg','gif','png'));
+		$arrUpload = ikUpload($_FILES['picfile'],$groupid,'group',array('jpg','gif','png'));
 		
 		if($arrUpload){
 
@@ -100,10 +100,10 @@ switch ($ts) {
 			//清除缓存图片
 			ClearAppCache($app.'/'.$arrUpload['path']);
 			
-			tsNotice("小组图标修改成功！","点击返回",$_SERVER['HTTP_REFERER']);
+			ikNotice("小组图标修改成功！","点击返回",$_SERVER['HTTP_REFERER']);
 			
 		}else{
-			tsNotice("上传出问题啦！");
+			ikNotice("上传出问题啦！");
 		}
 		
 		break;
@@ -111,7 +111,7 @@ switch ($ts) {
 	//编辑小组基本信息
 	case "edit_base":
 	
-		if($_POST['groupname']=='' || $_POST['groupdesc']=='') tsNotice('小组名称和介绍不能为空！');
+		if($_POST['groupname']=='' || $_POST['groupdesc']=='') ikNotice('小组名称和介绍不能为空！');
 		
 		$groupid = intval($_POST['groupid']);
 		$groupname = t($_POST['groupname']);
@@ -119,11 +119,11 @@ switch ($ts) {
 		
 		if( mb_strlen($groupname,'utf8')>20)
 		{
-			tsNotice('小组名称太长啦，最多20个字...^_^！');
+			ikNotice('小组名称太长啦，最多20个字...^_^！');
 			
 		}else if( mb_strlen($groupdesc, 'utf8') > 10000)
 		{
-			tsNotice('写这么多内容干啥，超出1万个字了都^_^');
+			ikNotice('写这么多内容干啥，超出1万个字了都^_^');
 		}
 		
 		$new['group']->update('group',array(
@@ -136,7 +136,7 @@ switch ($ts) {
 			'isopen'		=> intval($_POST['isopen']),
 		));
 		
-		tsNotice('基本信息修改成功！');
+		ikNotice('基本信息修改成功！');
 		
 		break;
 
@@ -164,7 +164,7 @@ switch ($ts) {
 			header("Location: ".SITE_URL);
 			
 		}else{
-			tsNotice('没有帖子可以删除，别瞎搞！');
+			ikNotice('没有帖子可以删除，别瞎搞！');
 		}
 		
 		break;
@@ -206,9 +206,9 @@ switch ($ts) {
 		
 		if($userid!=$strGroup['userid'] || $IK_USER['user']['isadmin']==1){
 			$db->query("update ".dbprefix."group_topics set istop='$istop' where topicid='$topicid'");
-			tsNotice("帖子置顶成功！");
+			ikNotice("帖子置顶成功！");
 		}else{
-			tsNotice("只有系统管理员才能置顶帖子！");
+			ikNotice("只有系统管理员才能置顶帖子！");
 		}
 		break;
 		
@@ -227,9 +227,9 @@ switch ($ts) {
 		
 		if($userid == $strGroup['userid'] || $IK_USER['user']['isadmin']==1){
 			$db->query("update ".dbprefix."group_topics set isshow='$isshow' where topicid='$topicid'");
-			tsNotice("操作成功！");
+			ikNotice("操作成功！");
 		}else{
-			tsNotice("非法操作！");
+			ikNotice("非法操作！");
 		}
 		
 		break;
@@ -246,14 +246,14 @@ switch ($ts) {
 		
 		$topicid = intval($_POST['topicid']);
 		
-		if($topicid == 0) tsNotice("非法操作！");
+		if($topicid == 0) ikNotice("非法操作！");
 		
 		$tagname = t($_POST['tagname']);
 		$uptime	= time();
 		
 		if($tagname != ''){
 		
-			if(strlen($tagname) > '32') tsNotice("TAG长度大于32个字节（不能超过16个汉字）");
+			if(strlen($tagname) > '32') ikNotice("TAG长度大于32个字节（不能超过16个汉字）");
 			
 			$tagcount = $db->once_num_rows("select * from ".dbprefix."tag where tagname='".$tagname."'");
 			
@@ -299,7 +299,7 @@ switch ($ts) {
 		if($typename != '')
 		  $db->query("insert into ".dbprefix."group_topics_type (`groupid`,`typename`) values ('$groupid','$typename')");
 		
-		header("Location: ".SITE_URL.tsUrl('group','edit',array('groupid'=>$groupid,'ts'=>'type')));
+		header("Location: ".SITE_URL.ikUrl('group','edit',array('groupid'=>$groupid,'ik'=>'type')));
 		
 		break;
 			
@@ -337,12 +337,12 @@ switch ($ts) {
 			$msg_userid = '0';
 			$msg_touserid = $strTopic['userid'];
 			$msg_title = '你的帖子：《'.$strTopic['title'].'》新增一条评论，快去看看给个回复吧';
-			$msg_content = '你的帖子：《'.$strTopic['title'].'》新增一条评论，快去看看给个回复吧^_^ <br />'.SITE_URL.tsUrl('group','topic',array('id'=>$topicid));
+			$msg_content = '你的帖子：《'.$strTopic['title'].'》新增一条评论，快去看看给个回复吧^_^ <br />'.SITE_URL.ikUrl('group','topic',array('id'=>$topicid));
 			aac('message')->sendmsg($msg_userid,$msg_touserid,$msg_title,$msg_content);
 		}
 		
 		if($referid && $strComment['userid'] != $IK_USER['user']['userid']){
-			$topicurl = SITE_URL.tsUrl('group','topic',array('id'=>$topicid));
+			$topicurl = SITE_URL.ikUrl('group','topic',array('id'=>$topicid));
 			$msg_userid = '0';
 			$msg_touserid = $strComment['userid'];
 			$msg_title = '有人评论了你在帖子：《'.$strTopic['title'].'》中的回复，快去看看给个回复吧';
@@ -406,7 +406,7 @@ switch ($ts) {
 		
 		$db->query("update ".dbprefix."group_topics set `groupid`='$groupid' where topicid='$topicid'");
 		
-		header("Location: ".SITE_URL.tsUrl('group','topic',array('id'=>$topicid)));
+		header("Location: ".SITE_URL.ikUrl('group','topic',array('id'=>$topicid)));
 		
 		break;
 		
@@ -415,7 +415,7 @@ switch ($ts) {
 
 		$topicid = intval($_GET['topicid']);
 		
-		if($userid == 0 || $topicid == 0) tsNotice("非法操作"); 
+		if($userid == 0 || $topicid == 0) ikNotice("非法操作"); 
 		
 		$strTopic = $db->once_fetch_assoc("select userid,groupid,title,isposts from ".dbprefix."group_topics where topicid='$topicid'");
 		
@@ -429,7 +429,7 @@ switch ($ts) {
 				$msg_userid = '0';
 				$msg_touserid = $strTopic['userid'];
 				$msg_title = '恭喜，你的帖子：《'.$strTopic['title'].'》被评为精华帖啦';
-				$msg_content = '恭喜，你的帖子：《'.$strTopic['title'].'》被评为精华帖啦^_^ <br />'.SITE_URL.tsUrl('group','topic',array('id'=>$topicid));
+				$msg_content = '恭喜，你的帖子：《'.$strTopic['title'].'》被评为精华帖啦^_^ <br />'.SITE_URL.ikUrl('group','topic',array('id'=>$topicid));
 				aac('message')->sendmsg($msg_userid,$msg_touserid,$msg_title,$msg_content);
 				//msg end
 				
@@ -437,9 +437,9 @@ switch ($ts) {
 				$db->query("update ".dbprefix."group_topics set `isposts`='0' where `topicid`='$topicid'");
 			}
 			
-			tsNotice("操作成功！");
+			ikNotice("操作成功！");
 		}else{
-			tsNotice("非法操作！");
+			ikNotice("非法操作！");
 		}
 		
 		break;

@@ -7,7 +7,7 @@ defined ( 'IN_IK' ) or die ( 'Access Denied.' );
  * @Email:160780470@qq.com
  */
 
-switch ($ts) {
+switch ($ik) {
 	case "" :
 		$title = '链接形式';
 		include template ( "urltype" );
@@ -27,6 +27,7 @@ switch ($ts) {
 		fileWrite ( 'system_options.php', 'data', $arrOption );
 		
 		if ($site_urltype == 3 || $site_urltype == 4 || $site_urltype == 5 || $site_urltype == 6 || $site_urltype == 7) {
+			
 			
 			$scriptName = explode('index.php',$_SERVER['SCRIPT_NAME']);			
 			

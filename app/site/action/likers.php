@@ -6,7 +6,7 @@ $siteid = intval($_GET['id']);
 include_once 'theme.php';
 
 //页面
-switch ($ts) {
+switch ($ik) {
 	case "" :
 	//小站管理员
 	$adminUser = aac('user')->getOneUser($strSite['userid']);

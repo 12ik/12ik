@@ -1,5 +1,5 @@
 <?php 
-switch($ts){
+switch($ik){
 	case "":
 		$areaid = $_GET['areaid'];
 		$strArea = $db->once_fetch_assoc("select * from ".dbprefix."area where areaid='$areaid'");

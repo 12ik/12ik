@@ -6,7 +6,7 @@ include_once 'theme.php';
 include_once 'RoomFunction.php';
 
 //页面
-switch ($ts) {
+switch ($ik) {
 	case "" :
 		//房间显示页面
 		$roomid = intval($_GET['roomid']);
@@ -41,7 +41,7 @@ switch ($ts) {
 		//isRoomEmpty 作标记 不是room的页面全部 false
 		$isRoomEmpty = 1 ;
 		//查询是否被我关注
-		$userid = $_SESSION['tsuser']['userid'];
+		$userid = $_SESSION['ikuser']['userid'];
 		if($userid>0)
 		{
 			$ismyfollow = aac('site')->find('site_follow', array('userid'=>$userid,'follow_siteid'=>$siteid)); 

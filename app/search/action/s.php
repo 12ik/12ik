@@ -6,17 +6,17 @@ $userid = intval($IK_USER['user']['userid']);
 $kw=urldecode($_GET['kw']);
 
 if($kw==''){
-	header("Location: ".SITE_URL.tsUrl('search'));
+	header("Location: ".SITE_URL.ikUrl('search'));
 	exit;
 }
 
 
 if(strlen($kw)<2) {
-	header("Location: ".SITE_URL.tsUrl('search'));
+	header("Location: ".SITE_URL.ikUrl('search'));
 	exit;
 };
 
-switch($ts){
+switch($ik){
 	case "":
 		$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 		$url = "index.php?app=search&ac=s&kw=".$kw."&page=";
@@ -52,7 +52,7 @@ switch($ts){
 	case "group":
 		
 		$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-		$url = "index.php?app=search&ac=s&ts=group&kw=".$kw."&page=";
+		$url = "index.php?app=search&ac=s&ik=group&kw=".$kw."&page=";
 		$lstart = $page*10-10;
 		
 		$arrGroups = $db->fetch_all_assoc("select groupid from ".dbprefix."group WHERE groupname like '%$kw%' or groupdesc like '%$kw%' order by groupid desc limit $lstart,10");
@@ -75,7 +75,7 @@ switch($ts){
 	case "topic":
 	
 		$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-		$url = "index.php?app=search&ac=s&ts=topic&kw=".$kw."&page=";
+		$url = "index.php?app=search&ac=s&ik=topic&kw=".$kw."&page=";
 		$lstart = $page*10-10;
 	
 		$arrTopics = $db->fetch_all_assoc("select * from ".dbprefix."group_topics WHERE title like '%$kw%' order by topicid desc limit $lstart,10");
@@ -97,7 +97,7 @@ switch($ts){
 	case "user":
 		
 		$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-		$url = "index.php?app=search&ac=s&ts=user&kw=".$kw."&page=";
+		$url = "index.php?app=search&ac=s&ik=user&kw=".$kw."&page=";
 		$lstart = $page*10-10;
 	
 		$arrUsers = $db->fetch_all_assoc("select userid from ".dbprefix."user_info WHERE username like '%$kw%' order by userid desc limit $lstart,10");

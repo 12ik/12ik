@@ -10,7 +10,7 @@ defined ( 'IN_IK' ) or die ( 'Access Denied.' );
 		
 		//分页
 		$page = isset($_GET['page']) ? $_GET['page'] : '1';
-		$url = SITE_URL."index.php?app=note&ac=index&ts=user&userid=".$userid."&page=";
+		$url = SITE_URL."index.php?app=note&ac=index&ik=user&userid=".$userid."&page=";
 		$lstart = $page*10-10;
 		
 		$arrNotes = $db->fetch_all_assoc ( "select * from " . dbprefix . "note where  `userid`='$userid' order by addtime desc limit $lstart, 10" );

@@ -4,7 +4,7 @@ defined('IN_IK') or die('Access Denied.');
 //不登陆不允许评论
 $userid = aac('user')->isLogin();
 
-switch($ts){
+switch($ik){
 	//添加评论
 	case "add":
 		$nid = intval($_POST['nid']);
@@ -12,8 +12,8 @@ switch($ts){
 		
 		$content = trim($_POST['content']);
 
-		if($content == '') tsNotice('没有任何内容是不允许你通过滴^_^');
-		if(mb_strlen($content,'utf8')>10000) tsNotice('发这么多内容干啥,最多只能写1000千个字^_^,回去重写哇！');
+		if($content == '') ikNotice('没有任何内容是不允许你通过滴^_^');
+		if(mb_strlen($content,'utf8')>10000) ikNotice('发这么多内容干啥,最多只能写1000千个字^_^,回去重写哇！');
 		//正确之后执行	
 		$arrData	= array(
 			'nid'	=> $nid,
@@ -32,7 +32,7 @@ switch($ts){
 		$db->query("update ".dbprefix."article_spaceitems set replynum ='$count_comment' 
 		where itemid='$itemid'");
 		
-		header("Location: ".SITE_URL.tsUrl('article','show',array('id'=>$nid)));
+		header("Location: ".SITE_URL.ikUrl('article','show',array('id'=>$nid)));
 		
 		break;
 	
@@ -53,7 +53,7 @@ switch($ts){
 		}
 		
 		//跳转
-		header("Location: ".SITE_URL.tsUrl('article','show',array('id'=>$strComment['nid'])));
+		header("Location: ".SITE_URL.ikUrl('article','show',array('id'=>$strComment['nid'])));
 		
 		break;
 		

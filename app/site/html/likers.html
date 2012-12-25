@@ -19,7 +19,7 @@
     <div class="main">
       <h1>{$title}</h1>
       <div class="user-search">
-        <form method="get" action="{SITE_URL}{tsUrl('site','likers',array('ts'=>'search'))}" name="usp_form">
+        <form method="get" action="{SITE_URL}{ikUrl('site','likers',array('ik'=>'search'))}" name="usp_form">
           <input type="text" title="名号、个人域名、常居地、email" value="" maxlength="36" class="search-input" name="keyword">
           <input type="submit" class="search-submit">
         </form>
@@ -33,11 +33,11 @@
           <div class="followers-admin">
             <ul class="list-s">
               <li>
-                <div class="pic"> <a class="nbg" href="{SITE_URL}{tsUrl('hi','',array('id'=>$adminUser[doname]))}">
+                <div class="pic"> <a class="nbg" href="{SITE_URL}{ikUrl('hi','',array('id'=>$adminUser[doname]))}">
                  <img title="{$adminUser[username]}" alt="{$adminUser[username]}" class="imgg" src="{$adminUser[face]}"></a> </div>
                 <div class="info">
                  <span class="name">
-                 	<a href="{SITE_URL}{tsUrl('hi','',array('id'=>$adminUser[doname]))}">{$adminUser[username]}</a>
+                 	<a href="{SITE_URL}{ikUrl('hi','',array('id'=>$adminUser[doname]))}">{$adminUser[username]}</a>
                  </span>		 				 
                  <span class="opt"><a title="授予小豆管理权限" href="#"></a> </span> 
                  </div>
@@ -56,17 +56,17 @@
             {loop $arrlikeUser $item}
             <li>
               <div class="pic">
-              <a class="nbg" href="{SITE_URL}{tsUrl('hi','',array('id'=>$item[doname]))}">
+              <a class="nbg" href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[doname]))}">
               <img title="{$item[username]}" alt="{$item[username]}" class="imgg" src="{$item[face]}">
               </a>
               </div>
               <div class="info"> 
-              <span class="name"><a href="{SITE_URL}{tsUrl('hi','',array('id'=>$item[doname]))}">{$item[username]}</a> <em></em> </span> 						 			  
+              <span class="name"><a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[doname]))}">{$item[username]}</a> <em></em> </span> 						 			  
               <span class="loca">({$item[area][areaname]})</span>
               {if $adminUser[userid] == $IK_USER[user][userid]}
               <span class="opt"> 
-              <a title="担任管理员" href="{SITE_URL}{tsUrl('site','likers',array('ts'=>'promote','userid'=>$item[userid]))}" class="icon-star"></a> 
-              <a title="拉入黑名单" href="{SITE_URL}{tsUrl('site','likers',array('ts'=>'blacklist','userid'=>$item[userid]))}" class="icon-ban"></a> 
+              <a title="担任管理员" href="{SITE_URL}{ikUrl('site','likers',array('ik'=>'promote','userid'=>$item[userid]))}" class="icon-star"></a> 
+              <a title="拉入黑名单" href="{SITE_URL}{ikUrl('site','likers',array('ik'=>'blacklist','userid'=>$item[userid]))}" class="icon-ban"></a> 
               </span>
               {/if} 
               </div>

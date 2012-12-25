@@ -54,10 +54,10 @@ a.pop_win_close { top: 5px }
 </style>
 
 
-<h3>会员登录<span> ( <a href="{SITE_URL}{tsUrl('user','register')}" >还没有注册?</a> ) </span></h3>
+<h3>会员登录<span> ( <a href="{SITE_URL}{ikUrl('user','register')}" >还没有注册?</a> ) </span></h3>
 
 <div id="pop_win_login" class="">
-    <form class="pop_win_login_form" name="lzform" method="post" action="{SITE_URL}{tsUrl('user','login',array('ts'=>'do'))}">
+    <form class="pop_win_login_form" name="lzform" method="post" action="{SITE_URL}{ikUrl('user','login',array('ik'=>'do'))}">
         <fieldset>
             <input type="hidden" name="jump" value="{$jump}" />
             <input type="hidden" name="cktime" value="2592000">
@@ -72,7 +72,7 @@ a.pop_win_close { top: 5px }
             <div class="item remember">
                 <label>&nbsp;</label>
                 <input id="remember" type="checkbox" name="remember" tabindex="4"/>
-                <label for="remember" class="sub">下次自动登录 |</label><a href="{SITE_URL}{tsUrl('user','forgetpwd')}" style="margin-left: 0.8em;" >忘记密码了</a>
+                <label for="remember" class="sub">下次自动登录 |</label><a href="{SITE_URL}{ikUrl('user','forgetpwd')}" style="margin-left: 0.8em;" >忘记密码了</a>
             </div>
             <div class="item recsubmit">
                 <label>&nbsp;</label>

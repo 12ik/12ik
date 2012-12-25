@@ -9,7 +9,7 @@ if($albumid == 0) header("Location: ".SITE_URL."index.php");
 
 $strAlbum = $db->once_fetch_assoc("select * from ".dbprefix."photo_album where albumid='$albumid'");
 
-if($userid != $strAlbum['userid']) header("Location: ".SITE_URL."index.php?app=photo&ac=album&ts=user&userid=".$userid);
+if($userid != $strAlbum['userid']) header("Location: ".SITE_URL."index.php?app=photo&ac=album&ik=user&userid=".$userid);
 
 $addtime = time();
 

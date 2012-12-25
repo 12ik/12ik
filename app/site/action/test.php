@@ -5,7 +5,7 @@ defined ( 'IN_IK' ) or die ( 'Access Denied.' );
  
 
 //页面
-switch ($ts) {
+switch ($ik) {
 	case "" :
 				echo 111;
 

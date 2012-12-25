@@ -20,7 +20,7 @@ function savaTag(tid)
 {
 	var tag = $('#tags').val();
 		if(tag ==''){ tips('请输入标签哟^_^');$('#tagFrom').show('fast');}else{
-			var url = siteUrl+'index.php?app=tag&ac=add_ajax&ts=do';
+			var url = siteUrl+'index.php?app=tag&ac=add_ajax&ik=do';
 			$.post(url,{objname:'user',idname:'userid',tags:tag,objid:tid},function(rs){  window.location.reload()   })
 		}
 	

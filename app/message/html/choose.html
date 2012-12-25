@@ -8,11 +8,11 @@
             <!--{loop $arrFollowUser $key $item}-->
               <dl class="obu">
                 <dt>
-                    <a class="nbg" href="{SITE_URL}{tsUrl('user','message',array('ts'=>'message_add','touserid'=>$item[userid]))}">
+                    <a class="nbg" href="{SITE_URL}{ikUrl('user','message',array('ik'=>'message_add','touserid'=>$item[userid]))}">
                     <img  alt="{$item[username]}" class="m_sub_img" src="{$item[face]}">
                     </a>
                 </dt>
-                <dd><a href="{SITE_URL}{tsUrl('user','message',array('ts'=>'message_add','touserid'=>$item[userid]))}" title="{$item[username]}">{$item[username]}</a></dd>
+                <dd><a href="{SITE_URL}{ikUrl('user','message',array('ik'=>'message_add','touserid'=>$item[userid]))}" title="{$item[username]}">{$item[username]}</a></dd>
               </dl>
 			<!--{/loop}-->              
               <br clear="all">
@@ -21,7 +21,7 @@
         <div class="cright">
 
             
-			<p class="pl2">&gt; <a href="{SITE_URL}{tsUrl('message','ikmail',array('ts'=>'inbox'))}">回到我的收件箱</a></p>
+			<p class="pl2">&gt; <a href="{SITE_URL}{ikUrl('message','ikmail',array('ik'=>'inbox'))}">回到我的收件箱</a></p>
 
                 
         </div>

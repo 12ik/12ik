@@ -43,7 +43,7 @@
             <input type="button" value="修改主题颜色" class="btn-large" name="theme-modify" hidefocus="hidefocus">
             
             <form enctype="multipart/form-data" method="post" 
-            action="{SITE_URL}{tsUrl('site','custom',array('ts'=>'background','siteid'=>$strSite[siteid]))}" id="bg-upload-form" target="iframe-post-form">
+            action="{SITE_URL}{ikUrl('site','custom',array('ik'=>'background','siteid'=>$strSite[siteid]))}" id="bg-upload-form" target="iframe-post-form">
             	<div style="display:none;"><input type="hidden" value="{$strTheme[ck]}" name="ck">
                 <input type="hidden" value="{$strTheme[background_ver]}" name="ver"></div>
                 <input type="file" id="sp-bg-upload" name="picfile">
@@ -417,7 +417,7 @@ IK('colorpicker', 'effects', 'iframe-post-form', function () {
 
             // 开始保存
             $.post_withck(
-                siteUrl+'index.php?app=site&ac=custom&ts=savetheme&siteid=' + siteId ,
+                siteUrl+'index.php?app=site&ac=custom&ik=savetheme&siteid=' + siteId ,
                 {
                     'theme_id': sysThemeId,
                     'background_ver': bgVer,

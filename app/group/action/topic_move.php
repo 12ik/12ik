@@ -8,7 +8,7 @@ $topicid = intval($_GET['topicid']);
 
 $groupid = intval($_GET['groupid']);
 
-if($groupid == 0 || $topicid == 0) tsNotice("非法操作！");
+if($groupid == 0 || $topicid == 0) ikNotice("非法操作！");
 
 $strGroup = $db->once_fetch_assoc("select groupid,userid from ".dbprefix."group where groupid='$groupid'");
 
@@ -31,9 +31,9 @@ if($userid == $strTopic['userid'] || $strUser['isadmin']=='1' || $userid==$strGr
 			include template("topic_move");
 		}
 	}else{
-		tsNotice("非法操作3！");
+		ikNotice("非法操作3！");
 	}
 
 }else{
-	tsNotice("非法操作2！");
+	ikNotice("非法操作2！");
 }
