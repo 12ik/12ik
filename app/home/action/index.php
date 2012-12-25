@@ -8,7 +8,7 @@ defined ( 'IN_IK' ) or die ( 'Access Denied.' );
 if ($IK_USER ['user'] == '') {
 
 	//推荐小组列表
-	$arrRecommendGroups = aac ( 'group' )->getRecommendGroup ( '12' );
+	$arrRecommendGroups = aac ( 'group' )->getRecommendGroup ( '20' );
 	foreach ( $arrRecommendGroups as $key => $item ) {
 		$arrRecommendGroup [] = $item;
 		$arrRecommendGroup [$key] ['groupdesc'] = getsubstrutf8 ( t ( $item ['groupdesc'] ), 0, 35 );
@@ -38,7 +38,7 @@ if ($IK_USER ['user'] == '') {
 		}
 	}
 	//活跃会员
-	$arrHotUser = aac('user')->getHotUser(16);
+	$arrHotUser = aac('user')->getHotUser(24);
 	//获取用户数
 	$count_user = aac('user')->getUsers();
 	

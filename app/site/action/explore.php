@@ -8,9 +8,9 @@ switch ($ts) {
 		//分页
 		$page = isset($_GET['page']) ? $_GET['page'] : '1';
 		$url = SITE_URL."index.php?app=site&ac=explore&ts=site&page=";
-		$lstart = $page*10-10;
+		$lstart = $page*30-30;
 		
-		$arrSites = $db->fetch_all_assoc ( "select * from " . dbprefix . "site order by addtime desc limit $lstart, 10" );
+		$arrSites = $db->fetch_all_assoc ( "select * from " . dbprefix . "site order by addtime desc limit $lstart, 30" );
 		
 		foreach($arrSites as $key=>$item){
 			//$arrSite[] = $item;

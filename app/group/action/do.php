@@ -342,10 +342,11 @@ switch ($ts) {
 		}
 		
 		if($referid && $strComment['userid'] != $IK_USER['user']['userid']){
+			$topicurl = SITE_URL.tsUrl('group','topic',array('id'=>$topicid));
 			$msg_userid = '0';
 			$msg_touserid = $strComment['userid'];
 			$msg_title = '有人评论了你在帖子：《'.$strTopic['title'].'》中的回复，快去看看给个回复吧';
-			$msg_content = '有人评论了你在帖子：《'.$strTopic['title'].'》中的回复，快去看看给个回复吧^_^ <br />'.SITE_URL.tsUrl('group','topic',array('id'=>$topicid));
+			$msg_content = '有人评论了你在帖子：《'.$strTopic['title'].'》中的回复，快去看看给个回复吧^_^ <br /><a href="'.$topicurl.'">'.$topicurl.'</a>';
 			aac('message')->sendmsg($msg_userid,$msg_touserid,$msg_title,$msg_content);
 		}
 		
