@@ -1145,7 +1145,7 @@ INSERT INTO `ik_system_options` (`optionname`, `optionvalue`) VALUES
 ('isface', '0'),
 ('site_key', '12ik'),
 ('site_desc', '又一个爱客网(12IK)开源社区'),
-('site_theme', 'white'),
+('site_theme', 'blue'),
 ('site_urltype', '1'),
 ('isgzip', '0'),
 ('timezone', 'Asia/Hong_Kong'),
