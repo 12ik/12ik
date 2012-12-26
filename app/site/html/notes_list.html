@@ -57,11 +57,18 @@ function openfn(id,obj)
     </h3>
   </div>
   <span class="datetime">{php echo date('Y-m-d H:i:s',$item[addtime])}</span>
-  <div id="note_$item[contentid]_short" class="summary"> {php echo getsubstrutf8(t($item[content]),0,120)} </div>
+  <div id="note_$item[contentid]_short" class="summary">
+    <div class="ll">
+        <a href="{SITE_URL}{ikUrl('site','notes',array('notesid'=>$item[notesid],'noteid'=>$item[contentid]))}" title="{$item[title]}">
+            <img src="{$item[photo][photo_140]}" alt="{$item[title]}">
+        </a>
+    </div>  
+   {php echo getsubstrutf8($item[content],0,200)} </div>
+  
   <div class="note-content"  id="note_$item[contentid]_full">
     <div id=""></div>
   </div>
-  <br>
+  <br clear="all"/>
   <div class="note-ft" style="display:none" id="note_$item[contentid]_footer">
   	<span class="count">&nbsp;{$item[count_view]}人阅读</span>
     <span class="reply"><a href="{SITE_URL}{ikUrl('site','notes',array('notesid'=>$item[notesid],'noteid'=>$item[contentid]))}#note_{$item[contentid]}_footer">({$item[count_comment]}回应)</a></span>

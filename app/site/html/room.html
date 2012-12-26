@@ -60,7 +60,7 @@
                                     </div>
                                     <div class="datetime">{php echo date('Y-m-d H:i:s',$item[addtime])}</div>
                                     <div id="note_$item[contentid]_short" class="summary">
-                                    	{php echo getsubstrutf8(t($item[content]),0,120)}
+                                    	{$item[content]}
                                     	<a href="{SITE_URL}{ikUrl('site','notes',array('notesid'=>$item[notesid],'noteid'=>$item[contentid]))}#note_{$item[contentid]}_footer">({$item[count_comment]}回应)</a>
                                     </div>
                                     

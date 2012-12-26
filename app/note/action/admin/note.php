@@ -14,7 +14,7 @@ switch($ik){
 		$arrNote = $db->fetch_all_assoc("select * from ".dbprefix."note order by addtime desc limit $lstart,10");
 
 		$noteNum = $db->once_num_rows("select * from ".dbprefix."note");
-		echo $noteNum;
+
 		
 		include template("admin/note_list");
 		

@@ -13,7 +13,19 @@ switch ($ik) {
 			$arrArticle[$key]['news'] = aac('article')->find('article_spacenews',array('itemid'=>$item['itemid']));
 			if($item['haveattach']==1)
 			{
-				$arrArticle[$key]['attach'] = aac('article')->find('attachments',array('itemid'=>$item['itemid']));
+				//$arrArticle[$key]['attach'] = aac('article')->find('attachments',array('itemid'=>$item['itemid']));
+				$arrAttach = aac('article')->find('attachments',array('itemid'=>$item['itemid']));
+
+				$arrpath = explode('/', $arrAttach['filepath']);
+				$path = '';
+				for($i=0; $i<count($arrpath)-1; $i++)
+				{
+					$path .= $arrpath[$i].'/'; 
+				}
+				$pathdir = substr($path, 0,strlen($path)-1);
+				$pathurl = $arrAttach['filepath'];
+				
+				$arrArticle[$key]['attach'] = SITE_URL.ikXimg($pathurl,'attachments',120,90,$path,1);		
 			}
 		}
 

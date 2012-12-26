@@ -1,11 +1,7 @@
 <?php
 defined ( 'IN_IK' ) or die ( 'Access Denied.' );
 
-//小组首页
 
-
-
-if ($IK_USER ['user'] == '') {
 
 	//推荐小组列表
 	$arrRecommendGroups = aac ( 'group' )->getRecommendGroup ( '20' );
@@ -58,11 +54,7 @@ if ($IK_USER ['user'] == '') {
 	}	
 
 
-} else {
-	
-	header ( "Location: " . SITE_URL . ikUrl ( 'group' ) );
 
-}
 	/*
 	//获取全部用户相册图片
 	$user =  $IK_USER ['user'];

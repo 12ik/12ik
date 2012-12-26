@@ -401,8 +401,33 @@ switch ($ik) {
 		break;				
 	case "list" :
 		//日记列表
-		
-		$arrNote = aac('site')->findAll('site_notes_content',array('notesid'=>$notesid),'addtime desc');
+		$arrNote = array();
+		$arrNotes = aac('site')->findAll('site_notes_content',array('notesid'=>$notesid),'addtime desc');
+		foreach ($arrNotes as $key=>$item)
+		{
+			$arrNote[] = $item;
+			$strcontent = $item['content'];
+			//匹配链接
+			preg_match_all ( '/\[(url)=([http|https|ftp]+:\/\/[a-zA-Z0-9\.\-\?\=\_\&amp;\/\'\`\%\:\@\^\+\,\.]+)\]([^\[]+)(\[\/url\])/is', 
+			$strcontent, $contenturl);
+			foreach($contenturl[2] as $c1)
+			{	
+				$strcontent = str_replace ( "[url={$c1}]", '<a href="'.$c1.'" target="_blank">', $strcontent);
+				$strcontent = str_replace ( "[/url]", '</a>', $strcontent);
+			}
+			//echo $strcontent;	
+			$arrNote[$key]['content'] = preg_replace ( '/\[(图片)(\d+)\]/is', '', $strcontent);
+			//匹配本地图片
+			preg_match_all ( '/\[(图片)(\d+)\]/is', $item['content'], $photos );	
+			
+			if(!empty($photos [2]))
+			{
+				//echo $photos [2][0];
+				$arrNote[$key]['photo'] = aac('site')->getPhotoByseq($item['contentid'],$photos [2][0]);
+			}
+			
+			
+		}		
 
 		include template('notes_list');
 		break;

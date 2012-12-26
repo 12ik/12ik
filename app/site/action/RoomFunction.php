@@ -43,9 +43,48 @@ function sortMod($mod)
 					$strMods[$key]['settingurl'] = '<a href="#" rel="'.SITE_URL.ikUrl('site','notes',array('ik'=>'settings','notesid'=>$item[1])).'" class="a_lnk_mod_setting">设置</a>';								
 					$strMods[$key]['list'] = '<a href="'.SITE_URL.ikUrl('site','notes',array('ik'=>'list','notesid'=>$item[1])).'">全部</a>';
 					$strMods[$key]['action']  = '<a href="'.SITE_URL.ikUrl('site','notes',array('ik'=>'create','notesid'=>$item[1])).'">添加新日记</a>';	
-					$strMods[$key]['content'] = aac('site')->findAll('site_notes_content',
+					
+					$arrNotes = aac('site')->findAll('site_notes_content',
 								array('notesid'=>$item[1]),'addtime desc', '','0,'.$display_number.'');
-					//图片问题							
+					$strMods[$key]['content']  =  $arrNotecontent = array();
+					//var_dump($arrNotes);
+					//图片问题
+					foreach ($arrNotes as $k=>$el)
+					{
+						
+						$arrNotecontent[$k] = $el;
+						$strcontent = $el['content'];
+						//匹配链接
+						preg_match_all ( '/\[(url)=([http|https|ftp]+:\/\/[a-zA-Z0-9\.\-\?\=\_\&amp;\/\'\`\%\:\@\^\+\,\.]+)\]([^\[]+)(\[\/url\])/is', 
+						$strcontent, $contenturl);
+						foreach($contenturl[2] as $c1)
+						{	
+							$strcontent = str_replace ( "[url={$c1}]", '', $strcontent);
+							$strcontent = str_replace ( "[/url]", '', $strcontent);
+						}
+							
+						$strcontent = preg_replace ( '/\[(图片)(\d+)\]/is', '', $strcontent);
+						//匹配本地图片
+						preg_match_all ( '/\[(图片)(\d+)\]/is', $el['content'], $photos );	
+						if(!empty($photos [2]))
+						{
+							//echo $photos [2][0];
+							$photo = aac('site')->getPhotoByseq($el['contentid'],$photos [2][0]);
+							$htmlpic = '<div class="ll">
+										<a href="'.SITE_URL.ikUrl('site','notes',array('notesid'=>$el['notesid'],'noteid'=>$el['contentid'])).'">
+										<img alt="" src="'.$photo['photo_140'].'">
+										</a>
+										</div>';
+						}
+						$strcontent = getsubstrutf8($strcontent,0,200);
+						$arrNotecontent[$k]['content'] = $htmlpic.$strcontent;
+						
+						
+					}
+					$strMods[$key]['content']  =  $arrNotecontent;					
+					
+					
+												
 				}
 			}
 			//论坛

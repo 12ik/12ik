@@ -19,6 +19,11 @@ if($from == 3)
 	aac('home')->create('downcount',array('userip'=>getIp(),'downfrom'=>'github','downtime'=>time()));
 	header("Location: https://github.com/12ik/12ik.git");
 }
+if($from == 4)
+{
+	aac('home')->create('downcount',array('userip'=>getIp(),'downfrom'=>'Admin5','downtime'=>time()));
+	header("Location: http://down.admin5.com/php/99569.html");
+}
 
 
 $title = '爱客网(12IK)源码下载';

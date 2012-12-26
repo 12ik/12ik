@@ -803,7 +803,7 @@ function ikXimg($file, $app, $w, $h, $path = '', $c = '0', $conditions='') {
 	{
 		if (! is_file ( $cpath )) {
 			createFolders ( 'cache/' . $app . '/' . $path . '/' . $w );
-			$dest = 'uploadfile/' . $app . '/' . $file;
+			$dest = 'uploadfile/' . $app . '/' . $file; 
 			$arrImg = getimagesize ( $dest );
 			if ($arrImg [0] <= $w) {
 				copy ( $dest, $cpath );

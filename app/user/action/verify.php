@@ -16,10 +16,10 @@ switch($ik){
 		}
 
 		$email = $strUser['email'];
-
+		$comeurl = SITE_URL.ikUrl('user','verify',array('id'=>'do', 'email'=>$email, 'verifycode'=>$verifycode));
 		//发送邮件
 		$subject = $IK_SITE['base']['site_title'].'会员真实性验证';
-		$content = '尊敬的'.$strUser['username'].'，<br />请点击以下链接进行会员验证：<a href="'.$IK_SITE['base']['site_url'].'index.php?app=user&ac=verify&ik=do&email='.$email.'&verifycode='.$verifycode.'">'.$IK_SITE['base']['site_url'].'index.php?app=user&ac=verify&ik=do&email='.$email.'&verifycode='.$verifycode.'</a>';
+		$content = '尊敬的'.$strUser['username'].'，<br />请点击以下链接进行会员验证：<a href="'.$comeurl.'">'.$comeurl.'</a>';
 
 		$result = aac('mail')->postMail($email,$subject,$content);
 

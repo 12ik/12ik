@@ -93,7 +93,7 @@ class SimpleCaptcha {
 			'spacing' => 0, 
 			'minSize' => $this->height/2+2, 
 			'maxSize' => $this->height/2+4, 
-			'font' => realpath(dirname(__FILE__)).'/'.'MONACO.ttf'
+			'font' => realpath(dirname(__FILE__)).'/'.'MONACO.TTF'
 		);
 
         $x      = 10*$this->scale;

@@ -7,12 +7,12 @@ switch($ik){
 		
 		//列表 
 		$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-		$url = SITE_URL.'index.php?app=article&ac=admin&mg=cate&ik=list&page=';
+		$url = SITE_URL.'index.php?app=note&ac=admin&mg=cate&ik=list&page=';
 		$lstart = $page*10-10;
 
-		$arrCate = $db->fetch_all_assoc("select * from ".dbprefix."article_cate order by cateid desc limit $lstart, 10");
+		$arrCate = $db->fetch_all_assoc("select * from ".dbprefix."note_cate order by cateid desc limit $lstart, 10");
 
-		$cateNum = $db->once_fetch_assoc("select count(*) from ".dbprefix."article_cate");
+		$cateNum = $db->once_fetch_assoc("select count(*) from ".dbprefix."note_cate");
 
 		$pageUrl = pagination($cateNum['count(*)'], 10, $page, $url);
 		
@@ -30,7 +30,7 @@ switch($ik){
 	
 		$catename = trim($_POST['catename']);
 		
-		$db->query("insert into ".dbprefix."article_cate (`catename`) values ('$catename')");
+		$db->query("insert into ".dbprefix."note_cate (`catename`) values ('$catename')");
 		
 		header("Location: ".SITE_URL.'index.php?app=article&ac=admin&mg=cate&ik=list');
 	
@@ -39,7 +39,7 @@ switch($ik){
 	case "edit":
 		$cateid = $_GET['cateid'];
 		
-		$strCate = $db->once_fetch_assoc("select * from ".dbprefix."article_cate where `cateid`='$cateid'");
+		$strCate = $db->once_fetch_assoc("select * from ".dbprefix."note_cate where `cateid`='$cateid'");
 		
 		include template("admin/cate_edit");
 		break;
@@ -49,7 +49,7 @@ switch($ik){
 		$cateid = $_POST['cateid'];
 		$catename = trim($_POST['catename']);
 		
-		$db->query("update ".dbprefix."article_cate set `catename`='$catename' where `cateid`='$cateid'");
+		$db->query("update ".dbprefix."note_cate set `catename`='$catename' where `cateid`='$cateid'");
 		
 		qiMsg("修改成功！");
 		
