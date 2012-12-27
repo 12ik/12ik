@@ -1,7 +1,8 @@
 <?php include template('header'); ?>
 <div class="midder">
 
-<?php if($user=='') { ?>
+
+<?php if($IK_USER ['user'] == '') { ?>
 <div class="anony-nav">
 <div class="bd">
 <div class="reg">

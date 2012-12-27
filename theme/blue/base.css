@@ -162,17 +162,19 @@ a.bn-post:hover span{ color:#FFF; background-color:#63AB1A; border: 1px solid #5
 #header {width:980px; margin:0px auto;margin-bottom:40px; }
 #header .site_nav .site_logo{ float:left; width:165px;}
 
-#header .appnav{ float:right; width:810px; background-color:#acd3e6; height:35px; line-height:35px}
+#header .appnav{ float:right; width:810px; background-color:#acd3e6; height:35px; }
 
-#nav_bar{ display:block; float:left; width:530px;}
+#nav_bar{ display:block; float:left; width:530px;line-height:34px}
 #nav_bar li{ float:left; }
 #nav_bar li a{ font-size:14px; padding:0px 20px; color:#fff}
 #nav_bar li a:hover{  color:#43b0e6}
 
-#search_bar{ float:right; width:260px;}
-#search_bar li{ float:left; position:relative; height:26px}
-#search_bar li .key{ border-style:none;height:24px; border:#4bb3e6 solid 1px; border-right:medium none; font-size:12px;  width:180px; color:#d4d4d4; line-height:24px; padding:0px 2px}
-#search_bar li .search-button{ height:26px; display:block;   width:26px; cursor:pointer; border:none; outline-width:0px; text-indent:-999px; overflow:hidden;background:url(search_bg.gif) no-repeat right 0px; position:absolute; left:0px; top:5px;top:6px\0;}
+#search_bar{ float:right; width:260px; position:relative;width:220px; margin-top:3px;}
+#search_bar .inp{cursor: text; border:#4BB3E6 solid 1px; height:26px; float:left; padding:0px; width:215px; background-color:#fff}
+#search_bar .inp-btn{ width:24px; height:24px; position:relative; position:absolute;right:5px; top:1px; width:24px}
+
+#search_bar .inp .key{ height:24px; border:#fff solid 0px;  outline:none; font-size:12px;  width:185px; color:#d4d4d4; padding:0px 2px; line-height:24px; margin:0px; }
+#search_bar .inp-btn .search-button{ display:block; width:24px; height:24px; cursor:pointer; border:none; outline-width:0px; text-indent:-999px; overflow:hidden;background:url(search_btn.gif) no-repeat 0px 0px; }
 /*APP导航*/
 
 
@@ -375,3 +377,26 @@ input[type="radio"] { margin:0;padding:0; vertical-align:middle; margin-right:5p
 .loading-style1{ text-align:center; color:#999;}
 .loading-style1 b{ background:url(../../public/images/loading.gif) no-repeat 0px 0px; display:block; width:20px; height:20px;
 margin:5px auto;}
+/**pop css**/
+.pop_win_bg { opacity: 0.3; filter: alpha(opacity=30); position: fixed; background: #000; border-radius: 6px; -webkit-border-radius: 6px; -moz-border-radius: 6px; _position: absolute; _top:expression(eval(document.documentElement.scrollTop+(document.documentElement.clientHeight-this.offsetHeight)*.45))!important }
+.pop_win form { padding: 0; margin: 0; border: 1px solid #fff }
+aa.pop_win_close, .pop_win_close:visited, .pop_win_close:link { position: absolute; right: 0; top: 0; font: 11px "Comic Sans MS"; margin: 9px 10px 0 0; padding: 0 0.3em; color: #b4b4b4; z-index: 99 }
+a.pop_win_close:hover { color: #fab0b6; background: none }
+.pop_win { background: #fff; padding: 17px 14px 16px 12px; _padding-right: 0; visibility: hidden; position: fixed; border-radius: 6px; -webkit-border-radius: 6px; -moz-border-radius: 6px; _position: absolute; _margin-top: expression(eval(document.documentElement.scrollTop)); }
+.pop_win { padding:0;border:1px solid #c8c8c8; }
+.pop_win .panel { width:450px;padding:10px 20px 20px;text-align:center; }
+.pop_win_bg { background-color:#999;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px;}
+.pop_win .waiting { position:absolute;display:none;top:50%;left:50%;margin-left:-50px;width:100px;text-align:center;color:#060;font-size:14px; }
+/*rec*/
+.rectitle { padding:10px 19px;margin-bottom:10px;overflow:hidden;word-break:break-all; }
+.rectitle {background: none repeat scroll 0 0 #EBF5EB;border-top-right-radius: 6px;}
+#dialog .rectitle{ background-color:#EBF5EB; }
+#dialog .rectitle .m{ color:#333;line-height:1.6em;display:block; }
+#dialog .rectitle .m i { font-style:normal;color:#072;margin-left:.5ex; }
+.recsmr{line-height:1.6em; color:#777; padding:0 19px;margin-bottom:10px;display:block;color:#666; }
+#dialog .rectitle .gact a:link,
+#dialog .rectitle .gact a:visited,
+#dialog .rectitle .gact a:hover,
+#dialog .rectitle .gact a:active { font-size:14px;padding:0 4px; }
+
+

@@ -670,7 +670,7 @@ a.share:hover {
     text-decoration: none;
 }
 a.mini-share {
-    background: url("http://a.xnimg.cn/imgpro/theme/xn/share_tiny.gif") no-repeat scroll right center #FFFFFF;
+    background: url("share_tiny.gif") no-repeat scroll right center #FFFFFF;
     border: 1px solid #7F93BC;
     color: #525C97;
     display: block;
@@ -682,7 +682,7 @@ a.mini-share {
     width: 38px;
 }
 a.mini-share:hover {
-    background: url("http://a.xnimg.cn/imgpro/theme/xn/share_tiny_hover.gif") no-repeat scroll right center #005EAC;
+    background: url("share_tiny_hover.gif") no-repeat scroll right center #005EAC;
     border: 1px solid #005EAC;
     color: #FFFFFF;
     text-decoration: none;
@@ -890,3 +890,18 @@ word-spacing:-0.43em; }
 
 a.button-join{ background-color:#ffeee0; border:#dec8b7 solid 1px; border-radius:3px;  padding:2px 10px; color:#524942;}
 a.button-join:hover{ background-color:#ffeee0;}
+
+/**发布帖子**/
+.item-thumb-list{ padding-left:110px}
+.thumblst { width:580px;min-width:580px;}
+.thumblst .details textarea { width:90%; }
+.thumblst { min-height: 140px; min-width: 600px; border: 1px solid #d3d3d3; background:#f0f0f0; padding: 10px 12px; margin: 3px 0 7px }
+.thumblst .thumb { float: left; width: 160px; overflow:hidden;}
+.thumblst .thumb img { max-width: 130px; _width: 130px }
+.thumblst .thumb .pl { padding:0px; margin-bottom:5px; }
+.thumblst .details { float: right; width: 419px;}
+.thumblst .details p{ margin-bottom:5px;}
+.thumblst .details textarea{ width: 410px; height:66px;border:1px solid #ccc;}
+.alignleft{background:url(http://www.12ik.com/public/images/align_left.png) no-repeat;padding:0 6px 0 25px}
+.aligncenter{background:url(http://www.12ik.com/public/images/align_center.png) no-repeat;padding:0 6px 0 25px}
+.alignright{background:url(http://www.12ik.com/public/images/align_right.png) no-repeat;padding:0 6px 0 25px}

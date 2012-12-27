@@ -337,7 +337,7 @@ switch ($ik) {
 			$msg_userid = '0';
 			$msg_touserid = $strTopic['userid'];
 			$msg_title = '你的帖子：《'.$strTopic['title'].'》新增一条评论，快去看看给个回复吧';
-			$msg_content = '你的帖子：《'.$strTopic['title'].'》新增一条评论，快去看看给个回复吧^_^ <br />'.SITE_URL.ikUrl('group','topic',array('id'=>$topicid));
+			$msg_content = '你的帖子：《'.$strTopic['title'].'》新增一条评论，快去看看给个回复吧^_^ <br /><a href="'.SITE_URL.ikUrl('group','topic',array('id'=>$topicid)).'">'.SITE_URL.ikUrl('group','topic',array('id'=>$topicid)).'</a>';
 			aac('message')->sendmsg($msg_userid,$msg_touserid,$msg_title,$msg_content);
 		}
 		
@@ -429,7 +429,7 @@ switch ($ik) {
 				$msg_userid = '0';
 				$msg_touserid = $strTopic['userid'];
 				$msg_title = '恭喜，你的帖子：《'.$strTopic['title'].'》被评为精华帖啦';
-				$msg_content = '恭喜，你的帖子：《'.$strTopic['title'].'》被评为精华帖啦^_^ <br />'.SITE_URL.ikUrl('group','topic',array('id'=>$topicid));
+				$msg_content = '恭喜，你的帖子：《'.$strTopic['title'].'》被评为精华帖啦^_^ <br /><a href="'.SITE_URL.ikUrl('group','topic',array('id'=>$topicid)).'">'.SITE_URL.ikUrl('group','topic',array('id'=>$topicid)).'</a>';
 				aac('message')->sendmsg($msg_userid,$msg_touserid,$msg_title,$msg_content);
 				//msg end
 				

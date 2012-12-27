@@ -835,7 +835,28 @@ CREATE TABLE IF NOT EXISTS `ik_group_topics` (
 --
 -- 转存表中的数据 `ik_group_topics`
 --
+-- --------------------------------------------------------
 
+--
+-- 表的结构 `ik_group_topics_photo`
+--
+
+CREATE TABLE IF NOT EXISTS `ik_group_topics_photo` (
+  `photoid` int(11) NOT NULL AUTO_INCREMENT COMMENT 'photoid',
+  `seqid` int(11) NOT NULL DEFAULT '0' COMMENT 'seqid',
+  `topicid` int(11) NOT NULL DEFAULT '0' COMMENT '帖子ID',
+  `userid` int(11) NOT NULL DEFAULT '0',
+  `photoname` char(64) NOT NULL DEFAULT '',
+  `phototype` char(32) NOT NULL DEFAULT '',
+  `path` char(32) NOT NULL DEFAULT '' COMMENT '图片路径',
+  `photourl` char(120) NOT NULL DEFAULT '',
+  `photosize` char(32) NOT NULL DEFAULT '',
+  `photodesc` char(120) NOT NULL DEFAULT '',
+  `align` char(32) NOT NULL DEFAULT 'center' COMMENT '图片对齐方式',
+  `addtime` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`photoid`),
+  KEY `topicid` (`topicid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 

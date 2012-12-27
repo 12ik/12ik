@@ -110,11 +110,12 @@
                 <!--{/loop}-->
                 <li><a href="{SITE_URL}{ikUrl('home','down')}">源码下载</a></li>
             </ul>
-           <form action="{SITE_URL}index.php?app=search&ac=s" method="get" onsubmit="return searchForm(this);">
-            <ul id="search_bar">
-            	<li><input type="text" name="kw"  class="key" value="小组、话题、日志、成员、小站" placeholder="小组、话题、日志、成员"/></li>
-                <li><input type="submit"  value="搜索" class="search-button"/></li>
-            </ul>
+           <form action="{SITE_URL}index.php"  method="get" onsubmit="return searchForm(this);">
+           <input type="hidden" name="app" value="search" /><input type="hidden" name="ac" value="q" />
+            <div id="search_bar">
+            	<div class="inp"><input type="text" name="kw"  class="key" value="小组、话题、日志、成员、小站" placeholder="小组、话题、日志、成员、小站"/></div>
+                <div class="inp-btn"><input type="submit"  value="搜索" class="search-button"/></div>
+            </div>
             </form>
         </div>
         <!--{/if}-->
@@ -129,11 +130,12 @@
                 <li><a href="{SITE_URL}{ikUrl('article')}">文章</a></li>
                 
             </ul>
-           <form action="{SITE_URL}index.php?app=search&ac=s" method="get" onsubmit="return searchForm(this);">
-            <ul id="search_bar">
-            	<li><input type="text" name="kw"  class="key" value="小组、话题、日志、成员、小站" placeholder="小组、话题、日志、成员、小站"/></li>
-                <li><input type="submit"  value="搜索" class="search-button"/></li>
-            </ul>
+           <form action="{SITE_URL}index.php"  method="get" onsubmit="return searchForm(this);">
+           <input type="hidden" name="app" value="search" /><input type="hidden" name="ac" value="q" />
+            <div id="search_bar">
+            	<div class="inp"><input type="text" name="kw"  class="key" value="小组、话题、日志、成员、小站" placeholder="小组、话题、日志、成员、小站"/></div>
+                <div class="inp-btn"><input type="submit"  value="搜索" class="search-button"/></div>
+            </div>
             </form>
         </div>        	
         <!--{/if}-->

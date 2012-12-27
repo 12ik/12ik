@@ -71,7 +71,7 @@
                    <form method="GET" action="<?php echo SITE_URL;?>index.php" id="searchApp">
                         <div class="tc">
                          <input type="hidden" name="app" value="search" />
-                         <input type="hidden" name="ac" value="s" />
+                         <input type="hidden" name="ac" value="q" />
 
                          <input type="text" maxlength="36" size="36" class="txt" name="kw" style="width:200px; margin-bottom:5px">
                         </div>

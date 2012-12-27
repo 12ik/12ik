@@ -11,7 +11,7 @@ catch(e){
 }
 */
 (function(){
- var site_list = window.white_site_list || /http:\/\/movie\.douban\.com\/sogou_search|http:\/\/audit\.douban\.com|http:\/\/web2\.qq\.com|http:\/\/web\.qq\.com|http:\/\/web3\.qq\.com|http:\/\/youku\.movie-test\.alphatown\.com/;
+ var site_list = window.white_site_list || /^https?:\/\/([\w]+\.douban\.com|web[0-9]?\.qq\.com|(hao\.)*360\.cn|so\.com|youku\.movie-test\.alphatown\.com)(\:[\d]+)?\//;
  if (self !== top && document.referrer.search(site_list) === -1) {
    top.location = self.location;
  }
@@ -266,7 +266,6 @@ Douban.init_bef = function(o) {
             var loadhl = setTimeout(function(){$('.source',o).before(loadtip);}, 200);
             var url = '/j/entry/'+eid+'/';
             $.getJSON(url, function(j){
-
                 clearTimeout(loadhl);
                 loadtip.hide();
                 $.post_withck(url+'view', {});
@@ -401,7 +400,6 @@ Douban.init_closelink = function(o) {
     $('<a href="#">关闭</a>').appendTo($(o)).click(function() {
         window.close();
         return false;
-
     });
 };
 
@@ -610,8 +608,9 @@ Douban.init_interest_form = function(form) {
                 });
               }
               return;
+            /*
             }else if(movie.length && data.pop_sync){
-            // 豆瓣电影分享到豆瓣说及第三方应用
+            // 豆瓣电影分享到豆瓣说及第三方应用(已废弃)
                 close_dialog();
                 var auth = dui.Dialog({
                     'title': '授权同步信息至豆瓣说与第三方网站',
@@ -639,6 +638,37 @@ Douban.init_interest_form = function(form) {
                 });
 
                 auth.open();
+            */
+            }else if(movie.length && data.cid){
+            // 豆瓣电影优惠券发放
+                close_dialog();
+                var cid = data.cid, pid = data.pid;
+                var dlg = dui.Dialog({
+                    'title': '已保存为想看',
+                    'url': '/j/coupon_info?coupon_id=' + cid,
+                    'autoupdate': true,
+                    'callback': function(data, o){
+                        $('a#btn-giveup, a#btn-close', o.node).bind('click', function(){
+                            $(o.node).remove();
+                            self.location.replace(self.location.href);
+                            return false;
+                        });
+                        $('a#btn-accept', o.node).bind('click', function(e){
+                            e.preventDefault();
+                            $.post_withck('/ticket/coupon/get/'+pid+'/accept?cid='+cid, {}, function(){
+                                var $pop = $(o.node);
+                                $pop.find("h3").html("你领取了这张优惠券");
+                                $pop.find(".coupon_tit").html("领取成功，可以到可用的优惠券 ( <a href='http://movie.douban.com/ticket/coupon/' target='_blank'>http://movie.douban.com/ticket/coupon/</a> ) 查看");
+                                $pop.find(".coupon").css('visibility', 'hidden');
+                                $pop.find("#btns a").hide();
+                                $pop.find("#btns #btn-close").show();
+                            });
+                            return false;
+                        });
+                    }
+                });
+
+                dlg.open();
             }else if(book.length && data.book_pop_sync){
             // 豆瓣读书分享到豆瓣说及第三方应用
                 close_dialog();
@@ -820,9 +850,11 @@ Douban.init_review_full = function(o) {
 }
 
 Douban.init_show_login = function(o){
-    $(o).click(function(){
-		alert(1)
-        return pop_win.load('/j/misc/login_form')
+    var node = $(o);
+    node.click(function(){
+        var p = node.data('params');
+        p = p ? '?' + p : '';
+        return pop_win.load('/j/misc/login_form' + p)
     });
 }
 
@@ -1564,9 +1596,10 @@ $.post_withck = function( url, data, callback, type, traditional) {
 
 String.prototype.escapeHTML = function () {
     return this.replace(/&/g,'&amp;')
-        .replace(/>/g,'&gt;')
-        .replace(/</g,'&lt;')
-        .replace(/"/g,'&quot;');
+               .replace(/>/g,'&gt;')
+               .replace(/</g,'&lt;')
+               .replace(/'/g,'&#39;')
+               .replace(/"/g,'&quot;');
 }
 
 jQuery.fn.extend({
@@ -1681,7 +1714,7 @@ jQuery.fn.extend({
     },
     hover_fold:function(type){
         var i = {folder:[1,3], unfolder:[0,2]}, s = function(o,n){
-            return function(){$('img',o).attr("src","/pics/arrow"+n+".gif");}
+            return function(){$('img',o).attr("src","/pics/arrow1_"+n+".png");}
         }
         return this.hover(s(this,i[type][0]),s(this,i[type][1]));
     },
@@ -1928,11 +1961,14 @@ function pop_win (htm, hide_close) {
     }
     b.innerHTML = dom.htm;
     var cr = {
-        left:(document.documentElement.offsetWidth-b.offsetWidth)/2+'px',
-        top:(document.documentElement.clientHeight-b.offsetHeight)*.45+'px'
+        left: '50%',
+        top: '50%',
+        marginLeft: -(b.offsetWidth/2) + 'px',
+        marginTop: -(b.offsetHeight/2) + 'px'
     };
     if(document.documentElement.clientHeight<b.offsetHeight){
         cr.top = '0';
+        cr.marginTop = '0';
         cr.height = document.documentElement.clientHeight - 40 + 'px';
         cr.overflow = 'auto';
     }
@@ -1941,17 +1977,22 @@ function pop_win (htm, hide_close) {
     pop_win.fit();
     if(!window.XMLHttpRequest){
         __pop_win.bg.style.top = '';
+        __pop_win.bg.style.marginTop = '';
     }
 }
 
 pop_win.fit = function () {
     if (window.__pop_win) {
         var b=__pop_win.body;
+        var h = b.offsetHeight + 16;
+        var w = b.offsetWidth + 16;
         __pop_win.bg_j.css({
-            height: b.offsetHeight + 16 + 'px',
-            width: b.offsetWidth + 16 + 'px',
-            left: b.offsetLeft - 8 + 'px',
-            top: b.offsetTop - 8 + 'px',
+            height: h + 'px',
+            width: w + 'px',
+            left: '50%',
+            top: '50%',
+            marginTop: -(h/2) + 'px',
+            marginLeft: -(w/2) + 'px',
             zIndex: 8888
         }).show();
     }
@@ -2118,8 +2159,8 @@ Douban.init_popup = function(o){
 
 Douban.init_show_request_join_form = function(o){
     $(o).click(function(){
-        group_id = window.location.href.split('/')[4];
-        return pop_win.load('/j/group/'+group_id+'/request_join_form')
+        group_id = $(o).data('group_id');
+        return pop_win.load('/j/group/'+group_id+'/request_join_form');
     });
 }
 
@@ -2339,7 +2380,9 @@ Douban.init_post_link = function(o) {
         var el = $(this),
         href = el.attr("href"),
         text = el.attr("title") || el.text() + "?",
-        is_direct = el.attr("rel") == "direct",
+        attr_rel = el.attr("rel"),
+        is_confirm = attr_rel == "confirm_direct" || attr_rel == "",
+        is_direct = attr_rel == "direct" || attr_rel == "confirm_direct",
         target = el.attr("target"),
         post_url = href.split("?")[0],
         post_args = {},
@@ -2356,12 +2399,16 @@ Douban.init_post_link = function(o) {
             return;
         };
 
+        if (is_confirm && !confirm(text)) {
+            return;
+        }
+
         if (is_direct) {
             var args_html = [];
             args.push("ck=" + get_cookie('ck'));
             for (i=0, pair; i<args.length; i++) {
                 pair = args[i].split("=");
-                args_html.push('<input type="hidden" name="' + pair[0] + '" value="' + pair[1] + '">');
+                args_html.push('<input type="hidden" name="' + pair[0] + '" value="' + unescape(pair[1]).escapeHTML() + '">');
             }
             $('<form action="' + post_url + '" method="POST" target="' + (target || "_self") + '" sytle="display:none">' + args_html.join("") + '</form>').appendTo("body").submit();
         } else {
@@ -2371,15 +2418,12 @@ Douban.init_post_link = function(o) {
                 post_args[pair[0]] = pair[1];
             }
 
-            // first confirm the operation
-            if (confirm(text)) {
-                el.addClass('processing');
-                $.post_withck(post_url, post_args,
-                function(e){
-                    el.removeClass('processing');
-                    location.reload(true);
-                });
-            }
+            el.addClass('processing');
+            $.post_withck(post_url, post_args,
+            function(e){
+                el.removeClass('processing');
+                location.reload(true);
+            });
         }
     });
 };

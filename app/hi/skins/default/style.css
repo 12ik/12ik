@@ -58,28 +58,28 @@
 
 /*豆瓣切换*/
 .zbar {
-    background: url("../../../people/skins/default/zbar.gif") no-repeat scroll 0 0 transparent;
+    background: url("zbar.gif") no-repeat scroll 0 0 transparent;
     margin-bottom: 21px;
 	display: block;
 	overflow: hidden;
 }
 
 .zbar div {
-    background: url("../../../people/skins/default/zbar.gif") no-repeat scroll right top transparent;
+    background: url("zbar.gif") no-repeat scroll right top transparent;
     float: left;
     margin-left: 5px;
     padding-left: 2px;
 }
 
 .zbar span.now {
-    background: url("../../../people/skins/default/wztab.gif") no-repeat scroll right top transparent;
+    background: url("wztab.gif") no-repeat scroll right top transparent;
     display: block;
     float: left;
     margin: 0 5px;
     padding: 0 10px 0 0;
 }
 .zbar span.now span {
-    background: url("../../../people/skins/default/wztab.gif") no-repeat scroll 0 0 transparent;
+    background: url("wztab.gif") no-repeat scroll 0 0 transparent;
     display: block;
     padding: 6px 1px 5px 11px;
 }
@@ -154,7 +154,7 @@
 }
 
 .infobox .ex2, .infobox .ex1 {
-    background: url("../../../people/skins/default/info_bg.png") no-repeat scroll 100% 0 transparent;
+    background: url("info_bg.png") no-repeat scroll 100% 0 transparent;
     clear: both;
     font-size: 0;
     height: 5px;
@@ -164,7 +164,7 @@
 }
 
 .infobox .ex2 span, .infobox .ex1 span {
-    background: url("../../../people/skins/default/info_bg.png") no-repeat scroll 0 0 transparent;
+    background: url("info_bg.png") no-repeat scroll 0 0 transparent;
     display: block;
     height: 5px;
     margin-left: -5px;
@@ -224,7 +224,7 @@ a.a_rec_btn {
 }
 
 a.a_rec_btn:link, a.a_rec_btn:visited, a.a_rec_btn:hover, a.a_rec_btn:active {
-    background: url("../../../people/skins/default/bg_rec_btn.png") no-repeat scroll 0 0 transparent;
+    background: url("bg_rec_btn.png") no-repeat scroll 0 0 transparent;
     color: #4F946E;
 }
 
@@ -240,7 +240,7 @@ a.a_rec_btn:link, a.a_rec_btn:visited, a.a_rec_btn:hover, a.a_rec_btn:active {
     float: right;
 }
 .bn-std1, a.bn-std1:hover, .bn-std1 span {
-    background: url("../../../people/skins/default/bg_bn_red.png") no-repeat scroll 0 0 transparent;
+    background: url("bg_bn_red.png") no-repeat scroll 0 0 transparent;
     display: inline-block;
     height: 20px;
     overflow: hidden;
@@ -307,7 +307,7 @@ fieldset, img {
 }
 
 .user-cs {
-    background: url("../../../people/skins/default/icon-ok.png") no-repeat scroll left center transparent;
+    background: url("icon-ok.png") no-repeat scroll left center transparent;
     display: inline-block;
     padding: 0 0 0 15px;
 }
@@ -316,7 +316,7 @@ fieldset, img {
 }
 
 .user-group-arrow {
-    background: url("../../../people/skins/default/icon-arrow-down-b.png") no-repeat scroll center center transparent;
+    background: url("icon-arrow-down-b.png") no-repeat scroll center center transparent;
     border: 1px solid #FFFFFF;
     cursor: pointer;
     display: inline-block;
@@ -346,17 +346,17 @@ fieldset, img {
     padding: 0 10px;
 }
 .a-btn-add:link, .a-btn-add:active, .a-btn-add:hover, .a-btn-add:visited {
-    background: url("../../../people/skins/default/icon-add.png") no-repeat scroll 63px center #FFE6CE;
+    background: url("icon-add.png") no-repeat scroll 63px center #FFE6CE;
     border: 1px solid #D6B79D;
     color: #584E46;
     padding: 0 22px 0 10px;
 }
 .a-btn-opt:link, .a-btn-opt:active, .a-btn-opt:hover, .a-btn-opt:visited {
-    background: url("../../../people/skins/default/icon-arrow-down.png") no-repeat scroll 38px center #FFF3E7;
+    background: url("icon-arrow-down.png") no-repeat scroll 38px center #FFF3E7;
     padding: 0 18px 0 10px;
 }
 .a-btn-add-light:link, .a-btn-add-light:active, .a-btn-add-light:hover, .a-btn-add-light:visited {
-    background: url("../../../people/skins/default/icon-add.png") no-repeat scroll 10px center #FDF9F5;
+    background: url("icon-add.png") no-repeat scroll 10px center #FDF9F5;
     border: 1px solid #F1E5DC;
     color: #625850;
     padding: 0 10px 0 23px;
@@ -387,12 +387,12 @@ fieldset, img {
     padding: 0;
 }
 .mbtrmini {
-    background: url("../../../people/skins/default/listdot.gif") no-repeat scroll 0 8px transparent;
+    background: url("listdot.gif") no-repeat scroll 0 8px transparent;
     border-bottom: 1px dashed #DDDDDD;
     padding: 4px 0 4px 12px;
 }
 .quote {
-    background: url("../../../people/skins/default/quotel.gif") no-repeat scroll left 4px transparent;
+    background: url("quotel.gif") no-repeat scroll left 4px transparent;
     margin: 8px 0 0 26px;
     overflow: hidden;
     padding: 0 24px 5px 15px;
@@ -400,7 +400,7 @@ fieldset, img {
     word-wrap: break-word;
 }
 .quote span.inq {
-    background: url("../../../people/skins/default/quoter.gif") no-repeat scroll right bottom transparent;
+    background: url("quoter.gif") no-repeat scroll right bottom transparent;
     color: #333333;
     display: inline-block;
     padding-right: 15px;
@@ -517,7 +517,7 @@ fieldset, img {
 .spacetopic{ margin-bottom:25px}
 .spacetopic table{}
 .spacetopic tr td{border-bottom:dashed 1px #DDDDDD;padding:5px 0;}
-.feed {background:url('../../../people/skins/default/feed1.png') no-repeat;font-size:14px;padding:0 0 30px 20px}
+.feed {background:url('feed1.png') no-repeat;font-size:14px;padding:0 0 30px 20px}
 
 /**关注列表页**/
 .user-list li {
@@ -558,7 +558,7 @@ cursor:pointer
 	line-height:18px
 }
 .user-list .user-cs {
-    background: url("../../../people/skins/default/icon-ok.png") no-repeat scroll left center transparent;
+    background: url("icon-ok.png") no-repeat scroll left center transparent;
     display: inline-block;
     float: right;
     font-size: 12px;

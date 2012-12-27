@@ -38,7 +38,20 @@ switch($ik){
 
 		//帖子类型 暂时屏蔽这个功能
 		//$arrGroupType = $db->fetch_all_assoc("select * from ".dbprefix."group_topics_type where groupid='".$strGroup['groupid']."'");
-
+		//预先执行添加一条记录
+		$strLastTipic= aac('group')->find('group_topics',array('userid'=>$userid, 'groupid'=>0));
+		if($strLastTipic['topicid']>0)
+		{
+			$topic_id = $strLastTipic['topicid'];
+			
+		}else{
+			$topic_id = aac('site')->create('group_topics',
+				array('userid'=>$userid, 'groupid'=>0,'title'=>'0','content'=>'0','addtime'=>time())
+			);
+		}
+		//浏览该topic_id下的照片
+		$arrPhotos = aac('group')->getPhotosByTopicid($userid, $topic_id);
+		
 		$title = '发布帖子';
 
 		//包含模版
@@ -53,6 +66,7 @@ switch($ik){
 		
 		$title	= trim($_POST['title']);
 		$content	= trim($_POST['content']);
+		
 		
 		//$tag = trim($_POST['tag']);
 		
@@ -136,5 +150,62 @@ switch($ik){
 		}
 	
 		break;
+
+	//添加图片
+	case "add_photo":
+		
+		$topic_id  = $_POST['topic_id'];
+		
+		$photonum = aac('group')->findCount('group_topics_photo',array('topicid'=>$topic_id));
+		$arrUpload = ikUpload($_FILES['file'],$photonum+1,'group/topicphoto/'.$topic_id,array('jpg','gif','png','jpeg'));
+		
+		if($arrUpload)
+		{
+			//插入数据库
+			$arrData = array(
+				'seqid'	    => $photonum+1,
+				'userid'	=> $userid,
+				'topicid'	=> $topic_id,
+				'photoname'	=> $arrUpload['name'],
+				'phototype' => $arrUpload['type'],
+				'photosize' => $arrUpload['size'],
+				'align' => 'C',
+				'path' => 'topicphoto/'.$topic_id.'/'.$arrUpload['path'],
+				'photourl' => 'topicphoto/'.$topic_id.'/'.$arrUpload['url'],				
+				'addtime'	=> time(),
+			);
+			
+			$photoid = aac('group')->create('group_topics_photo', $arrData);	
+			
+			//浏览该noteid下的照片
+			$arrPhoto = aac('group')->getPhotoByseq($topic_id,$photonum+1);	
+		
+			$arrJson = array(
+							'layout'=>'C', 
+							'title'=>'',
+							'seq_id'=> $photonum+1,
+							'photoid'=> $photoid,
+							'small_photo_url'=> $arrPhoto['photo_140'],
+							);
+										
+			echo json_encode($arrJson); 		
+		
+		}else{
+			$arrJson = array('r'=>1, 'html'=>'上传图片失败，请重新上传吧！');
+			echo json_encode($arrJson); 
+		}
+	
+		break;	
+		
+	//删除图片
+	case "remove_photo":
+		
+		$topic_id  = $_GET['topic_id'];
+		$seq_id  = $_POST['seq_id'];
+		aac('group')->delete('group_topics_photo',array('seqid'=>$seq_id, 'topicid'=>$topic_id,'userid'=>$userid));
+		
+		$arrJson = array('r'=>0, 'html'=> '删除成功');
+		echo json_encode($arrJson); 	
+		break;				
 
 }

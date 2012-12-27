@@ -207,6 +207,8 @@ class group extends IKApp{
 		
 		$this->delete('group_topics_collects',array('topicid'=>$topicid)); 
 		
+		//删除图片
+		$this->delete('group_topics_photo',array('topicid'=>$topic_id));
 		
 		//删除图片
 		//if($strTopic['photo']){
@@ -279,6 +281,27 @@ class group extends IKApp{
 			
 		}
 	}
+
+	//根据用户topicid 和 seqID 帖子图片
+	function getPhotoByseq($topicid,$seq)
+	{
+		$arrPhoto = $this->find('group_topics_photo',array('seqid'=>$seq, 'topicid'=>$topicid));
+		$arrPhoto['photo_140'] = SITE_URL.ikXimg($arrPhoto['photourl'],'group',140,140,$arrPhoto['path'],0);
+		$arrPhoto['photo_500'] = SITE_URL.ikXimg($arrPhoto['photourl'],'group',500,500,$arrPhoto['path'],0);			
+		return $arrPhoto;	
+	}
+	//根据用户userid topicid 获取帖子图片
+	function getPhotosByTopicid($userid,$topicid)
+	{
+		$arrPhotos = $this->findAll('group_topics_photo',array('userid'=>$userid, 'topicid'=>$topicid));
+		foreach($arrPhotos as $key=>$item)
+		{
+			$arrPhoto[] = $item;
+			$arrPhoto[$key]['photo_140'] = SITE_URL.ikXimg($item['photourl'],'group',140,140,$item['path'],0);
+			$arrPhoto[$key]['photo_500'] = SITE_URL.ikXimg($item['photourl'],'group',500,500,$item['path'],0);			
+		}
+		return $arrPhoto;	
+	}	
 	
 	
 	//析构函数
