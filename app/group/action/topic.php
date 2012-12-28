@@ -37,9 +37,31 @@ if($strGroup['isopen']=='1' && $isGroupUser=='0'){
 	//下一篇帖子
 	$downTopic = $new['group']->find('group_topics','topicid>'.$topicid.' and groupid='.$groupid,'topicid,title');
 	
+	//匹配本地图片
+	$strcontent = $strTopic['content'];	
+	preg_match_all ( '/\[(图片)(\d+)\]/is', $strcontent, $photos );		
+	foreach ($photos [2] as $item) {
+		$strPhoto = aac('group')->getPhotoByseq($topicid,$item);
+		$htmlTpl = '<div class="img_'.$strPhoto['align'].'">
+						<img alt="'.$strPhoto['photodesc'].'" src="'.$strPhoto['photo_500'].'" />
+						<span class="img_title" >'.$strPhoto['photodesc'].'</span>
+					</div><div class="clear"></div>';
+
+		$strcontent = str_replace ( '[图片'.$item.']', $htmlTpl, $strcontent );
+	}
+	//匹配链接
+	preg_match_all ( '/\[(url)=([http|https|ftp]+:\/\/[a-zA-Z0-9\.\-\?\=\_\&amp;\/\'\`\%\:\@\^\+\,\.]+)\]([^\[]+)(\[\/url\])/is', 
+	$strcontent, $contenturl);
+	foreach($contenturl[2] as $c1)
+	{	
+		$strcontent = str_replace ( "[url={$c1}]", '<a href="'.$c1.'" target="_blank">', $strcontent);
+		$strcontent = str_replace ( "[/url]", '</a>', $strcontent);
+	}	
+	
+
 	//帖子标签
 	$strTopic['tags'] = aac('tag')->getObjTagByObjid('topic','topicid',$topicid);
-	$strTopic['content'] = editor2html($strTopic['content']);
+	$strTopic['content'] = $strcontent;
 	$strTopic['user']	= aac('user')->getOneUser($strTopic['userid']);
 	$strTopic['user']['signed'] = hview($strTopic['user']['signed']);
 	$title = $strTopic['title'];

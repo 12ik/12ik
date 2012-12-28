@@ -399,4 +399,16 @@ a.pop_win_close:hover { color: #fab0b6; background: none }
 #dialog .rectitle .gact a:hover,
 #dialog .rectitle .gact a:active { font-size:14px;padding:0 4px; }
 
+/**链接form**/
+
+.pop_win .panel .frm-addlink .item { margin-top:10px; overflow:hidden; lineheight:1.62;font-size:13px; height:1.62}
+
+.pop_win .panel .frm-addlink label { width:6em; float:left; text-align:right;}
+.pop_win .panel .frm-addlink input { width:70%; float:left; }
+.pop_win .panel .frm-addlink .item input {padding:3px;border:1px solid #ccc;font-size:13px;}
+.pop_win .panel .frm-addlink .item input:focus {border-color:gray}
+.pop_win .bn-layout{ padding-bottom:20px; text-align:center;}
+.pop_win .confirmbtn{ padding:2px; margin-right:10px}
+.pop_win .cancellinkbtn{padding:2px;} 
+
 

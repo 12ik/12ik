@@ -852,7 +852,7 @@ CREATE TABLE IF NOT EXISTS `ik_group_topics_photo` (
   `photourl` char(120) NOT NULL DEFAULT '',
   `photosize` char(32) NOT NULL DEFAULT '',
   `photodesc` char(120) NOT NULL DEFAULT '',
-  `align` char(32) NOT NULL DEFAULT 'center' COMMENT '图片对齐方式',
+  `align` char(32) NOT NULL DEFAULT 'C' COMMENT '图片对齐方式',
   `addtime` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`photoid`),
   KEY `topicid` (`topicid`)

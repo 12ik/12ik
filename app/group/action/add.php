@@ -63,6 +63,7 @@ switch($ik){
 	case "do":
 
 		$groupid	= intval($_POST['groupid']);	
+		$topicid  = intval($_POST['topic_id']); //帖子id
 		
 		$title	= trim($_POST['title']);
 		$content	= trim($_POST['content']);
@@ -110,7 +111,35 @@ switch($ik){
 				'uptime'	=> $uptime,
 			);
 			
-			$topicid = $db->insertArr($arrData,dbprefix.'group_topics');
+			//执行更新帖子
+			aac('group')->update('group_topics', array('userid'=>$userid, 'topicid'=>$topicid),$arrData);
+			
+			//浏览该noteid下的照片
+			$arrPhotos = aac('group')->getPhotosByTopicid($userid, $topicid);
+			//执行更新图片***********************************************//
+			
+			if(!empty($arrPhotos))
+			{
+				
+				foreach($arrPhotos as $key=>$item)
+				{
+					$photo_seqid = intval($_POST['p_'.$item['seqid'].'_seqid']); 
+					$photodesc   = $_POST['p_'.$item['seqid'].'_title'];
+					$photo_align = $_POST['p_'.$item['seqid'].'_layout'];
+					if($photo_seqid > 0)
+					{
+						//存在表单 开始执行更新
+						$arrData = array(
+							'photodesc'	=> $photodesc,
+							'align' => $photo_align,
+						);	
+						
+						aac('group')->update('group_topics_photo',array('topicid'=>$topicid,'seqid'=>$photo_seqid), $arrData);						
+					}				
+				}
+			}
+			
+			////////////////////////////////////////////////////////////		
 					
 			$strGroup = $db->once_fetch_assoc("select groupid,groupname from ".dbprefix."group where `groupid`='$groupid'");
 			
@@ -143,6 +172,7 @@ switch($ik){
 			//更新积分
 			$db->query("update ".dbprefix."user_info set `count_score`='".$strScore['score']."' where userid='$userid'");
 	
+			
 		
 			header("Location: ".SITE_URL.ikUrl('group','topic',array('id'=>$topicid)));
 

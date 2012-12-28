@@ -143,3 +143,30 @@ var paras = function(s){
     }
     return o;
 }
+jQuery.fn.extend({
+	insert_caret:function(t){
+        var o = this[0];
+        if(document.all && o.createTextRange && o.p){
+            var p=o.p;
+            p.text = p.text.charAt(p.text.length-1) == '' ? t+'' : t;
+        } else if(o.setSelectionRange){
+            var s=o.selectionStart;
+            var e=o.selectionEnd;
+            var t1=o.value.substring(0,s);
+            var t2=o.value.substring(e);
+            o.value=t1+t+t2;
+            o.focus();
+            var len=t.length;
+            o.setSelectionRange(s+len,s+len);
+            o.blur();
+        } else {
+            o.value+=t;
+        }
+    },	
+    get_sel:function(){
+        var o = this[0];
+        return document.all && o.createTextRange && o.p ?
+            o.p.text : o.setSelectionRange ?
+            o.value.substring(o.selectionStart,o.selectionEnd) : '';
+    }	
+});

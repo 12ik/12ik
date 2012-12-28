@@ -263,7 +263,11 @@ h2 span {
 }
 .topic-content .topic-doc img{max-width:500px;}
 .topic-content .topic-doc .topic-view{font-size:14px;line-height:30px;padding: 10px 0;}
-
+.topic-view .img_C{ display:block; margin:5px 0px; padding:0px; text-align:center; }
+.topic-view .img_L{ display:block; margin:5px 0px; padding:0px; text-align:center; float:left;}
+.topic-view .img_R{ display:block; margin:5px 0px; padding:0px; text-align:center; float:right;}
+.topic-view img{ max-width: 500px;}
+.topic-view .img_title{ display:block; text-align:center}
 
 /*comment评论列表*/
 .comment{width: 100%;overflow:hidden;}

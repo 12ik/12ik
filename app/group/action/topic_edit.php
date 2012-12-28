@@ -8,7 +8,7 @@ switch($ik){
 	
 	//编辑帖子
 	case "":
-		$topicid = intval($_GET['topicid']);
+		$topicid = $topic_id = intval($_GET['topicid']);
 
 		if($topicid == 0){
 			header("Location: ".SITE_URL);
@@ -31,6 +31,8 @@ switch($ik){
 		if($strTopic['userid'] == $userid || $strGroup['userid']==$userid || $IK_USER['user']['isadmin']==1){
 
 		
+		//浏览该topic_id下的照片
+		$arrPhotos = aac('group')->getPhotosByTopicid($userid, $topic_id);
 
 			//帖子类型
 			$arrGroupType = $db->fetch_all_assoc("select * from ".dbprefix."group_topics_type where `groupid`='".$strGroup['groupid']."'");
@@ -98,6 +100,31 @@ switch($ik){
 			$new['group']->update('group_topics',array(
 				'topicid'=>$topicid,
 			),$arrData);
+			
+			//浏览该noteid下的照片
+			$arrPhotos = aac('group')->getPhotosByTopicid($userid, $topicid);
+			//执行更新图片***********************************************//
+			if(!empty($arrPhotos))
+			{
+				
+				foreach($arrPhotos as $key=>$item)
+				{
+					$photo_seqid = intval($_POST['p_'.$item['seqid'].'_seqid']); 
+					$photodesc   = $_POST['p_'.$item['seqid'].'_title'];
+					$photo_align = $_POST['p_'.$item['seqid'].'_layout'];
+					if($photo_seqid > 0)
+					{
+						//存在表单 开始执行更新
+						$arrData = array(
+							'photodesc'	=> $photodesc,
+							'align' => $photo_align,
+						);	
+						
+						aac('group')->update('group_topics_photo',array('topicid'=>$topicid,'seqid'=>$photo_seqid), $arrData);						
+					}				
+				}
+			}
+			////////////////////////////////////////////////////////////				
 			
 		
 

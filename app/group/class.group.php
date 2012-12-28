@@ -208,7 +208,7 @@ class group extends IKApp{
 		$this->delete('group_topics_collects',array('topicid'=>$topicid)); 
 		
 		//删除图片
-		$this->delete('group_topics_photo',array('topicid'=>$topic_id));
+		$this->delete('group_topics_photo',array('topicid'=>$topicid));
 		
 		//删除图片
 		//if($strTopic['photo']){
