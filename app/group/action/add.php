@@ -177,7 +177,7 @@ switch($ik){
 			
 			$photoid = aac('group')->create('group_topics_photo', $arrData);	
 			
-			//浏览该noteid下的照片
+			//浏览该topic_id seqid下的照片
 			$arrPhoto = aac('group')->getPhotoByseq($topic_id,$photonum+1);	
 		
 			$arrJson = array(

@@ -23,7 +23,7 @@
           <div class="pl2">时间: {$arrMessages[addtime]}</div>
           <div class="ul"><span class="pl2">话题: </span><span class="m">{$arrMessages[title]}</span></div>
           <div class="messagebox">
-          {php echo nl2br($arrMessages[content])}
+          {php echo nl2br(stripslashes($arrMessages[content]))}
           </div>
           {if $type == 'inbox'}
           	{if $arrMessages[userid]!=0}
