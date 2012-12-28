@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<title>
-{$title}
-</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="{php echo date("Y-m-d H:i:s");}">
 <meta name="robots" content="all" />
 <meta name="Copyright" content="{$IK_SOFT[info][name]}" />
-<meta name="keywords" content="" /> 
+<meta name="keywords" content="{$title}" /> 
 <meta name="description" content="{$strSite[sitedesc]}">
+<title>{$title}</title>
 <link rel="icon" type="image/ico" href="{SITE_URL}public/images/fav.ico">
 <style>
 @import url({SITE_URL}app/{$app}/css/core.css);

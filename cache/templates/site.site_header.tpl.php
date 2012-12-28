@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<title>
-<?php echo $title;?>
-</title>
+<meta charset="UTF-8">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="<?php echo date("Y-m-d H:i:s");?>">
 <meta name="robots" content="all" />
 <meta name="Copyright" content="<?php echo $IK_SOFT['info'][name];?>" />
-<meta name="keywords" content="" /> 
+<meta name="keywords" content="<?php echo $title;?>" /> 
 <meta name="description" content="<?php echo $strSite['sitedesc'];?>">
+<title><?php echo $title;?></title>
 <link rel="icon" type="image/ico" href="<?php echo SITE_URL;?>public/images/fav.ico">
 <style>
 @import url(<?php echo SITE_URL;?>app/<?php echo $app;?>/css/core.css);

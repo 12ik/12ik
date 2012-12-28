@@ -4,29 +4,7 @@
     text-align: center;
 	margin-top:20px;
 }
-.tags-nav {
-    border-bottom: 1px solid #DDDDDD;
-    color: #999999;
-    font-size: 0;
-    line-height: 1.8;
-    padding-bottom: 15px;
-}
-.tags-nav li {
-    display: inline-block;
-    font-size: 12px;
-}
-.tags-nav li a:hover, .tags-nav li a.active {
-    background: none repeat scroll 0 0 #82BF71;
-    color: white;
-}
-.tags-nav li a {
-    display: block;
-    margin-bottom: 3px;
-    margin-right: 5px;
-    padding: 2px 0;
-    text-align: center;
-    width: 60px;
-}
+
 /**loading**/
 .site-loading {
     display: none;
@@ -43,67 +21,7 @@
     margin-left: -5%;
     margin-top: -1px;
 }
-.site-item {
-    border-top: 1px solid #EFEFEF;
-    display: inline-block;
-    margin: 0 -2px 0 0;
-    padding-bottom: 20px;
-    padding-left: 5%;
-    padding-top: 20px;
-    vertical-align: top;
-    width: 45%;
-}
-.site-item .pic {
-    float: left;
-    padding-right: 10px;
-}
-.site-item .info {
-    overflow: hidden;
-}
-.site-item .title {
-    font-size: 14px;
-}
-.site-item .info p {
-	font-size: 12px;
-    color: #666666;
-    margin: 0;
-}
-/*加载更多*/
-.site-more {
-    background-color: #F8F8F8;
-    cursor: pointer;
-    display: block;
-    height: 36px;
-    line-height: 36px;
-    margin-top: 5px;
-    position: relative;
-    text-align: center;
-    z-index: 1;
-	cursor: pointer;
-}
-.site-more:hover{ background-color:#F0F0F0}
 
-/**右侧**/
-.site-rec .list-items {
-    margin-top: -15px;
-}
-.site-rec .list-item {
-    font-size: 0;
-    padding: 15px 0;
-}
-.site-rec .pic {
-    display: inline-block;
-}
-.site-rec .info {
-    display: inline-block;
-    font-size: 12px;
-    overflow: hidden;
-    padding-left: 10px;
-    vertical-align: top;
-}
-.site-rec .like-num {
-    color: #666666;
-}
 /**site-tags**/
 .site-tags{
   width:400px; 
@@ -125,3 +43,68 @@
 #new-site-result h1{ border-bottom:#ccc solid 1px; padding-bottom:10px}
 #new-site-result .bd{}
 #new-site-result .bd p{ line-height:20px; margin-bottom:10px}
+
+/* Nav Tags */
+.tags-nav { color:#999; line-height:1.8;border-bottom:1px solid #ddd; font-size: 0; padding-bottom: 15px;}
+.tags-nav li { display: inline-block; *display: inline; *zoom: 1; font-size: 12px; }
+.tags-nav li a { display: block; padding: 2px 0px; margin-bottom: 3px;  width: 60px; text-align: center; margin-right: 5px;}
+.tags-nav li a:hover,  
+.tags-nav li a.active { background: #82BF71; color: white; }
+
+/* Site list*/
+
+.site-item { display:inline-block; *display:inline; *zoom:1;width:45%; margin:0 -2px 0 0; padding-left: 5%; *padding-left:0%; *padding-right: 28px;   border-top:1px solid #efefef; *border-bottom: none; vertical-align:top;  padding-top: 20px; padding-bottom: 20px; }
+.site-list-wrap { overflow: hidden; }
+.site-list  {margin-left: -5%; *margin-left: 0;  display: none;  font-size: 0;  margin-top: -1px;  }
+.site-item .pic { float: left; padding-right: 10px;}
+.site-item .info {  overflow: hidden; }
+.site-item .info p { color: #666; margin: 0px; *zoom: 1; }
+.site-item .title { font-size:14px; }
+.site-item  p { font-size:12px; }
+.site-item .stat { margin-top: 5px;}
+a.act-unfollow, 
+a.act-unfollow:link { color: #999;}
+
+.follow-stat { color: #999; margin-top: 5px;}
+.follow-stat span { color: #111; }
+
+.follow-btn  { display:inline-block;*display:inline;zoom:1; }
+
+.follow-btn a { display:inline-block;*display:inline;zoom:1;padding:5px 6px; line-height:1.2; *line-height: 12px;  font-weight:800;
+-moz-border-radius:2px;
+@-webkit-border-radius:2px;
+-o-border-radius:2px;
+border-radius:2px;
+}
+.follow-btn a:link,
+.follow-btn a:visited { color:#ca6445;background:#FAE9DA; }
+.follow-btn a:hover,
+.follow-btn a:active { color:#d9896a;background:#fcefe3; }
+.follow-btn a.selected:link,
+.follow-btn a.selected:visited { color:#fae7d6;background:#d9896a; }
+.follow-btn i { *font-size: 9px;font-style:normal;font-weight:normal;   *line-height: 10px; *vertical-align: top; *position: relative; *top: -1px;}
+.follow-btn  { white-space:normal;word-wrap:break-word; }
+
+/* Site Rec Sidebar */
+
+.site-rec .list-item { padding: 15px 0; font-size: 0;}
+.site-rec .pic { display: inline-block; *display: inline; *zoom: 1;}
+.site-rec .info { display: inline-block; *display: inline; *zoom: 1; vertical-align: top; overflow: hidden; padding-left: 10px; font-size: 12px; }
+.site-rec .hd {  position: relative; z-index: 3;  }
+.site-rec .list-items { margin-top: -15px; }
+.site-rec p { margin: 0; }
+.site-rec .like-num { color: #666; }   
+.site-rec .like-info { color:#EA9C86;  }
+.site-rec .like-info .time { padding-left: 5px; }
+.site-rec .follow-btn { vertical-align: middle; }
+
+/* Site Search */
+
+.sidebar-input { border: 1px solid #ddd; display: inline-block; *display: inline; *zoom: 1; font-size: 12px; padding:  5px; width: 230px; vertical-align: middle; } 
+.sidebar-input:focus { border: 1px solid darkGray; }
+.site-search,
+.site-rec { margin-bottom: 30px; }
+
+/* More */
+.site-more { background: #f8f8f8; line-height: 36px; vertical-align: center; text-align: center; cursor: pointer;  position: relative; z-index: 1; display: none; height: 36px;  margin-top: 5px; }
+.site-more:hover { background: #f0f0f0; }

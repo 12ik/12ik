@@ -93,7 +93,7 @@
 <table width="100%">
 <?php foreach((array)$arrMyCollect as $key=>$item) {?>
 <tr>
-<td><img src="../../people/html/<?php echo SITE_URL;?>public/images/topic.gif" align="absmiddle"  title="[帖子]" alt="[帖子]" />
+<td><img src="<?php echo SITE_URL;?>public/images/topic.gif" align="absmiddle"  title="[帖子]" alt="[帖子]" />
 <a href="<?php echo SITE_URL;?><?php echo ikurl('group','topic',array('id'=>$item['topicid']))?>"><?php echo $item['title'];?></a>&nbsp;&nbsp;</td>
 <td ><?php echo $item['count_comment'];?></td>
 <td style="width:120px;text-align:right;color:#999999;"><?php echo date('Y-m-d H:i',$item['addtime'])?></td>

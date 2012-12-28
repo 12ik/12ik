@@ -58,7 +58,7 @@ if(is_array($arrGroups)){
 }
 
 //自己的帖子 
-$arrMyTopic = $db->fetch_all_assoc("select * from ".dbprefix."group_topics where userid='$userid' order by addtime desc limit 15");
+$arrMyTopic = $db->fetch_all_assoc("select * from ".dbprefix."group_topics where userid='$userid' and groupid>0 order by addtime desc limit 15");
 
 //回复的帖子 
 $arrComments = $db->fetch_all_assoc("select topicid from ".dbprefix."group_topics_comments where userid='$userid' group by topicid order by addtime desc limit 15");

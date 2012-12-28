@@ -6,23 +6,23 @@ $userid = aac('user')->isLogin();
 
 switch($ik){
 
-	//我的小组发言
+	//我发起的话题
 	case "topic":
 	
-		$arrTopics = $db->fetch_all_assoc("select topicid,groupid,userid,title,count_comment,addtime,uptime from ".dbprefix."group_topics where userid='".$IK_USER['user']['userid']."' order by addtime desc limit 30");
+		$arrTopics = $db->fetch_all_assoc("select topicid,groupid,userid,title,count_comment,addtime,uptime from ".dbprefix."group_topics where userid='".$userid."' and groupid > 0 order by addtime desc limit 30");
 		foreach($arrTopics as $key=>$item){
 			$arrTopic[] = $item;
 			$arrTopic[$key]['user'] = aac('user')->getOneUser($item['userid']);
 			$arrTopic[$key]['group'] = aac('group')->getOneGroup($item['groupid']);
 		}
 
-		$title = '我的小组发言';
+		$title = '我发起的话题';
 
 		include template("my_topic");
 	
 		break;
 		
-	//我回复的帖子 
+	//回应的话题 
 	case "reply":
 		
 		$myTopics = $db->fetch_all_assoc("select topicid from ".dbprefix."group_topics_comments where userid='".$IK_USER['user']['userid']."' group by topicid order by addtime desc limit 30");
@@ -41,7 +41,7 @@ switch($ik){
 			$arrTopic[$key]['group'] = aac('group')->getOneGroup($item['groupid']);
 		}
 
-		$title='我回应的话题';
+		$title='我最近回复的话题';
 
 		include template("my_reply");
 		

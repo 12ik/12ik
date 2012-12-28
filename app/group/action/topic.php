@@ -67,7 +67,7 @@ if($strGroup['isopen']=='1' && $isGroupUser=='0'){
 	$title = $strTopic['title'];
 	
 	//评论列表开始
-	$sc = isset($_GET['sc']) ? $_GET['sc'] : 'desc';
+	$sc = isset($_GET['sc']) ? $_GET['sc'] : 'asc';
 	
 	$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 	

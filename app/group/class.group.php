@@ -39,7 +39,8 @@ class group extends IKApp{
 	
 	//获取一个小组
 	function getOneGroup($groupid){
-	
+		
+		
 		if($this->isGroup($groupid)){
 			
 			$strGroup=$this->find('group',array(

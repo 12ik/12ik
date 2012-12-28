@@ -77,9 +77,9 @@
 </div>
 
 <!--{if $page == '1'}-->
-<div style="text-align:right;">
-<!--{if $sc=='desc'}-->
-<a href="{SITE_URL}{ikUrl('group','topic',array('id'=>$topicid,'sc'=>'asc'))}">倒序阅读</a>
+<div class="orderbar">
+<!--{if $sc=='asc'}-->
+<a href="{SITE_URL}{ikUrl('group','topic',array('id'=>$topicid,'sc'=>'desc'))}">倒序阅读</a>
 <!--{else}-->
 <a href="{SITE_URL}{ikUrl('group','topic',array('id'=>$topicid))}">正序阅读</a>
 <!--{/if}-->
@@ -118,7 +118,7 @@
 <span><a href="javascript:void(0)"  onclick="commentOpen({$item[commentid]},{$item[topicid]})">回复</a></span>
 <!--{/if}-->
 
-<!--{if $IK_USER[user][userid] == $strGroup[userid] || $IK_USER[user][userid] == $item[userid] || $strGroupUser[isadmin]==1 || $IK_USER[user][isadmin]==1}-->
+<!--{if $strTopic['userid'] == $IK_USER[user][userid] || $IK_USER[user][userid] == $strGroup[userid] || $IK_USER[user][userid] == $item[userid] || $strGroupUser[isadmin]==1 || $IK_USER[user][isadmin]==1}-->
 <span><a class="j a_confirm_link" href="{SITE_URL}index.php?app=group&ac=comment&ik=delete&commentid={$item[commentid]}" rel="nofollow" onclick="return confirm('确定删除?')">删除</a>
 </span>
 <!--{/if}-->

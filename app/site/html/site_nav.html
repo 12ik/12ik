@@ -62,13 +62,10 @@ IK(function(){$(function(){$('.mod:has(.edit)').live('mouseenter', function(e){ 
 </script>
 <!--{/if}-->
 </div>
-<!--//sp-nav-->
-
 <!--{if $roomid>0 && $strSite[userid] == $IK_USER[user][userid]}-->   
-<!--sp-fn-box-->    
     <div class="sp-fn-box">
-        <a href="#" class="box-close" style="display: block;">x</a>
-        <div class="room-box" style="display: inline-block;">
+        <a href="#" class="box-close">x</a>
+        <div class="room-box">
             <input type="text" maxlength="15" value="{$strRoom[name]}" id="room-rename" roomid="{$roomid}" >
             <label class="icon-save">保存</label>
             <span class="widget-tips selected" id="type-normal">小站公共应用<em>▶</em></span>
@@ -76,7 +73,7 @@ IK(function(){$(function(){$('.mod:has(.edit)').live('mouseenter', function(e){ 
             <a class="room-del" hidefocus="true" id="room_1650259" href="javascript:;">删除房间</a>
         </div>
     
-        <div id="widget-normal" class="widgets-box" style="display: inline-block;">
+        <div id="widget-normal" class="widgets-box">
         <div class="widgets-slider">
         <ul class="list-s slider">
         <!--{loop $strWidgets $item}-->
@@ -96,9 +93,6 @@ IK(function(){$(function(){$('.mod:has(.edit)').live('mouseenter', function(e){ 
             <span class="switcher-next">&gt;</span>
         </div>
         </div>
-    </div>
-<!--//sp-fn-box-->    
+    </div>  
 <!--{/if}-->
-</div><!--//header-->
-
-
+</div>

@@ -9,7 +9,7 @@
 <div class="bd">
 <img align="left" alt="<?php echo $strGroup['groupname'];?>" src="<?php echo $strGroup['icon_48'];?>" class="pil mr5 groupicon" valign="top" />
 <div>创建于<?php echo date('Y-m-d',$strGroup['addtime'])?>&nbsp; &nbsp; <?php echo $strGroup['role_leader'];?>：<a href="<?php echo SITE_URL;?><?php echo ikurl('hi','',array('id'=>$strLeader['doname']))?>"><?php echo $strLeader['username'];?></a><br></div>
-<?php echo $strGroup['groupdesc'];?>
+<?php echo nl2br($strGroup['groupdesc'])?>
 <div class="clearfix" style="margin-top: 10px;">
 
 <?php if($isGroupUser > 0 && $IK_USER['user'][userid] != $strGroup['userid']) { ?>
@@ -115,7 +115,9 @@
 
         
     </div>
-
+    
+	<p class="pl">本页永久链接: <a href="<?php echo SITE_URL;?><?php echo ikurl('group','show',array(id=>$strGroup['groupid']))?>"><?php echo SITE_URL;?><?php echo ikurl('group','show',array(id=>$strGroup['groupid']))?></a></p>
+    
     <p class="pl"><span class="feed"><a href="<?php echo SITE_URL;?><?php echo ikurl('group','rss',array(groupid=>$strGroup['groupid']))?>">feed: rss 2.0</a></span></p>
     
     <div class="clear"></div>

@@ -77,9 +77,9 @@
 </div>
 
 <?php if($page == '1') { ?>
-<div style="text-align:right;">
-<?php if($sc=='desc') { ?>
-<a href="<?php echo SITE_URL;?><?php echo ikurl('group','topic',array('id'=>$topicid,'sc'=>'asc'))?>">倒序阅读</a>
+<div class="orderbar">
+<?php if($sc=='asc') { ?>
+<a href="<?php echo SITE_URL;?><?php echo ikurl('group','topic',array('id'=>$topicid,'sc'=>'desc'))?>">倒序阅读</a>
 <?php } else { ?>
 <a href="<?php echo SITE_URL;?><?php echo ikurl('group','topic',array('id'=>$topicid))?>">正序阅读</a>
 <?php } ?>
@@ -118,7 +118,7 @@
 <span><a href="javascript:void(0)"  onclick="commentOpen(<?php echo $item['commentid'];?>,<?php echo $item['topicid'];?>)">回复</a></span>
 <?php } ?>
 
-<?php if($IK_USER['user'][userid] == $strGroup['userid'] || $IK_USER['user'][userid] == $item['userid'] || $strGroupUser['isadmin']==1 || $IK_USER['user'][isadmin]==1) { ?>
+<?php if($strTopic['userid'] == $IK_USER['user'][userid] || $IK_USER['user'][userid] == $strGroup['userid'] || $IK_USER['user'][userid] == $item['userid'] || $strGroupUser['isadmin']==1 || $IK_USER['user'][isadmin]==1) { ?>
 <span><a class="j a_confirm_link" href="<?php echo SITE_URL;?>index.php?app=group&ac=comment&ik=delete&commentid=<?php echo $item['commentid'];?>" rel="nofollow" onclick="return confirm('确定删除?')">删除</a>
 </span>
 <?php } ?>

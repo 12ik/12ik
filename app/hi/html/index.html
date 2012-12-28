@@ -93,7 +93,7 @@
 <table width="100%">
 <!--{loop $arrMyCollect $key $item}-->
 <tr>
-<td><img src="../../people/html/{SITE_URL}public/images/topic.gif" align="absmiddle"  title="[帖子]" alt="[帖子]" />
+<td><img src="{SITE_URL}public/images/topic.gif" align="absmiddle"  title="[帖子]" alt="[帖子]" />
 <a href="{SITE_URL}{ikUrl('group','topic',array('id'=>$item[topicid]))}">{$item[title]}</a>&nbsp;&nbsp;</td>
 <td >{$item[count_comment]}</td>
 <td style="width:120px;text-align:right;color:#999999;">{php echo date('Y-m-d H:i',$item[addtime])}</td>

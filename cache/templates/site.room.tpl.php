@@ -1,4 +1,3 @@
- <!--头部-->
 <?php include template('site_header'); ?>
 <!--//头部-->
 <!--导航-->

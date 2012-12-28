@@ -9,7 +9,7 @@
 <div class="bd">
 <img align="left" alt="{$strGroup[groupname]}" src="{$strGroup[icon_48]}" class="pil mr5 groupicon" valign="top" />
 <div>创建于{php echo date('Y-m-d',$strGroup[addtime])}&nbsp; &nbsp; {$strGroup[role_leader]}：<a href="{SITE_URL}{ikUrl('hi','',array('id'=>$strLeader[doname]))}">{$strLeader[username]}</a><br></div>
-{$strGroup[groupdesc]}
+{php echo nl2br($strGroup[groupdesc])}
 <div class="clearfix" style="margin-top: 10px;">
 
 <!--{if $isGroupUser > 0 && $IK_USER[user][userid] != $strGroup[userid]}-->
@@ -115,7 +115,9 @@
 
         
     </div>
-
+    
+	<p class="pl">本页永久链接: <a href="{SITE_URL}{ikUrl('group','show',array(id=>$strGroup[groupid]))}">{SITE_URL}{ikUrl('group','show',array(id=>$strGroup[groupid]))}</a></p>
+    
     <p class="pl"><span class="feed"><a href="{SITE_URL}{ikUrl('group','rss',array(groupid=>$strGroup[groupid]))}">feed: rss 2.0</a></span></p>
     
     <div class="clear"></div>
