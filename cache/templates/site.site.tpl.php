@@ -16,7 +16,7 @@ $(function(){
 		<div class="tags-nav">
             <ul class="tags">
 
-              <li><a class="active" href="javascript:;">爱客猜</a></li>
+              <li><a class="active" href="<?php echo SITE_URL;?><?php echo ikurl('site','explore',array('ik'=>'site'))?>">全部</a></li>
               <li><a href="javascript:;">生活</a></li>
               <li><a href="javascript:;">同城</a></li>
               <li><a href="javascript:;">影视</a></li>

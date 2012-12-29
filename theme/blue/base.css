@@ -164,9 +164,9 @@ a.bn-post:hover span{ color:#FFF; background-color:#63AB1A; border: 1px solid #5
 
 #header .appnav{ float:right; width:810px; background-color:#acd3e6; height:35px; }
 
-#nav_bar{ display:block; float:left; width:530px;line-height:34px}
+#nav_bar{ display:block; float:left; width:580px;line-height:34px}
 #nav_bar li{ float:left; }
-#nav_bar li a{ font-size:14px; padding:0px 20px; color:#fff}
+#nav_bar li a{ font-size:14px; padding:0px 18px; color:#fff}
 #nav_bar li a:hover{  color:#43b0e6}
 
 #search_bar{ float:right; width:260px; position:relative;width:220px; margin-top:3px;}

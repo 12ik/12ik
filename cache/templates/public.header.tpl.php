@@ -79,6 +79,7 @@
                 <a href="<?php echo SITE_URL;?><?php echo ikurl('haomiwo')?>" target="_blank">好米窝</a>
                 </li> 
                 <li><a href="<?php echo SITE_URL;?><?php echo ikurl('article')?>">文章</a></li>
+                <li><a href="<?php echo SITE_URL;?><?php echo ikurl('tribe')?>">部落</a></li>
                 <li><a href="<?php echo SITE_URL;?><?php echo ikurl('home','down')?>">源码下载</a></li>                                              
 
         </ul>
@@ -128,6 +129,7 @@
                 <li><a href="<?php echo SITE_URL;?><?php echo ikurl('group')?>">我的小组</a></li>
                 <li><a href="<?php echo SITE_URL;?><?php echo ikurl('site')?>">我的小站</a></li>
                 <li><a href="<?php echo SITE_URL;?><?php echo ikurl('article')?>">文章</a></li>
+                <li><a href="<?php echo SITE_URL;?><?php echo ikurl('tribe')?>">部落</a></li>
                 
             </ul>
            <form action="<?php echo SITE_URL;?>index.php"  method="get" onsubmit="return searchForm(this);">

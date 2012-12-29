@@ -19,8 +19,20 @@ defined ( 'IN_IK' ) or die ( 'Access Denied.' );
 		$arrNewSite[] = aac('site')->getOneSite($item['siteid']);
 	}
 	
+	//最新推荐小站
+	$recommendSite = aac('site')->getRecommendSite(8); 
+	$recommendSites = array();
+	if($recommendSite)
+	{   
+		foreach($recommendSite as $key=>$item)
+		{
+			$recommendSites[] = $item;
+			$recommendSites[$key]['likenum'] = 	aac('site')->findCount('site_follow', array('follow_siteid'=>$item['siteid']));
+		}
+	}
+	
 	//最新发表日志
-	$arrNewNote = aac('note')->getNewNote('15');
+	$arrNewNote = aac('note')->getNewNote('10');
 	//热门10个热门话题
 	$arrHotTopics = aac('group')->findAll('group_topics',null,'count_comment desc','userid,topicid,title,content,count_comment,
 	count_view,addtime,uptime',20);
@@ -39,7 +51,7 @@ defined ( 'IN_IK' ) or die ( 'Access Denied.' );
 	$count_user = aac('user')->getUsers();
 	
 	//最新小站日志
-	$arrSiteNote = aac('site')->findAll('site_notes_content',null,'addtime desc');
+	$arrSiteNote = aac('site')->findAll('site_notes_content','notesid>0','addtime desc', null, '0,10');
 
 	//最新文章
 	$arrArticles = aac('article')->findAll('article_spaceitems',null,'dateline desc',null,'0,8');

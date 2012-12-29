@@ -6,4 +6,5 @@ return array (
   'group' => '小组',
   'site' => '小站',
   'article' => '文章',
+  'tribe' => '部落',
 );

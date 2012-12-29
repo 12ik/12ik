@@ -22,13 +22,16 @@
    		{loop $item[notes] $itemnotes}
         <div class="site-item first">
             <div class="title">
+            	<span style="float:right;color:#B9B9B9">{php echo date('m-d H:i:s',$itemnotes[addtime])}</span>
                 <span class="item-type">[日记]</span>
                 <a href="{SITE_URL}{ikUrl('site','notes',array('notesid'=>$itemnotes[notesid],'noteid'=>$itemnotes[contentid]))}" target="_blank">{$itemnotes[title]}</a>
             </div>
             <div class="content">
+            	{if $itemnotes[photo]}
                     <a href="{SITE_URL}{ikUrl('site','notes',array('notesid'=>$itemnotes[notesid],'noteid'=>$itemnotes[contentid]))}" class="note-image" target="_blank">
                         <img width="70" src="{$itemnotes[photo][photo_140]}">
                     </a>
+                 {/if}   
               <p>{php echo getsubstrutf8($itemnotes[content],0,200)} </p>
             </div>
         </div> 

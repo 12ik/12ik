@@ -10,12 +10,19 @@ switch ($ik) {
 		
 		if($userid>0)
 		{
-			//$arrJson = array('r'=>'0');
 			$follow_siteid = trim($_POST['siteid']);
-			aac('site')->create('site_follow',
-				array('userid'=>$userid, 'follow_siteid'=>$follow_siteid,'addtime'=>time())
-			);
-			$arrJson = array('r'=>'0');
+			//先查询是否已经喜欢了
+			$islike = aac('site')->find('site_follow',array('userid'=>$userid, 'follow_siteid'=>$follow_siteid),'followid');
+			if($islike['followid']>0)
+			{
+				$arrJson = array('r'=>'1');
+				
+			}else{
+				
+				aac('site')->create('site_follow',array('userid'=>$userid, 'follow_siteid'=>$follow_siteid,'addtime'=>time()));
+				$arrJson = array('r'=>'0');
+			}
+
 		}else{
 			$arrJson = array('r'=>'1');
 		}

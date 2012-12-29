@@ -14,7 +14,7 @@
 				if(res.r==1)
 				{
 					//错误
-					location.href='/';
+					location.href='http://www.12ik.com/site/';
 				}
 				if (!site_is_commercial && followed == 0)
 				{

@@ -22,13 +22,16 @@
    		<?php foreach((array)$item['notes'] as $itemnotes) {?>
         <div class="site-item first">
             <div class="title">
+            	<span style="float:right;color:#B9B9B9"><?php echo date('m-d H:i:s',$itemnotes['addtime'])?></span>
                 <span class="item-type">[日记]</span>
                 <a href="<?php echo SITE_URL;?><?php echo ikurl('site','notes',array('notesid'=>$itemnotes['notesid'],'noteid'=>$itemnotes['contentid']))?>" target="_blank"><?php echo $itemnotes['title'];?></a>
             </div>
             <div class="content">
+            	<?php if($itemnotes['photo']) { ?>
                     <a href="<?php echo SITE_URL;?><?php echo ikurl('site','notes',array('notesid'=>$itemnotes['notesid'],'noteid'=>$itemnotes['contentid']))?>" class="note-image" target="_blank">
                         <img width="70" src="<?php echo $itemnotes['photo'][photo_140];?>">
                     </a>
+                 <?php } ?>   
               <p><?php echo getsubstrutf8($itemnotes['content'],0,200)?> </p>
             </div>
         </div> 

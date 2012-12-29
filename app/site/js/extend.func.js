@@ -9,7 +9,7 @@ var loading = {
 //加小站list
 function loadSite(text, page)
 {
-	//alert(text)
+	if(text=='全部') return;
 	var url = siteUrl+'index.php?app=site&ac=explore&ik=tag';
 	$.ajax({
 		async: false,//同步加载数据

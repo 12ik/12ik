@@ -12,12 +12,11 @@ switch ($ik) {
 		$strMylikeSite = array();
 		foreach($arrMylikeSite as $key=>$items)
 		{
-			$strMylikeSite[$key] = aac('site')->getOneSite($items['follow_siteid']);
+			$strMylikeSite[$key] = $tempsite = aac('site')->getOneSite($items['follow_siteid']);
 			
 			//查看已经关注的小站动态 暂时只关注日记动态
-			$strNotes =  aac('site')->find('site_notes',array('siteid'=>$items['follow_siteid']),'userid');
 			//根据userid 获取最新发表的日记
-			$contentAll = aac('site')->findAll('site_notes_content',array('userid'=>$strNotes['userid']), 'addtime desc', null, 2);
+			$contentAll = $db->fetch_all_assoc("SELECT c.*,n.siteid  FROM ".dbprefix."site_notes_content as c LEFT JOIN ".dbprefix."site_notes AS n ON  n.siteid=".$items['follow_siteid']." and c.userid=".$tempsite['userid']." and c.notesid in (n.notesid) and c.notesid>0 WHERE n.siteid is not null order by addtime desc limit 2");
 			
 			$arrNote = array();
 			foreach($contentAll as $k=>$item)

@@ -106,6 +106,24 @@
  	<br clear="all"/>
     </div>
     
+<h2>最新推荐小站&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·<span class="pl">&nbsp;(<a href="{SITE_URL}{ikUrl('site','explore',array('ik'=>'site'))}">全部</a>) </span></h2>
+<div class="indent">
+    <!--{loop $recommendSites $key $item}-->
+    <dl class="obu">
+        <dt>
+            <a href="{SITE_URL}{ikUrl('site','mine',array('siteid'=>$item[siteid]))}" target="_blank" title="{$item[sitename]}">
+            <img  class="m_sub_img" alt="{$item[sitename]}" src="{$item[icon_48]}" width="48" />
+            </a>
+        </dt>
+        <dd>
+            <a href="{SITE_URL}{ikUrl('site','mine',array('siteid'=>$item[siteid]))}" target="_blank" title="$item[sitename]">$item[sitename]</a>
+        </dd>
+    </dl>
+    <!--{/loop}-->
+    <br clear="all"/>
+</div>
+
+
 <h2>最新创建小站&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·<span class="pl">&nbsp;(<a href="{SITE_URL}{ikUrl('site','explore',array('ik'=>'site'))}">全部</a>) </span></h2>
 <div class="indent">
     <!--{loop $arrNewSite $key $item}-->
