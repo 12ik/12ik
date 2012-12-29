@@ -215,23 +215,16 @@ a.bn-post:hover span{ color:#FFF; background-color:#63AB1A; border: 1px solid #5
 .tabnav .select a { }
 
 /*分页*/
-.page {margin:0;text-align: left;padding:5px;}
-.page a {
-	border:#DDDDDD 1px solid; padding:2px 5px;margin: 2px; color: #336699;text-decoration: none
-}
-.page a:hover {
-
-	border: #3266A0 1px solid;
-}
-.page a:active {
-	border: #3266A0 1px solid; 
-}
-.page .current {
-	color:#FFFFFF;background:#3A81C0;border-bottom: 1px solid #3266A0; padding:2px 5px;font-weight: bold; margin: 2px;
-}
-.page .disabled {
-	border: #eee 1px solid; padding:2px 5px; margin: 2px;color: #ddd;
-}
+.page { font: 14px Arial, Helvetica, sans-serif; color: #aaa; margin: 20px 0; line-height: 150%; text-align: center; }
+.page a, .thispage, .break { padding: 0px 4px;margin:2px; }
+.page .prev { margin-right: 20px; }
+.page .next { margin-left: 20px; }
+.page .next a,.page .prev a {padding:0;margin:0}
+.page .count { margin-left: 20px; font-size: 14px; }
+.page .thispage {color:#fff;background:#83BF73;}
+.page .break {color:#999}
+.page .thispage {color:#fff;background:#83BF73;}
+.page .break {color:#999}
 
 /*tag*/
 .tags {

@@ -1,3 +1,5 @@
+IK = (typeof IK === 'undefined')? function(fn){setTimeout(fn, 0);} : IK;
+
 $.post_withck = function( url, data, callback, type, traditional) {
     if ($.isFunction(data)) {
         type = callback;

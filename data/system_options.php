@@ -1,9 +1,9 @@
 <?php
 defined('IN_IK') or die('Access Denied.');
 return array (
-  'site_title' => '爱客网(12IK)开源社区',
-  'site_subtitle' => '又一个爱客网(12IK)开源社区',
-  'site_url' => 'http://www.joyku.com/12ik/',
+  'site_title' => '爱客网',
+  'site_subtitle' => '又一个爱客社区',
+  'site_url' => 'http://joyku.com/12ik/',
   'site_email' => 'admin@admin.com',
   'site_icp' => '正在备案中',
   'isface' => '0',
@@ -17,6 +17,6 @@ return array (
   'charset' => 'UTF-8',
   'thumbwidth' => '400',
   'thumbheight' => '300',
-  'attachmentdirtype' => 'month',
   'attachmentdir' => 'uploadfile/attachments/',
+  'attachmentdirtype' => 'month',
 );

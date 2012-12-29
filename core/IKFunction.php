@@ -180,16 +180,16 @@ function pagination($count, $perlogs, $page, $url, $suffix = '') {
 	for($i = $page - 5; $i <= $page + 5 && $i <= $pnums; $i ++) {
 		if ($i > 0) {
 			if ($i == $page) {
-				$re .= ' <span class="current">' . $i . '</span> ';
-			} else {
+				$re .= ' <span class="thispage">' . $i . '</span> ';
+			} else{
 				$re .= '<a href="' . $url . $i . $suffix . '">' . $i . '</a>';
 			}
 		}
 	}
 	if ($page > 6)
-		$re = '<a href="' . $url . '1' . $suffix . '" title="首页">&laquo;</a> ...' . $re;
+		$re = '<a href="' . $url . '1' . $suffix . '" title="首页">&lt;首页</a><span class="break">...</span>' . $re;
 	if ($page + 5 < $pnums)
-		$re .= '... <a href="' . $url . $pnums . $suffix . '" title="尾页">&raquo;</a>';
+		$re .= '<span class="break">...</span><a href="' . $url . $pnums . $suffix . '" title="尾页">尾页&gt;</a>';
 	if ($pnums <= 1)
 		$re = '';
 	return $re;
