@@ -56,15 +56,19 @@
                             <tr class="pl">
                                 <td>
              <a title="<?php echo $item['title'];?>" href="<?php echo SITE_URL;?><?php echo ikurl('group','topic',array('id'=>$item['topicid']))?>"><?php echo $item['title'];?></a>
+            <?php if($item['isvideo'] == '1') { ?>
+            <img src="<?php echo SITE_URL;?>public/images/lc_cinema.png" align="absmiddle" title="[视频]" alt="[视频]" />
+            <?php } ?>             
             <?php if($item['istop']=='1') { ?>
-            <img src="<?php echo SITE_URL;?>app/<?php echo $app;?>/skins/<?php echo $skin;?>/headtopic_1.gif" title="[置顶]" alt="[置顶]" />
+            <img src="<?php echo SITE_URL;?>app/<?php echo $app;?>/skins/<?php echo $skin;?>/headtopic_1.gif" align="absmiddle" title="[置顶]" alt="[置顶]" />
             <?php } ?>
             <?php if($item['addtime']>strtotime(date('Y-m-d 00:00:00'))) { ?>
             <img src="<?php echo SITE_URL;?>app/<?php echo $app;?>/skins/<?php echo $skin;?>/topic_new.gif" align="absmiddle"  title="[新帖]" alt="[新帖]" />
             <?php } ?> 
             <?php if($item['isposts'] == '1') { ?>
-            <img src="<?php echo SITE_URL;?>public/images/posts.gif" title="[精华]" alt="[精华]" />
-            <?php } ?></td>
+            <img src="<?php echo SITE_URL;?>public/images/posts.gif" align="absmiddle" title="[精华]" alt="[精华]" />
+            <?php } ?>
+            </td>
 
                                 <td nowrap="nowrap"><a href="<?php echo SITE_URL;?><?php echo ikurl('hi','',array('id'=>$item['user'][doname]))?>"><?php echo $item['user'][username];?></a></td>
                                 <td nowrap="nowrap" ><?php if($item['count_comment']>0) { ?><?php echo $item['count_comment'];?><?php } ?></td>

@@ -341,7 +341,11 @@ a.rec-btn:hover { background-position:0 -20px; }
 .item-entry .title { font-size:14px; }
 .item-entry .summary { overflow:hidden;width:100%;word-wrap:break-word; }
 .summary .ll,
-.item-entry .summary .pic { float:left;margin:0 10px 5px 0; }
+.item-entry .summary .pic { float:left;margin:0 10px 5px 0;  width:140px;}
+.summary .ll .video{ position:relative;width:130px;height:97px;}
+.summary .ll .video img{width:130px;height:97px;}
+.summary .ll .video a { position:relative;display:block;width:130px;height:97px;overflow:hidden; } 
+.summary .ll .video a:hover .video-overlay { background-position:0 -97px; }
 
 .createnew { margin-top: 15px; color: #999; font-size: 14px; text-align: center }
 

@@ -56,15 +56,19 @@
                             <tr class="pl">
                                 <td>
              <a title="{$item[title]}" href="{SITE_URL}{ikUrl('group','topic',array('id'=>$item[topicid]))}">{$item[title]}</a>
+            <!--{if $item[isvideo] == '1'}-->
+            <img src="{SITE_URL}public/images/lc_cinema.png" align="absmiddle" title="[视频]" alt="[视频]" />
+            <!--{/if}-->             
             <!--{if $item[istop]=='1'}-->
-            <img src="{SITE_URL}app/{$app}/skins/{$skin}/headtopic_1.gif" title="[置顶]" alt="[置顶]" />
+            <img src="{SITE_URL}app/{$app}/skins/{$skin}/headtopic_1.gif" align="absmiddle" title="[置顶]" alt="[置顶]" />
             <!--{/if}-->
             <!--{if $item[addtime]>strtotime(date('Y-m-d 00:00:00'))}-->
             <img src="{SITE_URL}app/{$app}/skins/{$skin}/topic_new.gif" align="absmiddle"  title="[新帖]" alt="[新帖]" />
             <!--{/if}--> 
             <!--{if $item[isposts] == '1'}-->
-            <img src="{SITE_URL}public/images/posts.gif" title="[精华]" alt="[精华]" />
-            <!--{/if}--></td>
+            <img src="{SITE_URL}public/images/posts.gif" align="absmiddle" title="[精华]" alt="[精华]" />
+            <!--{/if}-->
+            </td>
 
                                 <td nowrap="nowrap"><a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[user][doname]))}">{$item[user][username]}</a></td>
                                 <td nowrap="nowrap" ><!--{if $item[count_comment]>0}-->{$item[count_comment]}<!--{/if}--></td>

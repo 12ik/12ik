@@ -59,9 +59,18 @@ function openfn(id,obj)
   <span class="datetime">{php echo date('Y-m-d H:i:s',$item[addtime])}</span>
   <div id="note_$item[contentid]_short" class="summary">
     <div class="ll">
+    	{if $item[video]}
+        <div class="video">
+         <a href="{SITE_URL}{ikUrl('site','notes',array('notesid'=>$item[notesid],'noteid'=>$item[contentid]))}" title="{$item[title]}">
+            <img src="{$item[video][imgurl]}" alt="{$item[title]}">
+            <span class="video-overlay"></span> 
+        </a>
+        </div>   
+        {else}
         <a href="{SITE_URL}{ikUrl('site','notes',array('notesid'=>$item[notesid],'noteid'=>$item[contentid]))}" title="{$item[title]}">
             <img src="{$item[photo][photo_140]}" alt="{$item[title]}">
         </a>
+        {/if}
     </div>  
    {php echo getsubstrutf8($item[content],0,200)} </div>
   

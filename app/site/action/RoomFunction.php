@@ -64,20 +64,35 @@ function sortMod($mod)
 						}
 							
 						$strcontent = preg_replace ( '/\[(图片)(\d+)\]/is', '', $strcontent);
+						$strcontent = preg_replace ( '/\[(视频)(\d+)\]/is', '', $strcontent);
+						//匹配本地视频
+						preg_match_all ( '/\[(视频)(\d+)\]/is', $el['content'], $videos );
 						//匹配本地图片
-						preg_match_all ( '/\[(图片)(\d+)\]/is', $el['content'], $photos );	
-						if(!empty($photos [2]))
+						preg_match_all ( '/\[(图片)(\d+)\]/is', $el['content'], $photos );		
+						if(!empty($videos [2]))
 						{
 							//echo $photos [2][0];
+							$reVideo = aac('site')->find('videos', array('type'=>'notes', 'typeid'=>$el['contentid'],'seqid'=>$videos[2][0]));
+							
+							$htmldiv = '<div class="ll">
+											<div class="video">
+											<a href="'.SITE_URL.ikUrl('site','notes',array('notesid'=>$el['notesid'],
+											'noteid'=>$el['contentid'])).'">
+											<img alt="" src="'.$reVideo['imgurl'].'"><span class="video-overlay"></span> 
+											</a>
+											</div>
+										</div>';							
+						}else{
+							//echo $photos [2][0];
 							$photo = aac('site')->getPhotoByseq($el['contentid'],$photos [2][0]);
-							$htmlpic = '<div class="ll">
+							$htmldiv = '<div class="ll">
 										<a href="'.SITE_URL.ikUrl('site','notes',array('notesid'=>$el['notesid'],'noteid'=>$el['contentid'])).'">
 										<img alt="" src="'.$photo['photo_140'].'">
 										</a>
 										</div>';
 						}
 						$strcontent = getsubstrutf8($strcontent,0,200);
-						$arrNotecontent[$k]['content'] = $htmlpic.$strcontent;
+						$arrNotecontent[$k]['content'] = $htmldiv.$strcontent;
 						
 						
 					}

@@ -12,7 +12,7 @@
     <th width="50">标题：</tg>
     <td><input style="width:400px;" type="text" value="<?php echo $strTopic['title'];?>" maxlength="100" size="50" name="title" gtbfieldid="2" class="txt"    placeholder="请填写标题"></td>
     </tr>
-    <tr><th>&nbsp;</th><td align="left" style="padding:0px 10px"><a href="javascript:addPhoto();">添加图片</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a id="addlink" href="javascript:addLink();">添加链接</a></td></tr>
+    <tr><th>&nbsp;</th><td align="left" style="padding:0px 10px"><a href="javascript:addPhoto();">添加图片</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a class="video-btn" href="javascript:addVideo();">添加视频</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a id="addlink" href="javascript:addLink();">添加链接</a></td></tr>
     <tr>
 	<th>内容：</th>
     <td><textarea id="editor_full" style="width:100%;height:300px;" name="content" class="txt"   placeholder="请填写内容"><?php echo $strTopic['content'];?></textarea></td>
@@ -63,8 +63,29 @@
     <?php } ?>
 
 </div>
+<div id="videosbar"  class="item item-thumb-list">
+	<?php foreach((array)$arrVideos as $item) {?>
+   <div class="thumblst">
+  <div class="details">
+    <p>视频标题（30字以内）</p>
+    <textarea name="video_<?php echo $item['seqid'];?>_title" maxlength="30">人在囧途</textarea>
+    <input type="hidden" value="<?php echo $item['seqid'];?>" name="video_<?php echo $item['seqid'];?>">
+    <br>
+    <br>
+    视频网址：<br>
+    <a onclick="javascript:removeVideo(this, '<?php echo $item['seqid'];?>');return false;" class="minisubmit rr j a_remove_pic" name="rm_p_1">删除</a>
+    <p><?php echo $item['url'];?></p>
+  </div>
+  <div class="thumb">
+    <div class="pl">[视频<?php echo $item['seqid'];?>]</div>
+    <img src="<?php echo $item['imgurl'];?>"> </div>
+  <div class="clear"></div>
+</div>
 
+    <?php } ?>
+</div>
 <script language="javascript">
+
 function addLink(){
 	
 	var templ_link =    '<form class="frm-addlink">'+
@@ -105,7 +126,6 @@ function addLink(){
 		}
 	});	
 }
-
 function addPhoto(){
     pop_win([
         '<div class="rectitle"><span class="m">添加图片</span></div>',
@@ -114,10 +134,11 @@ function addPhoto(){
             '<form>',
                 '<span class="pl">选择图片</span> ',
                 '<input id="file" type="file" name="file"/>',
-                '<br><br><br><input id="startup" type="button" onclick="ajaxFileUpload(); return false;" value="开始上传">',
-                '<input type="button" onclick="pop_win.close();" value="取消">',
+                '<br><br><br><input id="startup" type="button"  class="confirmbtn" onclick="ajaxFileUpload(); return false;" value="开始上传">',
+                '<input type="button" onclick="pop_win.close();" value="取消" class="cancellinkbtn">',
                 '</form>',
         '</div><div class="waiting">正在上传中......</div>'].join('') );
+	
 }
 function ajaxFileUpload(){
 
@@ -207,7 +228,98 @@ function removePhoto(obj, seq_id){
             if(data.r == 0){
                 oText = $("textarea[name='content']");
                 oText.val(oText.val().replace('[图片' + seq_id + ']', ''));
-                o.closest(".thumblst").remove();
+                o.closest(".thumblst").slideUp('fast',function(){$(this).remove()});
+            }else{
+                // console.log('fail');
+            }
+        },
+        error:  function(data, status){
+            // console.log('error');
+        }
+    });
+}
+//视频模块
+var formNote = $('#form_tipic'),
+	control_panel = $('.control-panel', formNote),
+	videos = formNote.children('.videos'),
+	nid = '<?php echo $topic_id;?>';
+function addVideo()
+{
+
+	pop_win([
+	'<div class="rectitle"><span class="m">添加视频</span></div>',
+	'<div class="panel">',
+	'<div class="frm-addvideo">',
+	'<div class="item tips" id="videotips"></div>',
+	'<div class="item" style="text-align:left">',
+	'目前爱客网支持抓取视频网站的有：土豆网、优酷网、酷6网、56网、的视频，其他网站视频会陆续推出。',
+	'</div>',
+	'<div class="item">',
+	'<label>输入视频播放页地址：</label><input name="url" type="text" value="">',
+	'</div>',
+	'<div class="item" style="text-align:left;color:red" id="videerror"></div>',	
+	'</div></div>',
+	'<div class="bn-layout"><input type="button" value="确定" class="confirmbtn" onclick="addRemoteVideo();">',
+	'<input type="button" value="取消" class="cancellinkbtn" onclick="pop_win.close();" ></div>'].join('') );
+}
+function addRemoteVideo(frm, o){
+			var frm =  $('.frm-addvideo'), o = pop_win;
+			var vurl = $.trim(frm.find('input[name=url]').val());
+			//var ck = get_cookie('ck');
+            if(vurl!=''){
+				$('.pop_win').find('.confirmbtn').attr('disabled','disabled');
+	 			$.ajax({
+                    type: 'post',
+                    url: "<?php echo SITE_URL;?><?php echo ikurl('group','add',array('ik'=>'add_video'))?>",
+                    data: {
+						topic_id: nid,
+                        url: encodeURIComponent(vurl)  //编码传送
+                    },
+                    beforeSend: function() {
+                       $('#videotips').css('color','green').html('正在抓取视频中。。');
+                    },					
+                    success: function(data) { 
+                        if (data.r) {
+                            // displayError
+                            $('#videotips').css('color','red').html(data.html);
+                            return;
+                        }
+						buildVideoDetail(data);
+						$('#videotips').html('');
+                        $('#editor_full').insert_caret('[视频' + data.seqid + ']');
+                        o.close();
+						
+                    },
+                    error: function() {
+                        that.showError('网络错误!');
+                    }
+                });
+            }
+}
+function buildVideoDetail(data){
+        var html = '<div class="thumblst">';
+
+        html += '<div class="details"><p>视频标题（30字以内）</p> <textarea maxlength="30" name="video_' + data.seqid + '_title">'+ data.title + '</textarea><input type="hidden" name="video_' + data.seqid + '" value="' + data.seqid + '" ><br/><br/>视频网址：<br/>'+ '<a name="rm_p_' + data.seqid + '"   class="minisubmit rr j a_remove_pic"  onclick="javascript:removeVideo(this, \''+ data.seqid +'\');return false;">删除</a><p>'+ data.url +'</p>';
+        
+        html += '</div><div class="thumb"><div class="pl">[视频' + data.seqid + ']</div> <img src="' + data.imgurl + '"/> </div><div class="clear"></div> </div>';
+		
+		$('#videosbar').append(html).show();
+}
+//删除视频
+function removeVideo(obj, seq_id){
+	var ck = get_cookie('ck');
+    var data = "seq_id=" + seq_id + "&ck="+ck;
+    $.ajax({
+        type:       "post",
+        url:        "<?php echo SITE_URL;?><?php echo ikurl('group','add',array('ik'=>'remove_video', 'topic_id'=>$topic_id))?>",
+        dataType:   "json",
+        data:       data,
+        success:    function(data, status){
+            var oText, o = $(obj);
+            if(data.r == 0){
+                oText = $("textarea[name='content']");
+                oText.val(oText.val().replace('[视频' + seq_id + ']', ''));
+                o.closest(".thumblst").slideUp('fast',function(){$(this).remove()});
             }else{
                 // console.log('fail');
             }

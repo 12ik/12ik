@@ -26,7 +26,10 @@
             <?php if($arrTopic) { ?>
             <?php foreach((array)$arrTopic as $key=>$item) {?>
                             <tr class="pl">
-                                <td><a title="<?php echo $item['title'];?>" href="<?php echo SITE_URL;?><?php echo ikurl('group','topic',array('id'=>$item['topicid']))?>"><?php echo $item['title'];?></a>
+           <td><a title="<?php echo $item['title'];?>" href="<?php echo SITE_URL;?><?php echo ikurl('group','topic',array('id'=>$item['topicid']))?>"><?php echo $item['title'];?></a>
+            <?php if($item['isvideo'] == '1') { ?>
+            <img src="<?php echo SITE_URL;?>public/images/lc_cinema.png" align="absmiddle" title="[视频]" alt="[视频]" />
+            <?php } ?>                
             <?php if($item['istop']=='1') { ?>
             <img src="<?php echo SITE_URL;?>app/<?php echo $app;?>/skins/<?php echo $skin;?>/headtopic_1.gif" title="[置顶]" alt="[置顶]" />
             <?php } ?>

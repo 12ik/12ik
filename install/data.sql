@@ -315,6 +315,29 @@ CREATE TABLE IF NOT EXISTS `ik_site_note_photo` (
 --
 -- --------------------------------------------------------
 
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `ik_videos`
+--
+
+CREATE TABLE IF NOT EXISTS `ik_videos` (
+  `videoid` int(11) NOT NULL AUTO_INCREMENT COMMENT '视频id',
+  `seqid` int(11) NOT NULL DEFAULT '0' COMMENT '顺序id',
+  `typeid` int(11) NOT NULL DEFAULT '0' COMMENT '日记ID或帖子id',
+  `type` char(64) NOT NULL DEFAULT '0' COMMENT '日记或帖子或其他组件',
+  `userid` int(11) NOT NULL DEFAULT '0',
+  `url` char(255) NOT NULL DEFAULT '' COMMENT '视频网址',
+  `imgurl` char(255) NOT NULL DEFAULT '' COMMENT '视频截图',
+  `videourl` char(255) NOT NULL DEFAULT '' COMMENT 'swf地址',
+  `title` char(120) NOT NULL DEFAULT '' COMMENT '视频标题',
+  `count_view` int(11) NOT NULL DEFAULT '0',
+  `addtime` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`videoid`),
+  KEY `typeid` (`typeid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
 --
 -- 表的结构 `ik_site_discuss_comment`
 --
@@ -822,6 +845,7 @@ CREATE TABLE IF NOT EXISTS `ik_group_topics` (
   `isattach` tinyint(1) NOT NULL DEFAULT '0',
   `isnotice` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否通知',
   `isposts` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否精华帖子',
+  `isvideo` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否有视频',
   `addtime` int(11) DEFAULT '0' COMMENT '创建时间',
   `uptime` int(11) NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`topicid`),

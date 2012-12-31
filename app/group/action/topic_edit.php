@@ -33,9 +33,12 @@ switch($ik){
 		
 		//浏览该topic_id下的照片
 		$arrPhotos = aac('group')->getPhotosByTopicid($userid, $topic_id);
+		//浏览视频
+		$arrVideos = aac('group')->findAll('videos',array('typeid'=>$topic_id, 'type'=>'topic'));
+		
 
-			//帖子类型
-			$arrGroupType = $db->fetch_all_assoc("select * from ".dbprefix."group_topics_type where `groupid`='".$strGroup['groupid']."'");
+		//帖子类型
+	    $arrGroupType = $db->fetch_all_assoc("select * from ".dbprefix."group_topics_type where `groupid`='".$strGroup['groupid']."'");
 
 			$title = '编辑帖子';
 

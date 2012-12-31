@@ -97,7 +97,28 @@ IK.add('uploadify', {path: '<?php echo SITE_URL;?>public/js/lib/jquery.uploadify
             </div>
         </div>
  <!--   <?php } ?> -->
-    </div>            
+    </div>  
+    <div class="videos">
+ <!--   <?php foreach((array)$arrVideos as $item) {?> -->
+<div class="video-item">
+  <input type="hidden" value="<?php echo $item['seqid'];?>" name="video<?php echo $item['seqid'];?>">
+  <a onclick="" title="删除该视频" class="delete-video" href="#">X</a>
+  <div class="thumbnail">
+    <label class="video-name">[视频<?php echo $item['seqid'];?>]</label>
+    <div class="video-thumb">
+      <div class="video_overlay"></div>
+      <a target="_blank" href="<?php echo $item['url'];?>"><img src="<?php echo $item['imgurl'];?>"></a></div>
+  </div>
+  <div class="video-info">
+    <label>视频信息</label>
+    <div>
+      <textarea style="height:60px; width:385px" id="videotitle" name="videotitle" maxlength="30"><?php echo $item['title'];?></textarea>
+    </div>
+  </div>
+</div>
+		
+ <!--   <?php } ?> -->    
+    </div>               
     <div class="row note-reply">
         <label for="isreply" class="field">权限设置: </label>
         <label>
@@ -127,6 +148,7 @@ IK.add('uploadify', {path: '<?php echo SITE_URL;?>public/js/lib/jquery.uploadify
 		}
 	};
 	var UPLOAD_PHOTO_URL = "<?php echo SITE_URL;?><?php echo ikurl('site','notes',array('ik'=>'add_photo','notesid'=>$notesid))?>";
+	var UPLOAD_VIDEO_URL = "<?php echo SITE_URL;?><?php echo ikurl('site','notes',array('ik'=>'add_video','notesid'=>$notesid))?>";
 	var AUTOSAVE_URL = '/j/note/autosave';
 	var PREVIEW_URL = '/j/note/preview';
 </script>
@@ -272,32 +294,11 @@ IK.add('uploadify', {path: '<?php echo SITE_URL;?>public/js/lib/jquery.uploadify
 </div>
 </script>
 
-<script id="video_item_tmpl" type="text/template">
-	<div class="video-item">
-		<input type="hidden" name="video{{#= 1}}" value="{{#= 1}}" />
-		<a href="#" class="delete-video" title="删除该视频">X</a>
-		<div class="thumbnail">
-			<label class="video-name">[视频{{#= 1}}]</label>
-			<div class="video-thumb">
-				<div class="video_overlay"></div>
-				<a href="{{#= 1}}" target="_blank">
-					<img src="{{#= 1}}" alt="{{#= 1}}"/>
-				</a>
-			</div>
-		</div>
-		<div class="video-info">
-			<label>视频信息</label>
-			<div>
-				<span class="video-title">{{#= 1}}</span>
-				<a href="{{#= 1}}" class="video-url" target="_blank">{{#= 1}}</a>
-			</div>
-		</div>
-	</div>
-</script>
+
 <script id="video_dlg" type="text/template">
 <div class="video-dlg">
 	<div class="video-tip">
-		目前支持豆瓣电影预告片，以及土豆、优酷、酷6、QQ播客、新浪播客、搜狐视频、Mofile等多家网站视频。
+		目前爱客网支持抓取视频网站的有：土豆网、优酷网、酷6网、56网、的视频，其他网站视频会陆续推出。
 	</div>
 	<div class="row">
 		<label class="field" for="video_url">输入视频播放页地址</label>

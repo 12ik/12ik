@@ -26,7 +26,10 @@
             <!--{if $arrTopic}-->
             <!--{loop $arrTopic $key $item}-->
                             <tr class="pl">
-                                <td><a title="{$item[title]}" href="{SITE_URL}{ikUrl('group','topic',array('id'=>$item[topicid]))}">{$item[title]}</a>
+           <td><a title="{$item[title]}" href="{SITE_URL}{ikUrl('group','topic',array('id'=>$item[topicid]))}">{$item[title]}</a>
+            <!--{if $item[isvideo] == '1'}-->
+            <img src="{SITE_URL}public/images/lc_cinema.png" align="absmiddle" title="[视频]" alt="[视频]" />
+            <!--{/if}-->                
             <!--{if $item[istop]=='1'}-->
             <img src="{SITE_URL}app/{$app}/skins/{$skin}/headtopic_1.gif" title="[置顶]" alt="[置顶]" />
             <!--{/if}-->

@@ -51,6 +51,8 @@ switch($ik){
 		}
 		//浏览该topic_id下的照片
 		$arrPhotos = aac('group')->getPhotosByTopicid($userid, $topic_id);
+		//浏览视频
+		$arrVideos = aac('group')->findAll('videos',array('typeid'=>$topic_id, 'type'=>'topic'));
 		
 		$title = '发布帖子';
 
@@ -100,17 +102,24 @@ switch($ik){
 		}else{
 			
 			$uptime = time();
-			
+			//查看是否有视频
+			$seqnum = aac('site')->findCount('videos',array('typeid'=>$topicid,'type'=>'topic'));
+			if($seqnum>0)
+			{
+				$isvideo = 1;
+			}else{
+				$isvideo = 0;
+			}			
 			$arrData = array(
 				'groupid'				=> $groupid,
 				'userid'				=> $IK_USER['user']['userid'],
 				'title'				=> htmlspecialchars($title),
 				'content'		=> htmlspecialchars($content),
+				'isvideo'		=> $isvideo,
 				'iscomment'		=> $iscomment,
 				'addtime'			=> time(),
 				'uptime'	=> $uptime,
 			);
-			
 			//执行更新帖子
 			aac('group')->update('group_topics', array('userid'=>$userid, 'topicid'=>$topicid),$arrData);
 			
@@ -236,6 +245,48 @@ switch($ik){
 		
 		$arrJson = array('r'=>0, 'html'=> '删除成功');
 		echo json_encode($arrJson); 	
-		break;				
+		break;	
+		
+	//添加图片
+	case "add_video":
+		
+		$topic_id  = $_POST['topic_id'];
+		$url = urldecode(trim($_POST['url']));
+		
+		$arrVideo = getVideoInfo($url);
+		
+		if(!empty($arrVideo['videourl']))
+		{
+			$seqnum = aac('site')->findCount('videos',array('typeid'=>$topic_id,'type'=>'topic'));
+			
+			$imgurl = empty($arrVideo['imgurl']) ?  SITE_URL.'/public/images/video_default.gif' : $arrVideo['imgurl'];
+			$arrJson = array('userid'=>$userid,'typeid'=>$topic_id, 'type'=>'topic','videourl'=>$arrVideo['videourl'], 
+			'title'=>$arrVideo['title'],'imgurl'=>$imgurl,'seqid'=>$seqnum+1,'url'=>$url,'addtime'=>time());
+			
+			$videoid = aac('site')->create('videos', $arrJson);	
+			
+			if($videoid>0)
+			{
+				header("Content-Type: application/json", true);
+				echo json_encode($arrJson); 				
+			}	
+			
+		}else{
+			$arrJson = array('r'=>1, 'html'=>"视频网址格式不正确,或是我们不支持的格式（请不要填写视频专辑地址）");
+			header("Content-Type: application/json", true);
+			echo json_encode($arrJson); 
+		}
+	
+		break;	
+	//删除视频
+	case "remove_video":
+		
+		$topic_id  = $_GET['topic_id'];
+		$seq_id  = $_POST['seq_id'];
+		aac('group')->delete('videos',array('seqid'=>$seq_id, 'typeid'=>$topic_id,'userid'=>$userid,'type'=>'topic'));
+		
+		$arrJson = array('r'=>0, 'html'=> '删除成功');
+		echo json_encode($arrJson); 	
+		break;								
 
 }

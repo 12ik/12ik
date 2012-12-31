@@ -84,7 +84,7 @@ if($IK_USER['user'] == ''){
 		
 		$strGroup = implode(',',$arrGroup);
 		if($strGroup){
-			$arrTopics = $db->fetch_all_assoc("select topicid,userid,groupid,title,count_comment,count_view,istop,isphoto,isattach,isposts,addtime,uptime from ".dbprefix."group_topics where groupid in ($strGroup) and isshow='0' order by uptime desc limit 50");
+			$arrTopics = $db->fetch_all_assoc("select topicid,userid,groupid,title,count_comment,count_view,istop,isphoto,isattach,isposts,isvideo,addtime,uptime from ".dbprefix."group_topics where groupid in ($strGroup) and isshow='0' order by uptime desc limit 50");
 			foreach($arrTopics as $key=>$item){
 				$arrTopic[] = $item;
 				$arrTopic[$key]['user'] = aac('user')->getOneUser($item['userid']);

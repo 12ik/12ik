@@ -36,7 +36,7 @@ if($strGroup['isopen']=='1' && $isGroupUser=='0'){
 	
 	//下一篇帖子
 	$downTopic = $new['group']->find('group_topics','topicid>'.$topicid.' and groupid='.$groupid,'topicid,title');
-	
+
 	//匹配本地图片
 	$strcontent = $strTopic['content'];	
 	preg_match_all ( '/\[(图片)(\d+)\]/is', $strcontent, $photos );		
@@ -49,6 +49,15 @@ if($strGroup['isopen']=='1' && $isGroupUser=='0'){
 
 		$strcontent = str_replace ( '[图片'.$item.']', $htmlTpl, $strcontent );
 	}
+
+	//匹配视频
+	preg_match_all ( '/\[(视频)(\d+)\]/is', $strcontent, $videos );		
+	foreach ($videos[2] as $vitem)
+	{
+		$strVideo =  aac('group')->find('videos',array('typeid'=>$topicid, 'type'=>'topic', 'seqid'=>$vitem));
+		$videohtml = ikVideo($strVideo['videourl'],$strVideo['title']);
+		$strcontent = str_replace ( '[视频'.$vitem.']', $videohtml, $strcontent );
+	}		
 	//匹配链接
 	preg_match_all ( '/\[(url)=([http|https|ftp]+:\/\/[a-zA-Z0-9\.\-\?\=\_\&amp;\/\'\`\%\:\@\^\+\,\.]+)\]([^\[]+)(\[\/url\])/is', 
 	$strcontent, $contenturl);

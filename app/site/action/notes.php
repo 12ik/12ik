@@ -15,6 +15,15 @@ switch ($ik) {
 		$noteid = intval($_GET['noteid']);
 		$strNote = aac('site')->getOneNote($noteid);
 		$strcontent = $strNote['content'];	
+		
+		//匹配视频
+		preg_match_all ( '/\[(视频)(\d+)\]/is', $strcontent, $videos );		
+		foreach ($videos[2] as $vitem)
+		{
+			$strVideo =  aac('site')->find('videos',array('userid'=>$userid, 'typeid'=>$noteid, 'type'=>'notes', 'seqid'=>$vitem));
+			$videohtml = ikVideo($strVideo['videourl']);
+			$strcontent = str_replace ( '[视频'.$vitem.']', $videohtml, $strcontent );
+		}
 		//匹配本地图片
 		preg_match_all ( '/\[(图片)(\d+)\]/is', $strcontent, $photos );		
 		foreach ($photos [2] as $item) {
@@ -298,6 +307,8 @@ switch ($ik) {
 		}
 		//浏览该noteid下的照片
 		$arrPhotos = aac('site')->getPhotosByNoteid($userid, $noteid);
+		//浏览该noteid下的视频
+		$arrVideos = aac('site')->findAll('videos',array('userid'=>$userid, 'typeid'=>$noteid, 'type'=>'notes'));			
 		//提交按钮
 		if($note_submit)
 		{
@@ -341,6 +352,8 @@ switch ($ik) {
 		$arrNote = aac('site')->find('site_notes_content',array('contentid'=>$noteid));	
 		//浏览该noteid下的照片
 		$arrPhotos = aac('site')->getPhotosByNoteid($userid, $noteid);
+		//浏览该noteid下的照片
+		$arrVideos = aac('site')->findAll('videos',array('userid'=>$userid, 'typeid'=>$noteid, 'type'=>'notes'));		
 		//接收提交数据		
 		$note_submit = trim($_POST['note_submit']); //提交按钮
 		$cancel_note = trim($_POST['cancel_note']); //取消发布按钮		
@@ -407,6 +420,16 @@ switch ($ik) {
 		{
 			$arrNote[] = $item;
 			$strcontent = $item['content'];
+			//匹配视频
+			preg_match_all ( '/\[(视频)(\d+)\]/is', $strcontent, $videos );		
+			if(!empty($videos [2]))
+			{
+				//echo $photos [2][0];
+				$arrvideo = aac('site')->find('videos',
+					array('typeid'=>$item['contentid'],'type'=>'notes','seqid'=>$videos[2][0]));
+				
+				$arrNote[$key]['video']['imgurl']=  $arrvideo['imgurl'];
+			}			
 			//匹配链接
 			preg_match_all ( '/\[(url)=([http|https|ftp]+:\/\/[a-zA-Z0-9\.\-\?\=\_\&amp;\/\'\`\%\:\@\^\+\,\.]+)\]([^\[]+)(\[\/url\])/is', 
 			$strcontent, $contenturl);
@@ -416,7 +439,9 @@ switch ($ik) {
 				$strcontent = str_replace ( "[/url]", '</a>', $strcontent);
 			}
 			//echo $strcontent;	
-			$arrNote[$key]['content'] = preg_replace ( '/\[(图片)(\d+)\]/is', '', $strcontent);
+			$strcontent = preg_replace ( '/\[(图片)(\d+)\]/is', '', $strcontent);
+			$strcontent = preg_replace ( '/\[(视频)(\d+)\]/is', '', $strcontent);
+			$arrNote[$key]['content'] = $strcontent;
 			//匹配本地图片
 			preg_match_all ( '/\[(图片)(\d+)\]/is', $item['content'], $photos );	
 			
@@ -523,6 +548,37 @@ switch ($ik) {
 
 		//header("Content-Type: application/json", true);
 		//echo json_encode($arrJson); 		
-		break;		
-				
+		break;	
+		
+	case "add_video" :		
+		
+		$url = urldecode(trim($_POST['url']));
+		$note_id = intval($_POST['nid']); 
+		$arrVideo = getVideoInfo($url);
+		
+		if(!empty($arrVideo['videourl']))
+		{
+			$seqnum = aac('site')->findCount('videos',array('typeid'=>$note_id,'type'=>'notes'));
+			
+			$imgurl = empty($arrVideo['imgurl']) ?  SITE_URL.'/public/images/video_default.gif' : $arrVideo['imgurl'];
+			$arrJson = array('userid'=>$userid,'typeid'=>$note_id, 'type'=>'notes','videourl'=>$arrVideo['videourl'], 
+			'title'=>$arrVideo['title'],'imgurl'=>$imgurl,'seqid'=>$seqnum+1,'url'=>$url,'addtime'=>time());
+			
+			$videoid = aac('site')->create('videos', $arrJson);	
+			
+			if($videoid>0)
+			{
+				header("Content-Type: application/json", true);
+				echo json_encode($arrJson); 				
+			}	
+			
+		}else{
+			$arrJson = array('r'=>'true', 'error'=>"视频网址格式不正确,或是我们不支持的格式（请不要填写视频专辑地址）");
+			header("Content-Type: application/json", true);
+			echo json_encode($arrJson); 
+		}
+			
+
+		
+		break;
 }

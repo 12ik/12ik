@@ -61,7 +61,7 @@ if($strGroup['isaudit']=='1'){
 		$url = SITE_URL.ikUrl('group','show',array('id'=>$groupid,'typeid'=>$typeid,'page'=>''));
 	}
 	
-	$sql = "select topicid,typeid,groupid,userid,title,count_comment,count_view,istop,isphoto,isattach,isposts,addtime,uptime from ".dbprefix."group_topics where groupid='$groupid' ".$andType." and isshow='0' order by istop desc,uptime desc limit $lstart,30";
+	$sql = "select topicid,typeid,groupid,userid,title,count_comment,count_view,istop,isphoto,isattach,isposts,isvideo,addtime,uptime from ".dbprefix."group_topics where groupid='$groupid' ".$andType." and isshow='0' order by istop desc,uptime desc limit $lstart,30";
 	
 	$arrTopics = $db->fetch_all_assoc($sql);
 	if( is_array($arrTopics)){

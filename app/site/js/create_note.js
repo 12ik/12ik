@@ -103,7 +103,11 @@ IK('template', 'dialog', 'modernizr.dnd', 'uploadify', function() {
     }
     control_panel.delegate('.video-btn', 'click', function(e) {
         e.preventDefault();
-        openVideoDialog({textarea_selector: NOTE_TEXT});
+        openVideoDialog({
+			textarea_selector: NOTE_TEXT,
+			nid: nid,
+            upload_video_url: UPLOAD_VIDEO_URL
+			});
     });
     videos.delegate('.delete-video', 'click', function(e) {
         e.preventDefault();
@@ -112,7 +116,8 @@ IK('template', 'dialog', 'modernizr.dnd', 'uploadify', function() {
         item.slideUp(function() {
             item.remove();
         });
-        noteText[0].value = noteText[0].value.replace(new RegExp(tagName, 'g'), '');
+        //noteText[0].value = noteText[0].value.replace(new RegExp(tagName, 'g'), '');
+		noteText[0].value = noteText[0].value.replace(tagName, '');
         if (videos.children().length === 0) {
             videos.hide();
         }
@@ -954,7 +959,9 @@ function openImageDialog(opt) {
 ////////////////////////////////////////////////////
 function openVideoDialog(opt) {
     // opt check
-    var textarea_selector = opt && opt.textarea_selector;
+    var textarea_selector = opt && opt.textarea_selector,
+	    nid = opt && opt.nid,
+        upload_video_url = opt && opt.upload_video_url;
     if (!textarea_selector) return;
 
     var VIDEO_ITEM_TMPL = $.template(null, $('#video_item_tmpl').html()),
@@ -976,6 +983,7 @@ function openVideoDialog(opt) {
      */
     var videoURL = function() {
         var input, msg;
+		
 
         var isProcessing = false;
 
@@ -985,10 +993,10 @@ function openVideoDialog(opt) {
                 input = $('#video_url');
                 msg = input.next();
                 // event
-                input.focus();
+                //input.focus();
                 // event binding
                 input.keypress(function(e) {
-                    e.preventDefault();
+                    //e.preventDefault();
                     if (e.which === 13) {
                         that.saveVideo();
                     }
@@ -1027,17 +1035,18 @@ function openVideoDialog(opt) {
                 if ($.trim(url) === '') {
                     return;
                 }
-
+				
                 $.ajax({
-                    type: 'get',
-                    url: '/j/video',
+                    type: 'post',
+                    url: upload_video_url,
                     data: {
-                        url: encodeURIComponent(url)
+						nid: nid,
+                        url: encodeURIComponent(url)  //编码传送
                     },
                     beforeSend: function() {
                         that.showLoading();
                     },
-                    success: function(data) {
+                    success: function(data) { 
                         if (data.r) {
                             // displayError
                             that.showError(data.error);
@@ -1045,13 +1054,34 @@ function openVideoDialog(opt) {
                         }
                         // TODO: parse
                         // video seq, according to client
-                        var videoData, seq;
+                        /*var videoData, seq;
                         $.tmpl(VIDEO_ITEM_TMPL, videoData).
                             appendTo(videoList);
                         videoList.show();
-
-                        $(textarea_selector).insert_caret('[视频' + seq + ']');
+						*/
+						var html = '<div class="video-item">'+
+							'<input type="hidden" name="video'+data.seqid+'" value="'+data.seqid+'" />'+
+							'<a href="#" class="delete-video" title="删除该视频" onclick="">X</a>'+
+							'<div class="thumbnail">'+
+							'<label class="video-name">[视频'+data.seqid+']</label>'+
+							'<div class="video-thumb">'+
+							'<div class="video_overlay"></div>'+
+							'<a href="'+data.url+'" target="_blank">'+
+							'<img src="'+data.imgurl+'" />'+
+							'</a>'+
+							'</div>'+
+							'</div>'+
+							'<div class="video-info">'+
+							'<label>视频信息</label>'+
+							'<div>'+
+							'<textarea maxlength="30" name="videotitle" id="videotitle" style="height:60px; width:385px">'+data.title+'</textarea>'+
+							'</div>'+
+							'</div>'+
+							'</div>';
+						$('.videos').append(html).show();
+                        $(textarea_selector).insert_caret('[视频' + data.seqid + ']');
                         dlg.close();
+						
                     },
                     error: function() {
                         that.showError('网络错误!');

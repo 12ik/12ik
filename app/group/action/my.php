@@ -9,7 +9,7 @@ switch($ik){
 	//我发起的话题
 	case "topic":
 	
-		$arrTopics = $db->fetch_all_assoc("select topicid,groupid,userid,title,count_comment,addtime,uptime from ".dbprefix."group_topics where userid='".$userid."' and groupid > 0 order by addtime desc limit 30");
+		$arrTopics = $db->fetch_all_assoc("select topicid,groupid,userid,title,count_comment,isvideo,addtime,uptime from ".dbprefix."group_topics where userid='".$userid."' and groupid > 0 order by addtime desc limit 30");
 		foreach($arrTopics as $key=>$item){
 			$arrTopic[] = $item;
 			$arrTopic[$key]['user'] = aac('user')->getOneUser($item['userid']);
@@ -30,7 +30,7 @@ switch($ik){
 
 		foreach($myTopics as $item){
 
-			$strTopic = $db->once_fetch_assoc("select topicid,userid,groupid,title,count_comment,count_view,isphoto,isattach,addtime,uptime from ".dbprefix."group_topics where topicid = '".$item['topicid']."'");
+			$strTopic = $db->once_fetch_assoc("select topicid,userid,groupid,title,count_comment,count_view,isphoto,isattach,isvideo,addtime,uptime from ".dbprefix."group_topics where topicid = '".$item['topicid']."'");
 			$arrTopics[] = $strTopic;
 			
 		}
@@ -54,7 +54,7 @@ switch($ik){
 
 		foreach($arrCollect as $item){
 
-			$strTopic = $db->once_fetch_assoc("select topicid,userid,groupid,title,count_comment,count_view,isphoto,isattach,addtime,uptime from ".dbprefix."group_topics where topicid = '".$item['topicid']."'");
+			$strTopic = $db->once_fetch_assoc("select topicid,userid,groupid,title,count_comment,count_view,isphoto,isattach,isvideo,addtime,uptime from ".dbprefix."group_topics where topicid = '".$item['topicid']."'");
 			$arrTopics[] = $strTopic;
 			
 		}

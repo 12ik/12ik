@@ -256,7 +256,7 @@ class site extends IKApp{
 			$arrPhoto[$key]['photo_600'] = SITE_URL.ikXimg($item['photourl'],'site',600,730,$item['path'],0);			
 		}
 		return $arrPhoto;	
-	}
+	}	
 	//根据用户id 日记内容ID 获取该日记内的图片
 	function getPhotoByseq($noteid,$seq)
 	{
