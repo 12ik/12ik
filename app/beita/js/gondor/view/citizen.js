@@ -1,0 +1,1 @@
+define("gondor/view/citizen",["lib/jquery","mod/lang","mod/template","gondor/view/dialog"],function(e,b,a,c){var d={telecontrol:function(f){c.set({isHideTitle:false,title:"选择一个小店：",content:a.convertTpl("tplAdminList",f,"list"),width:500,buttons:[]}).open()}};return d});

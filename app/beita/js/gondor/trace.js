@@ -1,0 +1,1 @@
+define("gondor/trace",["host"],function(c,b,a){c._eventStack=[];c._uiStack=[];a.eventStack=c._eventStack;a.uiStack=c._uiStack});

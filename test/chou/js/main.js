@@ -1,6 +1,5 @@
 require.config({
-    baseUrl: 'js/',
-    distUrl: 'dist/js/'
+    baseUrl: 'js/'
 });
 
 define("jquery-src", "lib/jquery.js");
@@ -19,7 +18,7 @@ require([
     "mod/lang", 
     "mod/uiproxy", 
     "mod/template", 
-    "luckybox", 
+    "wangli", 
     "data/draft", 
     "mod/domready"
 ], function($, _, uiproxy, tpl, app, json){

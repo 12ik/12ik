@@ -1,0 +1,1 @@
+define("gondor/observer",["mod/event","gondor/trace"],function(a,b){return a({trace:20,traceStack:b.eventStack})});

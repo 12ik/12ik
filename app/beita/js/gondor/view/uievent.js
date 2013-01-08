@@ -1,0 +1,1 @@
+define("gondor/view/uievent",["mod/lang","mod/uiproxy","gondor/trace","host"],function(b,a,d,c){var e=c.document;if(e.addEventListener){e.addEventListener("touchmove",function(f){f.preventDefault()},false)}return{clickProxy:a.add(e.body,"click",{},{trace:10,traceStack:d.uiStack}),dispatchClick:function(f){this.clickProxy.dispatchEvent(f)}}});
