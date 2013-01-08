@@ -43,7 +43,7 @@ if($strGroup['isopen']=='1' && $isGroupUser=='0'){
 	foreach ($photos [2] as $item) {
 		$strPhoto = aac('group')->getPhotoByseq($topicid,$item);
 		$htmlTpl = '<div class="img_'.$strPhoto['align'].'">
-						<img alt="'.$strPhoto['photodesc'].'" src="'.$strPhoto['photo_500'].'" />
+						<a href="'.SITE_URL.'uploadfile/group/'.$strPhoto['photourl'].'" target="_blank" title="点击查看原图"><img alt="'.$strPhoto['photodesc'].'" src="'.$strPhoto['photo_500'].'"  title="点击查看原图"/></a>
 						<span class="img_title" >'.$strPhoto['photodesc'].'</span>
 					</div><div class="clear"></div>';
 

@@ -53,8 +53,9 @@ class site extends IKApp{
 			return $strSite;
 			
 		}else{
-			header("Location: ".SITE_URL);
-			exit;
+			//header("Location: ".SITE_URL);
+			//exit;
+			return;
 		}
 	}
 	//根据roomid获取一个房间

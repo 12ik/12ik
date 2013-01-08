@@ -1,0 +1,1 @@
+Raven.config({secretKey:"d7d52f52b4bb41149e0597d12573a32b",publicKey:"5c2a71b6745f47ae90af5fbb04f9f9c1",servers:["http://onimaru-beta.intra.douban.com/api/store/"],projectId:5,logger:"js error"});window._jslog=function(){Raven.process.apply(Raven,arguments)};

@@ -405,7 +405,7 @@ CREATE TABLE IF NOT EXISTS `ik_site_widget` (
   `othername` char(64) NOT NULL DEFAULT '' COMMENT '别名',
   `widgetdesc` text NOT NULL COMMENT '组件介绍',
   PRIMARY KEY (`widgetid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- 转存表中的数据 `ik_site_widget`

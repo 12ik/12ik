@@ -1,4 +1,5 @@
 User-agent: *
+
 Disallow:/app/
 Disallow:/cache/
 Disallow:/data/

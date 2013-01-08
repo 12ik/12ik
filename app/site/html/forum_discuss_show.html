@@ -43,7 +43,7 @@
                 <div class="post-info"> <span class="datetime">{php echo date('Y-m-d H:i:s',$strdiscuss[addtime])}</span> <span class="from">来自: <a href="{SITE_URL}{ikUrl('hi','',array('id'=>$strUser[doname]))}">{$strUser[username]}</a>(性格决定命运)</span>
                 </div>
                 <p id="link-report">
-                    {$strdiscuss[content]}
+                    {php echo nl2br($strdiscuss[content])}
                 	{if $userid>0}<span class="report"><a href="#" rel="nofollow">举报</a></span>{/if}
                 </p>
                 <div class="post-func">

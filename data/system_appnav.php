@@ -7,4 +7,5 @@ return array (
   'site' => '小站',
   'article' => '文章',
   'tribe' => '部落',
+  'beita' => '贝塔城',
 );

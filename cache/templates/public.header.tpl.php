@@ -80,6 +80,7 @@
                 </li> 
                 <li><a href="<?php echo SITE_URL;?><?php echo ikurl('article')?>">文章</a></li>
                 <li><a href="<?php echo SITE_URL;?><?php echo ikurl('tribe')?>">部落</a></li>
+                 <li><a href="<?php echo SITE_URL;?><?php echo ikurl('beita')?>">贝塔城</a></li>
                 <li><a href="<?php echo SITE_URL;?><?php echo ikurl('home','down')?>">源码下载</a></li>                                              
 
         </ul>

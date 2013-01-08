@@ -79,7 +79,7 @@ class group extends IKApp{
 	
 	//获取推荐的小组
 	function getRecommendGroup($num){
-		$arrRecommendGroups = $this->db->fetch_all_assoc("select groupid from ".dbprefix."group where isrecommend='1' limit $num");
+		$arrRecommendGroups = $this->db->fetch_all_assoc("select groupid from ".dbprefix."group  where isrecommend='1' order by groupid desc limit $num");
 		
 		$arrRecommendGroup = array();
 		
@@ -211,6 +211,9 @@ class group extends IKApp{
 		//删除图片
 		$this->delete('group_topics_photo',array('topicid'=>$topicid));
 		
+		//删除视频
+		$this->delete('videos',array('typeid'=>$topicid,'type'=>'topic'));
+		
 		//删除图片
 		//if($strTopic['photo']){
 		//	unlink('uploadfile/topic/'.$strTopic['photo']);
@@ -287,8 +290,8 @@ class group extends IKApp{
 	function getPhotoByseq($topicid,$seq)
 	{
 		$arrPhoto = $this->find('group_topics_photo',array('seqid'=>$seq, 'topicid'=>$topicid));
-		$arrPhoto['photo_140'] = SITE_URL.ikXimg($arrPhoto['photourl'],'group',140,140,$arrPhoto['path'],0);
-		$arrPhoto['photo_500'] = SITE_URL.ikXimg($arrPhoto['photourl'],'group',500,500,$arrPhoto['path'],0);			
+		$arrPhoto['photo_140'] = SITE_URL.ikXimg($arrPhoto['photourl'],'group',140,140,$arrPhoto['path'],1);
+		$arrPhoto['photo_500'] = SITE_URL.ikXimg($arrPhoto['photourl'],'group',500,500,$arrPhoto['path'],1);			
 		return $arrPhoto;	
 	}
 	//根据用户userid topicid 获取帖子图片
@@ -298,8 +301,8 @@ class group extends IKApp{
 		foreach($arrPhotos as $key=>$item)
 		{
 			$arrPhoto[] = $item;
-			$arrPhoto[$key]['photo_140'] = SITE_URL.ikXimg($item['photourl'],'group',140,140,$item['path'],0);
-			$arrPhoto[$key]['photo_500'] = SITE_URL.ikXimg($item['photourl'],'group',500,500,$item['path'],0);			
+			$arrPhoto[$key]['photo_140'] = SITE_URL.ikXimg($item['photourl'],'group',140,140,$item['path'],1);
+			$arrPhoto[$key]['photo_500'] = SITE_URL.ikXimg($item['photourl'],'group',500,500,$item['path'],1);			
 		}
 		return $arrPhoto;	
 	}	
