@@ -411,4 +411,6 @@ a.pop_win_close:hover { color: #fab0b6; background: none }
 .pop_win .panel .frm-addvideo .item input:focus {border-color:gray}
 .pop_win .panel .frm-addvideo .tips{text-align:left;height:16px;margin:0px}
 
-
+/**12IK 编辑器**/
+.ik_toolbar{ line-height:28px; height:28px}
+.ik_toolbar .textnum{ text-align:right; float:right}

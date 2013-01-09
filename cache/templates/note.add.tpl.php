@@ -1,20 +1,22 @@
-{template header}
+<?php include template('header'); ?>
 <div class="midder">
 <div class="mc">
 <h1>写日志</h1>
 
-<form method="POST" action="{SITE_URL}index.php?app=note&ac=add&ik=do">
+<form method="POST" action="<?php echo SITE_URL;?>index.php?app=note&ac=add&ik=do">
 <table cellspacing="0" cellpadding="0" class="table_1">
 <tr><th>分类：</th><td>
 
 <select name="cateid" class="txt" id="cate_select" style="float:left;">
-<!--{if $arrCate==''}-->
+<?php if($arrCate=='') { ?>
 <option selected="select" value="0">默认分类</option>
-<!--{else}-->
-<!--{loop $arrCate $key $item}-->
-<option  {if $item[cateid] == $cateid } selected="select"  {/if}  value="{$item[cateid]}" >{$item[catename]}</option>
-<!--{/loop}-->
-<!--{/if}-->
+<?php } else { ?>
+<?php foreach((array)$arrCate as $key=>$item) {?>
+<option  <?php if($item['cateid'] == $cateid ) { ?> selected="select"  <?php } ?>  value="<?php echo $item['cateid'];?>" ><?php echo $item['catename'];?></option>
+<?php }?>
+<?php } ?>
+
+
 </select> <span id="cate_input" style="display:none; float:left; margin-left:5px; margin-top:2px">
 <input type="text" class="txt" style="width:100px;float:left; display:inline-block" name="catename"/>
 <input class="subab" type="button" value="新增" onClick="cateOptions.addPost();"  style="float:left; display:inline-block; margin-left:5px; margin-top:2px" /> 
@@ -37,6 +39,6 @@
 </div>
 </div>
 <!--加载编辑器-->
-<script src="{SITE_URL}public/js/editor/xheditor/xheditor.js" type="text/javascript"></script>
-<script src="{SITE_URL}public/js/editor/xheditor/loadeditor.js" type="text/javascript"></script>
-{template footer}
+<script src="<?php echo SITE_URL;?>public/js/editor/xheditor/xheditor.js" type="text/javascript"></script>
+<script src="<?php echo SITE_URL;?>public/js/editor/xheditor/loadeditor.js" type="text/javascript"></script>
+<?php include template('footer'); ?>

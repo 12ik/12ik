@@ -1,90 +1,112 @@
-{template header}
-
+<?php include template('header'); ?>
 <div class="midder">
-<div class="mc">
-<h1 class="group_tit">
-{$strGroup[groupname]}发布帖子
-</h1>
-
-<!--{if $isGroupUser == '0'}-->
-<div style="font-size:14px;padding-top:50px;text-align:center;">不好意思，你不是本组成员不能发表帖子，请加入后再发帖</div>
-<!--{else}-->
-<script type="text/javascript" src="{SITE_URL}public/js/lib/ajaxfileupload.js"></script>
-<form method="POST" action="{SITE_URL}{ikUrl('group','add',array('ik'=>'do'))}" onsubmit="return newTopicFrom(this)"  enctype="multipart/form-data" id="form_tipic">
+    <div class="mc">
+        <h1>
+        <?php echo $title;?>
+        </h1>    
+<script type="text/javascript" src="<?php echo SITE_URL;?>public/js/lib/ajaxfileupload.js"></script>
+<form method="POST" action="<?php echo SITE_URL;?><?php echo ikurl('group','add',array('ik'=>'do'))?>" onsubmit="return newTopicFrom(this)"  enctype="multipart/form-data" id="form_tipic">
 <table width="100%" cellpadding="0" cellspacing="0" class="table_1">
 
 	<tr>
     	<th>标题：</th>
-		<td><input style="width:400px;" type="text" value="" maxlength="100" size="50" name="title" gtbfieldid="2" class="txt"   placeholder="请填写标题"></td></tr>	
-    <tr><th>&nbsp;</th><td align="left" style="padding:0px 10px"><a href="javascript:addPhoto();">添加图片</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a class="video-btn" href="javascript:addVideo();">添加视频</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a id="addlink" href="javascript:addLink();">添加链接</a></td></tr>
-    <tr>
-        <th>内容：</th><td><textarea style="width:99.5%;height:300px;" id="editor_full" cols="55" rows="20" name="content" class="txt"   placeholder="请填写内容"></textarea></td>
-    </tr>
-    <tr>
-        <th>评论：</th>
-        <td><input type="radio" checked="select" name="iscomment" value="0" />允许 <input type="radio" name="iscomment" value="1" />不允许</td>
+		<td><input style="width:400px;" type="text" value="" maxlength="100" size="50" name="title" gtbfieldid="2" class="txt"   placeholder="请填写标题"></td>
     </tr>	
     <tr>
+        <th>发表到：</th>
+        <td>
+            <select name="cateid" class="txt" id="cate_select" style="float:left;">
+            <?php if($arrCate=='') { ?>
+            <option selected="select" value="0">--默认分类--</option>
+            <?php } else { ?>
+            <?php foreach((array)$arrCate as $key=>$item) {?>
+            <option  <?php if($item['cateid'] == $cateid ) { ?> selected="select"  <?php } ?>  value="<?php echo $item['cateid'];?>" ><?php echo $item['catename'];?></option>
+            <?php }?>
+            <?php } ?>
+            </select>
+        </td>
+    </tr>
+    <tr><th>&nbsp;</th><td align="left" style="padding:0px 10px"><a href="javascript:addPhoto();">添加图片</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a class="video-btn" href="javascript:addVideo();">添加视频</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a id="addlink" href="javascript:addLink();">添加链接</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a id="addBlod" href="javascript:addBlod();">加粗文字</a></td></tr>
+    <tr>
+        <th>内容：</th>
+        <td>
+        <textarea style="width:99.5%;height:300px;" id="editor_full" cols="55" rows="20" name="content" class="txt"   placeholder="请填写内容"></textarea>
+        <div class="ik_toolbar"><span class="textnum"> 34/1500 受欢迎的字数 </span></div>
+        </td>
+    </tr> 
+    <tr>
     	<th>&nbsp;</th><td>
-        <input type="hidden" name="groupid" value="{$strGroup[groupid]}" />
-        <input type="hidden" name="topic_id" value="{$topic_id}" id="topic_id" />
-        <input class="submit" type="submit" value="好啦，发布"> <a href="{SITE_URL}{ikUrl('group','show',array('id'=>$strGroup[groupid]))}">返回</a>
+        <input type="hidden" name="groupid" value="<?php echo $strGroup['groupid'];?>" />
+        <input type="hidden" name="topic_id" value="<?php echo $topic_id;?>" id="topic_id" />
+        <input class="submit" type="submit" value="好啦，发表"> <a href="<?php echo SITE_URL;?><?php echo ikurl('group','show',array('id'=>$strGroup['groupid']))?>">返回</a>
         </td>
     </tr>
 </table>
 <div id="thumblst" class="item item-thumb-list">
-	{loop $arrPhotos $item}
+	<?php foreach((array)$arrPhotos as $item) {?>
     <div class="thumblst">
       <div class="details">
         <p>图片描述（30字以内）</p>
-        <textarea name="p_{$item[seqid]}_title" maxlength="30">{$item[photodesc]}</textarea>
-        <input type="hidden" name="p_{$item[seqid]}_seqid" value="{$item[seqid]}" >
+        <textarea name="p_<?php echo $item['seqid'];?>_title" maxlength="30"><?php echo $item['photodesc'];?></textarea>
+        <input type="hidden" name="p_<?php echo $item['seqid'];?>_seqid" value="<?php echo $item['seqid'];?>" >
         <br>
         <br>
         图片位置<br>
-        <a onclick="javascript:removePhoto(this, '{$item[seqid]}');return false;" class="minisubmit rr j a_remove_pic" name="rm_p_{$item[seqid]}">删除</a>
+        <a onclick="javascript:removePhoto(this, '<?php echo $item['seqid'];?>');return false;" class="minisubmit rr j a_remove_pic" name="rm_p_<?php echo $item['seqid'];?>">删除</a>
         <label>
-          <input type="radio" name="p_{$item[seqid]}_layout" {if $item[align]==L} checked {/if} value="L" >
+          <input type="radio" name="p_<?php echo $item['seqid'];?>_layout" <?php if($item['align']==L) { ?> checked <?php } ?> value="L" >
           <span class="alignleft">居左</span></label>
         <label>
-          <input type="radio" name="p_{$item[seqid]}_layout" {if $item[align]==C} checked {/if} value="C" >
+          <input type="radio" name="p_<?php echo $item['seqid'];?>_layout" <?php if($item['align']==C) { ?> checked <?php } ?> value="C" >
           <span class="aligncenter">居中</span></label>
         <label>
-          <input type="radio" name="p_{$item[seqid]}_layout" {if $item[align]==R} checked {/if} value="R" >
+          <input type="radio" name="p_<?php echo $item['seqid'];?>_layout" <?php if($item['align']==R) { ?> checked <?php } ?> value="R" >
           <span class="alignright">居右</span></label>
       </div>
       <div class="thumb">
-        <div class="pl">[图片{$item[seqid]}]</div>
-        <img src="{$item[photo_140]}">
+        <div class="pl">[图片<?php echo $item['seqid'];?>]</div>
+        <img src="<?php echo $item['photo_140'];?>">
       </div>
       	<div class="clear"></div>
     </div>
-    {/loop}
+    <?php } ?>
 
 </div>
 <div id="videosbar"  class="item item-thumb-list">
-	{loop $arrVideos $item}
+	<?php foreach((array)$arrVideos as $item) {?>
    <div class="thumblst">
   <div class="details">
     <p>视频标题（30字以内）</p>
-    <textarea name="video_{$item[seqid]}_title" maxlength="30">人在囧途</textarea>
-    <input type="hidden" value="{$item[seqid]}" name="video_{$item[seqid]}">
+    <textarea name="video_<?php echo $item['seqid'];?>_title" maxlength="30">人在囧途</textarea>
+    <input type="hidden" value="<?php echo $item['seqid'];?>" name="video_<?php echo $item['seqid'];?>">
     <br>
     <br>
     视频网址：<br>
-    <a onclick="javascript:removeVideo(this, '{$item[seqid]}');return false;" class="minisubmit rr j a_remove_pic" name="rm_p_1">删除</a>
-    <p>{$item[url]}</p>
+    <a onclick="javascript:removeVideo(this, '<?php echo $item['seqid'];?>');return false;" class="minisubmit rr j a_remove_pic" name="rm_p_1">删除</a>
+    <p><?php echo $item['url'];?></p>
   </div>
   <div class="thumb">
-    <div class="pl">[视频{$item[seqid]}]</div>
-    <img src="{$item[imgurl]}"> </div>
+    <div class="pl">[视频<?php echo $item['seqid'];?>]</div>
+    <img src="<?php echo $item['imgurl'];?>"> </div>
   <div class="clear"></div>
 </div>
 
-    {/loop}
+    <?php } ?>
 </div>
 <script language="javascript">
-
+function addBlod(){
+	var text = $('#editor_full').get_sel();
+	if(text !=='') 
+	{
+		if(text.match(/\[b\](.*)\[\/b\]/gi))
+		{
+			text = text.replace(/\[b\]/,'').replace(/\[\/b\]/,'')
+		}else{
+			text = '[b]' + text + '[/b]';
+		}
+		$('#editor_full').insert_caret(text);
+	}
+}
 function addLink(){
 	
 	var templ_link =    '<form class="frm-addlink">'+
@@ -143,11 +165,11 @@ function ajaxFileUpload(){
 
        $.ajaxFileUpload(
             {
-                url : "{SITE_URL}{ikUrl('group','add',array('ik'=>'add_photo'))}",
+                url : "<?php echo SITE_URL;?><?php echo ikurl('group','add',array('ik'=>'add_photo'))?>",
                 fileElementId : 'file',
                 dataType : 'json',
                 allowType : 'jpg|png|gif|jpeg',
-                extra : {'topic_id':'{$topic_id}',
+                extra : {'topic_id':'<?php echo $topic_id;?>',
                          //'topic_id_sig':'7d887dc9395a8344c1c774ac7d7c495e10c3cb33',
                          'ck':get_cookie('ck')
                 },
@@ -219,7 +241,7 @@ function removePhoto(obj, seq_id){
     var data = "seq_id=" + seq_id + "&ck="+ck;
     $.ajax({
         type:       "post",
-        url:        "{SITE_URL}{ikUrl('group','add',array('ik'=>'remove_photo', 'topic_id'=>{$topic_id}))}",
+        url:        "<?php echo SITE_URL;?><?php echo ikurl('group','add',array('ik'=>'remove_photo', 'topic_id'=>$topic_id))?>",
         dataType:   "json",
         data:       data,
         success:    function(data, status){
@@ -241,7 +263,7 @@ function removePhoto(obj, seq_id){
 var formNote = $('#form_tipic'),
 	control_panel = $('.control-panel', formNote),
 	videos = formNote.children('.videos'),
-	nid = '{$topic_id}';
+	nid = '<?php echo $topic_id;?>';
 function addVideo()
 {
 
@@ -269,7 +291,7 @@ function addRemoteVideo(frm, o){
 				$('.pop_win').find('.confirmbtn').attr('disabled','disabled');
 	 			$.ajax({
                     type: 'post',
-                    url: "{SITE_URL}{ikUrl('group','add',array('ik'=>'add_video'))}",
+                    url: "<?php echo SITE_URL;?><?php echo ikurl('group','add',array('ik'=>'add_video'))?>",
                     data: {
 						topic_id: nid,
                         url: encodeURIComponent(vurl)  //编码传送
@@ -310,7 +332,7 @@ function removeVideo(obj, seq_id){
     var data = "seq_id=" + seq_id + "&ck="+ck;
     $.ajax({
         type:       "post",
-        url:        "{SITE_URL}{ikUrl('group','add',array('ik'=>'remove_video', 'topic_id'=>{$topic_id}))}",
+        url:        "<?php echo SITE_URL;?><?php echo ikurl('group','add',array('ik'=>'remove_video', 'topic_id'=>$topic_id))?>",
         dataType:   "json",
         data:       data,
         success:    function(data, status){
@@ -331,11 +353,8 @@ function removeVideo(obj, seq_id){
 </script>
 </form>
 
-<!--{/if}-->
-
-
-</div>
+    
+    </div>
 </div>
 
-
-{template footer}
+<?php include template('footer'); ?>
