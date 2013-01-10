@@ -16,6 +16,8 @@ define ( 'IKCORE', IKROOT . '/core' );
 define ( 'IKINSTALL', IKROOT . '/install' );
 define ( 'IKPLUGIN', IKROOT . '/plugins' );
 
+//加载软件信息
+$IK_SOFT ['info'] = array ('name' => '12IK', 'version' => '1.2', 'url' => 'http://www.12ik.com/', 'email' => '160780470@qq.com', 'copyright' => '12ik.com', 'year' => '2012 - 2015', 'author' => '小麦' );
 //装载12IK核心
 include 'core/core.php';
 

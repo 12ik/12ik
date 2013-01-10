@@ -67,6 +67,3 @@ $db = new MySql($IK_DB);
 
 //加载APP数据库操作类并建立对象
 require_once 'IKApp.php';
-
-//加载软件信息
-$IK_SOFT ['info'] = array ('name' => '12IK', 'version' => '1.1', 'url' => 'http://www.12ik.com/', 'email' => '160780470@qq.com', 'copyright' => '12ik.com', 'year' => '2012 - 2015', 'author' => '小麦' );
