@@ -1,11 +1,14 @@
-#Tue Jan 08 15:08:59 CST 2013
+#Thu Jan 10 16:41:23 CST 2013
 eclipse.preferences.version=1
+encoding//app/article/action/do.php=UTF-8
 encoding//app/article/html/admin/cate_add.html=UTF-8
 encoding//app/article/html/admin/channel_add.html=UTF-8
 encoding//app/article/html/admin/menu.html=UTF-8
 encoding//app/article/html/index.html=UTF-8
+encoding//app/article/html/post.html=UTF-8
 encoding//app/article/html/show.html=UTF-8
 encoding//app/beita/html/index.html=UTF-8
+encoding//app/feed/html/admin/info_about.html=UTF-8
 encoding//app/photo/html/admin/album_list.html=UTF-8
 encoding//app/robots/html/admin/add.html=UTF-8
 encoding//app/robots/html/admin/list.html=UTF-8

@@ -88,10 +88,9 @@ class user extends IKApp{
 	
 	//是否登录 
 	public function isLogin(){
-	
+		
 		$userid = intval($_SESSION['ikuser']['userid']);
-		
-		
+	
 		if($userid>0){
 			if($this->isUser($userid)){
 				return $userid;
