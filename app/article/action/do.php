@@ -17,14 +17,8 @@ switch ($ik) {
 			$arrSelect .='<optgroup label="'.$item['name'].'">';
 			foreach($arrCatename as $key1=>$item1)
 			{
-				if($thevalue['importcatid']==$item1['catid'] && $thevalue['importtype']==$item1['type'])
-				{
-					$ischecked = "selected";
-				}else{
-					$ischecked = "";
-				}
 				
-				$arrSelect .='<option '.$ischecked.' value="'.$item1['type'].'_'.$item1['catid'].'" >'.$item1['name'].'</option>';
+				$arrSelect .='<option  value="'.$item1['type'].'_'.$item1['catid'].'" >'.$item1['name'].'</option>';
 				
 			}
 			$arrSelect .='</optgroup>';
