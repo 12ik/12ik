@@ -53,7 +53,9 @@ a img {
 ul, li { list-style:none; }
 fieldset, img { border:none; }
 legend { display:none; }
-em, strong, cite, th { font-style:normal; font-weight:400; }
+em, strong, cite, th{ font-style:normal; font-weight:400; }
+optgroup { font-style:normal; font-weight:bold; margin:5px}
+optgroup option { margin:5px}
 input, textarea, select, button { font:12px Verdana,Helvetica,Arial,sans-serif; }
 table { border-collapse:collapse; }
 html { overflow:-moz-scrollbars-vertical; }
@@ -136,12 +138,14 @@ text-decoration:none
     padding: 1px 10px;
     text-align: center;
 }
-a.bn-post:hover span{ color:#FFF; background-color:#63AB1A; border: 1px solid #50950E;}
+a.bn-post:hover span{ color:red; background-color:#63AB1A; border: 1px solid #50950E;}
 
 /*字体大小*/
 .f12{font-size:12px;}
 .f14{font-size:14px;}
 
+/**字体颜色**/
+.red, a.red, a.red:link, a.red:visited, a.red:hover{ color:#FE2617}
 /*字间距*/
 .line23{line-height:25px; margin-bottom:15px}
 

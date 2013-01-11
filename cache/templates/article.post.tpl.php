@@ -5,17 +5,17 @@
         <?php echo $title;?>
         </h1>    
 <script type="text/javascript" src="<?php echo SITE_URL;?>public/js/lib/ajaxfileupload.js"></script>
-<form method="POST" action="<?php echo SITE_URL;?><?php echo ikurl('article','do',array('ik'=>'add'))?>" onsubmit="return newTopicFrom(this)"  enctype="multipart/form-data" id="form_tipic">
+<form method="POST" action="<?php echo SITE_URL;?><?php echo ikurl('article','do',array('ik'=>'update'))?>"  onsubmit="return checkForm(this);"  enctype="multipart/form-data" id="form_tipic">
 <table width="100%" cellpadding="0" cellspacing="0" class="table_1">
 
 	<tr>
     	<th>标题：</th>
-		<td><input style="width:400px;" type="text" value="" maxlength="100" size="50" name="title" gtbfieldid="2" class="txt"   placeholder="请填写标题"></td>
+		<td><input style="width:400px;" type="text" value="" maxlength="100" size="50" name="title" tabindex="1" class="txt"   placeholder="请填写标题"></td>
     </tr>	
     <tr>
         <th>发表到：</th>
         <td>
-            <select name="cateid" class="txt" id="cate_select" style="float:left;">
+            <select name="import" class="txt" id="cate_select" style="float:left;" tabindex="2" >
                 <option  value="0">默认分类</option>
                 <?php echo $arrSelect;?>
             </select>            
@@ -25,15 +25,15 @@
     <tr>
         <th>内容：</th>
         <td>
-        <textarea style="width:99.5%;height:300px;" id="editor_full" cols="55" rows="20" name="content" class="txt"   placeholder="请填写内容"></textarea>
-        <div class="ik_toolbar"><span class="textnum"> 34/1500 受欢迎的字数 </span></div>
+        <textarea tabindex="3"  style="width:99.5%;height:300px;" id="editor_full" cols="55" rows="20" name="content" class="txt"   placeholder="请填写内容"></textarea>
+        <div class="ik_toolbar" id="ik_toolbar"><span class="textnum" id="textnum"><em>0</em> / <em>20000</em> 受欢迎的字数 </span></div>
         </td>
     </tr> 
     <tr>
     	<th>&nbsp;</th><td>
         <input type="hidden" name="groupid" value="<?php echo $strGroup['groupid'];?>" />
         <input type="hidden" name="topic_id" value="<?php echo $topic_id;?>" id="topic_id" />
-        <input class="submit" type="submit" value="好啦，发表"> <a href="<?php echo SITE_URL;?><?php echo ikurl('group','show',array('id'=>$strGroup['groupid']))?>">返回</a>
+        <input class="submit" type="submit" value="好啦，发表" tabindex="4" > <a href="<?php echo SITE_URL;?><?php echo ikurl('group','show',array('id'=>$strGroup['groupid']))?>">返回</a>
         </td>
     </tr>
 </table>

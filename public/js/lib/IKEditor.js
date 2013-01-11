@@ -251,3 +251,21 @@ function removeVideo(obj, seq_id){
         }
     });
 }
+$(function(){
+	//字数统计
+	$('#editor_full').bind('keyup',function(){
+		
+			var len = $(this).val().length, 
+		        textnum  =  $('#ik_toolbar').find('#textnum em:eq(0)'),
+				totalnum = $('#ik_toolbar').find('#textnum em:eq(1)').text();
+			if(len<=parseInt(totalnum))
+			{
+				textnum.removeClass('red');
+			}else{
+				
+				textnum.addClass('red');
+			}
+			textnum.text(len);
+			
+	})
+})
