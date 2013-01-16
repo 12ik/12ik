@@ -23,7 +23,16 @@ switch ($ik) {
 
 		}
 		//预添加一行数据
-		
+		$strLast= aac('article')->find('article_spaceitems',array('uid'=>$userid, 'catid'=>0));
+		if($strLast['itemid']>0)
+		{
+			$itemid = $strLast['itemid'];
+			
+		}else{
+			$itemid = aac('article')->create('article_spaceitems',
+				array('uid'=>$userid, 'catid'=>0,'subject'=>'0')
+			);
+		}
 		
 		$title = "发表新文章";
 		include template ( 'post' );
@@ -32,8 +41,10 @@ switch ($ik) {
 	case "update":
 		//添加
 		$title = trim($_POST['title']);
+		$itemid = $_POST['itemid'];
 		$catarr = explode('_', $_POST['import']); //分类
 		$cateid = $catarr[1];
+		$type = $catarr[0]; //分类别名
 		$content = trim($_POST['content']);
 		
 		if($title==''){
@@ -56,7 +67,29 @@ switch ($ik) {
 		 	ikNotice('发这么多内容干啥^_^');
 		
 		}else{
+			$arrItemData = array(
+				'subject'		=> htmlspecialchars($title),
+				'catid'		=> $cateid,
+				'type'		=> $type,
+				'username'  => $_SESSION['ikuser']['username'],
+
+				//'isvideo'		=> $isvideo,
+				//'iscomment'		=> $iscomment,
+				'dateline'		=> time()
+			);
+			$arrNewsData = array(
+				'itemid'		=> $itemid,
+				'message'		=> htmlspecialchars($content),
+			);			
 			//执行更新
+			aac('article')->update('article_spaceitems', array('uid'=>$userid, 'itemid'=>$itemid),$arrItemData);
+			//插入数据
+			$nid = aac('article')->create('article_spacenews',$arrNewsData);
+			
+			if($nid>0)
+			{
+				header("Location: ".SITE_URL.ikUrl('article','show',array('id'=>$nid)));
+			}
 			
 		}			
 

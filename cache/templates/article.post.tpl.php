@@ -31,8 +31,7 @@
     </tr> 
     <tr>
     	<th>&nbsp;</th><td>
-        <input type="hidden" name="groupid" value="<?php echo $strGroup['groupid'];?>" />
-        <input type="hidden" name="topic_id" value="<?php echo $topic_id;?>" id="topic_id" />
+        <input type="hidden" name="itemid" value="<?php echo $itemid;?>" id="itemid" />
         <input class="submit" type="submit" value="好啦，发表" tabindex="4" > <a href="<?php echo SITE_URL;?><?php echo ikurl('group','show',array('id'=>$strGroup['groupid']))?>">返回</a>
         </td>
     </tr>
