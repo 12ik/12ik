@@ -964,3 +964,60 @@ a.button-join:hover{ background-color:#ffeee0;}
 	word-wrap:break-word;
 	word-break:break-all
 }
+/**发现话题**/
+.topics {
+	border:0
+}
+.topics li {
+	padding-bottom:9px;
+	margin-bottom:12px;
+	overflow:hidden;
+	zoom:1;
+	border-bottom:1px dashed #e5e5e5
+}
+.topics .pic {
+	float:left;
+	margin-right:20px
+}
+.topics .pic img {
+	width:48px;
+	height:48px
+}
+.topics .content {
+	overflow:hidden;
+	zoom:1
+}
+.topics .title {
+	margin-bottom:5px;
+	font-size:14px;
+	word-wrap:break-word;
+	word-break:break-all
+}
+.topics p {
+	margin:0 0 10px 0;
+	color:#666;
+	word-wrap:break-word;
+	word-break:break-all
+}
+.topics .from {
+	color:#999
+}
+.topics .from a:link, .topics .from a:visited {
+	color:#333
+}
+.topics .from a:hover {
+	color:#fff
+}
+.topics .group-name {
+	color:#333
+}
+.topics .from-group {
+	overflow:hidden;
+	zoom:1;
+	line-height:1.2
+}
+.topics .fav-num, .topics .reply-num {
+	float:right;
+	margin-left:15px;
+	color:#333
+}

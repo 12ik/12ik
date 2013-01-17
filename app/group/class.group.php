@@ -78,12 +78,12 @@ class group extends IKApp{
 	}
 
 	/*
-	 *获取全部话题
+	 *根据喜欢度 和 回应度 获取热门话题
 	 */
-	function getAllTopic($page = 1, $prePageNum, $city = ''){
+	function getHotTopics($page = 1, $prePageNum){
 		$start_limit = !empty($page) ? ($page - 1) * $prePageNum : 0;
 		$limit = $prePageNum ? "LIMIT $start_limit, $prePageNum" : '';
-		$arrTopics	= $this->db->fetch_all_assoc("select * from ".dbprefix."group_topics order by addtime desc $limit");
+		$arrTopics	= $this->db->fetch_all_assoc("select * from ".dbprefix."group_topics where  groupid > 0  order by addtime desc $limit");
 		return $arrTopics;
 	}	
 	

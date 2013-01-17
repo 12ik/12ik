@@ -68,7 +68,9 @@
 
     <div class="top_items">
         <ul>
-             
+                <li>
+                <a href="<?php echo SITE_URL;?>">爱客</a>
+                </li>             
                 <li>
                 <a href="<?php echo SITE_URL;?><?php echo ikurl('location')?>">同城</a>
                 </li>

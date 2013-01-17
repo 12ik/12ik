@@ -39,17 +39,32 @@ h2 {
 
 
 a {
-	cursor:pointer; text-decoration:none; color:#336699
+	cursor:pointer
+}
+a:link {
+	color:#37a;
+	text-decoration:none
+}
+a:visited {
+	color:#669;
+	text-decoration:none
 }
 a:hover {
+	color:#fff;
 	text-decoration:none;
-	color:#333
+	background:#37a
 }
-
+a:active {
+	color:#fff;
+	text-decoration:none;
+	background:#f93
+}
 a img {
 	border-width:0;
 	vertical-align:middle
 }
+
+
 ul, li { list-style:none; }
 fieldset, img { border:none; }
 legend { display:none; }
@@ -161,13 +176,17 @@ a.bn-post:hover span{background-color:#63AB1A; border: 1px solid #50950E;}
 .top_nav .top_info{ float:right}
 .top_nav .top_items{ float:left}
 .top_nav .top_items li{ float:left; margin-right:10px}
-.top_nav a{ color:#D5D5D5}
+.top_nav a:active, .top_nav a:hover, .top_nav a:link, .top_nav a:visited {color:#d5d5d5}
+.top_nav a:active, .top_nav a:hover {color:#fff;background-color:transparent}
 
 /**导航样式**/
 #header {width:100%; margin:0px auto;margin-bottom:40px; background-color:#EDF4ED; overflow:hidden}
 #header .site_nav { width:980px; margin:0 auto; padding-top:18px; padding-bottom:10px}
 #header .site_nav .site_logo{ float:left; width:165px; height:40px; background:url(logo.png) no-repeat 0px 0px;}
 #header .site_nav .site_logo a{ display: block;height: 100%; line-height: 100em; overflow: hidden;width: 100%;}
+#header .site_nav .site_logo a:active, #header .site_nav .site_logo a:hover {
+	background:none!important
+}
 
 #header .appnav{ float:right; width:810px;height:35px; }
 
