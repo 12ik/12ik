@@ -1,32 +1,25 @@
 <?php
 defined('IN_IK') or die('Access Denied.');
 
-//活跃会员
-$arrHotUser = aac('user')->getHotUser(16);
+	//所有小组
+	$page = isset($_GET['page']) ? $_GET['page'] : '1';
+	$url = SITE_URL.ikUrl('group','explore',array('page'=>''));
+	$lstart = $page*20-20;
+	
+	$arrGroups = $new['group']->findAll('group',null,'isrecommend desc','groupid',$lstart.',20');
+	
+	foreach($arrGroups as $key=>$item){
+		$arrData[] = $new['group']->getOneGroup($item['groupid']);
+	}
+	foreach($arrData as $key=>$item){
+		$exploreGroup[] =  $item;
+		$exploreGroup[$key]['groupdesc'] = getsubstrutf8(t($item['groupdesc']),0,45);
+	}
+	
+	$groupNum = $new['group']->findCount('group');
+	
+	$pageUrl = pagination($groupNum, 20, $page, $url);
+	
 
-//最新会员
-$arrNewUser = aac('user')->getNewUser(8);
-
-//推荐小组列表
-$arrRecommendGroup = $new['group']->getRecommendGroup(16);
-//最新10个小组
-$arrNewGroup = $new['group']->getNewGroup(10);
-
-
-//最新帖子
-$arrNewTopics = $db->fetch_all_assoc("select topicid,userid,groupid,title,count_comment,count_view,istop,isphoto,isattach,addtime,uptime from ".dbprefix."group_topics order by uptime desc limit 30");
-foreach($arrNewTopics as $key=>$item){
-	$arrTopic[] = $item;
-	$arrTopic[$key]['user'] = aac('user')->getOneUser($item['userid']);
-	$arrTopic[$key]['group'] = aac('group')->getOneGroup($item['groupid']);
-}
-
-
-//最新标签
-$arrTag = $db->fetch_all_assoc("select * from ".dbprefix."tag order by count_topic desc limit 30");
-
-//社区精华帖
-$arrPosts = $db->fetch_all_assoc("select topicid,title from ".dbprefix."group_topics where isposts='1' order by uptime desc limit 15");
-
-$title = '随便看看';
+$title = '发现小组';
 include template("explore");

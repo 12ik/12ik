@@ -96,9 +96,15 @@
 <div id="header">
     
 	<div class="site_nav">
+    	<?php if($app == 'group' ) { ?>
+        <div class="site_logo nav_logo">
+            <a href="<?php echo SITE_URL;?><?php echo ikurl('group','')?>">爱客小组</a>
+        </div>
+        <?php } else { ?>
         <div class="site_logo">
-            <a href="<?php echo SITE_URL;?>"><img src="<?php echo SITE_URL;?>theme/<?php echo $site_theme;?>/logo.gif" alt="<?php echo $IK_SITE['base'][site_title];?>" ></a>
-        </div> 
+            <a href="<?php echo SITE_URL;?>" title="<?php echo $IK_SITE['base'][site_title];?>"><?php echo $IK_SITE['base'][site_title];?></a>
+        </div>        
+        <?php } ?> 
          
          
         <?php if($IK_USER['user'] == '') { ?>
@@ -121,25 +127,44 @@
         </div>
         <?php } ?>
         <?php } else { ?>
-		<div class="appnav">
-            <ul id="nav_bar">
-            	<li><a href="<?php echo SITE_URL;?>">首页</a></li>
-                <li><a href="<?php echo SITE_URL;?><?php echo ikurl('feed')?>">友邻广播</a></li>
-                <li><a href="<?php echo SITE_URL;?><?php echo ikurl('hi','',array('id'=>$globalUser['doname']))?>">我的爱客</a></li>
-                <li><a href="<?php echo SITE_URL;?><?php echo ikurl('group')?>">我的小组</a></li>
-                <li><a href="<?php echo SITE_URL;?><?php echo ikurl('site')?>">我的小站</a></li>
-                <li><a href="<?php echo SITE_URL;?><?php echo ikurl('article')?>">文章</a></li>
-                <li><a href="<?php echo SITE_URL;?><?php echo ikurl('tribe')?>">部落</a></li>
-                
-            </ul>
-           <form action="<?php echo SITE_URL;?>index.php"  method="get" onsubmit="return searchForm(this);">
-           <input type="hidden" name="app" value="search" /><input type="hidden" name="ac" value="q" />
-            <div id="search_bar">
-            	<div class="inp"><input type="text" name="kw"  class="key" value="小组、话题、日志、成员、小站" placeholder="小组、话题、日志、成员、小站"/></div>
-                <div class="inp-btn"><input type="submit"  value="搜索" class="search-button"/></div>
+        	<?php if($app == 'group' ) { ?>
+            <div class="appnav">
+                <ul id="nav_bar">
+                    <li><a href="<?php echo SITE_URL;?><?php echo ikurl('group','')?>">我的小组</a></li>
+                    <li><a href="<?php echo SITE_URL;?><?php echo ikurl('group','explore')?>">发现小组</a></li>
+                    <li><a href="<?php echo SITE_URL;?><?php echo ikurl('group','explore_topic')?>">发现话题</a></li>
+                    <li><a href="<?php echo SITE_URL;?><?php echo ikurl('group','nearby',array('ik'=>'beijing'))?>">北京话题</a></li>
+                </ul>
+               <form action="<?php echo SITE_URL;?>index.php"  method="get" onsubmit="return searchForm(this);">
+               <input type="hidden" name="app" value="search" /><input type="hidden" name="ac" value="q" />
+                <div id="search_bar">
+                    <div class="inp"><input type="text" name="kw"  class="key" value="小组、话题、日志、成员、小站" placeholder="小组、话题、日志、成员、小站"/></div>
+                    <div class="inp-btn"><input type="submit"  value="搜索" class="search-button"/></div>
+                </div>
+                </form>
             </div>
-            </form>
-        </div>        	
+            <?php } else { ?>
+            <div class="appnav">
+                <ul id="nav_bar">
+                    <li><a href="<?php echo SITE_URL;?>">首页</a></li>
+                    <li><a href="<?php echo SITE_URL;?><?php echo ikurl('feed')?>">友邻广播</a></li>
+                    <li><a href="<?php echo SITE_URL;?><?php echo ikurl('hi','',array('id'=>$globalUser['doname']))?>">我的爱客</a></li>
+                    <li><a href="<?php echo SITE_URL;?><?php echo ikurl('group')?>">我的小组</a></li>
+                    <li><a href="<?php echo SITE_URL;?><?php echo ikurl('site')?>">我的小站</a></li>
+                    <li><a href="<?php echo SITE_URL;?><?php echo ikurl('article')?>">文章</a></li>
+                    <li><a href="<?php echo SITE_URL;?><?php echo ikurl('tribe')?>">部落</a></li>
+                    
+                </ul>
+               <form action="<?php echo SITE_URL;?>index.php"  method="get" onsubmit="return searchForm(this);">
+               <input type="hidden" name="app" value="search" /><input type="hidden" name="ac" value="q" />
+                <div id="search_bar">
+                    <div class="inp"><input type="text" name="kw"  class="key" value="小组、话题、日志、成员、小站" placeholder="小组、话题、日志、成员、小站"/></div>
+                    <div class="inp-btn"><input type="submit"  value="搜索" class="search-button"/></div>
+                </div>
+                </form>
+            </div>            
+            <?php } ?>
+                    	
         <?php } ?>
         
         

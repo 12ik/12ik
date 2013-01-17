@@ -1,4 +1,8 @@
 /* CSS Document */
+#header {background-color:#F0F6F3;}
+#header .site_nav .nav_logo{ background:url(logo.png) no-repeat 0px 0px;}
+#nav_bar li a{ color:#037B82}
+#nav_bar li a:hover{ background-color:#037b82; color:#fff;}
 
 .w300{width:250px;
 overflow:hidden;
@@ -911,3 +915,52 @@ a.button-join:hover{ background-color:#ffeee0;}
 .alignleft{background:url(http://www.12ik.com/public/images/align_left.png) no-repeat;padding:0 6px 0 25px}
 .aligncenter{background:url(http://www.12ik.com/public/images/align_center.png) no-repeat;padding:0 6px 0 25px}
 .alignright{background:url(http://www.12ik.com/public/images/align_right.png) no-repeat;padding:0 6px 0 25px}
+/**发现小组**/
+.group-list {
+	overflow:hidden;
+	font-size:0;
+	letter-spacing:-0.31em;
+	*letter-spacing:normal;
+	word-spacing:-0.43em
+}
+.group-list .result {
+	display:inline-block;
+	*display:inline;
+	zoom:1;
+	width:44.9%;
+	vertical-align:top;
+	padding-right:5%;
+	margin-bottom:15px;
+	border-top:1px dashed #ccc;
+	font-size:12px;
+	letter-spacing:normal;
+	word-spacing:normal;
+	margin-top:-2px;
+}
+.group-list .result:after {
+    clear: both;
+    content: " ";
+    display: block;
+}
+.group-list .result .content {
+	padding-top:16px;
+	border:0;
+	overflow:hidden;
+}
+.group-list .result .content h3 {
+	width:auto;
+	margin:0
+}
+.group-list .result .pic {
+	padding-top:20px;
+    float:left; width:62px;
+	
+}
+.group-list .result .info {
+	margin-bottom:4px
+}
+.group-list .result p {
+	color:#666;
+	word-wrap:break-word;
+	word-break:break-all
+}

@@ -76,6 +76,16 @@ class group extends IKApp{
 		$arrGroupContent	= $this->db->fetch_all_assoc("select * from ".dbprefix."group_topics where groupid='$groupid' order by addtime desc $limit");
 		return $arrGroupContent;
 	}
+
+	/*
+	 *获取全部话题
+	 */
+	function getAllTopic($page = 1, $prePageNum, $city = ''){
+		$start_limit = !empty($page) ? ($page - 1) * $prePageNum : 0;
+		$limit = $prePageNum ? "LIMIT $start_limit, $prePageNum" : '';
+		$arrTopics	= $this->db->fetch_all_assoc("select * from ".dbprefix."group_topics order by addtime desc $limit");
+		return $arrTopics;
+	}	
 	
 	//获取推荐的小组
 	function getRecommendGroup($num){

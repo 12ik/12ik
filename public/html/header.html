@@ -96,9 +96,15 @@
 <div id="header">
     
 	<div class="site_nav">
+    	<!--{if $app == 'group' }-->
+        <div class="site_logo nav_logo">
+            <a href="{SITE_URL}{ikUrl('group','')}">爱客小组</a>
+        </div>
+        <!--{else}-->
         <div class="site_logo">
-            <a href="{SITE_URL}"><img src="{SITE_URL}theme/{$site_theme}/logo.gif" alt="{$IK_SITE[base][site_title]}" ></a>
-        </div> 
+            <a href="{SITE_URL}" title="{$IK_SITE[base][site_title]}">{$IK_SITE[base][site_title]}</a>
+        </div>        
+        <!--{/if}--> 
          
          
         <!--{if $IK_USER[user] == ''}-->
@@ -121,25 +127,44 @@
         </div>
         <!--{/if}-->
         <!--{else}-->
-		<div class="appnav">
-            <ul id="nav_bar">
-            	<li><a href="{SITE_URL}">首页</a></li>
-                <li><a href="{SITE_URL}{ikUrl('feed')}">友邻广播</a></li>
-                <li><a href="{SITE_URL}{ikUrl('hi','',array('id'=>$globalUser[doname]))}">我的爱客</a></li>
-                <li><a href="{SITE_URL}{ikUrl('group')}">我的小组</a></li>
-                <li><a href="{SITE_URL}{ikUrl('site')}">我的小站</a></li>
-                <li><a href="{SITE_URL}{ikUrl('article')}">文章</a></li>
-                <li><a href="{SITE_URL}{ikUrl('tribe')}">部落</a></li>
-                
-            </ul>
-           <form action="{SITE_URL}index.php"  method="get" onsubmit="return searchForm(this);">
-           <input type="hidden" name="app" value="search" /><input type="hidden" name="ac" value="q" />
-            <div id="search_bar">
-            	<div class="inp"><input type="text" name="kw"  class="key" value="小组、话题、日志、成员、小站" placeholder="小组、话题、日志、成员、小站"/></div>
-                <div class="inp-btn"><input type="submit"  value="搜索" class="search-button"/></div>
+        	<!--{if $app == 'group' }-->
+            <div class="appnav">
+                <ul id="nav_bar">
+                    <li><a href="{SITE_URL}{ikUrl('group','')}">我的小组</a></li>
+                    <li><a href="{SITE_URL}{ikUrl('group','explore')}">发现小组</a></li>
+                    <li><a href="{SITE_URL}{ikUrl('group','explore_topic')}">发现话题</a></li>
+                    <li><a href="{SITE_URL}{ikUrl('group','nearby',array('ik'=>'beijing'))}">北京话题</a></li>
+                </ul>
+               <form action="{SITE_URL}index.php"  method="get" onsubmit="return searchForm(this);">
+               <input type="hidden" name="app" value="search" /><input type="hidden" name="ac" value="q" />
+                <div id="search_bar">
+                    <div class="inp"><input type="text" name="kw"  class="key" value="小组、话题、日志、成员、小站" placeholder="小组、话题、日志、成员、小站"/></div>
+                    <div class="inp-btn"><input type="submit"  value="搜索" class="search-button"/></div>
+                </div>
+                </form>
             </div>
-            </form>
-        </div>        	
+            <!--{else}-->
+            <div class="appnav">
+                <ul id="nav_bar">
+                    <li><a href="{SITE_URL}">首页</a></li>
+                    <li><a href="{SITE_URL}{ikUrl('feed')}">友邻广播</a></li>
+                    <li><a href="{SITE_URL}{ikUrl('hi','',array('id'=>$globalUser[doname]))}">我的爱客</a></li>
+                    <li><a href="{SITE_URL}{ikUrl('group')}">我的小组</a></li>
+                    <li><a href="{SITE_URL}{ikUrl('site')}">我的小站</a></li>
+                    <li><a href="{SITE_URL}{ikUrl('article')}">文章</a></li>
+                    <li><a href="{SITE_URL}{ikUrl('tribe')}">部落</a></li>
+                    
+                </ul>
+               <form action="{SITE_URL}index.php"  method="get" onsubmit="return searchForm(this);">
+               <input type="hidden" name="app" value="search" /><input type="hidden" name="ac" value="q" />
+                <div id="search_bar">
+                    <div class="inp"><input type="text" name="kw"  class="key" value="小组、话题、日志、成员、小站" placeholder="小组、话题、日志、成员、小站"/></div>
+                    <div class="inp-btn"><input type="submit"  value="搜索" class="search-button"/></div>
+                </div>
+                </form>
+            </div>            
+            <!--{/if}-->
+                    	
         <!--{/if}-->
         
         
