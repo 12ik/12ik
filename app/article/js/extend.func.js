@@ -68,7 +68,7 @@ function checkForm(that)
 	var title = $(that).find('input[name=title]').val();
 	var arrimport = $(that).find('select[name=import]').val();
 	var content = $(that).find('textarea[name=content]').val();
-	//if(arrimport == 0){ tips('请选择一个分类再发表吧！'); return false;}
+	if(arrimport == 0){ tips('请选择一个分类再发表吧！'); return false;}
 	if(title == '' || content == ''){tips('请填写标题和内容'); return false;}
 
 	$(that).find('input[type=submit]').val('正在提交^_^').attr('disabled',true);
