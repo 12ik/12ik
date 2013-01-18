@@ -195,3 +195,44 @@ function newTopicFrom(that)
 	//if(typeid == 0){tips('请选择分类'); return false;}
 	$(that).find('input[type=submit]').val('正在提交^_^').attr('disabled',true);
 }
+//新建小组
+function createGroup(that)
+{
+	var groupname = $(that).find('input[name=groupname]').val();
+	var groupdesc = $(that).find('textarea[name=groupdesc]').val();
+	var tag = $(that).find('input[name=tag]').val();
+	var grp_agreement = $(that).find('input[name=grp_agreement]').val();
+	if(groupname == '' || groupdesc == ''){tips('小组标题和小组描述必须填写'); return false;}
+	if(tag =='')
+	{
+		tips('小组标签不为空');
+		$(that).find('input[name=tag]').focus();
+		return false;
+	}
+}
+
+function checkTag(obj)
+{
+	var _self = $(obj), _val = _self.val(), tempval, arr;
+	tempval = _val.replace(/\s+/g, ' ');
+	arr = tempval.split(' ');
+	for(var i=0; i< arr.length; i++)
+	{
+		if(arr[0].length > 8)
+		{
+			_self.parent().find('.tip').html('<span class="red">每个标签最长8个汉字</span>')
+			return false;
+		}
+		
+	}
+	if(arr.length>5)
+	{
+		_self.parent().find('.tip').html('<span class="red">最多 5 个标签</span>');
+		return false;
+	}else{
+		_self.parent().find('.tip').html('<span>最多 5 个标签</span>')
+	}
+	_self.val(tempval);
+	
+	return true;
+}

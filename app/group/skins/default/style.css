@@ -871,12 +871,111 @@ a.mini-share:hover {
 /**我的小组**/
 .olt td {
     border-bottom: 1px dashed #DDDDDD;
-    padding: 3px 3px 3px 0;
+	padding: 6px 3px;
+	word-wrap: break-word;
 }
+.olt .td-subject{ font-size:13px;}
+.olt .td-reply{ width:80px}
+.olt .td-time{ width:80px}
+
+#g-user-profile .usercard {
+	overflow:hidden;
+	zoom:1;
+	padding-bottom:14px;
+	margin-bottom:3px;
+	border-bottom:1px solid #dcdcdc
+}
+#g-user-profile .pic {
+	float:left;
+	margin-right:16px
+}
+#g-user-profile .pic img {
+	width:48px;
+	height:48px
+}
+#g-user-profile .info {
+	overflow:hidden;
+	zoom:1;
+	color:#666
+}
+#g-user-profile .info .name {
+	margin-bottom:4px;
+	font-size:14px
+}
+#g-user-profile .info .name a:link, #g-user-profile .info .name a:visited {
+	color:#333
+}
+#g-user-profile .info .name a:hover {
+	color:#fff
+}
+#g-user-profile .info a:link, #g-user-profile .info a:visited {
+	color:#666
+}
+#g-user-profile .info a:hover {
+	color:#fff
+}
+#g-user-profile .group-nav {
+	border-bottom:1px solid #dcdcdc
+}
+#g-user-profile .group-nav li {
+	margin-bottom:3px;
+	font-size:14px;
+	zoom:1
+}
+#g-user-profile .group-nav i {
+	margin:0 2px;
+	font-style:normal;
+	color:#ca6445
+}
+#g-user-profile .group-nav .num {
+	color:#999
+}
+#g-user-profile .group-nav .on a:hover, #g-user-profile .group-nav .on a:link, #g-user-profile .group-nav .on a:visited {
+	background-color:#6ebfc3;
+	color:#fff
+}
+#g-user-profile .group-nav a {
+	display:block;
+	padding:0 10px;
+	line-height:30px
+}
+#g-user-profile .group-nav a:link, #g-user-profile .group-nav a:visited {
+	color:#666
+}
+#g-user-profile .group-nav a:hover {
+	color:#666;
+	background-color:#f4f4f4
+}
+#g-user-profile .group-nav a:hover .num, #g-user-profile .group-nav a:hover i {
+	color:#666
+}
+#g-user-profile .contact-link {
+	padding:12px 0;
+	border-bottom:1px solid #dcdcdc
+}
+
+.create-group a:link, .create-group a:visited {
+	color:#ca6445;
+}
+.create-group a:hover, .create-group a:active {
+	background:#ca6445;
+	color:#fff;
+}
+
 .mbt {
     clear: both;
     margin: 0;
     padding: 0;
+}
+.notify-mod{
+    background: none repeat scroll 0 0 #F2F7F6;
+    border-radius: 4px 4px 4px 4px;
+    clear: both;
+    font-size: 14px;
+    line-height: 1.2;
+    margin: 0 0 20px;
+    overflow: hidden;
+    padding: 18px 20px;
 }
 .tl-item { margin-top:25px; }
 .item-title { margin-left:5px; margin-top:15px; font-size:14px; background-color:#f8f8f8; }
@@ -892,6 +991,8 @@ word-spacing:-0.43em; }
 .group-item .reply-num { color:#a3a3a3; float:right; }
 .group-item .reply { color:#bbb; float:right; }
 .group-item .timestamp { color:#bbb; }
+
+.group_topics{ border-top:#EDEDED solid 1px}
 
 /**最新话题**/
 .newtopic{}
@@ -964,6 +1065,69 @@ a.button-join:hover{ background-color:#ffeee0;}
 	word-wrap:break-word;
 	word-break:break-all
 }
+.group-cate-bd {
+	border:1px solid #eee
+}
+.group-cate-bd .odd {
+	background-color:#fafafa
+}
+.group-cate {
+	padding:10px;
+	font-size:0;
+	letter-spacing:-0.31em;
+*letter-spacing:normal;
+	word-spacing:-0.43em
+}
+.group-cate ul {
+	margin-top:-7px
+}
+.group-cate li {
+	display:inline-block;
+*display:inline;
+	zoom:1;
+	width:25%;
+	margin-top:5px;
+	vertical-align:top;
+	font-size:12px;
+	letter-spacing:normal;
+	word-spacing:normal
+}
+.group-cate .cate-label {
+	display:block;
+	width:auto;
+	font-size:14px
+}
+.group-cate .cate-label a:active, .group-cate .cate-label a:hover, .group-cate .cate-label a:link, .group-cate .cate-label a:visited {
+	color:#333;
+	background-color:transparent
+}
+.group-cate .cate-label b {
+	margin-right:4px;
+	color:#6ebfc3
+}
+.group-cate .on a:active, .group-cate .on a:hover, .group-cate .on a:link, .group-cate .on a:visited {
+	color:#fff;
+	background-color:#6ebfc3
+}
+.group-cate .on b {
+	display:none
+}
+.group-cate a {
+	display:inline-block;
+*display:inline;
+	zoom:1;
+	padding:0 4px;
+	line-height:1.6
+}
+.group-cate a:link, .group-cate a:visited {
+	color:#888;
+	border-radius:3px
+}
+.group-cate a:hover {
+	color:#fff;
+	background-color:#6ebfc3;
+	border-radius:3px
+}
 /**发现话题**/
 .topics {
 	border:0
@@ -1021,3 +1185,9 @@ a.button-join:hover{ background-color:#ffeee0;}
 	margin-left:15px;
 	color:#333
 }
+/**我管理的小组**/
+.groups {
+    overflow: hidden;
+}
+.groups ul { margin-left:-2%; }
+.groups li { display:inline-block;*display:inline;zoom:1;width:22%;margin-left:2%;margin-bottom:20px;vertical-align:top;font-size:12px;color:#aaa; }

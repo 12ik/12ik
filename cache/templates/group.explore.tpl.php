@@ -2,7 +2,7 @@
 <div class="midder">
 <div class="mc">
     <h1><?php echo $title;?></h1>
-    <div class="cleft">
+    <div class="cleft w700">
 		
         <div class="group-list">
         	<?php foreach((array)$exploreGroup as $item) {?>
@@ -14,7 +14,7 @@
                 </div>
                 <div class="content">
                     <div class="title">
-                        <h3><a href="<?php echo SITE_URL;?><?php echo ikurl('group','show',array('id'=>$item['groupid']))?>"><?php echo $item['groupname'];?></a></h3>
+                        <h3><a href="<?php echo SITE_URL;?><?php echo ikurl('group','show',array('id'=>$item['groupid']))?>"><?php echo getsubstrutf8(t($item['groupname']),0,14)?></a></h3>
                     </div>
                     <div class="info"><?php echo $item['count_user'];?> 个成员 在此聚集 </div>
                     <div><p><?php echo $item['groupdesc'];?></p></div>
@@ -28,8 +28,8 @@
 
 
 
-    <div class="cright">
-    	
+    <div class="cright w250">
+		 <?php include template('group_cate'); ?>   	
     </div>
     
 </div>

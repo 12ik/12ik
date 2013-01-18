@@ -10,7 +10,7 @@
 		<li>
 		<div class="content">
 		<div class="title">
-		<a href="<?php echo SITE_URL;?><?php echo ikurl('group','topic',array('id'=>$item['topicid']))?>""><?php echo $item['title'];?></a>
+		<a href="<?php echo SITE_URL;?><?php echo ikurl('group','topic',array('id'=>$item['topicid']))?>"><?php echo $item['title'];?></a>
 		</div>
 	
 		<p><?php echo getsubstrutf8(t($item['content']),0,100)?></p>

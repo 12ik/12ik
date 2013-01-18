@@ -1,6 +1,6 @@
 <?php include template('header'); ?>
-<div class="midder">
 
+<div class="midder">
 
     <div class="mc">
     
@@ -58,19 +58,8 @@
         </div>
     
     </div><!--//mc-->
-
-
+    
 </div>
 
-<script>
-$(document).ready(function() {
-	$.ajax({
-		type: "GET",
-		url:  "<?php echo SITE_URL;?>index.php?app=group&ac=task&ik=istask",
-		success: function(msg){
-			$('#cright').prepend(msg);
-		}
-	});
-});
-</script>
+
 <?php include template('footer'); ?>

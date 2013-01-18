@@ -13,7 +13,10 @@
 * { margin:0; padding:0; word-break:break-all; }
 /**定义HTML5 css3 全局样式**/
 article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{ display:block;}
-
+address, caption, cite, code, dfn, em, i, th, var, optgroup {
+    font-style: normal;
+    font-weight: normal;
+}
 body{ background:#fff; color:#333; font:12px/1.5  Arial,Helvetica,sans-serif,Microsoft YaHei; direction:ltr;}
 h1, h2, h3, h4, h5, h6 {
     font-size: 100%;
@@ -212,24 +215,34 @@ a.bn-post:hover span{background-color:#63AB1A; border: 1px solid #50950E;}
 .midder .mc .cright{float: right;width: 310px;}
 .w190{width:190px}
 .w770{width:770px}
+.midder .mc .w250{ width:250px}
+.midder .mc .w700{ width:700px}
 
+.mod:after {clear: both;content: " ";display: block;}
+.cleft  .mod{ margin-bottom:30px}
+.cright .mod {margin: 0 0 40px;}
+
+.indent { word-break: break-all;}
+.item { overflow:hidden}
+.item .pic {float: left;margin-right: 10px;}
+.item .pic img { margin-bottom: -3px;}
+.item .info { color: #666666; line-height: 1.4;overflow: hidden;word-break: break-all;word-wrap: break-word;}
+
+.tips{ background-color: #F8F8F8; color: #666666; padding: 8px 10px; border-radius:3px}
+/**标题**/
+.tit-1{   border-bottom: 1px solid #DDDDDD;margin-bottom: 20px;padding-bottom: 5px; color:#333}
 /*底部*/
 #footer{height:162px; padding-top:43px;  margin-top:40px; }
 #footer .f_content{width:980px;  overflow:hidden; margin:0 auto;  border-top: 1px dashed #DDDDDD; padding-top:10px}
 
 
 /*tab切换导航*/
-.tabnav { padding:0px; background:url(zbar.gif) repeat-x 0px 0px; margin-bottom:10px; height:28px;}
-.tabnav ul {
- 	height: 28px;
-    margin: 0;
-    overflow: hidden;
-    padding: 0;
-}
-.tabnav ul li { float: left; margin:0px 8px; margin-top:3px}
-
-.tabnav ul li a{ padding: 0 20px; display:block; line-height:24px; color:#333;}
-
+.tabnav { padding:0px; background:url(../../public/images/zbar.gif) repeat-x 0px bottom; margin-bottom:10px; height:30px;overflow: hidden;}
+.tabnav ul { margin: 0;overflow: hidden;padding: 0;}
+.tabnav ul li { float: left; margin:0px 8px; margin-top:3px; padding: 0 20px; display:block; line-height:28px;}
+.tabnav ul li a{ color:#333}
+.tabnav ul li a:active, .tabnav ul li a:hover, .tabnav ul li a:link, .tabnav ul li a:visited { color:#333}
+.tabnav ul li a:active, .tabnav ul li a:hover {color:#fff;}
 .tabnav .select{
 	border:1px solid #faeee4;
 	border-bottom:none;
@@ -239,6 +252,7 @@ a.bn-post:hover span{background-color:#63AB1A; border: 1px solid #50950E;}
 	border-radius:3px 3px 0px 0px;
 }
 .tabnav .select a { }
+.tabnav .select a:active, .tabnav .select a:hover {color:#333;background-color:transparent}
 
 /*分页*/
 .page { font: 14px Arial, Helvetica, sans-serif; color: #aaa; margin: 20px 0; line-height: 150%; text-align: center; }

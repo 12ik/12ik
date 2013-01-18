@@ -2,31 +2,23 @@
 
 <div class="midder">
 
-<div class="mc">
-	
-    <h1>{$title}</h1>
+    <div class="mc">
+    
+   	    <h1>{$title}</h1>
+       
+        <div class="cleft w700">
 
-<div class="cleft">
 
-{template my_menu}
-
-           <div class="indent">
+            <div class="group_topics">
                 <table class="olt">
                     <tbody>
-                        <tr>
-                            <td>话题</td>
-                            <td>小组</td>
-                            <td>作者</td>
-                            <td nowrap="nowrap" align="right">&nbsp;&nbsp;&nbsp;&nbsp;回应</td>
-                            <td align="right">最后回应</td>
-                        </tr>
             <!--{if $arrTopic}-->
             <!--{loop $arrTopic $key $item}-->
                             <tr class="pl">
-                                <td><a title="{$item[title]}" href="{SITE_URL}{ikUrl('group','topic',array('id'=>$item[topicid]))}">{$item[title]}</a>
+           <td class="td-subject"><a title="{$item[title]}" href="{SITE_URL}{ikUrl('group','topic',array('id'=>$item[topicid]))}">{php echo getsubstrutf8(t($item['title']),0,25)}</a>
             <!--{if $item[isvideo] == '1'}-->
             <img src="{SITE_URL}public/images/lc_cinema.png" align="absmiddle" title="[视频]" alt="[视频]" />
-            <!--{/if}-->                                     
+            <!--{/if}-->                
             <!--{if $item[istop]=='1'}-->
             <img src="{SITE_URL}app/{$app}/skins/{$skin}/headtopic_1.gif" title="[置顶]" alt="[置顶]" />
             <!--{/if}-->
@@ -42,10 +34,9 @@
             <!--{if $item[isposts] == '1'}-->
             <img src="{SITE_URL}public/images/posts.gif" title="[精华]" alt="[精华]" />
             <!--{/if}--></td>
-                                <td><a href="{SITE_URL}{ikUrl('group','show',array('id'=>$item[groupid]))}">{$item[group][groupname]}</a></td>
-                                <td><a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[user][doname]))}">{$item[user][username]}</a></td>
-                                <td align="right"><!--{if $item[count_comment]>0}-->{$item[count_comment]}<!--{/if}--></td>
-                                <td nowrap="nowrap" align="right">&nbsp;&nbsp;&nbsp;&nbsp;{php echo getTime($item[uptime],time())}</td>
+                                <td class="td-reply" nowrap="nowrap"><!--{if $item[count_comment]>0}-->{$item[count_comment]} 回应<!--{/if}--></td>
+                                <td class="td-time" nowrap="nowrap">{php echo getTime($item[uptime],time())}</td>
+                                <td align="right"><a href="{SITE_URL}{ikUrl('group','show',array('id'=>$item[groupid]))}">{php echo getsubstrutf8(t($item[group][groupname]),0,10)}</a></td>
                             </tr>
              <!--{/loop}-->
             <!--{/if}-->         
@@ -53,19 +44,21 @@
               </table>
             </div>
             
+             
             
-            
-
-<div class="clear"></div>
-
-</div>
-
-<div class="cright">
-
-<p class="pl2">&gt; <a href="{SITE_URL}{ikUrl('group')}">返回我的小组</a></p>
-
-</div>
-</div>
+            <div class="clear"></div>
+    
+    
+    	</div>
+    
+        <div class="cright w250" id="cright">   
+              
+			{template my_menu}                     
+        
+        </div>
+    
+    </div><!--//mc-->
+    
 </div>
 
 
