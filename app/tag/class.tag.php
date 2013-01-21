@@ -60,6 +60,14 @@ class tag extends IKApp{
 		return $arrTag;
 		
 	}
+	//根据tagid 获取相关topicid
+	function getObjidByTagid($objname, $idname, $tagid)
+	{
+		$arrObjid = $this->db->fetch_all_assoc("select ".$idname." from ".dbprefix."tag_".$objname."_index where tagid='$tagid'");
+		if(is_array($arrObjid)){
+			return $arrObjid ;
+		}
+	}
 	//通过topic删除tag
 	function delObjTagByObjid($objname,$idname,$objid)
 	{
@@ -87,5 +95,6 @@ class tag extends IKApp{
 		
 		return $strTag['tagid'];
 	}
+
 	
 }

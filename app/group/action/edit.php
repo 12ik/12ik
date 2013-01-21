@@ -20,6 +20,12 @@ switch($ik){
 	//编辑小组基本信息
 	case "base":
 		
+		$arrtags = aac('tag')->getObjTagByObjid('group','groupid',$groupid);
+		foreach($arrtags as $key=>$item)
+		{
+			$tags .= $item['tagname'].' ';
+		}
+		$strGroup['tags'] = trim($tags);		
 		$title = '编辑小组基本信息';
 		include template("edit_base");
 		

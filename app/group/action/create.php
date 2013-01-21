@@ -47,6 +47,10 @@ switch($ik){
 			$groupname = t($_POST['groupname']);
 			$groupdesc = trim($_POST['groupdesc']);
 			
+			$tags = trim($_POST['tag']);
+			$tags = str_replace(' ',' ',$tags);
+			$arrtag = explode(' ',$tags);
+			
 			if( mb_strlen($groupname,'utf8')>20)
 			{
 				ikNotice('小组名称太长啦，最多20个字...^_^！');
@@ -54,6 +58,16 @@ switch($ik){
 			}else if( mb_strlen($groupdesc, 'utf8') > 10000)
 			{
 				ikNotice('写这么多内容干啥，超出1万个字了都^_^');
+			}else if(count($arrtag)>5)
+			{
+				ikNotice('最多 5 个标签，写的太多了...^_^！');
+			}
+			for($i=0; $i<count($arrtag); $i++)
+			{
+				if(mb_strlen($arrtag[$i], 'utf8') > 8)
+				{
+				  ikNotice('小组标签太长啦，最多8个字...^_^！');
+				}
 			}
 			
 			$isGroup = $db->once_fetch_assoc("select count(groupid) from ".dbprefix."group where groupname='$groupname'");
@@ -69,6 +83,9 @@ switch($ik){
 			);
 			
 			$groupid = $db->insertArr($arrData,dbprefix.'group');
+			
+			//添加tag
+			aac('tag')->addTag('group','groupid',$groupid,$tags);			
 
 			//上传
 			$arrUpload = ikUpload($_FILES['picfile'],$groupid,'group',array('jpg','gif','png'));

@@ -208,6 +208,8 @@ function createGroup(that)
 		tips('小组标签不为空');
 		$(that).find('input[name=tag]').focus();
 		return false;
+	}else if(!checkTag('#tag')){
+		return false;
 	}
 }
 
@@ -218,7 +220,7 @@ function checkTag(obj)
 	arr = tempval.split(' ');
 	for(var i=0; i< arr.length; i++)
 	{
-		if(arr[0].length > 8)
+		if(arr[i].length > 8)
 		{
 			_self.parent().find('.tip').html('<span class="red">每个标签最长8个汉字</span>')
 			return false;

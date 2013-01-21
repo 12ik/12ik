@@ -2,7 +2,7 @@
 <div class="midder">
 <div class="mc">
 <h1><?php echo $title;?></h1>
-<div class="cleft">
+<div class="cleft w700">
 
 	<div class="topics">
 	<ul>
@@ -27,7 +27,9 @@
 
 
 
-<div class="cright"></div>
+    <div class="cright w250">
+   		 <?php include template('topic_cate'); ?>   	
+    </div>
 
 </div>
 </div>
