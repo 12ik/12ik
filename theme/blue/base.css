@@ -454,3 +454,203 @@ a.pop_win_close:hover { color: #fab0b6; background: none }
 /**12IK 编辑器**/
 .ik_toolbar{ line-height:28px; height:28px}
 .ik_toolbar .textnum{ text-align:right; float:right}
+
+/**分享**/
+.bn-sharing {
+    background-image: url(../../public/images/a1.png) !important;
+    background-position: 100% -19px !important;
+    background-repeat: no-repeat !important;
+    padding-right:10px;
+}
+.bn-sharing-on {
+    background-position: 100% 4px !important;
+	position: relative !important;
+    z-index: 1 !important;
+}
+
+#db-div-sharing{position: absolute;width: 100px; display: none;}
+#db-div-sharing .hd{  
+	background: none repeat scroll 0 0 #FFFFFF;
+    border-color: #AAAAAA #AAAAAA -moz-use-text-color;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 1px 1px medium;
+    height: 24px;
+    overflow: hidden;
+    padding: 0 5px;
+    position: absolute;
+    right: 0;
+    top: -24px;}
+#db-div-sharing .bd{background: none repeat scroll 0 0 #FFFFFF;border: 1px solid #AAAAAA;padding: 10px 0 0 10px;}
+.rec-ren, .rec-sina, .rec-kx, .rec-msn, .rec-qq, .rec-tx, .rec-sohu, .rec-hua, .rec-db {
+    background: url(../../public/images/a3a.png) no-repeat scroll 0 0 transparent;
+    padding-left: 20px;
+}
+#db-div-sharing .bd li {
+    line-height: 17px;
+    margin-bottom: 10px;
+}
+.rec-sina {background-position: 0 -30px;}
+.rec-msn {background-position: 0 -60px;}
+.rec-ren {background-position: 0 -90px;}
+.rec-kx {background-position: 0 -120px;}
+.rec-tx {background-position: 0 -150px;}
+.rec-sohu {background-position: 0 -180px;}
+.rec-hua {background-position: 0 -210px;}
+.rec-db {background-position: 0 -244px;}
+/**喜欢 收藏**/
+.lnk-sharing {
+	display:inline-block;
+*display:inline;
+	zoom:1;
+	padding:0 8px;
+	vertical-align:middle;
+*vertical-align:baseline;
+	height:19px;
+	line-height:19px;
+	line-height:21px\9;
+	overflow:hidden;
+	border:1px solid #b9dcd0;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px
+}
+a.lnk-sharing:link, a.lnk-sharing:visited {
+	border-color:#e3f1ed;
+	background-color:#f2f8f2;
+	color:#4f946e
+}
+a.lnk-sharing:hover, a.lnk-sharing:active {
+	border-color:#c4e2d8;
+	background-color:#eff5ef
+}
+.sns-bar-rec {float:left}
+.sns-bar-rec .rec{ display:inline-block;}
+.sns-bar-rec .rec-sec {display: inline-block;float: none;}
+.sns-bar {clear:both;margin-bottom:20px;padding-top:20px;color:#666; height:24px;}
+.sns-bar-fav {float:right}
+.btn-fav {
+	display:inline-block;
+*display:inline;
+	zoom:1;
+	padding:0 8px 0 30px;
+	vertical-align:middle;
+*vertical-align:baseline;
+	height:19px;
+	line-height:19px;
+	line-height:21px\9;
+	overflow:hidden;
+	border:1px solid #edceba;
+	margin-left:4px;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px
+}
+a.btn-fav:link, a.btn-fav:visited {border-color:#f2ece7;background-color:#fff6ee;color:#99776b}
+a.btn-fav:hover, a.btn-fav:active {border-color:#edceba;background-color:#fff0e2;color:#99776b}
+.fav-add, .fav-add:link, .fav-add:hover {background:url(../../public/images/ic_like.png) no-repeat 8px 3px}
+.fav-cancel, .fav-cancel:link, .fav-cancel:hover {background:url(../../public/images/ic_like.png) no-repeat 8px -17px}
+.fav-num {display:inline-block;*display:inline;zoom:1;color:#666}
+/**推荐**/
+.frm-recbox{}
+.frm-recbox .item textarea{  padding: 3px;background: none repeat scroll 0 0 transparent;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 1px #FFFFFF;
+    color: #CCCCCC;
+    display: block;
+    font: 14px/20px "Helvetica Neue",Helvetica,Arial,sans-serif;
+    height: 60px;
+    outline: medium none;
+    white-space: pre-wrap;
+    width: 98%;
+    word-wrap: break-word;
+}
+.frm-recbox .media-info{ text-align:left}
+.frm-recbox .media-info h6{  font-weight: 800;line-height: 1.3; margin-top:5px}
+.frm-recbox .media-info h6 a{ color:#333}
+.frm-recbox .media-info h6 a:hover{background: none repeat scroll 0 0 transparent;color: #333333;}
+.frm-recbox .media-info .desc{line-height: 1.2;margin: 2px 0;color: #999999;display: table-cell;word-break: break-all;}
+.rec-submit{background: none repeat scroll 0 0 #f1f6fa;border-top: 1px solid #D9E2E9;color: #AAAAAA;padding: 10px 0; text-align:right}
+.rec-submit .bd{ width:90%; margin:0 auto}
+.rec-submit .num {
+    color: #AAAAAA;
+    font-size: 14px;
+    font-weight: 800;
+    margin-right: 5px;
+    position: relative;
+    top: 3px;
+}
+.lnk-flat, .bn-flat {
+	display:-moz-inline-box;
+	display:inline-block;
+	border-width:1px;
+	border-style:solid;
+	border-color:#bbb #bbb #999;
+*display:inline;
+*zoom:1;
+	color:#444;
+	border-radius:3px;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	overflow:hidden;
+	vertical-align:middle;
+}
+.bn-flat:hover, a.lnk-flat:hover {
+	border-color:#999 #999 #666;
+	color:#333;
+}
+.lnk-flat, .bn-flat input {
+	border:none;
+	height:25px;
+	padding:0 14px;
+	color:#333;
+	/*background:transparent url(/pics/site/sp_all_2.png) repeat-x 0 -700px\9;*/
+	font-size:12px;
+*padding:3px 8px 0;
+	margin:0!important;
+	cursor:pointer;
+	-webkit-appearance:none;
+	border-radius:2px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
+	background-image:-moz-linear-gradient(-90deg, #fcfcfc 0, #e9e9e9 100%);
+	background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0, #fcfcfc), color-stop(1, #e9e9e9));
+}
+a.lnk-flat:hover, a.lnk-flat:active, .bn-flat input:hover, .bn-flat-over input {
+	color:#333!important;
+	background-color:transparent!important;
+	background-position:1px -706px\9;
+	background-image:-moz-linear-gradient(-90deg, #f8f8f8 0, #ddd 100%);
+	background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0, #f8f8f8), color-stop(1, #ddd));
+}
+a.lnk-flat:active, .bn-flat input:active, .bn-flat-active input {
+	background:#ddd!important;
+	color:#333!important;
+	border-color:#999 #999 #666!important;
+}
+.lnk-flat {
+	border-radius:4px;
+	-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+}
+.lnk-flat {
+	height:24px;
+	padding:0 8px;
+	line-height:24px;
+	border:1px solid #d9d9d9;
+}
+a.lnk-flat:link, a.lnk-flat:visited {
+	color:#333;
+	/*background:transparent url(/pics/site/sp_all_2.png) repeat-x 0 -641px\9;*/
+}
+a.lnk-flat:hover {
+	color:#333;
+	background-position:0 -701px\9;
+}
+a.lnk-flat:active {
+	color:#333;
+	background:#ebebeb;
+}
+.rec-submit .bn-flat input {font-size: 14px;padding: 0 14px 2px;}
+

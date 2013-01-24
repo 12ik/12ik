@@ -15,11 +15,24 @@ if($strTopic['typeid'] != '0'){
 }
 
 //小组
-$strGroup = $db->once_fetch_assoc("select * from ".dbprefix."group where groupid='".$strTopic['groupid']."'");
+//$strGroup = $db->once_fetch_assoc("select * from ".dbprefix."group where groupid='".$strTopic['groupid']."'");
+$strGroup =  aac('group')->getOneGroup($strTopic['groupid']);
+
+
 
 //判断会员是否加入该小组
 $groupid = intval($strGroup['groupid']);
 $userid = intval($IK_USER['user']['userid']);
+
+//小组人数
+$strGroupUserNum = aac('group')->findCount('group_users',array('groupid'=>$groupid));
+
+//喜欢收藏的人数
+$collectNum = aac('group')->findCount('group_topics_collects', array('topicid'=>$topicid));
+$is_Like = aac('group')->find('group_topics_collects', array('userid'=>$userid, 'topicid'=>$topicid));
+
+//喜欢收藏的人数
+$recommendNum = aac('group')->findCount('group_topics_recommend', array('topicid'=>$topicid));
 
 $isGroupUser = $db->once_num_rows("select * from ".dbprefix."group_users where userid='$userid' and groupid='$groupid'");
 
@@ -37,11 +50,15 @@ if($strGroup['isopen']=='1' && $isGroupUser=='0'){
 	//下一篇帖子
 	$downTopic = $new['group']->find('group_topics','topicid>'.$topicid.' and groupid='.$groupid,'topicid,title');
 
+	//帖子图片
+	$arr_photo = array();
 	//匹配本地图片
 	$strcontent = $strTopic['content'];	
 	preg_match_all ( '/\[(图片)(\d+)\]/is', $strcontent, $photos );		
-	foreach ($photos [2] as $item) {
+	foreach ($photos [2] as $key=>$item) {
 		$strPhoto = aac('group')->getPhotoByseq($topicid,$item);
+		$arr_photo[$key] = $strPhoto['photo_500'];
+		
 		$htmlTpl = '<div class="img_'.$strPhoto['align'].'">
 						<a href="'.SITE_URL.'uploadfile/group/'.$strPhoto['photourl'].'" target="_blank" title="点击查看原图"><img alt="'.$strPhoto['photodesc'].'" src="'.$strPhoto['photo_500'].'"  title="点击查看原图"/></a>
 						<span class="img_title" >'.$strPhoto['photodesc'].'</span>
@@ -71,6 +88,7 @@ if($strGroup['isopen']=='1' && $isGroupUser=='0'){
 	//帖子标签
 	$strTopic['tags'] = aac('tag')->getObjTagByObjid('topic','topicid',$topicid);
 	$strTopic['content'] = $strcontent;
+	$strTopic['content_photo'] = $arr_photo;
 	$strTopic['user']	= aac('user')->getOneUser($strTopic['userid']);
 	$strTopic['user']['signed'] = hview($strTopic['user']['signed']);
 	$title = $strTopic['title'];

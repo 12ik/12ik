@@ -14,7 +14,7 @@
 		</div>
 	
 		<p><?php echo getsubstrutf8(t($item['content']),0,100)?></p>
-		<div class="from"><span class="reply-num"><a href="<?php echo SITE_URL;?><?php echo ikurl('group','topic',array('id'=>$item['topicid']))?>#comment"><?php echo $item['count_comment'];?> 回应</a></span> <span class="fav-num"><a href="#">164 喜欢</a></span>
+		<div class="from"><span class="reply-num"><a href="<?php echo SITE_URL;?><?php echo ikurl('group','topic',array('id'=>$item['topicid']))?>#comment"><?php echo $item['count_comment'];?> 回应</a></span> <span class="fav-num"><a href="<?php echo SITE_URL;?><?php echo ikurl('group','topic',array('id'=>$item['topicid']))?>#like"><?php echo $item['count_collect'];?> 喜欢</a></span>
 		<div class="from-group">来自: <span class="group-name"><a href="<?php echo SITE_URL;?><?php echo ikurl('group','show',array('id'=>$item['groupid']))?>"><?php echo $item['group'][groupname];?></a> 小组</span></div>
 		</div>
 		</div>

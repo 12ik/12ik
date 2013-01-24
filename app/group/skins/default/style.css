@@ -279,7 +279,7 @@ h2 span {
 .comment li .user-face {float: left;height: 48px;overflow: hidden;width: 48px; margin-top:0px;}
 .comment li .reply-doc {float: right;width: 580px;overflow: hidden;}
 .comment li .reply-doc p img{max-width:450px;}
-.comment li .reply-doc h4 {font-weight:normal;font-size:12px;height: 22px;line-height: 22px;margin: 0 0 5px 0px;color: #666666;display: block;overflow: hidden; background-color:#F8F8F8; padding:0px 10px}
+.comment li .reply-doc h4 {font-weight:normal;font-size:12px;height: 22px;line-height: 22px;margin: 0 0 5px 0px;color: #666666;display: block;overflow: hidden; background-color:#F0F6F3; padding:0px 10px}
 .comment li .reply-doc p {margin: 0 0 25px;overflow: hidden;word-wrap: break-word;line-height:23px; padding:0px 10px}
 .comment li .reply-doc .recomment {background: #F8F8F8;border: 1px dashed #DDDDDD;color: #666666;font-size: 12px;padding: 10px;}
 .comment li .group_banned {text-align: right; padding-bottom:5px}
@@ -1191,3 +1191,20 @@ a.button-join:hover{ background-color:#ffeee0;}
 }
 .groups ul { margin-left:-2%; }
 .groups li { display:inline-block;*display:inline;zoom:1;width:22%;margin-left:2%;margin-bottom:20px;vertical-align:top;font-size:12px;color:#aaa; }
+
+/**帖子显示**/
+#g-side-info { margin-bottom:30px;border:1px solid #eee; }
+#g-side-info .bd { padding:10px;overflow:hidden;zoom:1; }
+#g-side-info p { margin:5px 0 0 0;color:#666; }
+#g-side-info .member-info { color:#111;padding-top:5px; }
+#g-side-info .member-info1 { color:#666;padding-top:5px; }
+#g-side-info .group-item{ margin-left:5px}
+#g-side-info .group-item .pic { float:left;margin-right:12px; }
+#g-side-info .group-item .info { overflow:hidden; }
+#g-side-info .group-item .title { font-size:14px; }
+#g-side-info .ft { background-color:#f8f8f8;font-size:14px;padding:6px 0; }
+#g-side-info .ft-anonym { background-color:#edf6ed;padding:10px 0; }
+#g-side-info .ft-members { margin-bottom:10px;line-height:1.5;color:#666; }
+#g-side-info .ft-members i { color:#370; }
+#g-side-info .group-item .info p i {color: #372;}
+#g-side-info .ft .member-status{ padding-left: 70px;}

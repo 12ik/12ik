@@ -185,27 +185,65 @@ switch ($ik) {
 		}
 		
 		break;
+
+	//推荐帖子
+	case "topic_recommend":
 		
-	//收藏帖子
-	case "topic_collect":
+		$topicid = $_POST['tid'];
+		$groupid = $_POST['tkind'];
+		$content = $_POST['content']; //推荐的话
 		
-		$topicid = $_POST['topicid'];
-		
-		$strTopic = $db->once_fetch_assoc("select * from ".dbprefix."group_topics where topicid='".$topicid."'");
-		
-		$collectNum = $db->once_num_rows("select * from ".dbprefix."group_topics_collects where userid='$userid' and topicid='$topicid'");
-		
-		if($userid == '0'){
-			echo 0;
-		}elseif($userid == $strTopic['userid']){
-			echo 1;
-		}elseif($collectNum > 0){
-			echo 2;
-		}else{
-			$db->query("insert into ".dbprefix."group_topics_collects (`userid`,`topicid`,`addtime`) values ('".$userid."','".$topicid."','".time()."')");
-			echo 3;
+		if(empty($topicid))
+		{
+			ikNotice("非法操作！"); exit;
 		}
 		
+		$recommendNum = aac('group')->findCount('group_topics_recommend', array('topicid'=>$topicid));
+
+		$is_rec = aac('group')->findCount('group_topics_recommend', array('userid'=>$userid, 'topicid'=>$topicid));
+		
+		if($is_rec > 0){
+			//已经推荐过了
+			$arrJson = array('r'=>1, 'html'=>'你已经推荐过该帖子了！');
+		}else{
+			//执行
+			$arrData = array('userid'=>$userid, 'topicid'=>$topicid, 'content'=>htmlspecialchars($content),'addtime'=>time());
+			aac('group')->create('group_topics_recommend', $arrData);
+			$arrJson = array('r'=>0, 'num'=>$recommendNum+1);
+		}		
+
+		header("Content-Type: application/json", true);
+		echo json_encode($arrJson); 
+		break;
+				
+	//收藏帖子 喜欢
+	case "topic_collect":
+		
+		$topicid = $_POST['tid'];
+		$groupid = $_POST['tkind'];
+		if(empty($topicid))
+		{
+			ikNotice("非法操作！"); exit;
+		}
+		
+		$collectNum = aac('group')->findCount('group_topics_collects', array('topicid'=>$topicid));
+		$is_like = aac('group')->findCount('group_topics_collects', array('userid'=>$userid, 'topicid'=>$topicid));
+		
+		if($is_like > 0){
+			//已经喜欢过了 执行取消操作
+			aac('group')->delete('group_topics_collects', array('userid'=>$userid, 'topicid'=>$topicid));
+			aac('group')->update('group_topics', array('topicid'=>$topicid), array('count_collect'=>$collectNum-1));
+			$arrJson = array('r'=>1, 'num'=>$collectNum-1);
+		}else{
+			//执行喜欢
+			$arrData = array('userid'=>$userid, 'topicid'=>$topicid, 'addtime'=>time());
+			aac('group')->create('group_topics_collects', $arrData);
+			aac('group')->update('group_topics', array('topicid'=>$topicid), array('count_collect'=>$collectNum+1));
+			$arrJson = array('r'=>0, 'num'=>$collectNum+1);
+			
+		}
+		header("Content-Type: application/json", true);
+		echo json_encode($arrJson); 
 		break;
 		
 	//置顶帖子

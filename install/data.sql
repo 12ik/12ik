@@ -837,6 +837,7 @@ CREATE TABLE IF NOT EXISTS `ik_group_topics` (
   `content` text NOT NULL,
   `count_comment` int(11) NOT NULL DEFAULT '0' COMMENT '回复统计',
   `count_view` int(11) NOT NULL DEFAULT '0' COMMENT '帖子展示数',
+  `count_collect` int(11) NOT NULL DEFAULT '0' COMMENT '喜欢收藏数',  
   `count_attach` int(11) NOT NULL DEFAULT '0' COMMENT '统计附件',
   `istop` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否置顶',
   `isshow` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否显示',
@@ -882,6 +883,21 @@ CREATE TABLE IF NOT EXISTS `ik_group_topics_photo` (
   KEY `topicid` (`topicid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `ik_group_topics_recommend`
+--
+
+CREATE TABLE IF NOT EXISTS `ik_group_topics_recommend` (
+  `userid` int(11) NOT NULL DEFAULT '0',
+  `topicid` int(11) NOT NULL DEFAULT '0',
+  `content` char(250) NOT NULL DEFAULT '',  
+  `addtime` int(11) NOT NULL DEFAULT '0' COMMENT '推荐时间',
+  UNIQUE KEY `userid_2` (`userid`,`topicid`),
+  KEY `userid` (`userid`),
+  KEY `topicid` (`topicid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='帖子推荐';
 -- --------------------------------------------------------
 
 --

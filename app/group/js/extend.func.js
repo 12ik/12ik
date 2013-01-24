@@ -104,6 +104,7 @@ function topic_del(gid,tid){
 }
 
 //收藏帖子
+/*
 function topic_collect(tid){
 	
 	var url = siteUrl+'index.php?app=group&ac=do&ik=topic_collect';
@@ -120,6 +121,7 @@ function topic_collect(tid){
 			}					
 	});
 }
+*/
 
 //谁收藏了这篇帖子
 function topic_collect_user(topicid){
