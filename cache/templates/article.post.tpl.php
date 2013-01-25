@@ -25,13 +25,13 @@
     <tr>
         <th>内容：</th>
         <td>
-        <textarea tabindex="3"  style="width:99.5%;height:300px;" id="editor_full" cols="55" rows="20" name="content" class="txt"   placeholder="请填写内容"></textarea>
-        <div class="ik_toolbar" id="ik_toolbar"><span class="textnum" id="textnum"><em>0</em> / <em>20000</em> 受欢迎的字数 </span></div>
+        <textarea tabindex="3"  style="width:99.5%;height:300px;" maxlength="10000" id="editor_full" cols="55" rows="20" name="content" class="txt"   placeholder="请填写内容"></textarea>
+        <div class="ik_toolbar" id="ik_toolbar"><span class="textnum" id="textnum"><em>0</em> / <em>10000</em> 受欢迎的字数 </span></div>
         </td>
     </tr> 
     <tr>
     	<th>&nbsp;</th><td>
-        <input type="hidden" name="itemid" value="<?php echo $itemid;?>" id="itemid" />
+        <input type="hidden" name="itemid" value="<?php echo $itemid;?>" id="itemid"  />
         <input class="submit" type="submit" value="好啦，发表" tabindex="4" > <a href="<?php echo SITE_URL;?><?php echo ikurl('group','show',array('id'=>$strGroup['groupid']))?>">返回</a>
         </td>
     </tr>

@@ -144,21 +144,40 @@
       </div>
     </div>
     <div class="cright">
+       <?php if($isGroupUser > 0 ) { ?>
+        <div class="side-reg" id="g-side-info-member">
+          <div class="bd">
+              <div class="group-item">
+                  <div class="pic">
+                       <a href="<?php echo SITE_URL;?><?php echo ikurl('group','show',array('id'=>$strGroup['groupid']))?>"><img src="<?php echo $strGroup['icon_48'];?>"></a>
+                  </div>
+                  <div class="info">
+                      <div class="title">
+                          <a href="<?php echo SITE_URL;?><?php echo ikurl('group','show',array('id'=>$strGroup['groupid']))?>">我总觉得自己就是一个傻逼</a>
+                      </div>
+                  <div class="member-info1">我是小组的成员</div>
+              </div>
+            </div>
+          </div>
+        </div>    
+     <?php } else { ?>
       <div class="side-reg" id="g-side-info">
         <div class="bd">
           <div class="group-item">
             <div class="pic"> <a href="<?php echo SITE_URL;?><?php echo ikurl('group','show',array('id'=>$strGroup['groupid']))?>"> <img src="<?php echo $strGroup['icon_48'];?>"> </a> </div>
             <div class="info">
               <div class="title"> <a href="<?php echo SITE_URL;?><?php echo ikurl('group','show',array('id'=>$strGroup['groupid']))?>"><?php echo getsubstrutf8(t($strGroup['groupname']),0,14)?></a> </div>
-              <div class="member-info"> <i><?php echo $strGroupUserNum;?></i> 人聚集在这个小组 </div>
-              <p><?php echo getsubstrutf8(t($strGroup['groupdesc']),0,46)?></p>
+              	<div class="member-info"> <i><?php echo $strGroupUserNum;?></i> 人聚集在这个小组 </div>
+              	<p><?php echo getsubstrutf8(t($strGroup['groupdesc']),0,46)?></p>
             </div>
           </div>
         </div>
         <div class="ft">
-          <div class="member-status"> <?php if($isGroupUser > 0 ) { ?> <a class="bn-join" href="<?php echo SITE_URL;?><?php echo ikurl('group','add',array('groupid'=>$strGroup['groupid']))?>">发布帖子</a> <?php } else { ?> <a class="bn-join" href="<?php echo SITE_URL;?><?php echo ikurl('group','do',array('ik'=>'join','groupid'=>$strGroup['groupid']))?>">加入小组</a> <?php } ?> </div>
+          <div class="member-status"><a class="bn-join" href="<?php echo SITE_URL;?><?php echo ikurl('group','do',array('ik'=>'join','groupid'=>$strGroup['groupid']))?>">加入小组</a></div>
         </div>
       </div>
+      <?php } ?>
+      
       <h2>谁收藏了这篇帖子</h2>
       <script>topic_collect_user('<?php echo $strTopic['topicid'];?>')</script>
       <div id="collects">

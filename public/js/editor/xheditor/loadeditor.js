@@ -1,5 +1,4 @@
 //加载编辑器
-
 $(pageInit);
 function pageInit()
 {

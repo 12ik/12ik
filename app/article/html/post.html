@@ -25,13 +25,13 @@
     <tr>
         <th>内容：</th>
         <td>
-        <textarea tabindex="3"  style="width:99.5%;height:300px;" id="editor_full" cols="55" rows="20" name="content" class="txt"   placeholder="请填写内容"></textarea>
-        <div class="ik_toolbar" id="ik_toolbar"><span class="textnum" id="textnum"><em>0</em> / <em>20000</em> 受欢迎的字数 </span></div>
+        <textarea tabindex="3"  style="width:99.5%;height:300px;" maxlength="10000" id="editor_full" cols="55" rows="20" name="content" class="txt"   placeholder="请填写内容"></textarea>
+        <div class="ik_toolbar" id="ik_toolbar"><span class="textnum" id="textnum"><em>0</em> / <em>10000</em> 受欢迎的字数 </span></div>
         </td>
     </tr> 
     <tr>
     	<th>&nbsp;</th><td>
-        <input type="hidden" name="itemid" value="{$itemid}" id="itemid" />
+        <input type="hidden" name="itemid" value="{$itemid}" id="itemid"  />
         <input class="submit" type="submit" value="好啦，发表" tabindex="4" > <a href="{SITE_URL}{ikUrl('group','show',array('id'=>$strGroup[groupid]))}">返回</a>
         </td>
     </tr>
@@ -71,7 +71,7 @@
    <div class="thumblst">
   <div class="details">
     <p>视频标题（30字以内）</p>
-    <textarea name="video_{$item[seqid]}_title" maxlength="30">人在囧途</textarea>
+    <textarea name="video_{$item[seqid]}_title" maxlength="30"></textarea>
     <input type="hidden" value="{$item[seqid]}" name="video_{$item[seqid]}">
     <br>
     <br>

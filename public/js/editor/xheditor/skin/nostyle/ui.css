@@ -528,6 +528,7 @@
 		TBWindowMargin =   document.documentElement &&  
 		document.documentElement.scrollTop ||   document.body.scrollTop ) +  
 		'px' );
+	border-radius:5px;
 }
 
 .xheModalTitle {
@@ -557,14 +558,15 @@
 	top: 50%;
 	left: 50%;
 	background: #000;
-	opacity: 0.2;
-	-ms-filter: 'alpha(opacity=20)';
+	opacity: 0.3;
+	-ms-filter: 'alpha(opacity=30)';
 	filter: alpha(opacity = 20);
 	_position: absolute;
 	_margin-top: expression(0 -   parseInt(this.offsetHeight/ 2) +   (
 		TBWindowMargin =   document.documentElement &&  
 		document.documentElement.scrollTop ||   document.body.scrollTop ) +  
 		5 +   'px' );
+	border-radius:5px;	
 }
 
 .xheModalOverlay {

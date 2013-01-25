@@ -1198,13 +1198,15 @@ a.button-join:hover{ background-color:#ffeee0;}
 #g-side-info p { margin:5px 0 0 0;color:#666; }
 #g-side-info .member-info { color:#111;padding-top:5px; }
 #g-side-info .member-info1 { color:#666;padding-top:5px; }
-#g-side-info .group-item{ margin-left:5px}
-#g-side-info .group-item .pic { float:left;margin-right:12px; }
-#g-side-info .group-item .info { overflow:hidden; }
-#g-side-info .group-item .title { font-size:14px; }
+.group-item{ margin-left:5px}
+.group-item .pic { float:left;margin-right:12px; }
+.group-item .info { overflow:hidden; }
+.group-item .title { font-size:14px; }
 #g-side-info .ft { background-color:#f8f8f8;font-size:14px;padding:6px 0; }
 #g-side-info .ft-anonym { background-color:#edf6ed;padding:10px 0; }
 #g-side-info .ft-members { margin-bottom:10px;line-height:1.5;color:#666; }
 #g-side-info .ft-members i { color:#370; }
-#g-side-info .group-item .info p i {color: #372;}
+.group-item .info p i {color: #372;}
 #g-side-info .ft .member-status{ padding-left: 70px;}
+#g-side-info-member { margin-bottom:15px;border-bottom:1px solid #e3e3e3; }
+#g-side-info-member .bd { padding-bottom:15px;overflow:hidden;zoom:1; }
