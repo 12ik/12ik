@@ -149,11 +149,11 @@
           <div class="bd">
               <div class="group-item">
                   <div class="pic">
-                       <a href="<?php echo SITE_URL;?><?php echo ikurl('group','show',array('id'=>$strGroup['groupid']))?>"><img src="<?php echo $strGroup['icon_48'];?>"></a>
+                       <a href="<?php echo SITE_URL;?><?php echo ikurl('group','show',array('id'=>$strGroup['groupid']))?>" title="<?php echo $strGroup['groupname'];?>"><img src="<?php echo $strGroup['icon_48'];?>" alt="<?php echo $strGroup['groupname'];?>"></a>
                   </div>
                   <div class="info">
                       <div class="title">
-                          <a href="<?php echo SITE_URL;?><?php echo ikurl('group','show',array('id'=>$strGroup['groupid']))?>">我总觉得自己就是一个傻逼</a>
+                          <a href="<?php echo SITE_URL;?><?php echo ikurl('group','show',array('id'=>$strGroup['groupid']))?>" title="<?php echo $strGroup['groupname'];?>"><?php echo getsubstrutf8(t($strGroup['groupname']),0,14)?></a>
                       </div>
                   <div class="member-info1">我是小组的成员</div>
               </div>
