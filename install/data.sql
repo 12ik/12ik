@@ -1742,38 +1742,6 @@ CREATE TABLE ik_article_spaceitems (
   fromtype char(10) NOT NULL default 'adminpost',
   fromid mediumint(8) unsigned NOT NULL default '0',
   hot mediumint(8) unsigned NOT NULL default '0',
-  click_1 smallint(6) unsigned NOT NULL default '0',
-  click_2 smallint(6) unsigned NOT NULL default '0',
-  click_3 smallint(6) unsigned NOT NULL default '0',
-  click_4 smallint(6) unsigned NOT NULL default '0',
-  click_5 smallint(6) unsigned NOT NULL default '0',
-  click_6 smallint(6) unsigned NOT NULL default '0',
-  click_7 smallint(6) unsigned NOT NULL default '0',
-  click_8 smallint(6) unsigned NOT NULL default '0',
-  click_9 smallint(6) unsigned NOT NULL default '0',
-  click_10 smallint(6) unsigned NOT NULL default '0',
-  click_11 smallint(6) unsigned NOT NULL default '0',
-  click_12 smallint(6) unsigned NOT NULL default '0',
-  click_13 smallint(6) unsigned NOT NULL default '0',
-  click_14 smallint(6) unsigned NOT NULL default '0',
-  click_15 smallint(6) unsigned NOT NULL default '0',
-  click_16 smallint(6) unsigned NOT NULL default '0',
-  click_17 smallint(6) unsigned NOT NULL default '0',
-  click_18 smallint(6) unsigned NOT NULL default '0',
-  click_19 smallint(6) unsigned NOT NULL default '0',
-  click_20 smallint(6) unsigned NOT NULL default '0',
-  click_21 smallint(6) unsigned NOT NULL default '0',
-  click_22 smallint(6) unsigned NOT NULL default '0',
-  click_23 smallint(6) unsigned NOT NULL default '0',
-  click_24 smallint(6) unsigned NOT NULL default '0',
-  click_25 smallint(6) unsigned NOT NULL default '0',
-  click_26 smallint(6) unsigned NOT NULL default '0',
-  click_27 smallint(6) unsigned NOT NULL default '0',
-  click_28 smallint(6) unsigned NOT NULL default '0',
-  click_29 smallint(6) unsigned NOT NULL default '0',
-  click_30 smallint(6) unsigned NOT NULL default '0',
-  click_31 smallint(6) unsigned NOT NULL default '0',
-  click_32 smallint(6) unsigned NOT NULL default '0',
   PRIMARY KEY  (itemid),
   KEY `uid` (uid,`type`,top,dateline),
   KEY catid (catid,dateline),
@@ -1852,3 +1820,26 @@ CREATE TABLE ik_attachments (
   KEY uid (uid,`type`,dateline),
   KEY `type` (`type`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='附件表';
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `ik_photos`
+--
+
+CREATE TABLE IF NOT EXISTS `ik_photos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'photoid',
+  `seqid` int(11) NOT NULL DEFAULT '0' COMMENT 'seqid',  
+  `type` char(64) NOT NULL DEFAULT '',  
+  `typeid` int(11) NOT NULL DEFAULT '0' COMMENT 'ID',
+  `userid` int(11) NOT NULL DEFAULT '0',
+  `photoname` char(64) NOT NULL DEFAULT '',
+  `phototype` char(32) NOT NULL DEFAULT '',
+  `path` char(32) NOT NULL DEFAULT '' COMMENT '图片路径',
+  `photourl` char(120) NOT NULL DEFAULT '',
+  `photosize` char(32) NOT NULL DEFAULT '',
+  `count_view` int(11) NOT NULL DEFAULT '0',
+  `addtime` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `noteid` (`typeid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;

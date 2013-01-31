@@ -450,20 +450,29 @@
 .xheDialog textarea {
 	font-size: 12px;
 	resize: none;
+	border: 1px solid #CCCCCC;	
 }
 
 .xheDialog input[type=text] {
 	padding: 1px;
+	height:20px;	
 	width: 160px;
-	border-color: #ABADB3;
+	border-color: #CCCCCC;
 }
 
 .xheDialog input[type=button] {
 	margin: 0;
-	border-color: #fff #888 #888 #fff;
+	border-color: #b9b9b9;
 	background: #F0F0F0;
 	cursor: pointer;
 	font-size: 13px;
+	border-radius:3px;
+	color:#333;
+}
+.xheDialog input[type=button]:hover{
+	border-color: #b9b9b9;
+	background: #e1e1e1;
+	color:#000;
 }
 
 .xheDialog input[type=file] {
@@ -521,29 +530,36 @@
 	top: 50%;
 	left: 50%;
 	background: #FFF;
-	border: 1px solid #BBB;
+	border: 1px solid #C8C8C8;
 	font-size: 12px;
 	_position: absolute;
 	_margin-top: expression(0 -   parseInt(this.offsetHeight/ 2) +   (
 		TBWindowMargin =   document.documentElement &&  
 		document.documentElement.scrollTop ||   document.body.scrollTop ) +  
 		'px' );
-	border-radius:5px;
+	border-radius:5px 5px 5px 5px;		
+	
 }
 
 .xheModalTitle {
-	padding: 5px;
-	background: #F0F0EE;
-	border-bottom: 1px solid #BBB;
+	background: #EBF5EB;
+	border-radius:5px 5px 0 0;	
+    overflow: hidden;
+    padding: 10px 19px;
+    word-break: break-all;	
+   	color: #006600;
+    font-size: 14px;
+    line-height: 120%;		
 }
 
 .xheModalClose {
 	float: right;
 	width: 16px;
 	height: 16px;
-	background: url(img/close.gif);
 	cursor: pointer;
 }
+a.xheModalClose, .xheModalClose:visited, .xheModalClose:link { position: absolute; right: 0; top: 0; font: 11px "Comic Sans MS"; margin: 9px 5px 0 0; padding: 0 0.3em; color: #b4b4b4; z-index: 99 }
+a.xheModalClose:hover { color: #fab0b6; background: none }
 
 .xheModalIfmWait {
 	width: 100%;
@@ -557,16 +573,16 @@
 	z-index: 1000009;
 	top: 50%;
 	left: 50%;
-	background: #000;
+	background: #999999;
 	opacity: 0.3;
 	-ms-filter: 'alpha(opacity=30)';
-	filter: alpha(opacity = 20);
+	filter: alpha(opacity = 30);
 	_position: absolute;
 	_margin-top: expression(0 -   parseInt(this.offsetHeight/ 2) +   (
 		TBWindowMargin =   document.documentElement &&  
 		document.documentElement.scrollTop ||   document.body.scrollTop ) +  
 		5 +   'px' );
-	border-radius:5px;	
+	border-radius:8px;			
 }
 
 .xheModalOverlay {

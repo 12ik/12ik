@@ -12,8 +12,8 @@ function pageInit()
 		}},
 		tsImg:{c:'tsImg',t:'插入图片',e:function(){
 			var _this=this;
-			 _this.saveBookmark();
-			 _this.showIframeModal('选择图片',siteUrl+'index.php?app=photo&ac=ajax&ik=album',function(v){  _this.pasteHTML(v,false); },400,420);
+			 _this.saveBookmark(); 
+			 _this.showIframeModal('选择图片',siteUrl+'index.php?app=photo&ac=ikupload&ik=image&type='+type+'&typeid='+typeid,function(v){ _this.pasteHTML(v,false); },400,200);
 		}},
 		
 		
@@ -40,7 +40,7 @@ function pageInit()
 		tsVideo:{c:'tsVideo',t:'插入视频地址',h:1,e:function(){
 			var _this=this;
 			_this.saveBookmark();
-			var htmlCode=$('<div>插入视频地址(支持优酷土豆等播放地址)</div><div><img src="" id="urlImg" style="display:none"/></div><div>地址: <input type="text" id="xheVidoeUrl" value="" class="xheText" /></div><div>标题: <input type="text" id="xheVidoeTitle" value="" class="xheText" /></div><div style="text-align:right;"><input type="button" id="xheSave" value="解析" /></div>');
+			var htmlCode=$('<div>爱客网支持抓取视频网站的有：土豆网、优酷网、酷6网、56网、的视频。</div><div><img src="" id="urlImg" style="display:none"/></div><div>输入视频播放页地址: <input type="text" id="xheVidoeUrl" value="" class="xheText" /></div><div>标题: <input type="text" id="xheVidoeTitle" value="" class="xheText" /></div><div style="text-align:right;"><input type="button" id="xheSave" value="解析" /></div>');
 			var jCode=$(htmlCode),jSave=$('#xheSave',jCode),jimg=$('#urlImg',jCode),jtitle=$('#xheVidoeTitle',jCode),jValue=$('#xheVidoeUrl',jCode);
 			jSave.click(function(){
 				if(jimg.attr('src') != '')
@@ -93,7 +93,7 @@ function pageInit()
 
 
 	var fulltools = 'Paste,|,Bold,FontSize,Italic,Underline,Strikethrough,|,FontColor,BackColor,Align,List,Outdent,Indent,|,Link,Unlink,|,tsAttach,tsImg,tsMusic,Flash,tsVideo,Emot,tsCode,|,Fullscreen';
-	var minitools = 'Bold,FontSize,Italic,Underline,Strikethrough,|,FontColor,BackColor,Align,List,Outdent,Indent,|,Link,Unlink,|,tsImg,tsMusic,Flash,tsVideo,tsCode,|,Source,|,Preview,Fullscreen';
+	var minitools = 'Bold,FontSize,Italic,Underline,Strikethrough,|,FontColor,BackColor,Align,List,Outdent,Indent,|,Link,Unlink,|,tsImg,tsVideo,tsCode,|,Source,|,Preview,Fullscreen';
 	
 	
 	

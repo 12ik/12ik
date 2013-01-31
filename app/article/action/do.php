@@ -79,7 +79,7 @@ switch ($ik) {
 			);
 			$arrNewsData = array(
 				'itemid'		=> $itemid,
-				'message'		=> htmlspecialchars($content),
+				'message'		=> $content,
 			);			
 			//执行更新
 			aac('article')->update('article_spaceitems', array('uid'=>$userid, 'itemid'=>$itemid),$arrItemData);

@@ -94,5 +94,5 @@ switch($ik){
 		$arrPhoto = $db->fetch_all_assoc("select * from ".dbprefix."photo where albumid='$albumid' and  userid='$userid' and addtime>'$addtime'");
 		
 		include template("ajax/info");
-		break;
+		break;		
 }

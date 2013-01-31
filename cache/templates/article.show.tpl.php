@@ -9,7 +9,7 @@
         </div>
     
         <div class="art-text">
-             <?php echo hview($strArticle['message']);?>
+             <?php echo $strArticle['message'];?>
         </div>
     
   

@@ -25,4 +25,13 @@ class photo extends IKApp{
 		return $arrAlbum;
 	}
 
+	//根据用户typeid 和 seqID 帖子图片
+	function getPhotoByseq($type,$typeid,$seq)
+	{
+		$arrPhoto = $this->find('photos',array('seqid'=>$seq, 'typeid'=>$typeid));
+		$arrPhoto['photo_140'] = SITE_URL.ikXimg($arrPhoto['photourl'],$type,140,140,$arrPhoto['path'],1);
+		$arrPhoto['photo_500'] = SITE_URL.ikXimg($arrPhoto['photourl'],$type,500,500,$arrPhoto['path'],1);			
+		return $arrPhoto;	
+	}	
+
 }

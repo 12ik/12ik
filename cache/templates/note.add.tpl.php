@@ -37,6 +37,9 @@
 </div>
 </div>
 <!--加载编辑器-->
+<script language="javascript">
+var type  = "note",typeid  = "";
+</script>
 <script src="<?php echo SITE_URL;?>public/js/editor/xheditor/xheditor.js" type="text/javascript"></script>
 <script src="<?php echo SITE_URL;?>public/js/editor/xheditor/loadeditor.js" type="text/javascript"></script>
 <?php include template('footer'); ?>
