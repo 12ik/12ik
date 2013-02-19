@@ -51,3 +51,19 @@ section .hd{padding-bottom:5px;border-bottom:1px solid #ddd;margin-bottom:9px}
 .comment li .reply-doc p {margin: 0 0 25px;overflow: hidden;word-wrap: break-word;line-height:23px; padding:0px 10px}
 .comment li .reply-doc .recomment {background: #F8F8F8;border: 1px dashed #DDDDDD;color: #666666;font-size: 12px;padding: 10px;}
 .comment li .group_banned {text-align: right;}
+
+/**发布帖子**/
+.item-thumb-list{ padding-left:110px}
+.thumblst { width:580px;min-width:580px;}
+.thumblst .details textarea { width:90%; }
+.thumblst { min-height: 140px; min-width: 600px; border: 1px solid #d3d3d3; background:#f0f0f0; padding: 10px 12px; margin: 3px 0 7px }
+.thumblst .thumb { float: left; width: 160px; overflow:hidden;}
+.thumblst .thumb img { max-width: 130px; _width: 130px }
+.thumblst .thumb .pl { padding:0px; margin-bottom:5px; }
+.thumblst .details { float: right; width: 419px;}
+.thumblst .details .rr {float: right;}
+.thumblst .details p{ margin-bottom:5px;}
+.thumblst .details textarea{ width: 410px; height:66px;border:1px solid #ccc;}
+.alignleft{background:url(http://www.12ik.com/public/images/align_left.png) no-repeat;padding:0 6px 0 25px}
+.aligncenter{background:url(http://www.12ik.com/public/images/align_center.png) no-repeat;padding:0 6px 0 25px}
+.alignright{background:url(http://www.12ik.com/public/images/align_right.png) no-repeat;padding:0 6px 0 25px}

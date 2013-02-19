@@ -1824,10 +1824,10 @@ CREATE TABLE ik_attachments (
 -- --------------------------------------------------------
 
 --
--- 表的结构 `ik_photos`
+-- 表的结构 `ik_article_photos`
 --
 
-CREATE TABLE IF NOT EXISTS `ik_photos` (
+CREATE TABLE IF NOT EXISTS `ik_article_photos` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'photoid',
   `seqid` int(11) NOT NULL DEFAULT '0' COMMENT 'seqid',  
   `type` char(64) NOT NULL DEFAULT '',  
@@ -1839,7 +1839,8 @@ CREATE TABLE IF NOT EXISTS `ik_photos` (
   `photourl` char(120) NOT NULL DEFAULT '',
   `photosize` char(32) NOT NULL DEFAULT '',
   `count_view` int(11) NOT NULL DEFAULT '0',
+  `align` char(32) NOT NULL DEFAULT 'C' COMMENT '图片对齐方式',  
   `addtime` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
-  KEY `noteid` (`typeid`)
+  KEY `typeid` (`typeid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;

@@ -33,6 +33,10 @@ switch ($ik) {
 				array('uid'=>$userid, 'catid'=>0,'subject'=>'0')
 			);
 		}
+		//浏览该itemid下的照片
+		$arrPhotos = aac('article')->getPhotosByItemid($userid, $itemid);
+		//浏览视频
+		$arrVideos = aac('article')->findAll('videos',array('typeid'=>$itemid, 'type'=>'article'));
 		
 		$title = "发表新文章";
 		include template ( 'post' );
@@ -96,10 +100,50 @@ switch ($ik) {
 		break;	
 		
 	case "add_photo":
-		$itemid  = $_POST['itemid'];
-		$arrJson = array('r'=>1, 'html'=>'上传图片失败，请重新上传吧！'.$itemid);
-		echo json_encode($arrJson); 
-					
+
+		$typeid  = $_POST['typeid'];
+		$type  = $_POST['type'];
+		
+		$photonum = aac('article')->findCount('article_photos',array('typeid'=>$typeid));
+		$arrUpload = ikUpload($_FILES['file'],$photonum+1,'article/'.$typeid,array('jpg','gif','png','jpeg'));
+		
+		if($arrUpload)
+		{
+			//插入数据库
+			$arrData = array(
+				'seqid'	    => $photonum+1,
+				'userid'	=> $userid,
+				'type'	=> $type,
+				'typeid'	=> $typeid,
+				'photoname'	=> $arrUpload['name'],
+				'phototype' => $arrUpload['type'],
+				'photosize' => $arrUpload['size'],
+				'align' => 'C',
+				'path' => $typeid.'/'.$arrUpload['path'],
+				'photourl' => $typeid.'/'.$arrUpload['url'],				
+				'addtime'	=> time(),
+			);
+			
+			$photoid = aac('article')->create('article_photos', $arrData);	
+			
+			//浏览该typeid seqid下的照片
+			$arrPhoto = aac('article')->getPhotoByseq($typeid,$photonum+1);	
+		
+			$arrJson = array(
+							'layout'=>'C', 
+							'title'=>'',
+							'seq_id'=> $photonum+1,
+							'photoid'=> $photoid,
+							'small_photo_url'=> $arrPhoto['photo_140'],
+							);
+										
+			echo json_encode($arrJson); 		
+		
+		}else{
+			$arrJson = array('r'=>1, 'html'=>'上传图片失败，请重新上传吧！');
+			echo json_encode($arrJson); 
+		}
+	
 		break;				
 }
 
