@@ -1,4 +1,4 @@
-#Tue Feb 19 17:12:42 CST 2013
+#Mon Feb 25 13:09:59 CST 2013
 eclipse.preferences.version=1
 encoding//app/article/action/do.php=UTF-8
 encoding//app/article/html/admin/cate_add.html=UTF-8
@@ -14,8 +14,16 @@ encoding//app/note/html/list.html=UTF-8
 encoding//app/photo/html/admin/album_list.html=UTF-8
 encoding//app/robots/html/admin/add.html=UTF-8
 encoding//app/robots/html/admin/list.html=UTF-8
+encoding//app/system/html/admincp.html=UTF-8
+encoding//app/system/html/apps.html=UTF-8
+encoding//app/system/html/main.html=UTF-8
+encoding//app/system/html/menu.html=UTF-8
 encoding//app/system/html/options.html=UTF-8
+encoding//app/user/html/login.html=UTF-8
 encoding//app/user/html/register.html=UTF-8
+encoding//app/user/html/set_base.html=UTF-8
+encoding//app/user/html/set_city.html=UTF-8
+encoding//app/user/html/set_menu.html=UTF-8
 encoding//install/html/next.html=UTF-8
 encoding//public/html/notice.html=UTF-8
 encoding//test/chou/js/main.js=UTF-8
