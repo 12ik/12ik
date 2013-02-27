@@ -7,13 +7,6 @@ defined ( 'IN_IK' ) or die ( 'Access Denied.' );
  * @Email:160780470@qq.com
  */
 
-//判断升级
-if (is_file ( 'data/up.php' ))
-	$app = 'upgrade';
-
-if ($app == 'upgrade' && ! is_file ( 'data/up.php' ))
-	$app = 'group';
-
 //APP模板CSS,IMG,INC
 $IK_APP ['tpl'] = array ('skin' => 'app/' . $app . '/skins/', 'js' => 'app/' . $app . '/js/' );
 
@@ -21,7 +14,7 @@ $IK_APP ['tpl'] = array ('skin' => 'app/' . $app . '/skins/', 'js' => 'app/' . $
 $IK_APP ['system'] = array ('skin' => 'app/system/skins/', 'js' => 'app/system/js/' );
 
 //加载APP应用首页和配置文件
-if (is_file ( 'app/' . $app . '/action/' . $ac . '.php' )) {
+if (is_file ( 'app/' . $app . '/action/' . $a . '.php' )) {
 	
 	//加载系统缓存文件 
 	$IK_SITE ['base'] = fileRead ( 'data/system_options.php' );
@@ -51,23 +44,14 @@ if (is_file ( 'app/' . $app . '/action/' . $ac . '.php' )) {
 	
 	
 	//主题
-	$IK_theme = isset ( $_COOKIE ['ik_theme'] ) ? $_COOKIE ['ik_theme'] : '';
-	if ($IK_theme) {
-		if (is_file ( 'theme/' . $IK_theme . '/preview.gif' )) {
-			$site_theme = $IK_theme;
-		} else {
-			$site_theme = $IK_SITE ['base'] ['site_theme'];
-		}
-	} else {
-		$site_theme = $IK_SITE ['base'] ['site_theme'];
-	}
+	$site_theme = $IK_SITE ['base'] ['site_theme'];
 	
 	//加载APP配置缓存文件
 	if ($app != 'system') {
 		
 		$IK_APP ['options'] = fileRead ( 'data/' . $app . '_options.php' );
 				
-		if ($IK_APP ['options'] ['isenable'] == '1' && $ac != 'admin') {
+		if ($IK_APP ['options'] ['isenable'] == '1' && $a != 'admin') {
 			qiMsg ( $app . "应用关闭，请开启后访问！" );
 		}
 	
@@ -80,32 +64,23 @@ if (is_file ( 'app/' . $app . '/action/' . $ac . '.php' )) {
 	
 	
 	//控制前台ADMIN访问权限
-	if ($ac == 'admin' && $IK_USER ['admin'] ['isadmin'] != 1 && $app != 'system') {
+	if ($a == 'admin' && $IK_USER ['admin'] ['isadmin'] != 1 && $app != 'system') {
 		header ( "Location: " . SITE_URL );
 		exit ();
 	}
 	
 	//控制后台访问权限
-	if ($IK_USER ['admin'] ['isadmin'] != 1 && $app == 'system' && $ac != 'login') {
-		header ( "Location: " . SITE_URL . ikUrl ( 'system', 'login' ) );
+	if ($IK_USER ['admin'] ['isadmin'] != 1 && $app == 'system' && $a != 'login') {
+		header ( "Location: " . SITE_URL . U ( 'system', 'login' ) );
 		exit ();
 	}
 	
 	//控制插件设置权限
 	if ($IK_USER ['admin'] ['isadmin'] != 1 && $in == 'edit') {
-		header ( "Location: " . SITE_URL . ikUrl ( 'system', 'login' ) );
+		header ( "Location: " . SITE_URL . U ( 'system', 'login' ) );
 		exit ();
 	}
-	
-	//判断用户是否上传头像
-	if ($IK_SITE ['base'] ['isface'] == 1 && $IK_USER ['user'] != '' && $app != 'system' && $ac != 'admin') {
-		
-		$faceUser = $new [$app]->find ( 'user_info', array ('userid' => intval ( $IK_USER ['user'] ['userid'] ) ) );
-		
-		if ($faceUser ['face'] == '' && $ik != 'face') {
-			header ( "Location: " . SITE_URL . ikUrl ( 'user', 'set', array ('ik' => 'face' ) ) );
-		}
-	}
+
 	
 	//运行统计结束
 	$time_end = getmicrotime ();
@@ -132,41 +107,12 @@ if (is_file ( 'app/' . $app . '/action/' . $ac . '.php' )) {
 		
 		}
 	}
-	
-	$ikHooks = array ();
-	
-	if ($app != 'system' && $app != 'pubs') {
-		
-		//加载公用插件 
-		if (is_file ( 'data/pubs_plugins.php' )) {
-			$public_plugins = fileRead ( 'data/pubs_plugins.php' );
-			
-			if ($public_plugins && is_array ( $public_plugins )) {
-				foreach ( $public_plugins as $item ) {
-					if (is_file ( 'plugins/pubs/' . $item . '/' . $item . '.php' )) {
-						include 'plugins/pubs/' . $item . '/' . $item . '.php';
-					}
-				}
-			}
-		}
-		
-		//加载APP插件
-		if (is_file ( 'data/' . $app . '_plugins.php' )) {
-			$active_plugins = fileRead ( 'data/' . $app . '_plugins.php' );
-			if ($active_plugins && is_array ( $active_plugins )) {
-				foreach ( $active_plugins as $item ) {
-					if (is_file ( 'plugins/' . $app . '/' . $item . '/' . $item . '.php' )) {
-						include 'plugins/' . $app . '/' . $item . '/' . $item . '.php';
-					}
-				}
-			}
-		}
-	}
-	
+
 	//开始执行APP action
-	include $app . '/action/' . $ac . '.php';
+	include $app . '/action/' . $a . '.php';
 
 } else {
-	header("Location: http://www.12ik.com/home/404/");
+	//header("Location: http://www.12ik.com/home/404/");
+	echo '您访问的Action页面不存在！';
 	exit ();
 }

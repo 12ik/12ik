@@ -7,7 +7,7 @@ switch($ik){
 		
 		//列表 
 		$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-		$url = SITE_URL.'index.php?app=site&ac=admin&mg=site&ik=list&page=';
+		$url = SITE_URL.'index.php?app=site&a=admin&mg=site&ik=list&page=';
 		$lstart = 0;//$page*10-10;
 
 		//获取全部
@@ -28,7 +28,7 @@ switch($ik){
 			'isaudit'	=> $_GET['isaudit']==0 ? 1 : 0,
 		));
 		
-		header("Location: ".SITE_URL."index.php?app=site&ac=admin&mg=site&ik=list");
+		header("Location: ".SITE_URL."index.php?app=site&a=admin&mg=site&ik=list");
 		break;
 	
 }

@@ -8,7 +8,7 @@
 				</div>
 				<ul class="list categories-list">
 					<!--         <?php foreach((array)$arrCate as $item) {?> -->
-					<li><a href="<?php echo SITE_URL;?><?php echo ikurl('article','list',array('cateid'=>$item['catid']))?>"><?php echo $item['name'];?></a></li>
+					<li><a href="<?php echo SITE_URL;?><?php echo U('article','list',array('cateid'=>$item['catid']))?>"><?php echo $item['name'];?></a></li>
 					<!--         <?php } ?>   -->
 				</ul>
 			</section>
@@ -19,7 +19,7 @@
 				<div class="bd">
 					<p>个人作者可以在爱客上直接发布作品。 内容领域不限，唯一要求是保证质量优秀。 发表后，作者可直接从中获得分成。</p>
 					<p class="entrance">
-						<a href="<?php echo SITE_URL;?><?php echo ikurl('article','do',array('ik'=>'post'))?>" class="btn btn-large">去投稿<i class="arrow-right"></i></a>
+						<a href="<?php echo SITE_URL;?><?php echo U('article','do',array('ik'=>'post'))?>" class="btn btn-large">去投稿<i class="arrow-right"></i></a>
 					</p>
 				</div>
 			</section>
@@ -35,7 +35,7 @@
 						<!-- <?php foreach((array)$arrArticle as $item) {?> -->
 						<li class="item" id="article-407582">
 							<div class="title">
-								<a href="<?php echo SITE_URL;?><?php echo ikurl('article','show',array('id'=>$item['news'][nid]))?>"><?php echo $item['subject'];?> 
+								<a href="<?php echo SITE_URL;?><?php echo U('article','show',array('id'=>$item['news'][nid]))?>"><?php echo $item['subject'];?> 
                                 <?php if($item['attach']) { ?>
                                 [图文]
                                 <?php } ?>
@@ -43,7 +43,7 @@
 							</div>
                             <?php if($item['attach']) { ?> 
 							<div class="cover">
-                                <a class="pic" href="<?php echo SITE_URL;?><?php echo ikurl('article','show',array('id'=>$item['news'][nid]))?>">
+                                <a class="pic" href="<?php echo SITE_URL;?><?php echo U('article','show',array('id'=>$item['news'][nid]))?>">
 									<img src="<?php echo $item['attach'];?>" />
 								</a> 
 							</div>
@@ -51,7 +51,7 @@
 							<div class="info">
 								<div class="article-desc-brief">
 									<?php echo getsubstrutf8(t($item['news'][message]),0,150);?>...<a
-										href="<?php echo SITE_URL;?><?php echo ikurl('article','show',array('id'=>$item['news'][nid]))?>">（更多）</a>
+										href="<?php echo SITE_URL;?><?php echo U('article','show',array('id'=>$item['news'][nid]))?>">（更多）</a>
 								</div>
 							</div>
 							<span class="time"> <?php echo date('Y-m-d H:i:s',$item['dateline'])?></span> 

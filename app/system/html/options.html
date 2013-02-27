@@ -1,9 +1,9 @@
 {template header}
 
 <!--main-->
-<div class="midder">{template menu}
-<form method="POST" action="index.php?app=system&ac=do&ik=options">
-<h3>基本配置</h3>
+<div class="midder">
+<h2>{$title}</h2>
+<form method="POST" action="index.php?app=system&a=do&ik=options">
 <table cellpadding="0" cellspacing="0">
 
 	<tr>
@@ -53,14 +53,6 @@
 	</tr>
 
 	<tr>
-		<td>是否上传头像 :</td>
-		<td><input type="radio" {if $strOption[isface]==
-			'0'} checked="select" {/if}  name="isface" value="0" />不需要 <input
-			type="radio" {if $strOption[isface]== '1'} checked="select"
-			{/if}  name="isface" value="1" />需要</td>
-	</tr>
-
-	<tr>
 		<td>是否邀请注册 :</td>
 		<td><input type="radio" {if $strOption[isinvite]==
 			'0'} checked="select" {/if}  name="isinvite" value="0" />开放注册 <input
@@ -87,7 +79,7 @@
 	</tr>
 </table>
 
-<h3>缩略图设置</h3>
+<h2>缩略图设置</h2>
 <table cellpadding="0" cellspacing="0">
 
 	<tr>
@@ -102,7 +94,7 @@
 	</tr>
 </table>
 
-<h3>本地路径设置</h3>
+<h2>本地路径设置</h2>
 <table cellpadding="0" cellspacing="0">
 
 	<tr>
@@ -127,7 +119,7 @@
     
 </table>
 
-<div  style="padding-left:200px; padding-top:10px"><input type="submit" value="提 交" class="submit" /></div>
+<div class="page_btn"><input type="submit" value="提 交" class="submit" /></div>
 
 </form>
 </div>

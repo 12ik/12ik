@@ -100,9 +100,9 @@ if($strGroup['isopen']=='1' && $isGroupUser=='0'){
 	
 	//倒序asc
 	if($sc=='asc'){
-		$url = SITE_URL.ikUrl('group','topic',array('id'=>$topicid,'sc'=>$sc,'page'=>''));
+		$url = SITE_URL.U('group','topic',array('id'=>$topicid,'sc'=>$sc,'page'=>''));
 	}else{
-		$url = SITE_URL.ikUrl('group','topic',array('id'=>$topicid,'page'=>''));
+		$url = SITE_URL.U('group','topic',array('id'=>$topicid,'page'=>''));
 	}
 	
 	

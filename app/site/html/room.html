@@ -42,7 +42,7 @@
                 	<!--{if $item[table]=='notes'}-->
                     		<!--{if $item[content]==''}-->
                             <div class="createnew">
-                                记录你的最新动向 <a href="{SITE_URL}{ikUrl('site','notes',array('ik'=>'create','notesid'=>$item[itemid]))}"> &gt; 提笔写日记</a>
+                                记录你的最新动向 <a href="{U('site','notes',array('ik'=>'create','notesid'=>$item[itemid]))}"> &gt; 提笔写日记</a>
                             </div>
                             <!--{else}-->  
                                  
@@ -50,12 +50,12 @@
                                 <div class="item-entry">
                                 
                                     <div class="title">
-                                        <a href="{SITE_URL}{ikUrl('site','notes',array('notesid'=>$item[notesid],'noteid'=>$item[contentid]))}" title="{$item[title]}">{$item[title]}</a>
+                                        <a href="{U('site','notes',array('notesid'=>$item[notesid],'noteid'=>$item[contentid]))}" title="{$item[title]}">{$item[title]}</a>
                                     </div>
                                     <div class="datetime">{php echo date('Y-m-d H:i:s',$item[addtime])}</div>
                                     <div id="note_$item[contentid]_short" class="summary">
                                     	{$item[content]}
-                                    	<a href="{SITE_URL}{ikUrl('site','notes',array('notesid'=>$item[notesid],'noteid'=>$item[contentid]))}#note_{$item[contentid]}_footer">({$item[count_comment]}回应)</a>
+                                    	<a href="{U('site','notes',array('notesid'=>$item[notesid],'noteid'=>$item[contentid]))}#note_{$item[contentid]}_footer">({$item[count_comment]}回应)</a>
                                     </div>
                                     
                                 </div>                               		
@@ -69,9 +69,9 @@
                             <tr><td>话题</td><td>作者</td><td nowrap="nowrap">回应</td><td align="right">更新时间</td></tr>
                             <!--  {loop $item[content] $item}  -->
                             <tr>
-                                <td>{if $item[istop]==1}<img src="/public/images/stick.gif"/>{/if} <a title="{$item[title]}" href="{SITE_URL}{ikUrl('site','forum',array('forumid'=>$item[forumid],'discussid'=>$item[discussid]))}">{$item[title]}</a></td>
+                                <td>{if $item[istop]==1}<img src="/public/images/stick.gif"/>{/if} <a title="{$item[title]}" href="{U('site','forum',array('forumid'=>$item[forumid],'discussid'=>$item[discussid]))}">{$item[title]}</a></td>
                                     {php $struser = aac('user')->getOneUser($item[userid]);}
-                                <td>来自 <a href="{SITE_URL}{ikUrl('hi','',array('id'=>$struser[doname]))}">																 									{$struser[username]}</a>
+                                <td>来自 <a href="{U('hi','',array('id'=>$struser[doname]))}">																 									{$struser[username]}</a>
                                 </td>
                                 <td class="count" nowrap="nowrap">{$item[count_comment]}</td>
                                 <td class="date">{php echo date('Y-m-d H:i:s',$item[addtime])}</td>
@@ -85,7 +85,7 @@
                         <ul class="list-s"> 
                         <!--  {loop $item[content] $item}  -->
                             <li>
-                            <a href="{SITE_URL}{ikUrl('site','photos',array('ik'=>'photo','photosid'=>$item[photosid],'pid'=>$item[photoid]))}" title="" alt=""><img src="{SITE_URL}{php echo ikXimg($item[photourl],'site',100,100,$item[path],1)}"/></a>
+                            <a href="{U('site','photos',array('ik'=>'photo','photosid'=>$item[photosid],'pid'=>$item[photoid]))}" title="" alt=""><img src="{SITE_URL}{php echo ikXimg($item[photourl],'site',100,100,$item[path],1)}"/></a>
                             </li>
 						<!--  {/loop} -->                            
                         </ul> 
@@ -100,7 +100,7 @@
         
         <!--{if $countAchives > 0}-->
         <div id="div_archives" class="mod">
-            <a href="{SITE_URL}{ikUrl('site','archives',array('roomid'=>$roomid))}">&gt; 更多应用</a>
+            <a href="{U('site','archives',array('roomid'=>$roomid))}">&gt; 更多应用</a>
         </div>
         <!--{/if}-->
         
@@ -126,13 +126,13 @@
                 </div>
                 <div class="site-follow">
 					<!--{if $ismyfollow }-->
-            		<span>我喜欢这个小站。</span><span><a id="unlike" href="{SITE_URL}{ikUrl('site','siteac')}" class="lnk-unfollow a_lnk_unlike" title="确实不再关注 {$strSite[sitename]} 吗?">&gt;取消</a></span>
+            		<span>我喜欢这个小站。</span><span><a id="unlike" href="{U('site','siteac')}" class="lnk-unfollow a_lnk_unlike" title="确实不再关注 {$strSite[sitename]} 吗?">&gt;取消</a></span>
             		<input id="followed" value="1" type="hidden">
                     <!--{else}-->  
                         <!--{if $IK_USER[user][userid] > 0}-->  
-                        <a class="lnk-follow a_lnk_like" href="{SITE_URL}{ikUrl('site','siteac')}" id="like">喜欢</a>
+                        <a class="lnk-follow a_lnk_like" href="{U('site','siteac')}" id="like">喜欢</a>
                         <!--{else}-->
-                        <a class="lnk-follow a_show_login" href="{SITE_URL}{ikUrl('site','siteac')}" id="like">喜欢</a>
+                        <a class="lnk-follow a_show_login" href="{U('site','siteac')}" id="like">喜欢</a>
                         <!--{/if}-->
                     <input id="followed" type="hidden" value="0" />
                     <!--{/if}-->
@@ -143,9 +143,9 @@
                 <div class="share" id="share-site">
                     <p>
                     <strong class="title">分享小站</strong>
-                    <span class="shuo" title="豆瓣广播"><a href="#" class="a_lnk_share" rel="http://www.douban.com/recommend/?|douban|{$strSite[sitename]}|推荐{$strSite[sitename]}的爱客小站|{SITE_URL}{ikUrl('site','mine',array('siteid'=>$siteid))}">&nbsp;</a></span>
-                    <span class="sina" title="新浪微博"><a href="#" class="a_lnk_share" rel="http://v.t.sina.com.cn/share/share.php?appkey=|sina|{$strSite[sitename]}|推荐{$strSite[sitename]}的爱客小站|{SITE_URL}{ikUrl('site','mine',array('siteid'=>$siteid))}">&nbsp;</a></span>
-                    <span class="tqq" title="腾讯微博"><a href="#" class="a_lnk_share" rel="http://v.t.qq.com/share/share.php?source=|qzone|{$strSite[sitename]}|推荐{$strSite[sitename]}的爱客小站|{SITE_URL}{ikUrl('site','mine',array('siteid'=>$siteid))}">&nbsp;</a></span>
+                    <span class="shuo" title="豆瓣广播"><a href="#" class="a_lnk_share" rel="http://www.douban.com/recommend/?|douban|{$strSite[sitename]}|推荐{$strSite[sitename]}的爱客小站|{U('site','mine',array('siteid'=>$siteid))}">&nbsp;</a></span>
+                    <span class="sina" title="新浪微博"><a href="#" class="a_lnk_share" rel="http://v.t.sina.com.cn/share/share.php?appkey=|sina|{$strSite[sitename]}|推荐{$strSite[sitename]}的爱客小站|{U('site','mine',array('siteid'=>$siteid))}">&nbsp;</a></span>
+                    <span class="tqq" title="腾讯微博"><a href="#" class="a_lnk_share" rel="http://v.t.qq.com/share/share.php?source=|qzone|{$strSite[sitename]}|推荐{$strSite[sitename]}的爱客小站|{U('site','mine',array('siteid'=>$siteid))}">&nbsp;</a></span>
                     </p>
                     <script>IK('sharetool')</script>
                 </div>                           
@@ -160,7 +160,7 @@
             <h2>
                 <span>喜欢该小站的成员</span>
                 <span class="pl">
-                        ( <a href="{SITE_URL}{ikUrl('site','likers',array('id'=>$strSite[siteid]))}">{$likesiteNum}</a> )
+                        ( <a href="{U('site','likers',array('id'=>$strSite[siteid]))}">{$likesiteNum}</a> )
                 </span>
             </h2>
           </div>
@@ -170,7 +170,7 @@
                     {loop $arrlikeUser $item}
                     <li>
                     <div class="pic">
-                        <a class="nbg" href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[doname]))}" title="{$item[username]}">
+                        <a class="nbg" href="{U('hi','',array('id'=>$item[doname]))}" title="{$item[username]}">
                         <img  alt="{$item[username]}" class="imgg" src="{$item[face_32]}">
                         </a> 
                     </div>
@@ -224,7 +224,7 @@
 <!--//内容-->
 <!--{if $strSite[userid] == $IK_USER[user][userid]}-->
 <script type="text/javascript">
-    var mine_page_url="{SITE_URL}{ikUrl('site','layout',array('ik'=>'update','roomid'=>$roomid))}";
+    var mine_page_url="{U('site','layout',array('ik'=>'update','roomid'=>$roomid))}";
 	var globalsiteid = "{$siteid}", globalroomid = "{$roomid}";
     var aside = false;
    IK('{SITE_URL}public/js/lib/jquery-ui-sortable-dd.js',
@@ -233,8 +233,8 @@
 </script>
 <!--{/if}-->
 <script type="text/javascript">
-var pop_like_form = "{SITE_URL}{ikUrl('site','siteac',array('ik'=>'pop_like_form','siteid'=>$siteid))}";
-var pop_unlike_form = "{SITE_URL}{ikUrl('site','siteac',array('ik'=>'pop_unlike_form','siteid'=>$siteid))}";
+var pop_like_form = "{U('site','siteac',array('ik'=>'pop_like_form','siteid'=>$siteid))}";
+var pop_unlike_form = "{U('site','siteac',array('ik'=>'pop_unlike_form','siteid'=>$siteid))}";
 IK('room-action');
 </script>
 

@@ -8,4 +8,5 @@ return array (
   'article' => '文章',
   'tribe' => '部落',
   'beita' => '贝塔城',
+  'feed' => '动态',
 );

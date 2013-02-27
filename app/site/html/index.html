@@ -12,11 +12,11 @@
 
         <div class="item-title site-title">
             
-            <a target="_blank" href="{SITE_URL}{ikUrl('site','mine',array('siteid'=>$item[siteid]))}" class="icon">
+            <a target="_blank" href="{U('site','mine',array('siteid'=>$item[siteid]))}" class="icon">
                 <img width="32" height="32" src="{$item[icon_48]}">
             </a>
             <div class="info">
-                <a target="_blank" href="{SITE_URL}{ikUrl('site','mine',array('siteid'=>$item[siteid]))}">{$item[sitename]}</a>
+                <a target="_blank" href="{U('site','mine',array('siteid'=>$item[siteid]))}">{$item[sitename]}</a>
             </div>
         </div>
    		{loop $item[notes] $itemnotes}
@@ -24,11 +24,11 @@
             <div class="title">
             	<span style="float:right;color:#B9B9B9">{php echo date('m-d H:i:s',$itemnotes[addtime])}</span>
                 <span class="item-type">[日记]</span>
-                <a href="{SITE_URL}{ikUrl('site','notes',array('notesid'=>$itemnotes[notesid],'noteid'=>$itemnotes[contentid]))}" target="_blank">{$itemnotes[title]}</a>
+                <a href="{U('site','notes',array('notesid'=>$itemnotes[notesid],'noteid'=>$itemnotes[contentid]))}" target="_blank">{$itemnotes[title]}</a>
             </div>
             <div class="content">
             	{if $itemnotes[photo]}
-                    <a href="{SITE_URL}{ikUrl('site','notes',array('notesid'=>$itemnotes[notesid],'noteid'=>$itemnotes[contentid]))}" class="note-image" target="_blank">
+                    <a href="{U('site','notes',array('notesid'=>$itemnotes[notesid],'noteid'=>$itemnotes[contentid]))}" class="note-image" target="_blank">
                         <img width="70" src="{$itemnotes[photo][photo_140]}">
                     </a>
                  {/if}   
@@ -48,7 +48,7 @@
         
         <div class="footer">
             <span>这里看上去很冷清？尝试喜欢更多小站来发现感兴趣的内容吧</span>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="{SITE_URL}{ikUrl('site','explore',array('ik'=>'site'))}">发现更多小站</a>
+            <a href="{U('site','explore',array('ik'=>'site'))}">发现更多小站</a>
         </div>
    
     </div>
@@ -61,13 +61,13 @@
         我喜欢的小站
             &nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·
             <span class="pl">&nbsp;(
-                     <a href="{SITE_URL}{ikUrl('site','people',array('ik'=>'minisite'))}">全部</a>
+                     <a href="{U('site','people',array('ik'=>'minisite'))}">全部</a>
                 ) </span>
     </h2>
 
     <div class="content">
             {loop $strMylikeSite $item}
-            <a class="show-title" title="{$item[sitename]}" href="{SITE_URL}{ikUrl('site','mine',array('siteid'=>$item[siteid]))}"><img width="38" height="38" alt="{$item[sitename]}" src="{$item[icon_48]}"></a>
+            <a class="show-title" title="{$item[sitename]}" href="{U('site','mine',array('siteid'=>$item[siteid]))}"><img width="38" height="38" alt="{$item[sitename]}" src="{$item[icon_48]}"></a>
             {/loop}
                
     </div>
@@ -82,7 +82,7 @@
     <div class="content">
               
             {loop $strMysite $item}
-            <a class="show-title" title="{$item[sitename]}" href="{SITE_URL}{ikUrl('site','mine',array('siteid'=>$item[siteid]))}"><img width="38" height="38" alt="{$item[sitename]}" src="{$item[icon_48]}"></a>
+            <a class="show-title" title="{$item[sitename]}" href="{U('site','mine',array('siteid'=>$item[siteid]))}"><img width="38" height="38" alt="{$item[sitename]}" src="{$item[icon_48]}"></a>
             {/loop}              
                
     </div>
@@ -90,8 +90,8 @@
 
             
             
-            <p class="pl2">&gt; <a href="{SITE_URL}{ikUrl('site','explore',array('ik'=>'site'))}">发现更多小站</a></p>
-            <p class="pl2">&gt; <a href="{SITE_URL}{ikUrl('site','new_site')}">申请创建小站</a></p>
+            <p class="pl2">&gt; <a href="{U('site','explore',array('ik'=>'site'))}">发现更多小站</a></p>
+            <p class="pl2">&gt; <a href="{U('site','new_site')}">申请创建小站</a></p>
            
     </div>
     

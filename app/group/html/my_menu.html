@@ -2,11 +2,11 @@
                 
                     <div class="usercard">
                       <div class="pic">
-                            <a href="{SITE_URL}{ikUrl('hi','',array('id'=>$strUser[doname]))}"><img alt="{$strUser[username]}" src="{$strUser[face]}"></a>
+                            <a href="{U('hi','',array('id'=>$strUser[doname]))}"><img alt="{$strUser[username]}" src="{$strUser[face]}"></a>
                       </div>
                         <div class="info">
                             <div class="name">
-                                <a href="{SITE_URL}{ikUrl('hi','',array('id'=>$strUser[doname]))}">{$strUser[username]}</a>
+                                <a href="{U('hi','',array('id'=>$strUser[doname]))}">{$strUser[username]}</a>
                             </div>
                             <!--{if $strArea}-->
                             {$strArea[one][areaname]} 
@@ -21,11 +21,11 @@
                       
                     <div class="group-nav">
                         <ul>
-                            <li {if $ac=='my_group_topics'}class="on"{/if}><a href="{SITE_URL}{ikUrl('group','my_group_topics')}">我的小组话题</a></li>
-							<li {if $ac=='my_topics'}class="on"{/if}><a href="{SITE_URL}{ikUrl('group','my_topics')}">我发起的话题</a></li>
-                            <li {if $ac=='my_replied_topics'}class="on"{/if}><a href="{SITE_URL}{ikUrl('group','my_replied_topics')}">我回应的话题</a></li>
-                            <li {if $ac=='my_collect_topics'}class="on"{/if}><a href="{SITE_URL}{ikUrl('group','my_collect_topics')}">我收藏的话题</a></li>
-                            <li {if $ac=='mine'}class="on"{/if}><a href="{SITE_URL}{ikUrl('group','mine')}">我管理/加入的小组</a></li>
+                            <li {if $a=='my_group_topics'}class="on"{/if}><a href="{U('group','my_group_topics')}">我的小组话题</a></li>
+							<li {if $a=='my_topics'}class="on"{/if}><a href="{U('group','my_topics')}">我发起的话题</a></li>
+                            <li {if $a=='my_replied_topics'}class="on"{/if}><a href="{U('group','my_replied_topics')}">我回应的话题</a></li>
+                            <li {if $a=='my_collect_topics'}class="on"{/if}><a href="{U('group','my_collect_topics')}">我收藏的话题</a></li>
+                            <li {if $a=='mine'}class="on"{/if}><a href="{U('group','mine')}">我管理/加入的小组</a></li>
                         </ul>
                     </div>
                     
@@ -34,7 +34,7 @@
                 <div class="mod">
                    <!--{if $IK_APP[options][iscreate]==0 || $IK_USER[user][isadmin]==1}-->
                     <div class="create-group">
-                        <a href="{SITE_URL}{ikUrl('group','create')}"><i>+</i>申请创建小组</a>
+                        <a href="{U('group','create')}"><i>+</i>申请创建小组</a>
                     </div>
                    <!--{/if}--> 
                 </div>  

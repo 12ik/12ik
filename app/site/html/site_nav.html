@@ -3,11 +3,11 @@
             <a class="logo" href="{SITE_URL}" title="{$IK_SITE[base][site_title]}">{$IK_SITE[base][site_title]}</a>
             <div class="top-nav-info">
                 <!--{if $IK_USER[user] == ''}-->
-				<a href="{SITE_URL}{ikUrl('user','login')}">登录</a> <a href="{SITE_URL}{ikUrl('user','register')}">注册</a>       
+				<a href="{U('user','login')}">登录</a> <a href="{U('user','register')}">注册</a>       
                 <!--{else}-->
-                <a id="newmsg" href="{SITE_URL}{ikUrl('message','ikmail',array(ik=>inbox))}">新消息</em></a>
-                <a href="{SITE_URL}{ikUrl('user','set',array(ik=>base))}" target="_blank">{$IK_USER[user][username]}的帐号</a>
-                <a href="{SITE_URL}{ikUrl('user','login',array(ik=>out))}">退出</a>
+                <a id="newmsg" href="{U('message','ikmail',array(ik=>inbox))}">新消息</em></a>
+                <a href="{U('user','set',array(ik=>base))}" target="_blank">{$IK_USER[user][username]}的帐号</a>
+                <a href="{U('user','login',array(ik=>out))}">退出</a>
                 <!--{/if}-->                
                 
             </div>
@@ -17,7 +17,7 @@
 <!--sp-logo-->
 <div class="sp-logo">
     <a class="logo" 
-    href="{SITE_URL}{ikUrl('site','mine',array('siteid'=>$strSite[siteid]))}" 
+    href="{U('site','mine',array('siteid'=>$strSite[siteid]))}" 
     title="{$strSite[sitename]}">
     <img width="48" height="48" style="background:url({$strSite[icon_48]}) no-repeat 0 0;" 
     src="{SITE_URL}public/images/blank.gif" alt="{$strSite[sitename]}">{$strSite[sitename]}</a>
@@ -27,14 +27,14 @@
 <ul>                    
 <!--{loop $strNavs $item}-->
 <li {if $item[roomid] == $roomid} class="on" {/if}>
-    <a hidefocus="true" href="{SITE_URL}{ikUrl('site','room',array('siteid'=>$strSite[siteid],'roomid'=>$item[roomid]))}" roomid="$item[roomid]">
+    <a hidefocus="true" href="{U('site','room',array('siteid'=>$strSite[siteid],'roomid'=>$item[roomid]))}" roomid="$item[roomid]">
          <span>{$item[name]}</span>{if $item[roomid] == $roomid && $strSite[userid] == $IK_USER[user][userid] }<em title="房间设置">房间设置</em> {/if}
     </a>
 </li>
 <!--{/loop}-->
 <!--{if $strSite[userid] == $IK_USER[user][userid]}-->
 <li class="opt" id="room-admin">
-	<a href="{SITE_URL}{ikUrl('site','admins',array('siteid'=>$strSite[siteid]))}" id="admin-icon" title="管理小站">管理小站</a>
+	<a href="{U('site','admins',array('siteid'=>$strSite[siteid]))}" id="admin-icon" title="管理小站">管理小站</a>
     <div class="user-guide" style="display:none">
         <em></em>
         <h1>小站设置</h1>

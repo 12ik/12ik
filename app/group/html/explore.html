@@ -8,13 +8,13 @@
         	<!--{loop $exploreGroup $item}-->
             <div class="result">
                 <div class="pic">
-                <a title="{$item[groupname]}" href="{SITE_URL}{ikUrl('group','show',array('id'=>$item[groupid]))}" class="nbg">
+                <a title="{$item[groupname]}" href="{U('group','show',array('id'=>$item[groupid]))}" class="nbg">
                 	<img src="{$item[icon_48]}" alt="{$item[groupname]}" width="48" height="48">
                 </a>
                 </div>
                 <div class="content">
                     <div class="title">
-                        <h3><a href="{SITE_URL}{ikUrl('group','show',array('id'=>$item[groupid]))}">{php echo getsubstrutf8(t($item[groupname]),0,14)}</a></h3>
+                        <h3><a href="{U('group','show',array('id'=>$item[groupid]))}">{php echo getsubstrutf8(t($item[groupname]),0,14)}</a></h3>
                     </div>
                     <div class="info">{$item[count_user]} 个成员 在此聚集 </div>
                     <div><p>{$item[groupdesc]}</p></div>

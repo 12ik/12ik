@@ -16,7 +16,7 @@
     <div class="main"> 
          
         <div class="content-nav">
-        <a href="{SITE_URL}{ikUrl('site','photos',array('ik'=>'list','photosid'=>$photosid))}">&gt; 返回{$strPhotos[title]}</a>
+        <a href="{U('site','photos',array('ik'=>'list','photosid'=>$photosid))}">&gt; 返回{$strPhotos[title]}</a>
         </div>
         
         <h1>{$title}</h1>
@@ -25,16 +25,16 @@
             	
 
 <div class="bd">
-	<form method="post" name="album_info" action="{SITE_URL}{ikUrl('site','photos',array('ik'=>'addinfo','photosid'=>$photosid))}">
+	<form method="post" name="album_info" action="{U('site','photos',array('ik'=>'addinfo','photosid'=>$photosid))}">
 	<div class="photo-complete">
      	{loop $arrPhotos $item}
         <div class="photo-item">
             <div class="cover">
-                <a href="{SITE_URL}{ikUrl('site','photos',array('ik'=>'photo','photosid'=>$photosid,'pid'=>$item[photoid]))}"><img src="{SITE_URL}{php echo ikXimg($item[photourl],'site',100,100,$item[path])}"/></a>
+                <a href="{U('site','photos',array('ik'=>'photo','photosid'=>$photosid,'pid'=>$item[photoid]))}"><img src="{SITE_URL}{php echo ikXimg($item[photourl],'site',100,100,$item[path])}"/></a>
             </div>
             <div class="intro">
                 <textarea maxlength="128" name="desc_{$item[photoid]}">{$item[photodesc]}</textarea>
-                <p><a  title="删除这张照片" rel="nofollow" href="{SITE_URL}{ikUrl('site','photos',array('ik'=>'deletepic','photosid'=>$photosid,'id'=>$item[photoid]))}">删除照片</a></p>
+                <p><a  title="删除这张照片" rel="nofollow" href="{U('site','photos',array('ik'=>'deletepic','photosid'=>$photosid,'id'=>$item[photoid]))}">删除照片</a></p>
             </div>
         </div>
         {/loop}

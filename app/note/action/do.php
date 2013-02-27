@@ -56,7 +56,7 @@ switch($ik){
 		//处理标签
 		aac('tag')->addTag('note','noteid',$noteid, trim($_POST['tag']) );
 		
-		header("Location: ".SITE_URL.ikUrl('note','show',array('noteid'=>$noteid)));
+		header("Location: ".SITE_URL.U('note','show',array('noteid'=>$noteid)));
 	
 		break;
 		
@@ -71,7 +71,7 @@ switch($ik){
 			
 			//删除帖子
 			$new['note']->delNote($noteid);
-			header("Location: ".SITE_URL.ikUrl('note','index',array('ik'=>'user','userid'=>$userid)));
+			header("Location: ".SITE_URL.U('note','index',array('ik'=>'user','userid'=>$userid)));
 			
 		}else{
 			ikNotice('没有日志可以删除，别瞎搞！');

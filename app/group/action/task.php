@@ -43,7 +43,7 @@ switch($ik){
 		$strReply = $db->once_fetch_assoc("select count(*) as cr from ".dbprefix."group_topics_comments where userid='$userid' and `addtime`> '$starttime'");
 		
 		if($strUser['face']=='' || $strUser['isverify']==0 || $strTopic['ct'] == 0 || $strReply['cr']==0){
-			echo '<div class="notify-mod"><a href="'.SITE_URL.ikUrl('group','task').'">亲，你有新任务啦！快去看看吧！</a></div>';
+			echo '<div class="notify-mod"><a href="'.SITE_URL.U('group','task').'">亲，你有新任务啦！快去看看吧！</a></div>';
 		}
 		
 		break;

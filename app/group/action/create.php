@@ -106,7 +106,7 @@ switch($ik){
 			//更新
 			$db->query("update ".dbprefix."group set `count_user` = '1' where groupid='".$groupid."'");
 
-			header("Location: ".SITE_URL.ikUrl('group','show',array('id'=>$groupid)));
+			header("Location: ".SITE_URL.U('group','show',array('id'=>$groupid)));
 		}
 		break;
 	

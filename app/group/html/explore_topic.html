@@ -10,12 +10,12 @@
 		<li>
 		<div class="content">
 		<div class="title">
-		<a href="{SITE_URL}{ikUrl('group','topic',array('id'=>$item[topicid]))}">{$item[title]}</a>
+		<a href="{U('group','topic',array('id'=>$item[topicid]))}">{$item[title]}</a>
 		</div>
 	
 		<p>{php echo getsubstrutf8(t($item['content']),0,100)}</p>
-		<div class="from"><span class="reply-num"><a href="{SITE_URL}{ikUrl('group','topic',array('id'=>$item[topicid]))}#comment">{$item[count_comment]} 回应</a></span> <span class="fav-num"><a href="{SITE_URL}{ikUrl('group','topic',array('id'=>$item[topicid]))}#like">{$item[count_collect]} 喜欢</a></span>
-		<div class="from-group">来自: <span class="group-name"><a href="{SITE_URL}{ikUrl('group','show',array('id'=>$item[groupid]))}">{$item[group][groupname]}</a> 小组</span></div>
+		<div class="from"><span class="reply-num"><a href="{U('group','topic',array('id'=>$item[topicid]))}#comment">{$item[count_comment]} 回应</a></span> <span class="fav-num"><a href="{U('group','topic',array('id'=>$item[topicid]))}#like">{$item[count_collect]} 喜欢</a></span>
+		<div class="from-group">来自: <span class="group-name"><a href="{U('group','show',array('id'=>$item[groupid]))}">{$item[group][groupname]}</a> 小组</span></div>
 		</div>
 		</div>
 		</li>

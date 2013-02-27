@@ -8,7 +8,7 @@
 				</div>
 				<ul class="list categories-list">
 					<!--         {loop $arrCate  $item} -->
-					<li><a href="{SITE_URL}{ikUrl('article','list',array('cateid'=>$item[catid]))}">{$item[name]}</a></li>
+					<li><a href="{U('article','list',array('cateid'=>$item[catid]))}">{$item[name]}</a></li>
 					<!--         {/loop}   -->
 				</ul>
 			</section>
@@ -19,7 +19,7 @@
 				<div class="bd">
 					<p>个人作者可以在爱客上直接发布作品。 内容领域不限，唯一要求是保证质量优秀。 发表后，作者可直接从中获得分成。</p>
 					<p class="entrance">
-						<a href="{SITE_URL}{ikUrl('article','do',array('ik'=>'post'))}" class="btn btn-large">去投稿<i class="arrow-right"></i></a>
+						<a href="{U('article','do',array('ik'=>'post'))}" class="btn btn-large">去投稿<i class="arrow-right"></i></a>
 					</p>
 				</div>
 			</section>
@@ -35,7 +35,7 @@
 						<!-- {loop $arrArticle $item} -->
 						<li class="item" id="article-407582">
 							<div class="title">
-								<a href="{SITE_URL}{ikUrl('article','show',array('id'=>$item[news][nid]))}">{$item[subject]} 
+								<a href="{U('article','show',array('id'=>$item[news][nid]))}">{$item[subject]} 
                                 {if $item[attach]}
                                 [图文]
                                 {/if}
@@ -43,7 +43,7 @@
 							</div>
                             {if $item[attach]} 
 							<div class="cover">
-                                <a class="pic" href="{SITE_URL}{ikUrl('article','show',array('id'=>$item[news][nid]))}">
+                                <a class="pic" href="{U('article','show',array('id'=>$item[news][nid]))}">
 									<img src="{$item[attach]}" />
 								</a> 
 							</div>
@@ -51,7 +51,7 @@
 							<div class="info">
 								<div class="article-desc-brief">
 									{php echo getsubstrutf8(t($item[news][message]),0,150);}...<a
-										href="{SITE_URL}{ikUrl('article','show',array('id'=>$item[news][nid]))}">（更多）</a>
+										href="{U('article','show',array('id'=>$item[news][nid]))}">（更多）</a>
 								</div>
 							</div>
 							<span class="time"> {php echo date('Y-m-d H:i:s',$item[dateline])}</span> 

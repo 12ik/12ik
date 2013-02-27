@@ -142,7 +142,7 @@ function removePhoto(obj, seq_id){
     var data = "seq_id=" + seq_id + "&ck="+ck;
     $.ajax({
         type:       "post",
-        url:        "{SITE_URL}{ikUrl('group','add',array('ik'=>'remove_photo', 'topic_id'=>{$topic_id}))}",
+        url:        "{U('group','add',array('ik'=>'remove_photo', 'topic_id'=>{$topic_id}))}",
         dataType:   "json",
         data:       data,
         success:    function(data, status){
@@ -192,7 +192,7 @@ function addRemoteVideo(frm, o){
 				$('.pop_win').find('.confirmbtn').attr('disabled','disabled');
 	 			$.ajax({
                     type: 'post',
-                    url: "{SITE_URL}{ikUrl('group','add',array('ik'=>'add_video'))}",
+                    url: "{U('group','add',array('ik'=>'add_video'))}",
                     data: {
 						topic_id: nid,
                         url: encodeURIComponent(vurl)  //编码传送
@@ -233,7 +233,7 @@ function removeVideo(obj, seq_id){
     var data = "seq_id=" + seq_id + "&ck="+ck;
     $.ajax({
         type:       "post",
-        url:        "{SITE_URL}{ikUrl('group','add',array('ik'=>'remove_video', 'topic_id'=>{$topic_id}))}",
+        url:        "{U('group','add',array('ik'=>'remove_video', 'topic_id'=>{$topic_id}))}",
         dataType:   "json",
         data:       data,
         success:    function(data, status){

@@ -9,14 +9,14 @@
 	   
 	       <!--{loop $arrNote $key $item}-->
         <dl>
-            <dt><a href="{SITE_URL}{ikUrl('note','show',array('noteid'=>$item[noteid]))}" title="{$item[title]}">{$item[title]}</a><span class="open"><a href="javascript:;">开关</a></span></dt>
-            <dd class="addtime"><a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[user][doname]))}">{$item[user][username]}</a> 发表于 {php echo date('Y-m-d H:i:s',$item[addtime])}</dd>
+            <dt><a href="{U('note','show',array('noteid'=>$item[noteid]))}" title="{$item[title]}">{$item[title]}</a><span class="open"><a href="javascript:;">开关</a></span></dt>
+            <dd class="addtime"><a href="{U('hi','',array('id'=>$item[user][doname]))}">{$item[user][username]}</a> 发表于 {php echo date('Y-m-d H:i:s',$item[addtime])}</dd>
             <dd class="note_des">{$item[content]}</dd>
             
             <dd class="action">
-             {$item[count_view]} 人浏览  &nbsp;&nbsp;<a href="{SITE_URL}{ikUrl('note','show',array('noteid'=>$item[noteid]))}#comments" title="回应">{$item[count_comment]} 条回应</a>
+             {$item[count_view]} 人浏览  &nbsp;&nbsp;<a href="{U('note','show',array('noteid'=>$item[noteid]))}#comments" title="回应">{$item[count_comment]} 条回应</a>
              <!--{if $item[userid] == $IK_USER[user][userid]}-->
-            &gt; <a href="{SITE_URL}{ikUrl('note','do',array('ik'=>'edit', 'noteid'=>$item[noteid]))}" title="">修改</a> &gt; <a href="{SITE_URL}{ikUrl('note','do',array('ik'=>'del', 'noteid'=>$item[noteid]))}" title="">删除</a>
+            &gt; <a href="{U('note','do',array('ik'=>'edit', 'noteid'=>$item[noteid]))}" title="">修改</a> &gt; <a href="{U('note','do',array('ik'=>'del', 'noteid'=>$item[noteid]))}" title="">删除</a>
             <!--{/if}-->
             </dd>
         </dl>
@@ -30,19 +30,19 @@
 	<div class="cright">
 	
  		    <!--{if $userid == $IK_USER[user][userid] }-->
-            <p class="pl2">&gt; <a href="{SITE_URL}{ikUrl('note','add')}">写 日 志</a></p>
+            <p class="pl2">&gt; <a href="{U('note','add')}">写 日 志</a></p>
             <!--{/if}-->
 	
 			<h2>
 			日志分类
 			&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·
-			<span class="pl">&nbsp;(<a href="{SITE_URL}{ikUrl('note','list',array(userid=>$userid))}">全部</a>) </span>
+			<span class="pl">&nbsp;(<a href="{U('note','list',array(userid=>$userid))}">全部</a>) </span>
 			</h2>
 	
             <div class="cate">
             <ul>
             <!--{loop $arrCate $key $item}-->
-            <li  {if $item[cateid]==$cateid} class="select" {/if}  ><a  href="{SITE_URL}{ikUrl('note','cate',array('ik'=>'list', 'cateid'=>$item[cateid]))}">{$item[catename]}</a></li>
+            <li  {if $item[cateid]==$cateid} class="select" {/if}  ><a  href="{U('note','cate',array('ik'=>'list', 'cateid'=>$item[cateid]))}">{$item[catename]}</a></li>
             <!--{/loop}-->
             </ul>
             </div>

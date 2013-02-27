@@ -131,7 +131,7 @@ switch($ik){
 			
 		
 
-			header("Location: ".SITE_URL.ikUrl('group','topic',array('id'=>$topicid)));
+			header("Location: ".SITE_URL.U('group','topic',array('id'=>$topicid)));
 			
 		}else{
 			header("Location: ".SITE_URL);

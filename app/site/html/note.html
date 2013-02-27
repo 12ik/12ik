@@ -27,7 +27,7 @@
     <div class="main"> 
          
         <div class="content-nav">
-        <a href="{SITE_URL}{ikUrl('site','notes',array('ik'=>'list','notesid'=>$notesid))}">&gt; {$strNotes[title]}</a>
+        <a href="{U('site','notes',array('ik'=>'list','notesid'=>$notesid))}">&gt; {$strNotes[title]}</a>
         </div>        
         <div class="mod">
 
@@ -48,8 +48,8 @@
   <div class="note-ft" style="" id="note_{$strNote[contentid]}_footer">
         <span class="count">&nbsp;{$strNote[count_view]}人阅读</span>
         {if $strNotes[userid]==$userid}
-        <a href="{SITE_URL}{ikUrl('site','notes',array('ik'=>'edit','notesid'=>$notesid,'noteid'=>$noteid))}">&gt; 修改</a>
-        <a title="真的要删除这篇日记吗？" onClick="return confirm('真的要删除这篇日记吗？')" class="a_confirm_link" href="{SITE_URL}{ikUrl('site','notes',array('ik'=>'delnote','notesid'=>$notesid,'noteid'=>$noteid))}">&gt; 删除</a>
+        <a href="{U('site','notes',array('ik'=>'edit','notesid'=>$notesid,'noteid'=>$noteid))}">&gt; 修改</a>
+        <a title="真的要删除这篇日记吗？" onClick="return confirm('真的要删除这篇日记吗？')" class="a_confirm_link" href="{U('site','notes',array('ik'=>'delnote','notesid'=>$notesid,'noteid'=>$noteid))}">&gt; 删除</a>
 		{/if}
   </div>
 </div>
@@ -60,11 +60,11 @@
     <!--{loop $arrComment $item}-->
     <div id="13299013" class="comment-item">
         <div class="pic">
-            <a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[user][doname]))}"><img alt="{$item[user][username]}" src="{$item[user][face]}"></a>
+            <a href="{U('hi','',array('id'=>$item[user][doname]))}"><img alt="{$item[user][username]}" src="{$item[user][face]}"></a>
         </div>
         <div class="content report-comment">
             <div class="author">
-              <a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[user][doname]))}">{$item[user][username]}</a> 
+              <a href="{U('hi','',array('id'=>$item[user][doname]))}">{$item[user][username]}</a> 
               {php echo date('Y-m-d H:i:s',$item[addtime])}
             </div>
             <p>{php echo nl2br($item[content])}</p>
@@ -72,7 +72,7 @@
             <div class="op-lnks">
                 {if $userid>0}
                 	{if $item[user][userid]==$userid || $strNotes[userid]==$userid}
-                <a title="删除{$item[user][username]}的留言?" class="" href="{SITE_URL}{ikUrl('site','notes',array('ik'=>'del_comment','notesid'=>$notesid,'noteid'=>$noteid,'commentid'=>$item['commentid']))}" rel="nofollow" onClick="return confirm('删除{$item[user][username]}的留言?')">删除</a>
+                <a title="删除{$item[user][username]}的留言?" class="" href="{U('site','notes',array('ik'=>'del_comment','notesid'=>$notesid,'noteid'=>$noteid,'commentid'=>$item['commentid']))}" rel="nofollow" onClick="return confirm('删除{$item[user][username]}的留言?')">删除</a>
                 	{/if}
                 {/if}
             	{if $userid>0}<div class="comment-report"><a href="#" rel="nofollow">举报</a></div>{/if}
@@ -91,7 +91,7 @@
     {if $mycommentTime && $userid>0}    
     <h2>你的回应 &nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;· </h2>
     <div id="add_comment" class="comment-form txd">
-      <form action="{SITE_URL}{ikUrl('site','notes',array('ik'=>'add_comment','notesid'=>$notesid,'noteid'=>$noteid))}" method="post" name="comment_form">
+      <form action="{U('site','notes',array('ik'=>'add_comment','notesid'=>$notesid,'noteid'=>$noteid))}" method="post" name="comment_form">
         <div style="display:none;">
           <input type="hidden" value="-PMQ" name="ck">
         </div>
@@ -108,7 +108,7 @@
     </div>
     {elseif $userid>0}
     <div class="comment-lnk">&gt;&nbsp;
-    <a href="{SITE_URL}{ikUrl('site','notes',array('notesid'=>$notesid,'noteid'=>$noteid,'goon'=>'1'))}#add_comment" rel="nofollow">继续发言</a>
+    <a href="{U('site','notes',array('notesid'=>$notesid,'noteid'=>$noteid,'goon'=>'1'))}#add_comment" rel="nofollow">继续发言</a>
     </div>    
     {/if}
   </div>

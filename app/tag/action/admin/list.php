@@ -4,7 +4,7 @@ defined('IN_IK') or die('Access Denied.');
 //获取小组全部内容列表
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
-$url = 'index.php?app=tag&ac=admin&mg=list&page=';
+$url = 'index.php?app=tag&a=admin&mg=list&page=';
 
 $sLimit = $page*10-10;
 

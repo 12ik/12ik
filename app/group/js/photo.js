@@ -2,7 +2,7 @@ $(function(){
 
 var $container = $('#container');
 
-$.get(siteUrl+'index.php?app=group&ac=photo&ik=ajax', {  },
+$.get(siteUrl+'index.php?app=group&a=photo&ik=ajax', {  },
 function(data){
 	
 	$container.html(data);

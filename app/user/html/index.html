@@ -28,7 +28,7 @@
 <!--{loop $arrMyTopic $key $item}-->
 <tr>
 <td><img src="{SITE_URL}public/images/topic.gif" align="absmiddle"  title="[帖子]" alt="[帖子]" />
-<a href="{SITE_URL}{ikUrl('group','topic',array('id'=>$item[topicid]))}">{$item[title]}</a>&nbsp;&nbsp;</td>
+<a href="{U('group','topic',array('id'=>$item[topicid]))}">{$item[title]}</a>&nbsp;&nbsp;</td>
 <td>{$item[count_comment]}</td>
 <td style="width:120px;text-align:right;color:#999999;">{php echo date('Y-m-d H:i',$item[addtime])}</td>
 </tr>
@@ -61,7 +61,7 @@
 <!--{loop $arrMyComment $key $item}-->
 <tr>
 <td><img src="{SITE_URL}public/images/topic.gif" align="absmiddle"  title="[帖子]" alt="[帖子]" />
-<a href="{SITE_URL}{ikUrl('group','topic',array('id'=>$item[topicid]))}">{$item[title]}</a>&nbsp;&nbsp;</td>
+<a href="{U('group','topic',array('id'=>$item[topicid]))}">{$item[title]}</a>&nbsp;&nbsp;</td>
 <td>{$item[count_comment]}</td>
 <td style="width:120px;text-align:right;color:#999999;">{php echo date('Y-m-d H:i',$item[addtime])}</td>
 </tr>
@@ -94,7 +94,7 @@
 <!--{loop $arrMyCollect $key $item}-->
 <tr>
 <td><img src="{SITE_URL}public/images/topic.gif" align="absmiddle"  title="[帖子]" alt="[帖子]" />
-<a href="{SITE_URL}{ikUrl('group','topic',array('id'=>$item[topicid]))}">{$item[title]}</a>&nbsp;&nbsp;</td>
+<a href="{U('group','topic',array('id'=>$item[topicid]))}">{$item[title]}</a>&nbsp;&nbsp;</td>
 <td >{$item[count_comment]}</td>
 <td style="width:120px;text-align:right;color:#999999;">{php echo date('Y-m-d H:i',$item[addtime])}</td>
 </tr>
@@ -124,7 +124,7 @@
 <img alt="" class="userface" src="{$strUser[face_120]}">
 
 <div class="user-info">
-常居：&nbsp;{if $arrArea[two]}<a href="{SITE_URL}{ikUrl('location','area',array(areaid=>$arrArea[two][areaid]))}">{$arrArea[two][areaname]}</a>{/if}
+常居：&nbsp;{if $arrArea[two]}<a href="{U('location','area',array(areaid=>$arrArea[two][areaid]))}">{$arrArea[two][areaname]}</a>{/if}
 <br />
 <div class="pl">UID:{$strUser[userid]} <br> {php echo date('Y-m-d',$strUser[addtime])} 加入</div>
 <div class="pl">级别:{$strUser['rolename']}</div>
@@ -137,13 +137,13 @@
 <span class="user-cs">已关注</span>
 <span class="user-rs">
 
-<a href="{SITE_URL}index.php?app=user&ac=do&ik=user_nofollow&userid_follow={$strUser[userid]}">取消关注</a></span>
+<a href="{SITE_URL}index.php?app=user&a=do&ik=user_nofollow&userid_follow={$strUser[userid]}">取消关注</a></span>
 
 </div>
 <!--{else}-->
-<a class="a-btn-add mr10 add_contact" href="{SITE_URL}index.php?app=user&ac=do&ik=user_follow&userid_follow={$strUser[userid]}">关注此人</a>
+<a class="a-btn-add mr10 add_contact" href="{SITE_URL}index.php?app=user&a=do&ik=user_follow&userid_follow={$strUser[userid]}">关注此人</a>
 <!--{/if}-->
-<a href="{SITE_URL}{ikUrl('user','message',array(ik=>message_add,touserid=>$strUser[userid]))}" rel="nofollow" class="a-btn mr5">发消息</a>
+<a href="{U('user','message',array(ik=>message_add,touserid=>$strUser[userid]))}" rel="nofollow" class="a-btn mr5">发消息</a>
 <div id="divac"></div>
 </div>
 <!--{/if}-->
@@ -159,7 +159,7 @@
 <!--{if $strUser[about]}-->关于：{$strUser[about]}<br /><!--{/if}-->
 <!--{if $strUser[signed]}-->签名：{$strUser[signed]}<br /><!--{/if}-->
 
-<!--{if $strUser[userid] == $IK_USER[user][userid]}-->[<a href="{SITE_URL}{ikUrl('user','set',array(ik=>base))}">修改基本信息</a>]<!--{/if}-->
+<!--{if $strUser[userid] == $IK_USER[user][userid]}-->[<a href="{U('user','set',array(ik=>base))}">修改基本信息</a>]<!--{/if}-->
 </span>
 </div>
 
@@ -183,19 +183,19 @@
 <!--{/if}-->
 &nbsp;·&nbsp;·&nbsp;·
 <span class="pl">&nbsp;(
-<a href="{SITE_URL}{ikUrl('user','follow',array(userid=>$strUser[userid]))}">全部{$strUser[count_follow]}</a>
+<a href="{U('user','follow',array(userid=>$strUser[userid]))}">全部{$strUser[count_follow]}</a>
 ) </span>
 </h2>
 
 <!--{loop $arrFollowUser $key $item}-->
-<dl class="obu"><dt><a class="nbg" href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[doname]))}"><img alt="{$item[username]}" class="m_sub_img" src="{$item[face]}"></a></dt>
-<dd><a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[doname]))}">{$item[username]}</a></dd>
+<dl class="obu"><dt><a class="nbg" href="{U('hi','',array('id'=>$item[doname]))}"><img alt="{$item[username]}" class="m_sub_img" src="{$item[face]}"></a></dt>
+<dd><a href="{U('hi','',array('id'=>$item[doname]))}">{$item[username]}</a></dd>
 </dl>
 <!--{/loop}-->
 
 <br clear="all">
 
-<a href="{SITE_URL}{ikUrl('user','followed',array(userid=>$strUser[userid]))}">&gt; 被{$strUser[count_followed]}人关注</a>
+<a href="{U('user','followed',array(userid=>$strUser[userid]))}">&gt; 被{$strUser[count_followed]}人关注</a>
 
 </div>
 
@@ -214,8 +214,8 @@
 </h2>
 
 <!--{loop $arrGroup $key $item}-->
-<dl class="ob"><dt><a href="{SITE_URL}{ikUrl('group','show',array('id'=>$item[groupid]))}"><img alt="{$item[groupname]}" class="m_sub_img" src="{$item[icon_48]}"></a></dt>
-<dd><a href="{SITE_URL}{ikUrl('group','show',array('id'=>$item[groupid]))}">{$item[groupname]}</a> <span>({$item[count_user]})</span>
+<dl class="ob"><dt><a href="{U('group','show',array('id'=>$item[groupid]))}"><img alt="{$item[groupname]}" class="m_sub_img" src="{$item[icon_48]}"></a></dt>
+<dd><a href="{U('group','show',array('id'=>$item[groupid]))}">{$item[groupname]}</a> <span>({$item[count_user]})</span>
 </dd></dl>
 <!--{/loop}-->
 
@@ -223,7 +223,7 @@
 
 </div>
 <br/>
-<p class="pl">本页永久链接: <a href="{SITE_URL}{ikUrl('hi','',array('id'=>$strUser[doname]))}">{SITE_URL}{ikUrl('hi','',array('id'=>$strUser[doname]))}</a></p>
+<p class="pl">本页永久链接: <a href="{U('hi','',array('id'=>$strUser[doname]))}">{U('hi','',array('id'=>$strUser[doname]))}</a></p>
 <br>
 <p class="pl">订阅{$strUser[username]}的收藏 <br>
 <span class="feed"><a href="#"> feed: rss 2.0</a></span>

@@ -16,7 +16,7 @@ $(function(){
 		<div class="tags-nav">
             <ul class="tags">
 
-              <li><a class="active" href="{SITE_URL}{ikUrl('site','explore',array('ik'=>'site'))}">全部</a></li>
+              <li><a class="active" href="{U('site','explore',array('ik'=>'site'))}">全部</a></li>
               <li><a href="javascript:;">生活</a></li>
               <li><a href="javascript:;">同城</a></li>
               <li><a href="javascript:;">影视</a></li>
@@ -54,13 +54,13 @@ $(function(){
     			<!--{loop $arrSite $item}-->
                 <li class="site-item">
                 <div class="pic">
-                    <a target="_blank" href="{SITE_URL}{ikUrl('site','mine',array('siteid'=>$item[siteid]))}" title="{$item[sitename]}">
+                    <a target="_blank" href="{U('site','mine',array('siteid'=>$item[siteid]))}" title="{$item[sitename]}">
                         <img width="75" height="75" alt="{$item[sitename]}" src="{$item[icon_75]}">
                     </a>
                 </div>
                 <div class="info">
                   <div class="title">
-                    <a target="_blank" href="{SITE_URL}{ikUrl('site','mine',array('siteid'=>$item[siteid]))}" title="{$item[sitename]}">{$item[sitename]}</a>
+                    <a target="_blank" href="{U('site','mine',array('siteid'=>$item[siteid]))}" title="{$item[sitename]}">{$item[sitename]}</a>
                   </div>
                   <p>{php echo getsubstrutf8(t($item['sitedesc']),0,30);}</p>
                 </div>
@@ -84,12 +84,12 @@ $(function(){
         	{loop $recommendSites $item}
                 <li class="list-item">
                     <div class="pic">
-                        <a href="{SITE_URL}{ikUrl('site','mine',array('siteid'=>$item[siteid]))}" target="_blank" title="{$item[sitename]}">
+                        <a href="{U('site','mine',array('siteid'=>$item[siteid]))}" target="_blank" title="{$item[sitename]}">
                             <img width="50" height="50" alt="{$item[sitename]}" src="{$item[icon_75]}">
                         </a>
                     </div>
                     <div class="info">
-                        <a href="{SITE_URL}{ikUrl('site','mine',array('siteid'=>$item[siteid]))}" target="_blank" title="$item[sitename]">$item[sitename]</a>
+                        <a href="{U('site','mine',array('siteid'=>$item[siteid]))}" target="_blank" title="$item[sitename]">$item[sitename]</a>
                         <p class="like-num">{$item[likenum]}人喜欢</p>
                     </div>
                 </li> 
@@ -100,7 +100,7 @@ $(function(){
         </div>
         
          	<!--{if $IK_USER[user][userid] !='' }-->
-            <p class="pl2">&gt; <a href="{SITE_URL}{ikUrl('site','new_site')}">申请创建小站</a></p>
+            <p class="pl2">&gt; <a href="{U('site','new_site')}">申请创建小站</a></p>
             <!--{/if}-->
         
     </div><!--//end right-->

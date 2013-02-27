@@ -7,10 +7,10 @@
     <div class="s_index">
     
         <div class="s_menu">
-        <a <!--{if $ik==''}-->class="s_select"<!--{/if}--> href="{SITE_URL}{ikUrl('search')}">全部</a> | 
-        <a <!--{if $ik=='group'}-->class="s_select"<!--{/if}--> href="{SITE_URL}{ikUrl('search','index',array(ik=>group))}">小组</a> | 
-        <a <!--{if $ik=='topic'}-->class="s_select"<!--{/if}--> href="{SITE_URL}{ikUrl('search','index',array(ik=>topic))}">帖子</a> | 
-        <a <!--{if $ik=='user'}-->class="s_select"<!--{/if}--> href="{SITE_URL}{ikUrl('search','index',array(ik=>user))}">用户</a>
+        <a <!--{if $ik==''}-->class="s_select"<!--{/if}--> href="{U('search')}">全部</a> | 
+        <a <!--{if $ik=='group'}-->class="s_select"<!--{/if}--> href="{U('search','index',array(ik=>group))}">小组</a> | 
+        <a <!--{if $ik=='topic'}-->class="s_select"<!--{/if}--> href="{U('search','index',array(ik=>topic))}">帖子</a> | 
+        <a <!--{if $ik=='user'}-->class="s_select"<!--{/if}--> href="{U('search','index',array(ik=>user))}">用户</a>
         </div>
     
     <div>

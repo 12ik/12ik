@@ -32,15 +32,15 @@
     <div class="main"> 
          
         <div class="content-nav">
-        <a href="{SITE_URL}{ikUrl('site','forum',array('ik'=>'list','forumid'=>$strdiscuss[forumid]))}">&gt; {$strForum[title]}</a>
+        <a href="{U('site','forum',array('ik'=>'list','forumid'=>$strdiscuss[forumid]))}">&gt; {$strForum[title]}</a>
         </div>   
         <h1>{$strdiscuss[title]}</h1>     
         <div class="mod">
 
             <div class="post">
-              <div class="post-author"> <a href="{SITE_URL}{ikUrl('hi','',array('id'=>$strUser[doname]))}"><img src="{$strUser[face]}" class="pil"></a> </div>
+              <div class="post-author"> <a href="{U('hi','',array('id'=>$strUser[doname]))}"><img src="{$strUser[face]}" class="pil"></a> </div>
               <div class="post-content">
-                <div class="post-info"> <span class="datetime">{php echo date('Y-m-d H:i:s',$strdiscuss[addtime])}</span> <span class="from">来自: <a href="{SITE_URL}{ikUrl('hi','',array('id'=>$strUser[doname]))}">{$strUser[username]}</a>(性格决定命运)</span>
+                <div class="post-info"> <span class="datetime">{php echo date('Y-m-d H:i:s',$strdiscuss[addtime])}</span> <span class="from">来自: <a href="{U('hi','',array('id'=>$strUser[doname]))}">{$strUser[username]}</a>(性格决定命运)</span>
                 </div>
                 <p id="link-report">
                     {php echo nl2br($strdiscuss[content])}
@@ -49,14 +49,14 @@
                 <div class="post-func">
 
                 {if $strdiscuss[userid] == $userid}
-                <a href="{SITE_URL}{ikUrl('site','forum',array('ik'=>'editdiscuss','forumid'=>$forumid,'discussid'=>$discussid))}" rel="nofollow">&gt; 修改&#12288;</a>
-                <a href="{SITE_URL}{ikUrl('site','forum',array('ik'=>'deldiscuss','forumid'=>$forumid,'discussid'=>$discussid))}" rel="nofollow" onClick="return confirm('真的要删除“$strdiscuss[title]”?')" >&gt; 删除&#12288;</a>                
+                <a href="{U('site','forum',array('ik'=>'editdiscuss','forumid'=>$forumid,'discussid'=>$discussid))}" rel="nofollow">&gt; 修改&#12288;</a>
+                <a href="{U('site','forum',array('ik'=>'deldiscuss','forumid'=>$forumid,'discussid'=>$discussid))}" rel="nofollow" onClick="return confirm('真的要删除“$strdiscuss[title]”?')" >&gt; 删除&#12288;</a>                
                 {/if}
                 {if  $strForum[userid] == $userid && $strdiscuss[userid] != $userid}
-                <a href="{SITE_URL}{ikUrl('site','forum',array('ik'=>'deldiscuss','forumid'=>$forumid,'discussid'=>$discussid))}" rel="nofollow" onClick="return confirm('真的要删除"$strdiscuss[title]"?')">&gt; 删除&#12288;</a>
+                <a href="{U('site','forum',array('ik'=>'deldiscuss','forumid'=>$forumid,'discussid'=>$discussid))}" rel="nofollow" onClick="return confirm('真的要删除"$strdiscuss[title]"?')">&gt; 删除&#12288;</a>
                 {/if}
                 {if  $strForum[userid] == $userid}
-                <a href="{SITE_URL}{ikUrl('site','forum',array('ik'=>'istop','forumid'=>$forumid,'discussid'=>$discussid))}" rel="nofollow">&gt; {if $strdiscuss[istop]==0}置顶{else}取消置顶{/if}&#12288;</a>
+                <a href="{U('site','forum',array('ik'=>'istop','forumid'=>$forumid,'discussid'=>$discussid))}" rel="nofollow">&gt; {if $strdiscuss[istop]==0}置顶{else}取消置顶{/if}&#12288;</a>
                 {/if}
 
                 </div>
@@ -70,11 +70,11 @@
     <!--{loop $arrComment $item}-->
     <div id="13299013" class="comment-item">
         <div class="pic">
-            <a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[user][doname]))}"><img alt="{$item[user][username]}" src="{$item[user][face]}"></a>
+            <a href="{U('hi','',array('id'=>$item[user][doname]))}"><img alt="{$item[user][username]}" src="{$item[user][face]}"></a>
         </div>
         <div class="content report-comment">
             <div class="author">
-              <a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[user][doname]))}">{$item[user][username]}</a> 
+              <a href="{U('hi','',array('id'=>$item[user][doname]))}">{$item[user][username]}</a> 
               {php echo date('Y-m-d H:i:s',$item[addtime])}
             </div>
             <p>{php echo nl2br($item[content])}</p>
@@ -82,7 +82,7 @@
             <div class="op-lnks">
                 {if $userid>0}
                 	{if $item[user][userid]==$userid || $strForum[userid]==$userid}
-                <a title="删除{$item[user][username]}的留言?" class="" href="{SITE_URL}{ikUrl('site','forum',array('ik'=>'del_comment','forumid'=>$forumid,'discussid'=>$discussid,'commentid'=>$item['commentid']))}" rel="nofollow" onClick="return confirm('删除{$item[user][username]}的留言?')">删除</a>
+                <a title="删除{$item[user][username]}的留言?" class="" href="{U('site','forum',array('ik'=>'del_comment','forumid'=>$forumid,'discussid'=>$discussid,'commentid'=>$item['commentid']))}" rel="nofollow" onClick="return confirm('删除{$item[user][username]}的留言?')">删除</a>
                 	{/if}
                 {/if}
             	{if $userid>0}<span class="comment-report"><a href="#" rel="nofollow">举报</a></span>{/if}
@@ -101,7 +101,7 @@
     {if $mycommentTime && $userid>0}    
     <h2>你的回应 &nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;· </h2>
     <div id="add_comment" class="comment-form txd">
-      <form action="{SITE_URL}{ikUrl('site','forum',array('ik'=>'add_comment','forumid'=>$forumid,'discussid'=>$discussid))}" method="post" name="comment_form">
+      <form action="{U('site','forum',array('ik'=>'add_comment','forumid'=>$forumid,'discussid'=>$discussid))}" method="post" name="comment_form">
         <div style="display:none;">
           <input type="hidden" value="-PMQ" name="ck">
         </div>
@@ -118,7 +118,7 @@
     </div>
     {elseif $userid>0}
     <div class="comment-lnk">&gt;&nbsp;
-    <a href="{SITE_URL}{ikUrl('site','forum',array('forumid'=>$forumid,'discussid'=>$discussid,'goon'=>'1'))}#add_comment" rel="nofollow">继续发言</a>
+    <a href="{U('site','forum',array('forumid'=>$forumid,'discussid'=>$discussid,'goon'=>'1'))}#add_comment" rel="nofollow">继续发言</a>
     </div>    
     {/if}
   </div>

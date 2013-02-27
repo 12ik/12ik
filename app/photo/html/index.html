@@ -11,9 +11,9 @@
 
 <!--{loop $arrAlbum $key $item}-->
         <div class="box albumlst">
-        <a href="{SITE_URL}{ikUrl('photo','album',array(ik=>photo,albumid=>$item[albumid]))}" class="album_photo"><img class="album" src="<!--{if $item[albumface] == ''}-->{SITE_URL}app/{$app}/skins/{$skin}/photo_album.png<!--{else}-->{SITE_URL}{php echo ikXimg($item[albumface],'photo',170,170,$item[path],'1')}<!--{/if}-->"></a>
+        <a href="{U('photo','album',array(ik=>photo,albumid=>$item[albumid]))}" class="album_photo"><img class="album" src="<!--{if $item[albumface] == ''}-->{SITE_URL}app/{$app}/skins/{$skin}/photo_album.png<!--{else}-->{SITE_URL}{php echo ikXimg($item[albumface],'photo',170,170,$item[path],'1')}<!--{/if}-->"></a>
         <div class="albumlst_r">
-            <div><a href="{SITE_URL}{ikUrl('photo','albumid',array(ik=>photo,albumid=>$item[albumid]))}">{$item[albumname]}</a></div>
+            <div><a href="{U('photo','albumid',array(ik=>photo,albumid=>$item[albumid]))}">{$item[albumname]}</a></div>
         <div class="albumlst_descri">{$item[albumdesc]}</div>
 
         <span class="pl">
@@ -42,10 +42,10 @@
 <!--{loop $arrComment $key $item}-->
 <li class="mbtl">
 <!--{if $item[user][userid] !=$arrComment[$key-1][user][userid]}-->
-<a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[user][doname]))}"><img src="{$item[user][face]}"></a>
+<a href="{U('hi','',array('id'=>$item[user][doname]))}"><img src="{$item[user][face]}"></a>
 <!--{/if}-->
 </li>
-<li class="mbtrdot"><a href="{SITE_URL}{ikUrl('photo','show',array('photoid'=>$item[photoid]))}">$item[user][username] : {$item[content]}</a><span class="pl">  {php echo getTime($item[addtime],time())}</span>
+<li class="mbtrdot"><a href="{U('photo','show',array('photoid'=>$item[photoid]))}">$item[user][username] : {$item[content]}</a><span class="pl">  {php echo getTime($item[addtime],time())}</span>
 <div class="clear"></div>
 </li>
 <!--{/loop}-->

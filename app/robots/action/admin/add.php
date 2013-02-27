@@ -853,7 +853,7 @@ switch ($ik) {
 		
 		$postlisturl = serialize(array('manual'=>$_POST['listurl_manual'], 'auto'=>$_POST['listurl_auto']));
 		$_POST['autotype'] = !empty($_POST['autotype']) && intval($_POST['autotype']) == 2 ? 2 : 1;
-		if(empty($_POST['name'])) qiMsg("采集器名称不能为空",'返回',SITE_URL.'index.php?app=robots&ac=admin&mg=add');
+		if(empty($_POST['name'])) qiMsg("采集器名称不能为空",'返回',SITE_URL.'index.php?app=robots&a=admin&mg=add');
 		$_POST['subjectreplace'] = !empty($_POST['subjectreplace']) ? implode("\n", $_POST['subjectreplace']) : '';
 		$_POST['subjectreplaceto'] = !empty($_POST['subjectreplaceto']) ? implode("\n", $_POST['subjectreplaceto']) : '';
 		$_POST['messagereplace'] = !empty($_POST['messagereplace']) ? implode("\n", $_POST['messagereplace']) : '';
@@ -913,10 +913,10 @@ switch ($ik) {
 		//对于新增的采集器与编辑的采集器的分别处理
 		if(empty($_POST['robotid'])) {
 			$robotid = 0;
-			$setsqlarr['uid'] = $_SESSION ['tsadmin']['userid'];
+			$setsqlarr['uid'] = $_SESSION ['ikadmin']['userid'];
 			$robotid = aac('robots') -> create('robots', $setsqlarr);
 			updaterobot($robotid);	//更新采集器缓存
-			qiMsg("采集机器人成功添加",'返回',SITE_URL.'index.php?app=robots&ac=admin&mg=list');
+			qiMsg("采集机器人成功添加",'返回',SITE_URL.'index.php?app=robots&a=admin&mg=list');
 		} else {
 			//UPDATE
 			$wheresqlarr = array(
@@ -924,7 +924,7 @@ switch ($ik) {
 			);
 			aac('robots') -> update('robots', $wheresqlarr, $setsqlarr);
 			updaterobot($_POST['robotid']);	//更新采集器缓存
-			qiMsg("采集机器人编辑成功",'返回',SITE_URL.'index.php?app=robots&ac=admin&mg=list');
+			qiMsg("采集机器人编辑成功",'返回',SITE_URL.'index.php?app=robots&a=admin&mg=list');
 		}		
 		
 		break;

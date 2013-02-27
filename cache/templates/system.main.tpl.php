@@ -2,12 +2,13 @@
 <script src="public/js/jquery.js" type="text/javascript"></script>
 <script>
 $(document).ready(function(){
-	$.getJSON("http://www.12ik.com/index.php?app=group&ac=notice&callback=?", 
+	/*$.getJSON("http://www.12ik.com/index.php?app=group&a=notice&callback=?", 
 	function(data){
 		$.each(data, function(i,item){
 			$("#admindex_msg table").append("<tr><td width='100'>"+item.time+"</td><td><a href=\""+item.url+"\" target=\"_blank\">"+item.title+"</a></td></tr>");
 		});
-	});   
+	}); 
+	*/  
 });
 </script>
 
@@ -16,7 +17,7 @@ $(document).ready(function(){
 </style>
 
 <div class="midder">
-
+<?php if($message) { ?><p class="message"><?php echo $message;?></p><?php } ?>
 <div class="fbox">
 <h2>目录权限</h2>
 <table>

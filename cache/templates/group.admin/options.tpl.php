@@ -5,7 +5,7 @@
 
 <?php include template("admin/menu");?>
 
-<form method="POST" action="<?php echo SITE_URL;?>index.php?app=group&ac=admin&mg=options&ik=do">
+<form method="POST" action="<?php echo SITE_URL;?>index.php?app=group&a=admin&mg=options&ik=do">
 <table  cellpadding="0" cellspacing="0">
 
 <tr><td width="150">APP名称：</td><td><input style="width:300px;" name="appname" value="<?php echo $strOption['appname'];?>" /></td></tr>

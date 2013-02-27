@@ -92,7 +92,7 @@ switch ($ik) {
 			
 			if($nid>0)
 			{
-				header("Location: ".SITE_URL.ikUrl('article','show',array('id'=>$nid)));
+				header("Location: ".SITE_URL.U('article','show',array('id'=>$nid)));
 			}
 			
 		}			

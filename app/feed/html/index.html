@@ -76,7 +76,7 @@
 
 
 <div class="isay" id="db-isay">
-<form action="{SITE_URL}index.php?app=feed&ac=addfeed&ik=do" method="post" >
+<form action="{SITE_URL}index.php?app=feed&a=addfeed&ik=do" method="post" >
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td><textarea  style="height: 45px; width:600px" class="txt" name="content"></textarea></td>
@@ -97,11 +97,11 @@
 <!--{/if}-->
 <li class="mbtl">
 <!--{if $item[user][userid] !=$arrFeed[$key-1][user][userid]}-->
-<a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[user][doname]))}" ><img title="{$item[user][username]}" alt="{$item[user][username]}" src="{$item[user][face]}"></a>
+<a href="{U('hi','',array('id'=>$item[user][doname]))}" ><img title="{$item[user][username]}" alt="{$item[user][username]}" src="{$item[user][face]}"></a>
 <!--{/if}-->
 </li>
 <li class="mbtr">
-<a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[user][doname]))}">{$item[user][username]}</a> 
+<a href="{U('hi','',array('id'=>$item[user][doname]))}">{$item[user][username]}</a> 
 {$item[content]}
 </li>
 <div class="clear"></div>

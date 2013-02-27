@@ -6,7 +6,7 @@
 <h1 class="user_tit">用户登录</h1>
 
 <div class="user_left">
-<form method="POST" action="{SITE_URL}{ikUrl('user','login',array('ik'=>'do'))}" id="signupform">
+<form method="POST" action="{U('user','login',array('ik'=>'do'))}" id="signupform">
 <table width="100%" border="0" cellspacing="0" cellpadding="0"  class="Tabletext">
 <tr><td class="label">Email：</td><td class="field"><input class="uinput" type="email" name="email" autofocus/></td></tr>
 <tr><td class="label">密码：</td><td class="field"><input class="uinput" type="password" name="pwd" /></td></tr>
@@ -17,7 +17,7 @@
 <input type="hidden" name="jump" value="{$jump}" />
 <input type="hidden" name="cktime" value="2592000">
 <input class="submit" type="submit" value="登录" style="margin-top:8px"/> 
-&nbsp;&nbsp;<a href="{SITE_URL}{ikUrl('user','register')}">还没有帐号？</a> | <a href="{SITE_URL}{ikUrl('user','forgetpwd')}">忘记密码</a>
+&nbsp;&nbsp;<a href="{U('user','register')}">还没有帐号？</a> | <a href="{U('user','forgetpwd')}">忘记密码</a>
 </td>
 </tr>
 </table>

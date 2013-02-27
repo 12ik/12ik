@@ -43,7 +43,7 @@ switch($ik){
 		$strAlbum = $db->once_fetch_assoc("select * from ".dbprefix."photo_album where albumid='$albumid'");
 		
 		$page = isset($_GET['page']) ? $_GET['page'] : '1';
-		$url = SITE_URL."index.php?app=photo&ac=ajax&ik=photo&albumid=".$albumid."&page=";
+		$url = SITE_URL."index.php?app=photo&a=ajax&ik=photo&albumid=".$albumid."&page=";
 		$lstart = $page*6-6;
 		$arrPhoto = $db->fetch_all_assoc("select * from ".dbprefix."photo where albumid='$albumid' order by photoid desc limit $lstart ,6");
 		$photoNum = $db->once_num_rows("select * from ".dbprefix."photo where albumid='$albumid'");
@@ -69,7 +69,7 @@ switch($ik){
 		
 		$albumid = $db->insert_id();
 		
-		header("Location: ".SITE_URL."index.php?app=photo&ac=ajax&ik=flash&albumid=".$albumid);
+		header("Location: ".SITE_URL."index.php?app=photo&a=ajax&ik=flash&albumid=".$albumid);
 		break;
 	
 	//

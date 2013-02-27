@@ -21,7 +21,7 @@ $(document).ready(function()
 		'fileDesc':'jpg,gif,png图片格式',
 		'fileExt':'*.jpg;*.gif;*.png;*bmp;',
 		'onAllComplete' : function(event,data) {
-			window.location = "{SITE_URL}index.php?app=photo&ac=ajax&ik=info&albumid={$albumid}&addtime={$addtime}";
+			window.location = "{SITE_URL}index.php?app=photo&a=ajax&ik=info&albumid={$albumid}&addtime={$addtime}";
 		}
 
 	});
@@ -38,7 +38,7 @@ $(document).ready(function()
     <p>
       <a href="javascript:$('#uploadify').uploadifyUpload()">上传</a>| 
       <a href="javascript:$('#uploadify').uploadifyClearQueue()">取消上传</a>
-	  | <a href="{SITE_URL}index.php?app=photo&ac=ajax&ik=album">返回我的相册</a>
+	  | <a href="{SITE_URL}index.php?app=photo&a=ajax&ik=album">返回我的相册</a>
     </p>
 
 

@@ -8,13 +8,13 @@
 <meta name="Copyright" content="{$IK_SOFT[info][name]}" />
 <meta name="baidu_union_verify" content="f67264028a31c2617ff3b5c78113034e">
 <title>
-<!--{if $ac=='index'}-->
+<!--{if $a=='index'}-->
 {$IK_SITE[base][site_title]} - {$title}
 <!--{else}-->
 {$title} - {$IK_APP[options][appname]}
 <!--{/if}-->
 </title>
-<!--{if  $app=='home' && $ac=='index'}-->
+<!--{if  $app=='home' && $a=='index'}-->
 <meta name="keywords" content="{$IK_SITE[base][site_key]}" /> 
 <meta name="description" content="{$IK_SITE[base][site_desc]}" /> 
 <!--{/if}-->
@@ -53,15 +53,15 @@
     
     <div class="top_info">
         <!--{if $IK_USER[user] == ''}-->
-		<a href="{SITE_URL}{ikUrl('user','login')}">登录</a> | <a href="{SITE_URL}{ikUrl('user','register')}">注册</a>       
+		<a href="{U('user','login')}">登录</a> | <a href="{U('user','register')}">注册</a>       
         <!--{else}-->
-        <a id="newmsg" href="{SITE_URL}{ikUrl('message','ikmail',array(ik=>inbox))}"></a> | 
+        <a id="newmsg" href="{U('message','ikmail',array(ik=>inbox))}"></a> | 
         {php $globalUser = aac('user')->getOneUser($IK_USER[user][userid]);}
-        <a href="{SITE_URL}{ikUrl('hi','',array('id'=>$globalUser[doname]))}">
+        <a href="{U('hi','',array('id'=>$globalUser[doname]))}">
         {$globalUser[username]}
         </a> | 
-        <a href="{SITE_URL}{ikUrl('user','set',array(ik=>base))}">设置</a> | 
-        <a href="{SITE_URL}{ikUrl('user','login',array(ik=>out))}">退出</a>
+        <a href="{U('user','set',array(ik=>base))}">设置</a> | 
+        <a href="{U('user','login',array(ik=>out))}">退出</a>
         <!--{/if}-->
     </div>
 
@@ -72,17 +72,17 @@
                 <a href="{SITE_URL}">爱客</a>
                 </li>             
                 <li>
-                <a href="{SITE_URL}{ikUrl('location')}">同城</a>
+                <a href="{U('location')}">同城</a>
                 </li>
                 <li>
-                <a href="{SITE_URL}{ikUrl('group')}">小组</a>
+                <a href="{U('group')}">小组</a>
                 </li>
                 <li>
-                <a href="{SITE_URL}{ikUrl('haomiwo')}" target="_blank">好米窝</a>
+                <a href="{U('haomiwo')}" target="_blank">好米窝</a>
                 </li> 
-                <li><a href="{SITE_URL}{ikUrl('article')}">文章</a></li>
-<!--                 <li><a href="{SITE_URL}{ikUrl('tribe')}">部落</a></li> -->
-                <li><a href="{SITE_URL}{ikUrl('home','down')}">源码下载</a></li>                                              
+                <li><a href="{U('article')}">文章</a></li>
+<!--                 <li><a href="{U('tribe')}">部落</a></li> -->
+                <li><a href="{U('home','down')}">源码下载</a></li>                                              
 
         </ul>
     </div>
@@ -100,7 +100,7 @@
 	<div class="site_nav">
     	<!--{if $app == 'group' }-->
         <div class="site_logo nav_logo">
-            <a href="{SITE_URL}{ikUrl('group','')}">爱客小组</a>
+            <a href="{U('group','')}">爱客小组</a>
         </div>
         <!--{else}-->
         <div class="site_logo">
@@ -115,9 +115,9 @@
         <div class="appnav">
             <ul id="nav_bar">
                 <!--{loop $IK_SITE[appnav] $key $item}-->
-                <li  {if $app==$key} class="select" {/if} ><a href="{SITE_URL}{ikUrl($key)}">{$item}</a></li>
+                <li  {if $app==$key} class="select" {/if} ><a href="{U($key)}">{$item}</a></li>
                 <!--{/loop}-->
-                <li><a href="{SITE_URL}{ikUrl('home','down')}">源码下载</a></li>
+                <li><a href="{U('home','down')}">源码下载</a></li>
             </ul>
            <form action="{SITE_URL}index.php"  method="get" onsubmit="return searchForm(this);">
            <input type="hidden" name="app" value="search" /><input type="hidden" name="ac" value="q" />
@@ -132,10 +132,10 @@
         	<!--{if $app == 'group' }-->
             <div class="appnav">
                 <ul id="nav_bar">
-                    <li><a href="{SITE_URL}{ikUrl('group','')}">我的小组</a></li>
-                    <li><a href="{SITE_URL}{ikUrl('group','explore')}">发现小组</a></li>
-                    <li><a href="{SITE_URL}{ikUrl('group','explore_topic')}">发现话题</a></li>
-                    <li><a href="{SITE_URL}{ikUrl('group','nearby',array('ik'=>'beijing'))}">北京话题</a></li>
+                    <li><a href="{U('group','')}">我的小组</a></li>
+                    <li><a href="{U('group','explore')}">发现小组</a></li>
+                    <li><a href="{U('group','explore_topic')}">发现话题</a></li>
+                    <li><a href="{U('group','nearby',array('ik'=>'beijing'))}">北京话题</a></li>
                 </ul>
                <form action="{SITE_URL}index.php"  method="get" onsubmit="return searchForm(this);">
                <input type="hidden" name="app" value="search" /><input type="hidden" name="ac" value="q" />
@@ -149,12 +149,12 @@
             <div class="appnav">
                 <ul id="nav_bar">
                     <li><a href="{SITE_URL}">首页</a></li>
-                    <li><a href="{SITE_URL}{ikUrl('feed')}">友邻广播</a></li>
-                    <li><a href="{SITE_URL}{ikUrl('hi','',array('id'=>$globalUser[doname]))}">我的爱客</a></li>
-                    <li><a href="{SITE_URL}{ikUrl('group')}">我的小组</a></li>
-                    <li><a href="{SITE_URL}{ikUrl('site')}">我的小站</a></li>
-                    <li><a href="{SITE_URL}{ikUrl('article')}">文章</a></li>
-                    <li><a href="{SITE_URL}{ikUrl('tribe')}">部落</a></li>
+                    <li><a href="{U('feed')}">友邻广播</a></li>
+                    <li><a href="{U('hi','',array('id'=>$globalUser[doname]))}">我的爱客</a></li>
+                    <li><a href="{U('group')}">我的小组</a></li>
+                    <li><a href="{U('site')}">我的小站</a></li>
+                    <li><a href="{U('article')}">文章</a></li>
+                    <li><a href="{U('tribe')}">部落</a></li>
                     
                 </ul>
                <form action="{SITE_URL}index.php"  method="get" onsubmit="return searchForm(this);">

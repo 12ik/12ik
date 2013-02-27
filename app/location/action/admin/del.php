@@ -16,7 +16,7 @@ if($strArea['referid'] == '0'){
 	//删除一级
 	$db->query("delete from ".dbprefix."area where areaid='$areaid'");
 	
-	qiMsg("顶级区域及其下所有区域删除成功！",'点击返回顶级区域！',SITE_URL.'index.php?app=location&ac=admin&mg=list&ik=one');
+	qiMsg("顶级区域及其下所有区域删除成功！",'点击返回顶级区域！',SITE_URL.'index.php?app=location&a=admin&mg=list&ik=one');
 	
 }elseif($strArea['referid']>0){
 	
@@ -31,6 +31,6 @@ if($strArea['referid'] == '0'){
 	//删除二级
 	$db->query("delete from ".dbprefix."area where areaid='$areaid'");
 	
-	qiMsg("区域删除成功！",'点击返回顶级区域！',SITE_URL.'index.php?app=location&ac=admin&mg=list&ik=one');
+	qiMsg("区域删除成功！",'点击返回顶级区域！',SITE_URL.'index.php?app=location&a=admin&mg=list&ik=one');
 	
 }

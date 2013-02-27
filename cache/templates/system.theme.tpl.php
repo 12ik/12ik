@@ -1,9 +1,9 @@
 <?php include template('header'); ?>
 
-<div class="midder"><?php include template('menu'); ?>
-
+<div class="midder">
+<h2><?php echo $title;?></h2>
 <div class="theme">
-<form method="POST" action="index.php?app=system&ac=theme&ik=do">
+<form method="POST" action="index.php?app=system&a=theme&ik=do">
 <ul>
 	<?php foreach((array)$arrTheme as $key=>$item) {?>
 	<li><img src="theme/<?php echo $item;?>/preview.gif"> <br />
@@ -14,7 +14,10 @@
 </ul>
 
 <div class="clear"></div>
-<input type="submit" value="更改主题" /></form>
+
+<div class="page_btn"><input type="submit" value="更改主题" class="submit" /></div>
+
+</form>
 
 </div>
 

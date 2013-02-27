@@ -2,10 +2,10 @@
     <ul>
 <!--
 <li {if $ik=="notification"} class="select" {/if} >
-<a href="{SITE_URL}{ikUrl('message','ikmail',array(ik=>notification))}">提醒</a>
+<a href="{U('message','ikmail',array(ik=>notification))}">提醒</a>
 </li>
 -->
-<li <!--{if $ik=="outbox"}-->class="select"<!--{/if}--> ><a href="{SITE_URL}{ikUrl('message','ikmail',array(ik=>outbox))}">发件箱</a></li>
-<li <!--{if $ik=="inbox" || $ik=="spam" || $ik=="unread"}-->class="select"<!--{/if}--> ><a href="{SITE_URL}{ikUrl('message','ikmail',array(ik=>inbox))}">收件箱</a></li>
+<li <!--{if $ik=="outbox"}-->class="select"<!--{/if}--> ><a href="{U('message','ikmail',array(ik=>outbox))}">发件箱</a></li>
+<li <!--{if $ik=="inbox" || $ik=="spam" || $ik=="unread"}-->class="select"<!--{/if}--> ><a href="{U('message','ikmail',array(ik=>inbox))}">收件箱</a></li>
     </ul>
 </div>

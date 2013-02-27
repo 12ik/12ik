@@ -3,7 +3,7 @@
 <div class="midder">
 <div class="mc">
 	<h1>
-    <a href="{SITE_URL}{ikUrl('note','note_tag',array(tagname=>$tagname))}">{$strTag[tagname]}</a>
+    <a href="{U('note','note_tag',array(tagname=>$tagname))}">{$strTag[tagname]}</a>
     </h1>
     <div class="cleft">
         <div class="tag_list">
@@ -12,12 +12,12 @@
                 <!--{loop $arrNote $key $item}-->
                 <div class="result">
                     <div class="pic">
-                    <a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[user][doname]))}" class="nbg">
+                    <a href="{U('hi','',array('id'=>$item[user][doname]))}" class="nbg">
                     <img alt="{$item[user][username]}" src="{$item[user][face]}"></a>
                     </div>
                     <div class="content">
-                    <h3><a  href="{SITE_URL}{ikUrl('note','show',array('noteid'=>$item[noteid]))}">{$item[title]}</a></h3>
-                    <div class="info">发表于  {php echo date('Y-m-d',$item[addtime])} &nbsp;  <a href="{SITE_URL}{ikUrl('note','show',array('noteid'=>$item[noteid]))}">阅读 {$item[count_view]} 次</a> &nbsp;&nbsp;<a href="{SITE_URL}{ikUrl('note','show',array('noteid'=>$item[noteid]))}#comments" title="回应"> {$item[count_comment]} 条回应</a></div>
+                    <h3><a  href="{U('note','show',array('noteid'=>$item[noteid]))}">{$item[title]}</a></h3>
+                    <div class="info">发表于  {php echo date('Y-m-d',$item[addtime])} &nbsp;  <a href="{U('note','show',array('noteid'=>$item[noteid]))}">阅读 {$item[count_view]} 次</a> &nbsp;&nbsp;<a href="{U('note','show',array('noteid'=>$item[noteid]))}#comments" title="回应"> {$item[count_comment]} 条回应</a></div>
                     <p>{$item[content]}</p>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
             <h2>热门标签</h2>
             <ul>
             <!--{loop $arrTag $key $item}-->
-            <li><a class="post-tag" href="{SITE_URL}{ikUrl('note','note_tag',array(tagname=>$item[tagname]))}">{$item[tagname]}</a>×{$item[count_note]}</li>
+            <li><a class="post-tag" href="{U('note','note_tag',array(tagname=>$item[tagname]))}">{$item[tagname]}</a>×{$item[count_note]}</li>
             <!--{/loop}-->
             </ul>
         </div>

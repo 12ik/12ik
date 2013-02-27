@@ -63,7 +63,7 @@ switch($ik){
 			$_SGLOBAL['db']->query("UPDATE ".tname('article_categories')." SET subcatid=catid");
 		}
 		
-		qiMsg("添加成功",'返回到频道列表',SITE_URL.'index.php?app=article&ac=admin&mg=channel&ik=list');
+		qiMsg("添加成功",'返回到频道列表',SITE_URL.'index.php?app=article&a=admin&mg=channel&ik=list');
 		
 		break;
 		

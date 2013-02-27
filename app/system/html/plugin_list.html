@@ -8,7 +8,7 @@
 
 	{loop $arrApps $key $item}
 	<li {if $apps==$item} class="select"{/if} ><a
-		href="index.php?app=system&ac=plugin&ik=list&apps={$item}">{$item}</a></li>
+		href="index.php?app=system&a=plugin&ik=list&apps={$item}">{$item}</a></li>
 	{/loop}
 
 </ul>
@@ -28,13 +28,13 @@
 		<td>{$item[about][desc]}<br />
 		作者：<a href="{$item[about][author_url]}">{$item[about][author]}</a></td>
 		<td><!--{if in_array($item[name],$app_plugins)}--><a
-			href="index.php?app=system&ac=plugin&ik=do&apps={$apps}&pname={$item[name]}&isused=0">停用</a><!--{else}--><a
-			href="index.php?app=system&ac=plugin&ik=do&apps={$apps}&pname={$item[name]}&isused=1">启用</a><!--{/if}-->
+			href="index.php?app=system&a=plugin&ik=do&apps={$apps}&pname={$item[name]}&isused=0">停用</a><!--{else}--><a
+			href="index.php?app=system&a=plugin&ik=do&apps={$apps}&pname={$item[name]}&isused=1">启用</a><!--{/if}-->
 
 		<!--{if $item[about][isedit]=='1' && in_array($item[name],$app_plugins)}--><a
-			href="index.php?app={$apps}&ac=plugin&plugin={$item[name]}&in=edit&ik=set">编辑</a><!--{/if}-->
+			href="index.php?app={$apps}&a=plugin&plugin={$item[name]}&in=edit&ik=set">编辑</a><!--{/if}-->
 
-		<a href="index.php?app=system&ac=plugin&ik=del&pname={$item[name]}">删除</a>
+		<a href="index.php?app=system&a=plugin&ik=del&pname={$item[name]}">删除</a>
 
 		</td>
 	</tr>

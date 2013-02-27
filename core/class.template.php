@@ -37,7 +37,7 @@ class template {
 	function parse($template) {
 		
 		//BY wanglijun 2012-04-11 增加ikurl路由模板标签
-		$template = preg_replace ( "/\{ikUrl(.*?)\}/s", "{php echo ikurl\\1}", $template );
+		$template = preg_replace ( "/\{U(.*?)\}/s", "{php echo U\\1}", $template );
 		
 		$template = preg_replace ( "/\<\!\-\-\{(.+?)\}\-\-\>/s", "{\\1}", $template ); //去除html注释符号<!---->
 		$template = preg_replace ( "/\{($this->var_regexp)\}/", "<?php echo \\1;?>", $template ); //替换带{}的变量

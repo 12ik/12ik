@@ -11,7 +11,7 @@ defined('IN_IK') or die('Access Denied.');
 	{
 		$tagid = aac('tag')->getTagId($tag);
 		$tagname = aac('tag')->getOneTag($tagid);
-		$url = SITE_URL.ikUrl('group','explore_topic',array('tag'=>$tag,'page'=>''));
+		$url = SITE_URL.U('group','explore_topic',array('tag'=>$tag,'page'=>''));
 		$lstart = $page*20-20;
 		$all_id = aac('tag')->findAll('tag_topic_index',array('tagid'=>$tagid),null, 'topicid',$lstart.',20');	
 		

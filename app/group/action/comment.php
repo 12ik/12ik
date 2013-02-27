@@ -86,7 +86,7 @@ switch($ik){
 				$msg_userid = '0';
 				$msg_touserid = $strTopic['userid'];
 				$msg_title = '你的帖子：《'.$strTopic['title'].'》新增一条评论，快去看看给个回复吧';
-				$msg_content = '你的帖子：《'.$strTopic['title'].'》新增一条评论，快去看看给个回复吧^_^ <br /><a href="'.SITE_URL.ikUrl('group','topic',array('id'=>$topicid)).'">'.SITE_URL.ikUrl('group','topic',array('id'=>$topicid)).'</a>';
+				$msg_content = '你的帖子：《'.$strTopic['title'].'》新增一条评论，快去看看给个回复吧^_^ <br /><a href="'.SITE_URL.U('group','topic',array('id'=>$topicid)).'">'.SITE_URL.U('group','topic',array('id'=>$topicid)).'</a>';
 				aac('message')->sendmsg($msg_userid,$msg_touserid,$msg_title,$msg_content);
 				
 			}
@@ -96,14 +96,14 @@ switch($ik){
 			$feed_template = '<span class="pl">评论了帖子：<a href="{link}">{title}</a></span><div class="quote"><span class="inq">{content}</span> <span><a class="j a_saying_reply" href="{link}" rev="unfold">回应</a>
 	</span></div>';
 			$feed_data = array(
-				'link'	=> SITE_URL.ikUrl('group','topic',array('id'=>$topicid)),
+				'link'	=> SITE_URL.U('group','topic',array('id'=>$topicid)),
 				'title'	=> $strTopic['title'],
 				'content'	=>getsubstrutf8(htmlspecialchars($content),0,100),
 			);
 			aac('feed')->add($userid,$feed_template,$feed_data);
 			//feed结束
 			
-			header("Location: ".SITE_URL.ikUrl('group','topic',array('id'=>$topicid)));
+			header("Location: ".SITE_URL.U('group','topic',array('id'=>$topicid)));
 		}	
 	
 		break;
@@ -134,7 +134,7 @@ switch($ik){
 		}
 		
 		//跳转回到帖子页
-		header("Location: ".SITE_URL.ikUrl('group','topic',array('id'=>$strComment['topicid'])));
+		header("Location: ".SITE_URL.U('group','topic',array('id'=>$strComment['topicid'])));
 		
 		break;
 

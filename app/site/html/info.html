@@ -42,13 +42,13 @@
                 <img src="{$strSite[icon_180]}?v={php echo rand();}" class="sp-icon-b">
                 <img src="{$strSite[icon_48]}?v={php echo rand();}" class="sp-icon-s">
                 
-                <a title="修改图标" href="{SITE_URL}{ikUrl('site','admins',array('ik'=>'icon','siteid'=>$siteid))}">修改图标</a>
+                <a title="修改图标" href="{U('site','admins',array('ik'=>'icon','siteid'=>$siteid))}">修改图标</a>
             </div>
 
             <div class="attn hide" id="error_msg"></div>
             <div class="item-submit">
                 <span class="bn-flat-hot"><input type="submit" value="保存" hidefocus="1" name="pf_submit"></span>
-                <a name="pf_cancel" href="{SITE_URL}{ikUrl('site','mine',array('siteid'=>$siteid))}">取消</a>
+                <a name="pf_cancel" href="{U('site','mine',array('siteid'=>$siteid))}">取消</a>
             </div>
         </form>
     </div>
@@ -62,7 +62,7 @@
         var site_id = $('body').attr('id');
         var css_top_tips = '#top-tips',
             tmpl_top_tips = '<div id="top-tips">你的最新设置已经被成功保存.</div>',
-            postUrl = '{SITE_URL}{ikUrl("site","admins",array("ik"=>"info","siteid"=>$siteid))}',
+            postUrl = '{U("site","admins",array("ik"=>"info","siteid"=>$siteid))}',
             removeTips = function () {
                 $(css_top_tips).slideUp(function () {
                     $(this).remove();

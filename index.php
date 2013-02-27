@@ -17,13 +17,14 @@ define ( 'IKINSTALL', IKROOT . '/install' );
 define ( 'IKPLUGIN', IKROOT . '/plugins' );
 
 //加载软件信息
-$IK_SOFT ['info'] = array ('name' => '12IK', 'version' => '1.2', 'url' => 'http://www.12ik.com/', 'email' => '160780470@qq.com', 'copyright' => '12ik.com', 'year' => '2012 - 2015', 'author' => '小麦' );
+$IK_SOFT ['info'] = include_once 'version.php';
 //装载12IK核心
 include 'core/core.php';
 
 //除去加载内核运行时间统计开始
 $time_start = getmicrotime ();
-$_SGLOBAL['supe_starttime'] = $time_start;
+//全局变量
+$_SGLOBAL['starttime'] = $time_start;
 
 if (is_file ( 'data/config.inc.php' )) { 
 	//装载APP应用
@@ -32,5 +33,3 @@ if (is_file ( 'data/config.inc.php' )) {
 	//装载安装程序
 	include 'install/index.php';
 }
-
-unset ( $GLOBALS );

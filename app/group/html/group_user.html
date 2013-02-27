@@ -8,8 +8,8 @@
 
 <h2>{$strGroup[role_leader]} &nbsp; ·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;</h2>
 
-<div class="obss"><dl class="obu"><dt><a class="nbg" href="{SITE_URL}{ikUrl('hi','',array('id'=>$strLeader[doname]))}"><img alt="mido" class="m_sub_img" src="{$strLeader[face]}"></a></dt>
-<dd>{$strLeader[username]}<br><span class="pl">(<a href="{SITE_URL}{ikUrl('location','area',array(areaid=>$strLeader[area][areaid]))}">{$strLeader[area][areaname]}</a>)</span></dd></dl><br clear="all">
+<div class="obss"><dl class="obu"><dt><a class="nbg" href="{U('hi','',array('id'=>$strLeader[doname]))}"><img alt="mido" class="m_sub_img" src="{$strLeader[face]}"></a></dt>
+<dd>{$strLeader[username]}<br><span class="pl">(<a href="{U('location','area',array(areaid=>$strLeader[area][areaid]))}">{$strLeader[area][areaname]}</a>)</span></dd></dl><br clear="all">
 </div>
 
 <h2>{$strGroup[role_admin]} &nbsp; ·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;</h2>
@@ -17,11 +17,11 @@
 <div class="obss">
 
 <!--{loop $arrAdmin $key $item}-->
-<dl class="obu"><dt><a class="nbg" href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[doname]))}"><img alt="{$item[username]}" class="imgg" src="{$item[face]}"></a>
+<dl class="obu"><dt><a class="nbg" href="{U('hi','',array('id'=>$item[doname]))}"><img alt="{$item[username]}" class="imgg" src="{$item[face]}"></a>
 <!--{if $IK_USER[user][userid] == $strLeader[userid]}-->
-<span title="取消管理员" class="gact"><a title="取消{$item[username]}的管理员" class="j a_confirm_link" href="{SITE_URL}index.php?app=group&ac=group_user_set&ik=isadmin&userid={$item[userid]}&groupid={$strGroup[groupid]}&isadmin=0" rel="nofollow">^</a></span>
+<span title="取消管理员" class="gact"><a title="取消{$item[username]}的管理员" class="j a_confirm_link" href="{SITE_URL}index.php?app=group&a=group_user_set&ik=isadmin&userid={$item[userid]}&groupid={$strGroup[groupid]}&isadmin=0" rel="nofollow">^</a></span>
 <!--{/if}-->
-</dt><dd>{$item[username]}<br><span class="pl">(<a href="{SITE_URL}{ikUrl('location','area',array(areaid=>$item[area][areaid]))}">{$item[area][areaname]}</a>)</span></dd></dl>
+</dt><dd>{$item[username]}<br><span class="pl">(<a href="{U('location','area',array(areaid=>$item[area][areaid]))}">{$item[area][areaname]}</a>)</span></dd></dl>
 <!--{/loop}-->
 
 
@@ -37,21 +37,21 @@
 <!--{loop $arrGroupUser $key $item}-->
 <dl class="obu">
 <dt>
-<a class="nbg" href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[doname]))}"><img alt="{$item[username]}" class="imgg" src="{$item[face]}"></a>
+<a class="nbg" href="{U('hi','',array('id'=>$item[doname]))}"><img alt="{$item[username]}" class="imgg" src="{$item[face]}"></a>
 
 <!--{if $IK_USER[user][userid] == $strLeader[userid]}-->
 <!--{if $item[isadmin] != '1'}-->
-<span title="提升为管理员" class="gact"><a title="把{$item[username]}提升为管理员" class="j a_confirm_link" href="{SITE_URL}index.php?app=group&ac=group_user_set&ik=isadmin&userid={$item[userid]}&groupid={$strGroup[groupid]}&isadmin=1" rel="nofollow">^</a></span>
+<span title="提升为管理员" class="gact"><a title="把{$item[username]}提升为管理员" class="j a_confirm_link" href="{SITE_URL}index.php?app=group&a=group_user_set&ik=isadmin&userid={$item[userid]}&groupid={$strGroup[groupid]}&isadmin=1" rel="nofollow">^</a></span>
 <br />
 <!--{/if}-->
 <!--{if $item[userid] !=$strGroup[userid]}-->
-<span title="踢出小组" class="gact"><a title="把{$item[username]}踢出小组" class="j a_confirm_link" href="{SITE_URL}index.php?app=group&ac=group_user_set&ik=isuser&userid={$item[userid]}&groupid={$strGroup[groupid]}" rel="nofollow">k</a></span>
+<span title="踢出小组" class="gact"><a title="把{$item[username]}踢出小组" class="j a_confirm_link" href="{SITE_URL}index.php?app=group&a=group_user_set&ik=isuser&userid={$item[userid]}&groupid={$strGroup[groupid]}" rel="nofollow">k</a></span>
 <br />
 <!--{/if}-->
 
 <!--{/if}-->
 </dt>
-<dd>{$item[username]}<br><span class="pl">(<a href="{SITE_URL}{ikUrl('location','area',array(areaid=>$item[area][areaid]))}">{$item[area][areaname]}</a>)</span></dd></dl>
+<dd>{$item[username]}<br><span class="pl">(<a href="{U('location','area',array(areaid=>$item[area][areaid]))}">{$item[area][areaname]}</a>)</span></dd></dl>
 <!--{/loop}-->
 
 <br clear="all">
@@ -65,7 +65,7 @@
 
 
 <div class="cright">
-<p class="pl2">&gt; <a href="{SITE_URL}{ikUrl('group','show',array('id'=>$strGroup[groupid]))}">回{$strGroup[groupname]}小组</a></p>
+<p class="pl2">&gt; <a href="{U('group','show',array('id'=>$strGroup[groupid]))}">回{$strGroup[groupname]}小组</a></p>
 
 </div>
 </div>

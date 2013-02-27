@@ -8,7 +8,7 @@ switch($ik){
 		
 		$lstart = $page*10-10;
 		
-		$url = SITE_URL.'index.php?app=photo&ac=admin&mg=photo&ik=list&page=';
+		$url = SITE_URL.'index.php?app=photo&a=admin&mg=photo&ik=list&page=';
 		
 		$arrPhoto = $db->fetch_all_assoc("select * from ".dbprefix."photo order by addtime desc limit $lstart,10");
 		

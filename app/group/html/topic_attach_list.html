@@ -8,7 +8,7 @@
 <!--{if $userCommentNum == '0' && $item[isview]=='1' && $item[userid] !=$IK_USER[user][userid]}-->
 [此文件需要回复后显示]
 <!--{else}-->
-<a href="{SITE_URL}index.php?app=group&ac=topic_attach&ik=topic_attach_down&attachid={$item[attachid]}">{$item[attachname]}</a>
+<a href="{SITE_URL}index.php?app=group&a=topic_attach&ik=topic_attach_down&attachid={$item[attachid]}">{$item[attachname]}</a>
 <!--{/if}-->
 </td>
 <td><!--{if $item[score] !='0'}--><font color="red">{$item[score]}积分</font><!--{/if}--></td>

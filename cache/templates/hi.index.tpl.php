@@ -28,7 +28,7 @@
 <?php foreach((array)$arrMyTopic as $key=>$item) {?>
 <tr>
 <td><img src="<?php echo SITE_URL;?>public/images/topic.gif" align="absmiddle"  title="[帖子]" alt="[帖子]" />
-<a href="<?php echo SITE_URL;?><?php echo ikurl('group','topic',array('id'=>$item['topicid']))?>"><?php echo $item['title'];?></a>&nbsp;&nbsp;</td>
+<a href="<?php echo U('group','topic',array('id'=>$item['topicid']))?>"><?php echo $item['title'];?></a>&nbsp;&nbsp;</td>
 <td><?php echo $item['count_comment'];?></td>
 <td style="width:120px;text-align:right;color:#999999;"><?php echo date('Y-m-d H:i',$item['addtime'])?></td>
 </tr>
@@ -61,7 +61,7 @@
 <?php foreach((array)$arrMyComment as $key=>$item) {?>
 <tr>
 <td><img src="<?php echo SITE_URL;?>public/images/topic.gif" align="absmiddle"  title="[帖子]" alt="[帖子]" />
-<a href="<?php echo SITE_URL;?><?php echo ikurl('group','topic',array('id'=>$item['topicid']))?>"><?php echo $item['title'];?></a>&nbsp;&nbsp;</td>
+<a href="<?php echo U('group','topic',array('id'=>$item['topicid']))?>"><?php echo $item['title'];?></a>&nbsp;&nbsp;</td>
 <td><?php echo $item['count_comment'];?></td>
 <td style="width:120px;text-align:right;color:#999999;"><?php echo date('Y-m-d H:i',$item['addtime'])?></td>
 </tr>
@@ -94,7 +94,7 @@
 <?php foreach((array)$arrMyCollect as $key=>$item) {?>
 <tr>
 <td><img src="<?php echo SITE_URL;?>public/images/topic.gif" align="absmiddle"  title="[帖子]" alt="[帖子]" />
-<a href="<?php echo SITE_URL;?><?php echo ikurl('group','topic',array('id'=>$item['topicid']))?>"><?php echo $item['title'];?></a>&nbsp;&nbsp;</td>
+<a href="<?php echo U('group','topic',array('id'=>$item['topicid']))?>"><?php echo $item['title'];?></a>&nbsp;&nbsp;</td>
 <td ><?php echo $item['count_comment'];?></td>
 <td style="width:120px;text-align:right;color:#999999;"><?php echo date('Y-m-d H:i',$item['addtime'])?></td>
 </tr>
@@ -124,7 +124,7 @@
 <img alt="" class="userface" src="<?php echo $strUser['face_120'];?>">
 
 <div class="user-info">
-常居：&nbsp;<?php if($arrArea['two']) { ?><a href="<?php echo SITE_URL;?><?php echo ikurl('location','area',array(areaid=>$arrArea['two'][areaid]))?>"><?php echo $arrArea['two'][areaname];?></a><?php } ?>
+常居：&nbsp;<?php if($arrArea['two']) { ?><a href="<?php echo U('location','area',array(areaid=>$arrArea['two'][areaid]))?>"><?php echo $arrArea['two'][areaname];?></a><?php } ?>
 <br />
 <div class="pl">UID:<?php echo $strUser['userid'];?> <br> <?php echo date('Y-m-d',$strUser['addtime'])?> 加入</div>
 <div class="pl">级别:<?php echo $strUser['rolename'];?></div>
@@ -137,13 +137,13 @@
 <span class="user-cs">已关注</span>
 <span class="user-rs">
 
-<a href="<?php echo SITE_URL;?>index.php?app=user&ac=do&ik=user_nofollow&userid_follow=<?php echo $strUser['userid'];?>">取消关注</a></span>
+<a href="<?php echo SITE_URL;?>index.php?app=user&a=do&ik=user_nofollow&userid_follow=<?php echo $strUser['userid'];?>">取消关注</a></span>
 
 </div>
 <?php } else { ?>
-<a class="a-btn-add mr10 add_contact" href="<?php echo SITE_URL;?>index.php?app=user&ac=do&ik=user_follow&userid_follow=<?php echo $strUser['userid'];?>">关注此人</a>
+<a class="a-btn-add mr10 add_contact" href="<?php echo SITE_URL;?>index.php?app=user&a=do&ik=user_follow&userid_follow=<?php echo $strUser['userid'];?>">关注此人</a>
 <?php } ?>
-<a href="<?php echo SITE_URL;?><?php echo ikurl('user','message',array(ik=>message_add,touserid=>$strUser['userid']))?>" rel="nofollow" class="a-btn mr5">发消息</a>
+<a href="<?php echo U('user','message',array(ik=>message_add,touserid=>$strUser['userid']))?>" rel="nofollow" class="a-btn mr5">发消息</a>
 <div id="divac"></div>
 </div>
 <?php } ?>
@@ -159,7 +159,7 @@
 <?php if($strUser['about']) { ?>关于：<?php echo $strUser['about'];?><br /><?php } ?>
 <?php if($strUser['signed']) { ?>签名：<?php echo $strUser['signed'];?><br /><?php } ?>
 
-<?php if($strUser['userid'] == $IK_USER['user'][userid]) { ?>[<a href="<?php echo SITE_URL;?><?php echo ikurl('user','set',array(ik=>base))?>">修改基本信息</a>]<?php } ?>
+<?php if($strUser['userid'] == $IK_USER['user'][userid]) { ?>[<a href="<?php echo U('user','set',array(ik=>base))?>">修改基本信息</a>]<?php } ?>
 </span>
 </div>
 
@@ -183,19 +183,19 @@
 <?php } ?>
 &nbsp;·&nbsp;·&nbsp;·
 <span class="pl">&nbsp;(
-<a href="<?php echo SITE_URL;?><?php echo ikurl('user','follow',array(userid=>$strUser['userid']))?>">全部<?php echo $strUser['count_follow'];?></a>
+<a href="<?php echo U('user','follow',array(userid=>$strUser['userid']))?>">全部<?php echo $strUser['count_follow'];?></a>
 ) </span>
 </h2>
 
 <?php foreach((array)$arrFollowUser as $key=>$item) {?>
-<dl class="obu"><dt><a class="nbg" href="<?php echo SITE_URL;?><?php echo ikurl('hi','',array('id'=>$item['doname']))?>"><img alt="<?php echo $item['username'];?>" class="m_sub_img" src="<?php echo $item['face'];?>"></a></dt>
-<dd><a href="<?php echo SITE_URL;?><?php echo ikurl('hi','',array('id'=>$item['doname']))?>"><?php echo $item['username'];?></a></dd>
+<dl class="obu"><dt><a class="nbg" href="<?php echo U('hi','',array('id'=>$item['doname']))?>"><img alt="<?php echo $item['username'];?>" class="m_sub_img" src="<?php echo $item['face'];?>"></a></dt>
+<dd><a href="<?php echo U('hi','',array('id'=>$item['doname']))?>"><?php echo $item['username'];?></a></dd>
 </dl>
 <?php }?>
 
 <br clear="all">
 
-<a href="<?php echo SITE_URL;?><?php echo ikurl('user','followed',array(userid=>$strUser['userid']))?>">&gt; 被<?php echo $strUser['count_followed'];?>人关注</a>
+<a href="<?php echo U('user','followed',array(userid=>$strUser['userid']))?>">&gt; 被<?php echo $strUser['count_followed'];?>人关注</a>
 
 </div>
 
@@ -209,13 +209,13 @@
 <?php } ?>
 &nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·
 <span class="pl">&nbsp;(
-<a href="<?php echo SITE_URL;?><?php echo ikurl('group','groups',array('userid'=>$strUser['userid']))?>">全部</a>
+<a href="<?php echo U('group','groups',array('userid'=>$strUser['userid']))?>">全部</a>
 ) </span>
 </h2>
 
 <?php foreach((array)$arrGroup as $key=>$item) {?>
-<dl class="ob"><dt><a href="<?php echo SITE_URL;?><?php echo ikurl('group','show',array('id'=>$item['groupid']))?>"><img alt="<?php echo $item['groupname'];?>" class="m_sub_img" src="<?php echo $item['icon_48'];?>"></a></dt>
-<dd><a href="<?php echo SITE_URL;?><?php echo ikurl('group','show',array('id'=>$item['groupid']))?>"><?php echo $item['groupname'];?></a> <span>(<?php echo $item['count_user'];?>)</span>
+<dl class="ob"><dt><a href="<?php echo U('group','show',array('id'=>$item['groupid']))?>"><img alt="<?php echo $item['groupname'];?>" class="m_sub_img" src="<?php echo $item['icon_48'];?>"></a></dt>
+<dd><a href="<?php echo U('group','show',array('id'=>$item['groupid']))?>"><?php echo $item['groupname'];?></a> <span>(<?php echo $item['count_user'];?>)</span>
 </dd></dl>
 <?php }?>
 
@@ -223,7 +223,7 @@
 
 </div>
 <br/>
-<p class="pl">本页永久链接: <a href="<?php echo SITE_URL;?><?php echo ikurl('hi','',array('id'=>$strUser['doname']))?>"><?php echo SITE_URL;?><?php echo ikurl('hi','',array('id'=>$strUser['doname']))?></a></p>
+<p class="pl">本页永久链接: <a href="<?php echo U('hi','',array('id'=>$strUser['doname']))?>"><?php echo U('hi','',array('id'=>$strUser['doname']))?></a></p>
 <br>
 <p class="pl">订阅<?php echo $strUser['username'];?>的收藏 <br>
 <span class="feed"><a href="#"> feed: rss 2.0</a></span>

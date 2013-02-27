@@ -39,7 +39,7 @@ switch ($ik) {
 			$new['site']->update('site_bulletin',array('bulletinid'=>$bulletinid),array(
 				'content'	=> htmlspecialchars($content)
 				));
-			//header("Location: ".SITE_URL.ikUrl('site','room',array('roomid'=>$strBulletin['roomid'],'siteid'=>$strBulletin['siteid'])));
+			//header("Location: ".SITE_URL.U('site','room',array('roomid'=>$strBulletin['roomid'],'siteid'=>$strBulletin['siteid'])));
 			
 			header("Location: ".$historyurl);
 		}
@@ -53,15 +53,15 @@ switch ($ik) {
 
 		$strRoom = aac('site')->getOneRoom($strBulletin['roomid']);
 		
-		$actionUrl = SITE_URL.ikUrl('site','bulletin',array('ik'=>'settings','bulletinid'=>$bulletinid));
-		$deleteUrl = SITE_URL.ikUrl('site','bulletin',array('ik'=>'delete','bulletinid'=>$bulletinid));
+		$actionUrl = SITE_URL.U('site','bulletin',array('ik'=>'settings','bulletinid'=>$bulletinid));
+		$deleteUrl = SITE_URL.U('site','bulletin',array('ik'=>'delete','bulletinid'=>$bulletinid));
 		//判断是否是存档
 		if($strBulletin['isarchive']==1)
 		{
-		 	$archiveUrl = SITE_URL.ikUrl('site','bulletin',array('ik'=>'unarchive','bulletinid'=>$bulletinid));//恢复url
+		 	$archiveUrl = SITE_URL.U('site','bulletin',array('ik'=>'unarchive','bulletinid'=>$bulletinid));//恢复url
 			$archiveName = "恢复此应用";
 		}else{
-		 	$archiveUrl = SITE_URL.ikUrl('site','bulletin',array('ik'=>'archive','bulletinid'=>$bulletinid));//存档url
+		 	$archiveUrl = SITE_URL.U('site','bulletin',array('ik'=>'archive','bulletinid'=>$bulletinid));//存档url
 			$archiveName = "存档此应用";			
 		}
 

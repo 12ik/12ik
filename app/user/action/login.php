@@ -131,7 +131,7 @@ switch($ik){
 		//ck
 		setcookie("ck", '', time()+3600,'/');
 
-		header('Location: '.SITE_URL.ikUrl('user','login'));
+		header('Location: '.SITE_URL.U('user','login'));
 		
 		break;
 }

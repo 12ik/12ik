@@ -26,7 +26,7 @@ $(function(){
 
     saveTabs = function(){
 	  var roomID = [], hideRoomID = [], 
-	  	  api = siteUrl+'index.php?app=site&ac=admins&ik=layout&siteid={ID}',
+	  	  api = siteUrl+'index.php?app=site&a=admins&ik=layout&siteid={ID}',
 		  siteId; 
 
 	 	siteId =  globalsiteid; //全局小站id 只针对room 使用

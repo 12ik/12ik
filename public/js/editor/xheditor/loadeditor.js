@@ -8,12 +8,12 @@ function pageInit()
 		tsAttach:{c:'tsAttach',t:'插入附件',e:function(){
 			var _this=this;
 			  _this.saveBookmark();
-			 _this.showIframeModal('选择附件',siteUrl+'index.php?app=attach&ac=ajax&ik=my',function(v){  _this.pasteHTML(v,false); },400,420);
+			 _this.showIframeModal('选择附件',siteUrl+'index.php?app=attach&a=ajax&ik=my',function(v){  _this.pasteHTML(v,false); },400,420);
 		}},
 		tsImg:{c:'tsImg',t:'插入图片',e:function(){
 			var _this=this;
 			 _this.saveBookmark(); 
-			 _this.showIframeModal('选择图片',siteUrl+'index.php?app=photo&ac=ikupload&ik=image&type='+type+'&typeid='+typeid,function(v){ _this.pasteHTML(v,false); },400,200);
+			 _this.showIframeModal('选择图片',siteUrl+'index.php?app=photo&a=ikupload&ik=image&type='+type+'&typeid='+typeid,function(v){ _this.pasteHTML(v,false); },400,200);
 		}},
 		
 		
@@ -51,7 +51,7 @@ function pageInit()
 				if(jValue.val() !='')
 				{
 					url = jValue.val();
-					var urls = siteUrl+'index.php?app=group&ac=do&ik=parseurl';
+					var urls = siteUrl+'index.php?app=group&a=do&ik=parseurl';
 					jSave.val('稍等...');jSave.attr('disabled',true);
 					$.post(urls,{parseurl:url},function(rs){
 								rsJson = eval('(' + rs + ')');

@@ -9,12 +9,12 @@
 <ul class="user-list">
 <!--{loop $arrFollowedUser $key $item}-->
     <li class="clearfix" id="u$item[userid]">
-        <a title="{$item[username]}" href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[doname]))}">
+        <a title="{$item[username]}" href="{U('hi','',array('id'=>$item[doname]))}">
         <img alt="{$item[username]}" src="{$item[face]}" class="face">
         </a>
         <div class="info">
           <h3>
-              <a title="{$item[username]}" href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[doname]))}">{$item[username]}</a>
+              <a title="{$item[username]}" href="{U('hi','',array('id'=>$item[doname]))}">{$item[username]}</a>
               {if $item['isfollow'] }<span class="user-cs">已关注</span>{/if}
           </h3>
           <!-- 签名档 -->
@@ -33,11 +33,11 @@
 
 <!--{if $strUser[userid] == $IK_USER[user][userid]}-->
         <p class="pl2">
-            &gt;&nbsp;<a href="{SITE_URL}{ikUrl('user','follow',array('userid'=>$userid))}">我关注的人({$strUser[count_follow]})</a>
+            &gt;&nbsp;<a href="{U('user','follow',array('userid'=>$userid))}">我关注的人({$strUser[count_follow]})</a>
         </p> 
 <!--{else}-->
         <p class="pl2">
-            &gt;&nbsp;<a href="{SITE_URL}{ikUrl('user','follow',array('userid'=>$userid))}">{$strUser[username]}关注的人({$strUser[count_follow]})</a>
+            &gt;&nbsp;<a href="{U('user','follow',array('userid'=>$userid))}">{$strUser[username]}关注的人({$strUser[count_follow]})</a>
         </p> 
 <!--{/if}-->               
 <!---
@@ -46,7 +46,7 @@
         </p>
 -->        
         <p class="pl2">
-            &gt;&nbsp;<a href="{SITE_URL}{ikUrl('user','contacts',array('ik'=>'invite'))}">邀请我的朋友加入爱客网</a>
+            &gt;&nbsp;<a href="{U('user','contacts',array('ik'=>'invite'))}">邀请我的朋友加入爱客网</a>
         </p>
 
 

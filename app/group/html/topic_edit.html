@@ -6,7 +6,7 @@
 <h1>编辑：{$strTopic[title]}</h1>
 <div class="cleft">
 <script type="text/javascript" src="{SITE_URL}public/js/lib/ajaxfileupload.js"></script>
-<form method="POST" action="{SITE_URL}index.php?app=group&ac=topic_edit&ik=do">
+<form method="POST" action="{SITE_URL}index.php?app=group&a=topic_edit&ik=do">
 <table cellpadding="0" cellspacing="0" class="table_1">
 	<tr>
     <th width="50">标题：</tg>
@@ -29,7 +29,7 @@
     <th>&nbsp;</th>
     <td>
 	<input type="hidden" name="topicid" value="{$strTopic[topicid]}" />
-    <input type="submit" class="submit" value="保存">&nbsp;&nbsp;<a href="{SITE_URL}{ikUrl('group','topic',array('id'=>$strTopic[topicid]))}">返回</a>
+    <input type="submit" class="submit" value="保存">&nbsp;&nbsp;<a href="{U('group','topic',array('id'=>$strTopic[topicid]))}">返回</a>
 	</td>
     </tr>
 </table>
@@ -144,7 +144,7 @@ function ajaxFileUpload(){
 
        $.ajaxFileUpload(
             {
-                url : "{SITE_URL}{ikUrl('group','add',array('ik'=>'add_photo'))}",
+                url : "{U('group','add',array('ik'=>'add_photo'))}",
                 fileElementId : 'file',
                 dataType : 'json',
                 allowType : 'jpg|png|gif|jpeg',
@@ -220,7 +220,7 @@ function removePhoto(obj, seq_id){
     var data = "seq_id=" + seq_id + "&ck="+ck;
     $.ajax({
         type:       "post",
-        url:        "{SITE_URL}{ikUrl('group','add',array('ik'=>'remove_photo', 'topic_id'=>{$topic_id}))}",
+        url:        "{U('group','add',array('ik'=>'remove_photo', 'topic_id'=>{$topic_id}))}",
         dataType:   "json",
         data:       data,
         success:    function(data, status){
@@ -270,7 +270,7 @@ function addRemoteVideo(frm, o){
 				$('.pop_win').find('.confirmbtn').attr('disabled','disabled');
 	 			$.ajax({
                     type: 'post',
-                    url: "{SITE_URL}{ikUrl('group','add',array('ik'=>'add_video'))}",
+                    url: "{U('group','add',array('ik'=>'add_video'))}",
                     data: {
 						topic_id: nid,
                         url: encodeURIComponent(vurl)  //编码传送
@@ -311,7 +311,7 @@ function removeVideo(obj, seq_id){
     var data = "seq_id=" + seq_id + "&ck="+ck;
     $.ajax({
         type:       "post",
-        url:        "{SITE_URL}{ikUrl('group','add',array('ik'=>'remove_video', 'topic_id'=>{$topic_id}))}",
+        url:        "{U('group','add',array('ik'=>'remove_video', 'topic_id'=>{$topic_id}))}",
         dataType:   "json",
         data:       data,
         success:    function(data, status){
@@ -334,7 +334,7 @@ function removeVideo(obj, seq_id){
 </div>
 
     <div class="cright">
-        <p class="pl2">&gt; <a href="{SITE_URL}{ikUrl('group','show',array('id'=>$strGroup[groupid]))}">返回{$strGroup[groupname]}</a></p>
+        <p class="pl2">&gt; <a href="{U('group','show',array('id'=>$strGroup[groupid]))}">返回{$strGroup[groupname]}</a></p>
     </div>
 
 

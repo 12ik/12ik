@@ -164,7 +164,7 @@ switch($ik){
 			$msg_userid = '0';
 			$msg_touserid = $userid_follow;
 			$msg_title = '恭喜，您被人跟随啦！看看他是谁吧';
-			$msg_content = '恭喜，您被人跟随啦！看看他是谁吧<br />'.SITE_URL.ikUrl('hi','',array('id'=>$strdoname['doname']));
+			$msg_content = '恭喜，您被人跟随啦！看看他是谁吧<br />'.SITE_URL.U('hi','',array('id'=>$strdoname['doname']));
 			aac('message')->sendmsg($msg_userid,$msg_touserid,$msg_title,$msg_content);
 			
 			$strUser = $db->once_fetch_assoc("select userid,username,path,face from ".dbprefix."user_info where `userid`='$userid_follow'");
@@ -175,7 +175,7 @@ switch($ik){
 			
 			$strdoname = aac('user')->find('user_info',array('userid'=>$userid_follow));
 			$feed_data = array(
-				'link'	=> SITE_URL.ikUrl('hi','',array('id'=>$strdoname['doname'])),
+				'link'	=> SITE_URL.U('hi','',array('id'=>$strdoname['doname'])),
 				'username'	=> $strUser['username'],
 			);
 			
@@ -191,7 +191,7 @@ switch($ik){
 			
 			$strdoname = aac('user')->find('user_info',array('userid'=>$userid_follow));
 
-			header("Location: ".SITE_URL.ikUrl('hi','',array('id'=>$strdoname['doname'])));
+			header("Location: ".SITE_URL.U('hi','',array('id'=>$strdoname['doname'])));
 			
 		}
 		
@@ -218,7 +218,7 @@ switch($ik){
 		$db->query("update ".dbprefix."user_info set `count_follow`='$count_follow_userid',`count_followed`='$count_followed_userid' where userid='$userid_follow'");
 		
 		$strdoname = aac('user')->find('user_info',array('userid'=>$userid_follow));
-		header("Location: ".SITE_URL.ikUrl('hi','',array('id'=>$strdoname['doname'])));
+		header("Location: ".SITE_URL.U('hi','',array('id'=>$strdoname['doname'])));
 		
 		break;
 		

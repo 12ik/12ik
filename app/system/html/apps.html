@@ -7,7 +7,7 @@ function isinstall(appname){
 	$('#isinstall_'+appname).html('<img src="public/images/loading.gif">');
 	$.ajax({
 		type: "GET",
-		url:  "index.php?app=system&ac=apps&ik=install&appname="+appname,
+		url:  "index.php?app=system&a=apps&ik=install&appname="+appname,
 		success: function(result){
 			if(result=='1'){
 				window.location.reload(true); 
@@ -22,7 +22,7 @@ function isinstall(appname){
 
 //升级
 function isupdate(appkey,version){
-	$.getJSON("http://www.12ik.com/index.php?app="+appkey+"&ac=update&old="+version+"&callback=?", function(response){
+	$.getJSON("http://www.12ik.com/index.php?app="+appkey+"&a=update&old="+version+"&callback=?", function(response){
 		if(response != ''){
 			$('#'+appkey).html('发现新版本：'+response.newv+'<a target="_blank" href="http://www.12ik.com/"><font color="red">[升级]</font></a>');
 		}
@@ -34,7 +34,7 @@ function isupdate(appkey,version){
 function isappnav(appkey,appname){
 	$.ajax({
 		type:"POST",
-		url:"index.php?app=system&ac=apps&ik=appnav",
+		url:"index.php?app=system&a=apps&ik=appnav",
 		data:"&appkey="+appkey+"&appname="+appname,
 		beforeSend:function(){},
 		success:function(result){
@@ -49,7 +49,7 @@ function isappnav(appkey,appname){
 function unisappnav(appkey){
 	$.ajax({
 		type:"POST",
-		url:"index.php?app=system&ac=apps&ik=unappnav",
+		url:"index.php?app=system&a=apps&ik=unappnav",
 		data:"&appkey="+appkey,
 		beforeSend:function(){},
 		success:function(result){
@@ -59,26 +59,29 @@ function unisappnav(appkey){
 		}
 	})
 }
-
+//鼠标移动表格效果
+$(document).ready(function(){
+    $("tr[overstyle='on']").hover(
+      function () {
+        $(this).addClass("odd");
+      },
+      function () {
+        $(this).removeClass("odd");
+      }
+    );
+});
 </script>
 
 <!--main-->
 <div class="midder">
 
-<h2>APP管理 <span><a href="http://www.12ik.com/index.php?app=market" target="_blank">下载更多APP组件>></a></span></h2>
-
-<div class="tabnav">
-<ul>
-<li class="select"><a href="index.php?app=system&ac=apps&ik=list">APP列表</a></li>
-<!-- <li><a href="index.php?app=system&ac=installonline&ik=list">在线安装</a></li> -->
-</ul>
-</div>
+<h2><span><a href="http://www.12ik.com/index.php?app=market" target="_blank">下载更多APP组件>></a></span>{$title}</h2>
 
 <table  cellpadding="0" cellspacing="0">
 
 <tr class="old"><td width="150">APP名称</td><td>版本</td><td>介绍</td><td>作者</td><td>操作</td><td>导航</td><td>安装</td></tr>
 <!--{loop $arrApp $keys $item}-->
-<tr class="odd">
+<tr overstyle="on">
 <td><img src="app/{$item[name]}/icon.png" title="{$item}" align="absmiddle" />
 {$item[about][name]}({$item[name]})</td>
 <td>{$item[about][version]}<span id="{$item[name]}"></span>
@@ -86,7 +89,7 @@ function unisappnav(appkey){
 <td>{$item[about][desc]}</td>
 <td>{$item[about][author]}</td>
 <td>
-<!--{if $item[about][isoption] == '1' && $item[about][isinstall]=='1'}--><a href="index.php?app={$item[name]}&ac=admin&mg=options">[管理]</a><!--{/if}--> 
+<!--{if $item[about][isoption] == '1' && $item[about][isinstall]=='1'}--><a href="index.php?app={$item[name]}&a=admin&mg=options">[管理]</a><!--{/if}--> 
 </td>
 <td>
 <!--{if $item[about][isappnav] == '1' && $IK_SITE[appnav][$item[name]] == ''}--><a href="javascript:void('0');" onclick="isappnav('{$item[name]}','{$item[about][name]}');">[导航]</a><!--{/if}-->

@@ -10,4 +10,4 @@ if(is_file('plugins/'.$app.'/'.$plugin.'/'.$in.'.php')){
 }
 
 //形如这样
-//index.php?app=group&ac=plugin&plugin=qq&in=do
+//index.php?app=group&a=plugin&plugin=qq&in=do

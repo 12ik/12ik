@@ -2,7 +2,7 @@
 defined('IN_IK') or die('Access Denied.');
 $page = isset($_GET['page']) ? $_GET['page'] : '1';
 
-$url = SITE_URL."index.php?app=photo&ac=index&page=";
+$url = SITE_URL."index.php?app=photo&a=index&page=";
 
 $lstart = $page*28-28;
 

@@ -7,7 +7,7 @@ switch($ik){
 		
 		$lstart = $page*10-10;
 		
-		$url = SITE_URL.'index.php?app=photo&ac=admin&mg=album&ik=list&page=';
+		$url = SITE_URL.'index.php?app=photo&a=admin&mg=album&ik=list&page=';
 		
 		$arrAlbum = $db->fetch_all_assoc("select * from ".dbprefix."photo_album order by addtime desc limit $lstart,10");
 		
@@ -26,7 +26,7 @@ switch($ik){
 		
 		$lstart = $page*10-10;
 		
-		$url = SITE_URL.'index.php?app=photo&ac=admin&mg=album&ik=photo&albumid='.$albumid.'&page=';
+		$url = SITE_URL.'index.php?app=photo&a=admin&mg=album&ik=photo&albumid='.$albumid.'&page=';
 		
 		$arrPhoto = $db->fetch_all_assoc("select * from ".dbprefix."photo where albumid='$albumid' limit $lstart,10");
 		

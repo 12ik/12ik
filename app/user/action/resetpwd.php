@@ -55,7 +55,7 @@ switch($ik){
 				'email'=>$email,
 			));
 			
-			ikNotice("密码修改成功^_^","点击登陆",SITE_URL.ikUrl('user','login'));
+			ikNotice("密码修改成功^_^","点击登陆",SITE_URL.U('user','login'));
 		}
 	
 		

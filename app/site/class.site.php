@@ -242,7 +242,7 @@ class site extends IKApp{
 			
 		}else if(empty($userid)){
 			
-			ikNotice('你没有执行该操作('.$type.')的权限！','请登录后重试',SITE_URL.ikUrl('user','login'));	
+			ikNotice('你没有执行该操作('.$type.')的权限！','请登录后重试',SITE_URL.U('user','login'));	
 		}
 		return;		
 	}

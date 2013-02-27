@@ -11,13 +11,13 @@ $(document).ready(function() {
 		<!--{if $IK_SITE['base']['isinvite']=='1'}-->
 			invitecode:{
 				required:true,
-				remote:"{SITE_URL}index.php?app=user&ac=check&ik=isinvitecode"
+				remote:"{SITE_URL}index.php?app=user&a=check&ik=isinvitecode"
 			},
 		<!--{/if}-->
 			email: {
 				required: true,
 				email: true,
-				remote: "{SITE_URL}index.php?app=user&ac=check&ik=inemail"
+				remote: "{SITE_URL}index.php?app=user&a=check&ik=inemail"
 			},
 			pwd: {
 				required: true,
@@ -32,7 +32,7 @@ $(document).ready(function() {
 				required: true,
 				minlength: 2,
 				maxlength: 12,
-				remote:"{SITE_URL}index.php?app=user&ac=check&ik=isusername"
+				remote:"{SITE_URL}index.php?app=user&a=check&ik=isusername"
 			}
 		},
 		messages: {
@@ -101,7 +101,7 @@ obj.src = $(obj).attr('url') + '&nowtime=' + new Date().getTime();
 <!--{else}-->
 
 <div class="user_left">
-<form  id="signupform" method="POST" action="{SITE_URL}{ikUrl('user','register',array('ik'=>'do'))}">
+<form  id="signupform" method="POST" action="{U('user','register',array('ik'=>'do'))}">
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0"  class="Tabletext">
 <!--{if $IK_SITE['base']['isinvite']=='1'}-->
@@ -138,7 +138,7 @@ obj.src = $(obj).attr('url') + '&nowtime=' + new Date().getTime();
 
 <tr><td class="label">验证码：</td><td class="field">
 <input name="authcode"  class="uinput" style="width:50px; float:left"/>
-<img src="{SITE_URL}index.php?app=user&ac=checkcode" url="{SITE_URL}index.php?app=user&ac=checkcode" onclick="javascript:newgdcode(this);" alt="点击刷新验证码" style="cursor:pointer; margin-left:5px; float:left;" align="absmiddle"/></td>
+<img src="{SITE_URL}index.php?app=user&a=checkcode" url="{SITE_URL}index.php?app=user&a=checkcode" onclick="javascript:newgdcode(this);" alt="点击刷新验证码" style="cursor:pointer; margin-left:5px; float:left;" align="absmiddle"/></td>
 <td class="status"></td></tr>
 
 <tr>
@@ -163,7 +163,7 @@ obj.src = $(obj).attr('url') + '&nowtime=' + new Date().getTime();
 
 <div class="aside">
             
-	<p class="pl2">&gt; 已经拥有12ik网帐号? <a href="{SITE_URL}{ikUrl('user','login')}" rel="nofollow">直接登录</a></p>
+	<p class="pl2">&gt; 已经拥有12ik网帐号? <a href="{U('user','login')}" rel="nofollow">直接登录</a></p>
 
 </div>
 <div class="cl"></div>

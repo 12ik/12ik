@@ -44,7 +44,7 @@ IK('dialog', 'effects', function () {
             },
             DoCreateRoom = function (e) {
                 $.post_withck(
-					siteUrl+'index.php?app=site&ac=create_room&siteid=' + siteId,
+					siteUrl+'index.php?app=site&a=create_room&siteid=' + siteId,
                     function (o) {
                         if (!o.error) {
                             location.href = o.room;
@@ -61,7 +61,7 @@ IK('dialog', 'effects', function () {
             roomRename = function (name,roomid) {
                 oCurrTab.text(name);//设置名称 发送ajax
                 $.post_withck(
-                    siteUrl+'index.php?app=site&ac=roomRename&siteid=' + siteId+'&roomid='+roomid,
+                    siteUrl+'index.php?app=site&a=roomRename&siteid=' + siteId+'&roomid='+roomid,
                     { 'name': name }
                 );
             };
@@ -126,7 +126,7 @@ IK('dialog', 'effects', function () {
         oCreateRoom.click(function (e) {
             e.preventDefault(); 
             $.post_withck(
-                siteUrl+'index.php?app=site&ac=create_room_check&siteid=' + siteId,
+                siteUrl+'index.php?app=site&a=create_room_check&siteid=' + siteId,
                 function (o) {
                     if (o.code == 'go_ahead') {
                         DoCreateRoom();
@@ -221,7 +221,7 @@ IK('dialog', 'effects', function () {
             if (!$(this).data('adding')) {
                 $(this).data('adding', 1);
                 $.post_withck(
-				    siteUrl+'index.php?app=site&ac=widgets&siteid=' + siteId+'&roomid='+ roomid,
+				    siteUrl+'index.php?app=site&a=widgets&siteid=' + siteId+'&roomid='+ roomid,
                     { 'kind': widget_kind },
                     function (mod) {
                         if (!mod.error) {
@@ -291,7 +291,7 @@ IK('dialog', 'effects', function () {
                     $(this).parent().remove();
                     showBox(500);
                     $.post_withck(
-                        siteUrl+'index.php?app=site&ac=tips&siteid=' + siteId,
+                        siteUrl+'index.php?app=site&a=tips&siteid=' + siteId,
                         { isSetting: '1'}
                     );
                 });

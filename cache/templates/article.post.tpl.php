@@ -4,7 +4,7 @@
         <h1>
         <?php echo $title;?>
         </h1>    
-<form method="POST" action="<?php echo SITE_URL;?><?php echo ikurl('article','do',array('ik'=>'update'))?>"  onsubmit="return checkForm(this);"  enctype="multipart/form-data" id="form_tipic">
+<form method="POST" action="<?php echo SITE_URL;?><?php echo U('article','do',array('ik'=>'update'))?>"  onsubmit="return checkForm(this);"  enctype="multipart/form-data" id="form_tipic">
 <table width="100%" cellpadding="0" cellspacing="0" class="table_1">
 
 	<tr>
@@ -31,7 +31,7 @@
     <tr>
     	<th>&nbsp;</th><td>
         <input type="hidden" name="itemid" value="<?php echo $itemid;?>" id="itemid"  />
-        <input class="submit" type="submit" value="好啦，发表" tabindex="4" > <a href="<?php echo SITE_URL;?><?php echo ikurl('group','show',array('id'=>$strGroup['groupid']))?>">返回</a>
+        <input class="submit" type="submit" value="好啦，发表" tabindex="4" > <a href="<?php echo SITE_URL;?><?php echo U('group','show',array('id'=>$strGroup['groupid']))?>">返回</a>
         </td>
     </tr>
 </table>
@@ -90,7 +90,7 @@
 <script language="javascript">
 $(function(){
 	$('#addImg').bind('click',function(){
-		var ajaxurl = "<?php echo SITE_URL;?><?php echo ikurl('article','do',array('ik'=>'add_photo'))?>";
+		var ajaxurl = "<?php echo SITE_URL;?><?php echo U('article','do',array('ik'=>'add_photo'))?>";
 		var data = "{'type':'article','typeid':'<?php echo $itemid;?>'}";		
 		addPhoto(ajaxurl, data);
 	})

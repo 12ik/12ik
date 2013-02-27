@@ -8,13 +8,13 @@
 <meta name="Copyright" content="<?php echo $IK_SOFT['info'][name];?>" />
 <meta name="baidu_union_verify" content="f67264028a31c2617ff3b5c78113034e">
 <title>
-<?php if($ac=='index') { ?>
+<?php if($a=='index') { ?>
 <?php echo $IK_SITE['base'][site_title];?> - <?php echo $title;?>
 <?php } else { ?>
 <?php echo $title;?> - <?php echo $IK_APP['options'][appname];?>
 <?php } ?>
 </title>
-<?php if($app=='home' && $ac=='index') { ?>
+<?php if($app=='home' && $a=='index') { ?>
 <meta name="keywords" content="<?php echo $IK_SITE['base'][site_key];?>" /> 
 <meta name="description" content="<?php echo $IK_SITE['base'][site_desc];?>" /> 
 <?php } ?>
@@ -53,15 +53,15 @@
     
     <div class="top_info">
         <?php if($IK_USER['user'] == '') { ?>
-		<a href="<?php echo SITE_URL;?><?php echo ikurl('user','login')?>">登录</a> | <a href="<?php echo SITE_URL;?><?php echo ikurl('user','register')?>">注册</a>       
+		<a href="<?php echo U('user','login')?>">登录</a> | <a href="<?php echo U('user','register')?>">注册</a>       
         <?php } else { ?>
-        <a id="newmsg" href="<?php echo SITE_URL;?><?php echo ikurl('message','ikmail',array(ik=>inbox))?>"></a> | 
+        <a id="newmsg" href="<?php echo U('message','ikmail',array(ik=>inbox))?>"></a> | 
         <?php $globalUser = aac('user')->getOneUser($IK_USER['user'][userid]);?>
-        <a href="<?php echo SITE_URL;?><?php echo ikurl('hi','',array('id'=>$globalUser['doname']))?>">
+        <a href="<?php echo U('hi','',array('id'=>$globalUser['doname']))?>">
         <?php echo $globalUser['username'];?>
         </a> | 
-        <a href="<?php echo SITE_URL;?><?php echo ikurl('user','set',array(ik=>base))?>">设置</a> | 
-        <a href="<?php echo SITE_URL;?><?php echo ikurl('user','login',array(ik=>out))?>">退出</a>
+        <a href="<?php echo U('user','set',array(ik=>base))?>">设置</a> | 
+        <a href="<?php echo U('user','login',array(ik=>out))?>">退出</a>
         <?php } ?>
     </div>
 
@@ -72,17 +72,17 @@
                 <a href="<?php echo SITE_URL;?>">爱客</a>
                 </li>             
                 <li>
-                <a href="<?php echo SITE_URL;?><?php echo ikurl('location')?>">同城</a>
+                <a href="<?php echo U('location')?>">同城</a>
                 </li>
                 <li>
-                <a href="<?php echo SITE_URL;?><?php echo ikurl('group')?>">小组</a>
+                <a href="<?php echo U('group')?>">小组</a>
                 </li>
                 <li>
-                <a href="<?php echo SITE_URL;?><?php echo ikurl('haomiwo')?>" target="_blank">好米窝</a>
+                <a href="<?php echo U('haomiwo')?>" target="_blank">好米窝</a>
                 </li> 
-                <li><a href="<?php echo SITE_URL;?><?php echo ikurl('article')?>">文章</a></li>
-<!--                 <li><a href="<?php echo SITE_URL;?><?php echo ikurl('tribe')?>">部落</a></li> -->
-                <li><a href="<?php echo SITE_URL;?><?php echo ikurl('home','down')?>">源码下载</a></li>                                              
+                <li><a href="<?php echo U('article')?>">文章</a></li>
+<!--                 <li><a href="<?php echo U('tribe')?>">部落</a></li> -->
+                <li><a href="<?php echo U('home','down')?>">源码下载</a></li>                                              
 
         </ul>
     </div>
@@ -100,7 +100,7 @@
 	<div class="site_nav">
     	<?php if($app == 'group' ) { ?>
         <div class="site_logo nav_logo">
-            <a href="<?php echo SITE_URL;?><?php echo ikurl('group','')?>">爱客小组</a>
+            <a href="<?php echo U('group','')?>">爱客小组</a>
         </div>
         <?php } else { ?>
         <div class="site_logo">
@@ -115,9 +115,9 @@
         <div class="appnav">
             <ul id="nav_bar">
                 <?php foreach((array)$IK_SITE['appnav'] as $key=>$item) {?>
-                <li  <?php if($app==$key) { ?> class="select" <?php } ?> ><a href="<?php echo SITE_URL;?><?php echo ikurl($key)?>"><?php echo $item;?></a></li>
+                <li  <?php if($app==$key) { ?> class="select" <?php } ?> ><a href="<?php echo U($key)?>"><?php echo $item;?></a></li>
                 <?php }?>
-                <li><a href="<?php echo SITE_URL;?><?php echo ikurl('home','down')?>">源码下载</a></li>
+                <li><a href="<?php echo U('home','down')?>">源码下载</a></li>
             </ul>
            <form action="<?php echo SITE_URL;?>index.php"  method="get" onsubmit="return searchForm(this);">
            <input type="hidden" name="app" value="search" /><input type="hidden" name="ac" value="q" />
@@ -132,10 +132,10 @@
         	<?php if($app == 'group' ) { ?>
             <div class="appnav">
                 <ul id="nav_bar">
-                    <li><a href="<?php echo SITE_URL;?><?php echo ikurl('group','')?>">我的小组</a></li>
-                    <li><a href="<?php echo SITE_URL;?><?php echo ikurl('group','explore')?>">发现小组</a></li>
-                    <li><a href="<?php echo SITE_URL;?><?php echo ikurl('group','explore_topic')?>">发现话题</a></li>
-                    <li><a href="<?php echo SITE_URL;?><?php echo ikurl('group','nearby',array('ik'=>'beijing'))?>">北京话题</a></li>
+                    <li><a href="<?php echo U('group','')?>">我的小组</a></li>
+                    <li><a href="<?php echo U('group','explore')?>">发现小组</a></li>
+                    <li><a href="<?php echo U('group','explore_topic')?>">发现话题</a></li>
+                    <li><a href="<?php echo U('group','nearby',array('ik'=>'beijing'))?>">北京话题</a></li>
                 </ul>
                <form action="<?php echo SITE_URL;?>index.php"  method="get" onsubmit="return searchForm(this);">
                <input type="hidden" name="app" value="search" /><input type="hidden" name="ac" value="q" />
@@ -149,12 +149,12 @@
             <div class="appnav">
                 <ul id="nav_bar">
                     <li><a href="<?php echo SITE_URL;?>">首页</a></li>
-                    <li><a href="<?php echo SITE_URL;?><?php echo ikurl('feed')?>">友邻广播</a></li>
-                    <li><a href="<?php echo SITE_URL;?><?php echo ikurl('hi','',array('id'=>$globalUser['doname']))?>">我的爱客</a></li>
-                    <li><a href="<?php echo SITE_URL;?><?php echo ikurl('group')?>">我的小组</a></li>
-                    <li><a href="<?php echo SITE_URL;?><?php echo ikurl('site')?>">我的小站</a></li>
-                    <li><a href="<?php echo SITE_URL;?><?php echo ikurl('article')?>">文章</a></li>
-                    <li><a href="<?php echo SITE_URL;?><?php echo ikurl('tribe')?>">部落</a></li>
+                    <li><a href="<?php echo U('feed')?>">友邻广播</a></li>
+                    <li><a href="<?php echo U('hi','',array('id'=>$globalUser['doname']))?>">我的爱客</a></li>
+                    <li><a href="<?php echo U('group')?>">我的小组</a></li>
+                    <li><a href="<?php echo U('site')?>">我的小站</a></li>
+                    <li><a href="<?php echo U('article')?>">文章</a></li>
+                    <li><a href="<?php echo U('tribe')?>">部落</a></li>
                     
                 </ul>
                <form action="<?php echo SITE_URL;?>index.php"  method="get" onsubmit="return searchForm(this);">

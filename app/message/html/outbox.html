@@ -6,7 +6,7 @@
     	<div class="cleft">
         	{template menu}
             <div class="clear"></div>
-		 <form  method="post" onSubmit="return isConfirmed" action="{SITE_URL}{ikUrl('message','do',array('ik'=>'all'))}">               <table class="olt">
+		 <form  method="post" onSubmit="return isConfirmed" action="{U('message','do',array('ik'=>'all'))}">               <table class="olt">
               <tbody>
                 <tr>
                   <td class="pl" style="width:112px;"><span class="doumail_from">送往</span></td>
@@ -20,11 +20,11 @@
                 <tr>
                   <td><span class="doumail_from">{$item[touser][username]}</span></td>
                   <td class="m" align="center">&gt;</td>
-                  <td><a href="{SITE_URL}{ikUrl('message','show',array('messageid'=>$item[messageid]))}">{$item[title]}</a></td>
+                  <td><a href="{U('message','show',array('messageid'=>$item[messageid]))}">{$item[title]}</a></td>
                   <td>{$item[addtime]}</td>
                   <td align="center"><input name="messageid[]" value="{$item[messageid]}" type="checkbox"></td>
                   <td style="display: none;" class="mail_options">
-                  <a onClick="return confirm('真的要删除消息吗？')" class="post_link" href="{SITE_URL}{ikUrl('message','do',array('ik'=>'del','type'=>'outbox','messageid'=>$item[messageid]))}">删除</a>
+                  <a onClick="return confirm('真的要删除消息吗？')" class="post_link" href="{U('message','do',array('ik'=>'del','type'=>'outbox','messageid'=>$item[messageid]))}">删除</a>
                   </td>
                 </tr>
                 <!--{/loop}-->

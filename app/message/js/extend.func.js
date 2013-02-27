@@ -7,7 +7,7 @@ $("#sendbox").html("加载输入框中......")
 
 	$.ajax({
 		type: "GET",
-		url:  siteUrl+"index.php?app=message&ac=msgbox&userid="+userid,
+		url:  siteUrl+"index.php?app=message&a=msgbox&userid="+userid,
 		success: function(msg){
 			$('#msgbox').html(msg);
 			
@@ -19,7 +19,7 @@ $("#sendbox").html("加载输入框中......")
 
 	$.ajax({
 		type: "GET",
-		url:  siteUrl+"index.php?app=message&ac=sendbox&userid="+userid,
+		url:  siteUrl+"index.php?app=message&a=sendbox&userid="+userid,
 		success: function(msg){
 			$('#sendbox').html(msg);
 		}
@@ -40,14 +40,14 @@ function sendmsg(userid,touserid){
 	
 	$.ajax({
 		type: "POST",
-		url: siteUrl+"index.php?app=message&ac=sendmsg",
+		url: siteUrl+"index.php?app=message&a=sendmsg",
 		data: "userid="+userid+"&touserid="+touserid+"&content="+content,
 		beforeSend: function(){},
 		success: function(result){
 			if(result == '1'){
 				$.ajax({
 					type: "GET",
-					url:  siteUrl+"index.php?app=message&ac=msgbox&userid="+touserid,
+					url:  siteUrl+"index.php?app=message&a=msgbox&userid="+touserid,
 					success: function(msg){
 					
 						$('#msgbox').html(msg);
@@ -72,7 +72,7 @@ function systembox(userid){
 	$("#msgbox").html("加载系统消息中......")
 	$.ajax({
 		type: "GET",
-		url:  siteUrl+"index.php?app=message&ac=systembox&userid="+userid,
+		url:  siteUrl+"index.php?app=message&a=systembox&userid="+userid,
 		success: function(msg){
 			$('#msgbox').html(msg);
 			var msgbox=document.getElementById('msgbox');

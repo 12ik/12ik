@@ -16,7 +16,7 @@ $title = $strGroup['groupname'];
  
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
-$url = SITE_URL.ikUrl('group','recovery',array('groupid'=>$groupid,'page'=>''));
+$url = SITE_URL.U('group','recovery',array('groupid'=>$groupid,'page'=>''));
 
 $lstart = $page*30-30;
 

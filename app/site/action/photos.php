@@ -71,7 +71,7 @@ switch ($ik) {
 
 	case "addinfo" :
 	
-		header("Location: ".SITE_URL.ikUrl('site','photos',array('ik'=>'list','photosid'=>$photosid)));
+		header("Location: ".SITE_URL.U('site','photos',array('ik'=>'list','photosid'=>$photosid)));
 		break;	
 		
 	case "list" :
@@ -83,12 +83,12 @@ switch ($ik) {
 	case "photo" :
 		$photoid = intval($_GET['pid']);//照片id
 		if($photoid == 0){
-			header("Location: ".SITE_URL.ikUrl('site','photos',array('ik'=>'list','photosid'=>$photosid)));
+			header("Location: ".SITE_URL.U('site','photos',array('ik'=>'list','photosid'=>$photosid)));
 			exit;
 		}
 		$photoNum = $db->once_fetch_assoc("select count(*) from ".dbprefix."site_photos_pic where `photoid`='$photoid'");
 		if($photoNum['count(*)']==0){
-			header("Location: ".SITE_URL.ikUrl('site','photos',array('ik'=>'list','photosid'=>$photosid)));
+			header("Location: ".SITE_URL.U('site','photos',array('ik'=>'list','photosid'=>$photosid)));
 			exit;
 		}	
 		$strPhoto = aac('site')->find('site_photos_pic',array('photoid'=>$photoid));

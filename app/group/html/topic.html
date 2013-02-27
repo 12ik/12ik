@@ -7,10 +7,10 @@
       <!--{if $page == '1'}-->
       
       <div class="topic-content clearfix">
-        <div class="user-face"> <a href="{SITE_URL}{ikUrl('hi','',array('id'=>$strTopic[user][doname]))}"><img title="{$strTopic[user][username]}" alt="{$strTopic[user][username]}" src="{$strTopic[user][face]}" width="48"></a> <br />
+        <div class="user-face"> <a href="{U('hi','',array('id'=>$strTopic[user][doname]))}"><img title="{$strTopic[user][username]}" alt="{$strTopic[user][username]}" src="{$strTopic[user][face]}" width="48"></a> <br />
           {php doAction('topic_face_footer',$strTopic)} </div>
         <div class="topic-doc">
-          <h3> <span class="color-green">{php echo date('Y-m-d H:i:s',$strTopic[addtime])}</span> <span class="pl20">来自：<a href="{SITE_URL}{ikUrl('hi','',array('id'=>$strTopic[user][doname]))}">{$strTopic[user][username]}</a></span> </h3>
+          <h3> <span class="color-green">{php echo date('Y-m-d H:i:s',$strTopic[addtime])}</span> <span class="pl20">来自：<a href="{U('hi','',array('id'=>$strTopic[user][doname]))}">{$strTopic[user][username]}</a></span> </h3>
           <div class="topic-view">{php echo nl2br($strTopic[content])}</div>
           
           <!--签名--> 
@@ -21,10 +21,10 @@
           <!--{if $IK_USER[user][userid] == $strTopic[userid] || $IK_USER[user][userid]==$strGroup[userid] ||$strGroupUser[isadmin]=="1" || $IK_USER[user][isadmin]=="1"}-->
           <div style="text-align:right;"> 
             <!--{if $IK_USER[user][userid]==$strGroup[userid] ||$strGroupUser[isadmin]=="1" || $IK_USER[user][isadmin]=="1"}--> 
-            &gt;&nbsp; <a href="{SITE_URL}index.php?app=group&ac=do&ik=topic_istop&topicid={$strTopic[topicid]}"><!--{if $strTopic[istop]=='0'}-->置顶<!--{else}-->取消置顶<!--{/if}--></a> &gt;&nbsp; <a href="{SITE_URL}index.php?app=group&ac=do&ik=isposts&topicid={$strTopic[topicid]}"><!--{if $strTopic[isposts]==0}-->精华<!--{else}-->取消精华<!--{/if}--></a> &gt;&nbsp; <a href="{SITE_URL}index.php?app=group&ac=do&ik=topic_isshow&topicid={$strTopic[topicid]}"><!--{if $strTopic[isshow]=='0'}-->隐藏<!--{else}-->显示<!--{/if}--></a> &gt;&nbsp; <a href="{SITE_URL}index.php?app=group&ac=topic_move&groupid={$strGroup[groupid]}&topicid={$strTopic[topicid]}">移动</a> 
+            &gt;&nbsp; <a href="{SITE_URL}index.php?app=group&a=do&ik=topic_istop&topicid={$strTopic[topicid]}"><!--{if $strTopic[istop]=='0'}-->置顶<!--{else}-->取消置顶<!--{/if}--></a> &gt;&nbsp; <a href="{SITE_URL}index.php?app=group&a=do&ik=isposts&topicid={$strTopic[topicid]}"><!--{if $strTopic[isposts]==0}-->精华<!--{else}-->取消精华<!--{/if}--></a> &gt;&nbsp; <a href="{SITE_URL}index.php?app=group&a=do&ik=topic_isshow&topicid={$strTopic[topicid]}"><!--{if $strTopic[isshow]=='0'}-->隐藏<!--{else}-->显示<!--{/if}--></a> &gt;&nbsp; <a href="{SITE_URL}index.php?app=group&a=topic_move&groupid={$strGroup[groupid]}&topicid={$strTopic[topicid]}">移动</a> 
             
             <!--{/if}--> 
-            &gt;&nbsp; <a href="{SITE_URL}index.php?app=group&ac=topic_edit&topicid={$strTopic[topicid]}">编辑</a> &gt;&nbsp; <a  href="{SITE_URL}index.php?app=group&ac=do&ik=deltopic&topicid={$strTopic['topicid']}" onclick="return confirm('确定删除?')">删除</a> </div>
+            &gt;&nbsp; <a href="{SITE_URL}index.php?app=group&a=topic_edit&topicid={$strTopic[topicid]}">编辑</a> &gt;&nbsp; <a  href="{SITE_URL}index.php?app=group&a=do&ik=deltopic&topicid={$strTopic['topicid']}" onclick="return confirm('确定删除?')">删除</a> </div>
           <!--{/if}--> 
         </div>
       </div>
@@ -32,16 +32,16 @@
       	<div class="sns-bar">
         	<div class="sns-bar-rec">
                 <span class="rec">
-                    <a class="bn-sharing  i a_share_btn" data-pic="{$strTopic[content_photo][0]}" data-title="{$strTopic[title]}" data-desc="{php echo getsubstrutf8(t($strTopic[content]),0,150)}" data-url="{SITE_URL}{ikUrl('group','topic',array('id'=>$strTopic[topicid]))}" href="#">分享到</a> &nbsp;&nbsp;
+                    <a class="bn-sharing  i a_share_btn" data-pic="{$strTopic[content_photo][0]}" data-title="{$strTopic[title]}" data-desc="{php echo getsubstrutf8(t($strTopic[content]),0,150)}" data-url="{U('group','topic',array('id'=>$strTopic[topicid]))}" href="#">分享到</a> &nbsp;&nbsp;
                 </span>            
-            	<div class="rec-sec"><a href="{SITE_URL}{ikUrl('group','do',array('ik'=>'topic_recommend'))}" title="推荐" class="lnk-sharing i a_recommend_btn"  data-title="{php echo getsubstrutf8(t($strTopic[title]),0,40)}"  data-desc="{php echo getsubstrutf8(t($strTopic[content]),0,100)}"  data-tkind="{$strTopic[groupid]}" data-tid="{$strTopic[topicid]}" data-tuid="{$IK_USER['user']['userid']}" data-url="{SITE_URL}{ikUrl('group','topic',array('id'=>$strTopic[topicid]))}">推荐</a> <span class="rec-num" id="rec-num">{$recommendNum}人</span></div>
+            	<div class="rec-sec"><a href="{U('group','do',array('ik'=>'topic_recommend'))}" title="推荐" class="lnk-sharing i a_recommend_btn"  data-title="{php echo getsubstrutf8(t($strTopic[title]),0,40)}"  data-desc="{php echo getsubstrutf8(t($strTopic[content]),0,100)}"  data-tkind="{$strTopic[groupid]}" data-tid="{$strTopic[topicid]}" data-tuid="{$IK_USER['user']['userid']}" data-url="{U('group','topic',array('id'=>$strTopic[topicid]))}">推荐</a> <span class="rec-num" id="rec-num">{$recommendNum}人</span></div>
             </div>
             <div class="sns-bar-fav">
             	<span  class="fav-num"><a href="#" id="like-num">{$collectNum}人</a> 喜欢 </span>
             	{if $is_Like}
-                <a href="{SITE_URL}{ikUrl('group','do',array('ik'=>'topic_collect'))}" title="取消喜欢" data-tkind="{$strTopic[groupid]}" data-tid="{$strTopic[topicid]}" data-tuid="{$IK_USER['user']['userid']}" class="btn-fav fav-cancel i a_like_btn">喜欢</a> 
+                <a href="{U('group','do',array('ik'=>'topic_collect'))}" title="取消喜欢" data-tkind="{$strTopic[groupid]}" data-tid="{$strTopic[topicid]}" data-tuid="{$IK_USER['user']['userid']}" class="btn-fav fav-cancel i a_like_btn">喜欢</a> 
 				{else}
-                <a href="{SITE_URL}{ikUrl('group','do',array('ik'=>'topic_collect'))}" title="标为喜欢" data-tkind="{$strTopic[groupid]}" data-tid="{$strTopic[topicid]}" data-tuid="{$IK_USER['user']['userid']}" class="btn-fav fav-add i a_like_btn">喜欢</a> 
+                <a href="{U('group','do',array('ik'=>'topic_collect'))}" title="标为喜欢" data-tkind="{$strTopic[groupid]}" data-tid="{$strTopic[topicid]}" data-tuid="{$IK_USER['user']['userid']}" class="btn-fav fav-add i a_like_btn">喜欢</a> 
             	{/if}
             </div>        
         </div>
@@ -52,7 +52,7 @@
       <!--tag标签-->
       <div class="tags"> 
         <!--{loop $strTopic[tags] $key $item}--> 
-        <a rel="tag" title="" class="post-tag" href="{SITE_URL}{ikUrl('group','topic_tag',array(tagname=>$item[tagname]))}">{$item[tagname]}</a> 
+        <a rel="tag" title="" class="post-tag" href="{U('group','topic_tag',array(tagname=>$item[tagname]))}">{$item[tagname]}</a> 
         <!--{/loop}--> 
         <!--{if $isGroupUser}--> 
         <a rel="tag" href="javascript:void(0);" onclick="showTagFrom()">+标签</a>
@@ -67,16 +67,16 @@
       <!--{/if}-->
       
       <div class="clear"></div>
-      <div> {if $upTopic}上一篇：<a href="{SITE_URL}{ikUrl('group','topic',array('id'=>$upTopic['topicid']))}">{$upTopic['title']}</a>{/if}
+      <div> {if $upTopic}上一篇：<a href="{U('group','topic',array('id'=>$upTopic['topicid']))}">{$upTopic['title']}</a>{/if}
         
-        {if $downTopic}下一篇：<a href="{SITE_URL}{ikUrl('group','topic',array('id'=>$downTopic['topicid']))}">{$downTopic['title']}</a>{/if} </div>
+        {if $downTopic}下一篇：<a href="{U('group','topic',array('id'=>$downTopic['topicid']))}">{$downTopic['title']}</a>{/if} </div>
       
       <!--{if $page == '1'}-->
       <div class="orderbar"> 
         <!--{if $sc=='asc'}--> 
-        <a href="{SITE_URL}{ikUrl('group','topic',array('id'=>$topicid,'sc'=>'desc'))}">倒序阅读</a> 
+        <a href="{U('group','topic',array('id'=>$topicid,'sc'=>'desc'))}">倒序阅读</a> 
         <!--{else}--> 
-        <a href="{SITE_URL}{ikUrl('group','topic',array('id'=>$topicid))}">正序阅读</a> 
+        <a href="{U('group','topic',array('id'=>$topicid))}">正序阅读</a> 
         <!--{/if}--> 
       </div>
       <!--{/if}--> 
@@ -86,12 +86,12 @@
         <!--{if is_array($arrTopicComment)}--> 
         <!--{loop $arrTopicComment $key $item}-->
         <li class="clearfix">
-          <div class="user-face"> <a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[user][doname]))}"><img title="{$item[user][username]}" alt="{$item[user][username]}" src="{$item[user][face]}"></a> </div>
+          <div class="user-face"> <a href="{U('hi','',array('id'=>$item[user][doname]))}"><img title="{$item[user][username]}" alt="{$item[user][username]}" src="{$item[user][face]}"></a> </div>
           <div class="reply-doc">
-            <h4><span class="fr">{php echo $key+1;}F</span><a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[user][doname]))}">{$item[user][username]}</a> {php echo date('Y-m-d H:i:s',$item[addtime])}</h4>
+            <h4><span class="fr">{php echo $key+1;}F</span><a href="{U('hi','',array('id'=>$item[user][doname]))}">{$item[user][username]}</a> {php echo date('Y-m-d H:i:s',$item[addtime])}</h4>
             
             <!--{if $item[referid] !='0'}-->
-            <div class="recomment"><a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[recomment][user][doname]))}"><img src="{$item[recomment][user][face]}" width="24" align="absmiddle"></a> <strong><a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[recomment][user][doname]))}">{$item[recomment][user][username]}</a></strong>：{php echo nl2br($item[recomment][content])}</div>
+            <div class="recomment"><a href="{U('hi','',array('id'=>$item[recomment][user][doname]))}"><img src="{$item[recomment][user][face]}" width="24" align="absmiddle"></a> <strong><a href="{U('hi','',array('id'=>$item[recomment][user][doname]))}">{$item[recomment][user][username]}</a></strong>：{php echo nl2br($item[recomment][content])}</div>
             <!--{/if}-->
             
             <p> {php echo nl2br($item[content])} </p>
@@ -107,7 +107,7 @@
               <!--{/if}--> 
               
               <!--{if $strTopic['userid'] == $IK_USER[user][userid] || $IK_USER[user][userid] == $strGroup[userid] || $IK_USER[user][userid] == $item[userid] || $strGroupUser[isadmin]==1 || $IK_USER[user][isadmin]==1}--> 
-              <span><a class="j a_confirm_link" href="{SITE_URL}index.php?app=group&ac=comment&ik=delete&commentid={$item[commentid]}" rel="nofollow" onclick="return confirm('确定删除?')">删除</a> </span> 
+              <span><a class="j a_confirm_link" href="{SITE_URL}index.php?app=group&a=comment&ik=delete&commentid={$item[commentid]}" rel="nofollow" onclick="return confirm('确定删除?')">删除</a> </span> 
               <!--{/if}--> 
             </div>
             <div id="rcomment_{$item[commentid]}" style="display:none; clear:both; padding:0px 10px">
@@ -126,14 +126,14 @@
       <h2>你的回应&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·</h2>
       <div> 
         <!--{if intval($IK_USER[user][userid])==0}-->
-        <div style="border:solid 1px #DDDDDD; text-align:center;padding:20px 0"><a href="{SITE_URL}{ikUrl('user','login')}">登录</a> | <a href="{SITE_URL}{ikUrl('user','register')}">注册</a></div>
+        <div style="border:solid 1px #DDDDDD; text-align:center;padding:20px 0"><a href="{U('user','login')}">登录</a> | <a href="{U('user','register')}">注册</a></div>
         <!--{elseif $isGroupUser == 0}--> 
         不是本组成员不能回应此贴哦 
         <!--{elseif $strTopic[iscomment] == 1 && $strTopic[userid] != $IK_USER[user][userid]}--> 
         本帖除作者外不允许任何人评论 
         <!--{else}-->
         
-        <form method="POST" action="{SITE_URL}index.php?app=group&ac=comment&ik=do" onSubmit="return checkComment('#formMini');" id="formMini" enctype="multipart/form-data">
+        <form method="POST" action="{SITE_URL}index.php?app=group&a=comment&ik=do" onSubmit="return checkComment('#formMini');" id="formMini" enctype="multipart/form-data">
           <textarea  style="width:100%;height:100px;" id="editor_mini" name="content" class="txt" onkeydown="keyComment('#formMini',event)"></textarea>
           <input type="hidden" name="topicid" value="{$strTopic[topicid]}" />
           <input class="submit" type="submit" value="加上去(Crtl+Enter)" style="margin:10px 0px">
@@ -149,11 +149,11 @@
           <div class="bd">
               <div class="group-item">
                   <div class="pic">
-                       <a href="{SITE_URL}{ikUrl('group','show',array('id'=>$strGroup[groupid]))}" title="{$strGroup[groupname]}"><img src="{$strGroup[icon_48]}" alt="{$strGroup[groupname]}"></a>
+                       <a href="{U('group','show',array('id'=>$strGroup[groupid]))}" title="{$strGroup[groupname]}"><img src="{$strGroup[icon_48]}" alt="{$strGroup[groupname]}"></a>
                   </div>
                   <div class="info">
                       <div class="title">
-                          <a href="{SITE_URL}{ikUrl('group','show',array('id'=>$strGroup[groupid]))}" title="{$strGroup[groupname]}">{php echo getsubstrutf8(t($strGroup[groupname]),0,14)}</a>
+                          <a href="{U('group','show',array('id'=>$strGroup[groupid]))}" title="{$strGroup[groupname]}">{php echo getsubstrutf8(t($strGroup[groupname]),0,14)}</a>
                       </div>
                   <div class="member-info1">我是小组的成员</div>
               </div>
@@ -164,16 +164,16 @@
       <div class="side-reg" id="g-side-info">
         <div class="bd">
           <div class="group-item">
-            <div class="pic"> <a href="{SITE_URL}{ikUrl('group','show',array('id'=>$strGroup[groupid]))}"> <img src="{$strGroup[icon_48]}"> </a> </div>
+            <div class="pic"> <a href="{U('group','show',array('id'=>$strGroup[groupid]))}"> <img src="{$strGroup[icon_48]}"> </a> </div>
             <div class="info">
-              <div class="title"> <a href="{SITE_URL}{ikUrl('group','show',array('id'=>$strGroup[groupid]))}">{php echo getsubstrutf8(t($strGroup[groupname]),0,14)}</a> </div>
+              <div class="title"> <a href="{U('group','show',array('id'=>$strGroup[groupid]))}">{php echo getsubstrutf8(t($strGroup[groupname]),0,14)}</a> </div>
               	<div class="member-info"> <i>{$strGroupUserNum}</i> 人聚集在这个小组 </div>
               	<p>{php echo getsubstrutf8(t($strGroup[groupdesc]),0,46)}</p>
             </div>
           </div>
         </div>
         <div class="ft">
-          <div class="member-status"><a class="bn-join" href="{SITE_URL}{ikUrl('group','do',array('ik'=>'join','groupid'=>$strGroup['groupid']))}">加入小组</a></div>
+          <div class="member-status"><a class="bn-join" href="{U('group','do',array('ik'=>'join','groupid'=>$strGroup['groupid']))}">加入小组</a></div>
         </div>
       </div>
       <!--{/if}-->
@@ -187,7 +187,7 @@
       <div class="indent newtopic">
         <ul>
           <!--{loop $newTopic $key $item}-->
-          <li><a title="{$item[title]}" href="{SITE_URL}{ikUrl('group','topic',array('id'=>$item[topicid]))}">{$item[title]}</a> &nbsp; <span class="pl">(<a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[user][doname]))}">{$item[user][username]}</a>) </span> </li>
+          <li><a title="{$item[title]}" href="{U('group','topic',array('id'=>$item[topicid]))}">{$item[title]}</a> &nbsp; <span class="pl">(<a href="{U('hi','',array('id'=>$item[user][doname]))}">{$item[user][username]}</a>) </span> </li>
           <!--{/loop}-->
         </ul>
       </div>

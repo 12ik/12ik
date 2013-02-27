@@ -17,4 +17,6 @@ foreach ( $arrOptions as $item ) {
 $arrTime = fileRead ( 'data/system_timezone.php' );
 $arrLang = fileRead ( 'data/system_lang.php' );
 
+$title = '基本配置';
+
 include template ( "options" );

@@ -4,7 +4,7 @@ switch ($ik) {
 	case "" :
 		//分页
 		$page = isset($_GET['page']) ? $_GET['page'] : '1';
-		$url = SITE_URL.ikUrl('article','list',array('cateid'=>'0','page'=>''));
+		$url = SITE_URL.U('article','list',array('cateid'=>'0','page'=>''));
 		$lstart = $page*15-15;
 		$arrArticles = aac('article')->findAll('article_spaceitems',null,'dateline desc',null,$lstart.',15');
 		foreach($arrArticles as $key=>$item)

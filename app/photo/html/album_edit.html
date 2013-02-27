@@ -7,12 +7,12 @@
 <div class="cleft">
 
     <div class="pl photitle">
-        &gt;<a href="{SITE_URL}index.php?app=photo&ac=upload&albumid={$strAlbum[albumid]}">添加照片</a> 
+        &gt;<a href="{SITE_URL}index.php?app=photo&a=upload&albumid={$strAlbum[albumid]}">添加照片</a> 
         &nbsp;&gt; <a href="">批量修改</a>
-        &nbsp;&gt; <a href="{SITE_URL}{ikUrl('photo','album',array(ik=>photo,albumid=>$strAlbum[albumid]))}">返回相册</a><br>
+        &nbsp;&gt; <a href="{U('photo','album',array(ik=>photo,albumid=>$strAlbum[albumid]))}">返回相册</a><br>
     </div>
 
-    <form method="POST" action="{SITE_URL}index.php?app=photo&ac=album&ik=edit_do">
+    <form method="POST" action="{SITE_URL}index.php?app=photo&a=album&ik=edit_do">
       <table width="100%" cellpadding="0" cellspacing="0" class="table_1">
             <tr>
                 <th>相册名称：</th>
@@ -26,7 +26,7 @@
            		<th></th>
                 <td>
                 <input type="hidden" name="albumid" value="{$strAlbum[albumid]}" />
-                <input class="submit" type="submit" value="更改我的设置" />  <a href="{SITE_URL}{ikUrl('photo','album',array(ik=>photo,albumid=>$strAlbum[albumid]))}">返回我的相册</a></td>
+                <input class="submit" type="submit" value="更改我的设置" />  <a href="{U('photo','album',array(ik=>photo,albumid=>$strAlbum[albumid]))}">返回我的相册</a></td>
            </tr> 
      </table>
     </form>   

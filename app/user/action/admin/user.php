@@ -12,7 +12,7 @@ switch ($ik) {
 		
 		$lstart = $page * 20 - 20;
 		
-		$url = 'index.php?app=user&ac=admin&mg=user&ik=list&page=';
+		$url = 'index.php?app=user&a=admin&mg=user&ik=list&page=';
 		
 		$arrAllUser = $new ['user']->findAll ( 'user_info', null, 'userid desc', null, $lstart . ',20' );
 		
@@ -46,6 +46,6 @@ switch ($ik) {
 		$userid = $_GET ['userid'];
 		$isenable = $_GET ['isenable'];
 		$db->query ( "update " . dbprefix . "user_info set `isenable`='$isenable' where userid='$userid'" );
-		header ( "Location: " . SITE_URL . "index.php?app=user&ac=admin&mg=user&ik=list" );
+		header ( "Location: " . SITE_URL . "index.php?app=user&a=admin&mg=user&ik=list" );
 		break;
 }

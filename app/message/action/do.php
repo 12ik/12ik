@@ -23,7 +23,7 @@ switch($ik){
 	
 	case "spam":
 		$status = aac('message')->update('message',array('messageid'=>$messageid,'touserid'=>$userid),array('isspam'=>1));
-		header("Location: ".SITE_URL.ikUrl('message','ikmail',array('ik'=>'spam')));
+		header("Location: ".SITE_URL.U('message','ikmail',array('ik'=>'spam')));
 	break;	
 
 	case "all":
@@ -53,7 +53,7 @@ switch($ik){
 			{
 				aac('message')->update('message',array('messageid'=>$messageid[$i],'touserid'=>$userid),array('isspam'=>1));
 			}
-			header("Location: ".SITE_URL.ikUrl('message','ikmail',array('ik'=>'spam')));
+			header("Location: ".SITE_URL.U('message','ikmail',array('ik'=>'spam')));
 		}
 		if(trim($_POST['mc_submit'])=='标记为已读')
 		{

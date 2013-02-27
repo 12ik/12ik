@@ -29,7 +29,7 @@ switch($ik){
 		$db->query("update ".dbprefix."note set count_comment='$count_comment' 
 		where noteid='$noteid'");
 		
-		header("Location: ".SITE_URL.ikUrl('note','show',
+		header("Location: ".SITE_URL.U('note','show',
 			array('noteid'=>$noteid)));
 		break;
 	
@@ -54,7 +54,7 @@ switch($ik){
 		}
 		
 		//跳转
-		header("Location: ".SITE_URL.ikUrl('note','show',array('noteid'=>$strComment['noteid'])));
+		header("Location: ".SITE_URL.U('note','show',array('noteid'=>$strComment['noteid'])));
 		
 		break;
 		

@@ -23,7 +23,7 @@ function ajaxFileUpload(){
 	   {
 		   $.ajaxFileUpload(
 				{
-					url : "{SITE_URL}{ikUrl('photo','ikupload',array('ik'=>'addimage'))}",
+					url : "{U('photo','ikupload',array('ik'=>'addimage'))}",
 					fileElementId : 'file',
 					dataType : 'json',
 					allowType : 'jpg|png|gif|jpeg',

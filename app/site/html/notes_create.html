@@ -36,7 +36,7 @@ IK.add('uploadify', {path: '{SITE_URL}public/js/lib/jquery.uploadify.min.js', ty
     <div class="main"> 
          
         <div class="content-nav">
-        <a href="{SITE_URL}{ikUrl('site','notes',array('ik'=>'list','notesid'=>$notesid))}">&gt; {$strNotes[title]}</a>
+        <a href="{U('site','notes',array('ik'=>'list','notesid'=>$notesid))}">&gt; {$strNotes[title]}</a>
         </div>
         
         <h1>{$title}</h1>
@@ -149,8 +149,8 @@ IK.add('uploadify', {path: '{SITE_URL}public/js/lib/jquery.uploadify.min.js', ty
 			value: '38672004:17fb1650e2c07ed759051d454054b2a43ec58b07'
 		}
 	};
-	var UPLOAD_PHOTO_URL = "{SITE_URL}{ikUrl('site','notes',array('ik'=>'add_photo','notesid'=>$notesid))}";
-	var UPLOAD_VIDEO_URL = "{SITE_URL}{ikUrl('site','notes',array('ik'=>'add_video','notesid'=>$notesid))}";
+	var UPLOAD_PHOTO_URL = "{U('site','notes',array('ik'=>'add_photo','notesid'=>$notesid))}";
+	var UPLOAD_VIDEO_URL = "{U('site','notes',array('ik'=>'add_video','notesid'=>$notesid))}";
 	var AUTOSAVE_URL = '/j/note/autosave';
 	var PREVIEW_URL = '/j/note/preview';
 </script>

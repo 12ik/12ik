@@ -8,25 +8,25 @@
 <div class="cleft">
 
 <div style="padding:3px;border-bottom:1px solid #ddd;margin:5px 0 10px 0;text-align:center;overflow: hidden;" class="pl">
-    <span class="rr">&gt; <a href="{SITE_URL}{ikUrl('photo','album',array(ik=>photo,albumid=>$strAlbum[albumid]))}">返回相册</a></span>
+    <span class="rr">&gt; <a href="{U('photo','album',array(ik=>photo,albumid=>$strAlbum[albumid]))}">返回相册</a></span>
     <span class="ll">第{$nowPage}张 / 共{$conutPage}张</span>
  
 <!--{if $nowPage >1}-->
 <link href="#" rel="prev">
-<a id="pre_photo" title="用方向键←可以向前翻页" href="{SITE_URL}{ikUrl('photo','show',array(photoid=>$prev))}">上一张</a>
+<a id="pre_photo" title="用方向键←可以向前翻页" href="{U('photo','show',array(photoid=>$prev))}">上一张</a>
 <!--{if $nowPage < $conutPage}-->
 /
 <!--{/if}-->
 <!--{/if}-->
 <!--{if $nowPage < $conutPage}-->
 <link href="#" rel="next">
-<a id="next_photo" title="用方向键→可以向后翻页" name="next_photo" href="{SITE_URL}{ikUrl('photo','show',array(photoid=>$next))}">下一张</a>
+<a id="next_photo" title="用方向键→可以向后翻页" name="next_photo" href="{U('photo','show',array(photoid=>$next))}">下一张</a>
 <!--{/if}-->
 </div>
 
 <div style="text-align:center">
 <!--{if $nowPage < $conutPage}-->
-<a title="点击查看下一张" href="{SITE_URL}{ikUrl('photo','show',array(photoid=>$next))}" class="mainphoto">
+<a title="点击查看下一张" href="{U('photo','show',array(photoid=>$next))}" class="mainphoto">
 <!--{/if}-->
   
         {if $strPhoto[hash]}
@@ -55,7 +55,7 @@
      {/if}
     
 
-　<!--{if $IK_USER[user][userid] == $strPhoto[userid] || $IK_USER[user][isadmin]==1}--><span class="gact">&gt;&nbsp;<a class="j a_confirm_link" title="删除这张照片" rel="nofollow" href="{SITE_URL}index.php?app=photo&ac=do&ik=photo_del&photoid={$strPhoto[photoid]}">删除照片</a>&nbsp;&nbsp;</span><!--{/if}-->
+　<!--{if $IK_USER[user][userid] == $strPhoto[userid] || $IK_USER[user][isadmin]==1}--><span class="gact">&gt;&nbsp;<a class="j a_confirm_link" title="删除这张照片" rel="nofollow" href="{SITE_URL}index.php?app=photo&a=do&ik=photo_del&photoid={$strPhoto[photoid]}">删除照片</a>&nbsp;&nbsp;</span><!--{/if}-->
 </div>
 
 <div class="clear"></div>
@@ -67,16 +67,16 @@
 <tbody>
 
 <!--{loop $arrComment $key $item}-->
-<tr><td width="75" valign="top"><a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[user][doname]))}"><img src="{$item[user][face]}" class="pil"></a>
+<tr><td width="75" valign="top"><a href="{U('hi','',array('id'=>$item[user][doname]))}"><img src="{$item[user][face]}" class="pil"></a>
 </td>
 <td valign="top">
 <span class="wrap">
-<h4>{php echo date('Y-m-d H:i:s',$item[addtime])}: <a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[user][doname]))}">{$item[user][username]}</a></h4>
+<h4>{php echo date('Y-m-d H:i:s',$item[addtime])}: <a href="{U('hi','',array('id'=>$item[user][doname]))}">{$item[user][username]}</a></h4>
 </span>{$item[content]}<br>
 <div class="align-right">
 
 <!--{if intval($IK_USER[user][isadmin]) == 1 || $strPhoto[userid]==$IK_USER[user][userid]}-->
-<span class="gact">&gt; <a class="j a_confirm_link" href="{SITE_URL}index.php?app=photo&ac=do&ik=delcomment&commentid={$item[commentid]}">删除</a></span>
+<span class="gact">&gt; <a class="j a_confirm_link" href="{SITE_URL}index.php?app=photo&a=do&ik=delcomment&commentid={$item[commentid]}">删除</a></span>
 <!--{/if}-->
 
 </div>
@@ -90,7 +90,7 @@
 <div class="txd">
 
 <!--{if intval($IK_USER[user][userid]) > 0}-->
-<form method="POST" action="{SITE_URL}index.php?app=photo&ac=do&ik=comment_do">
+<form method="POST" action="{SITE_URL}index.php?app=photo&a=do&ik=comment_do">
 <textarea style="width:500px;" name="content"></textarea><br>
 <input type="hidden" value="{$strPhoto[photoid]}" name="photoid">
 <input class="submit" type="submit" value="加上去">
@@ -112,7 +112,7 @@
 <!--{else}-->
     <h2>{$strUser['username']}的相册&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·
 <!--{/if}-->
-    <span class="pl">&nbsp;(<a href="{SITE_URL}{ikUrl('photo','album',array(ik=>user,userid=>$strAlbum[userid]))}">全部</a>) </span>
+    <span class="pl">&nbsp;(<a href="{U('photo','album',array(ik=>user,userid=>$strAlbum[userid]))}">全部</a>) </span>
     </h2>
 
     <div class="bd">
@@ -120,12 +120,12 @@
                 <!--{loop $arrAlbum $key $item}-->
                 <li>
                 <div class="pic">
-                    <a href="{SITE_URL}{ikUrl('photo','album',array(ik=>photo,albumid=>$item[albumid]))}" title="{$item[albumname]}">
+                    <a href="{U('photo','album',array(ik=>photo,albumid=>$item[albumid]))}" title="{$item[albumname]}">
                         <img width="75" height="75" alt="{$item[albumname]}" src="<!--{if $item[albumface] == ''}-->{SITE_URL}app/{$app}/skins/{$skin}/photo_album.png<!--{else}-->{SITE_URL}{php echo ikXimg($item[albumface],'photo',75,75,$item[path],1)}<!--{/if}-->">
                     </a>
                 </div>
                 <div class="info">
-                    <a href="{SITE_URL}{ikUrl('photo','album',array(ik=>photo,albumid=>$item[albumid]))}" title="{$item[albumname]}">{$item[albumname]}</a>
+                    <a href="{U('photo','album',array(ik=>photo,albumid=>$item[albumid]))}" title="{$item[albumname]}">{$item[albumname]}</a>
                     <span class="num">{$item[count_photo]}张照片</span>
                     <p><!--{php echo getsubstrutf8(t($item[albumdesc]),0,28);}--></p>
                 </div>

@@ -3,7 +3,7 @@
 <script type="text/javascript" charset="utf-8">
 $(function() {
 
-$(".editable_textarea").editable("{SITE_URL}index.php?app=group&ac=do&ik=edit_type", { 
+$(".editable_textarea").editable("{SITE_URL}index.php?app=group&a=do&ik=edit_type", { 
   indicator : '<img src="'+siteUrl+'public/js/jeditable/indicator.gif">',
   type   : 'textarea',
   submitdata: { _method: "put"},
@@ -21,7 +21,7 @@ function deltopictype(typeid){
 	if(confirm("确定删除吗？")){
 		$.ajax({
 			type: "POST",
-			url: siteUrl+'index.php?app=group&ac=do&ik=del_type',
+			url: siteUrl+'index.php?app=group&a=do&ik=del_type',
 			data: "&typeid=" + typeid,
 			beforeSend: function(){},
 			success: function(result){
@@ -56,7 +56,7 @@ function deltopictype(typeid){
     <!--{/if}-->
 </div>
 
-<form method="POST" action="{SITE_URL}index.php?app=group&ac=do&ik=topic_type">
+<form method="POST" action="{SITE_URL}index.php?app=group&a=do&ik=topic_type">
 <table width="100%" cellspacing="0" cellpadding="0" class="table_1">
     <tr>
         <th>添加帖子分类：</th>
@@ -77,7 +77,7 @@ function deltopictype(typeid){
 
 <div class="cright">
 
-<p class="pl2">&gt; <a href="{SITE_URL}{ikUrl('group','show',array('id'=>$strGroup[groupid]))}">返回{$strGroup[groupname]}</a></p>
+<p class="pl2">&gt; <a href="{U('group','show',array('id'=>$strGroup[groupid]))}">返回{$strGroup[groupname]}</a></p>
 
 </div>
 

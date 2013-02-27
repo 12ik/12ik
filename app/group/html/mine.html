@@ -17,11 +17,11 @@
                             <!--{loop $arrMyAdminGroup $item}-->
                             <li class="item">
                                 <div class="pic">
-                                    <a href="{SITE_URL}{ikUrl('group','show',array('id'=>$item[groupid]))}"><img alt="{$item[groupname]}" class="m_sub_img" src="{$item[icon_48]}" width="48" height="48"></a>
+                                    <a href="{U('group','show',array('id'=>$item[groupid]))}"><img alt="{$item[groupname]}" class="m_sub_img" src="{$item[icon_48]}" width="48" height="48"></a>
                                 </div>
                             
                                 <div class="info">
-                                    <a href="{SITE_URL}{ikUrl('group','show',array('id'=>$item[groupid]))}" title="{$item[groupname]}">{php echo getsubstrutf8(t($item[groupname]),0,12)}</a><br> 
+                                    <a href="{U('group','show',array('id'=>$item[groupid]))}" title="{$item[groupname]}">{php echo getsubstrutf8(t($item[groupname]),0,12)}</a><br> 
                                     <span class="num">({$item[count_user]})</span><br>
                             </div>
                             </li>
@@ -41,11 +41,11 @@
                             <!--{loop $arrMyGroup $item}-->
                             <li class="item">
                                 <div class="pic">
-                                    <a href="{SITE_URL}{ikUrl('group','show',array('id'=>$item[groupid]))}"><img alt="{$item[groupname]}" class="m_sub_img" src="{$item[icon_48]}"  width="48" height="48"></a>
+                                    <a href="{U('group','show',array('id'=>$item[groupid]))}"><img alt="{$item[groupname]}" class="m_sub_img" src="{$item[icon_48]}"  width="48" height="48"></a>
                                 </div>
                             
                                 <div class="info">
-                                    <a href="{SITE_URL}{ikUrl('group','show',array('id'=>$item[groupid]))}" title="{$item[groupname]}">{php echo getsubstrutf8(t($item[groupname]),0,12)}</a><br> 
+                                    <a href="{U('group','show',array('id'=>$item[groupid]))}" title="{$item[groupname]}">{php echo getsubstrutf8(t($item[groupname]),0,12)}</a><br> 
                                     <span class="num">({$item[count_user]})</span><br>
                             	</div>
                             </li>

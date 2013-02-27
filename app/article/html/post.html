@@ -4,7 +4,7 @@
         <h1>
         {$title}
         </h1>    
-<form method="POST" action="{SITE_URL}{ikUrl('article','do',array('ik'=>'update'))}"  onsubmit="return checkForm(this);"  enctype="multipart/form-data" id="form_tipic">
+<form method="POST" action="{U('article','do',array('ik'=>'update'))}"  onsubmit="return checkForm(this);"  enctype="multipart/form-data" id="form_tipic">
 <table width="100%" cellpadding="0" cellspacing="0" class="table_1">
 
 	<tr>
@@ -31,7 +31,7 @@
     <tr>
     	<th>&nbsp;</th><td>
         <input type="hidden" name="itemid" value="{$itemid}" id="itemid"  />
-        <input class="submit" type="submit" value="好啦，发表" tabindex="4" > <a href="{SITE_URL}{ikUrl('group','show',array('id'=>$strGroup[groupid]))}">返回</a>
+        <input class="submit" type="submit" value="好啦，发表" tabindex="4" > <a href="{U('group','show',array('id'=>$strGroup[groupid]))}">返回</a>
         </td>
     </tr>
 </table>
@@ -90,7 +90,7 @@
 <script language="javascript">
 $(function(){
 	$('#addImg').bind('click',function(){
-		var ajaxurl = "{SITE_URL}{ikUrl('article','do',array('ik'=>'add_photo'))}";
+		var ajaxurl = "{U('article','do',array('ik'=>'add_photo'))}";
 		var data = "{'type':'article','typeid':'{$itemid}'}";		
 		addPhoto(ajaxurl, data);
 	})

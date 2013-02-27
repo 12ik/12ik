@@ -1,6 +1,6 @@
 <?php
 
-$theurl = SITE_URL."index.php?app=robots&ac=admin";
+$theurl = SITE_URL."index.php?app=robots&a=admin";
 include_once('robot.func.php');
 
 switch ($ik) {

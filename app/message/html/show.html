@@ -10,7 +10,7 @@
       <tr>
         <td width="75" valign="top">
         {if $touser[userid]}
-        <a href="{SITE_URL}{ikUrl('hi','',array('id'=>$touser[doname]))}" class="nbg">
+        <a href="{U('hi','',array('id'=>$touser[doname]))}" class="nbg">
        	 <img alt="{$touser[username]}" style="padding:5px;" src="{$touser[face]}">
         </a>
         {else}
@@ -27,12 +27,12 @@
           </div>
           {if $type == 'inbox'}
           	{if $arrMessages[userid]!=0}
-          <a class="submit"  title="回信" href="{SITE_URL}{ikUrl('user','message',array('ik'=>'message_add','touserid'=>$touser[userid]))}">回信</a>&nbsp;&nbsp;&nbsp;&nbsp;
+          <a class="submit"  title="回信" href="{U('user','message',array('ik'=>'message_add','touserid'=>$touser[userid]))}">回信</a>&nbsp;&nbsp;&nbsp;&nbsp;
             {/if}
-          <a class="gray-submit" onclick="return confirm('真的要删除消息吗?')" title="删除" href="{SITE_URL}{ikUrl('message','do',array('ik'=>'del','type'=>'inbox','messageid'=>$messageid))}">删除</a>           
+          <a class="gray-submit" onclick="return confirm('真的要删除消息吗?')" title="删除" href="{U('message','do',array('ik'=>'del','type'=>'inbox','messageid'=>$messageid))}">删除</a>           
           {/if}
           {if $type == 'outbox'}
-          <a class="gray-submit" onclick="return confirm('真的要删除消息吗?')" title="删除" href="{SITE_URL}{ikUrl('message','do',array('ik'=>'del','type'=>'outbox','messageid'=>$messageid))}">删除</a>           
+          <a class="gray-submit" onclick="return confirm('真的要删除消息吗?')" title="删除" href="{U('message','do',array('ik'=>'del','type'=>'outbox','messageid'=>$messageid))}">删除</a>           
           {/if}
           </td>
       </tr>
@@ -42,13 +42,13 @@
         </div>
         <div class="cright">
             {if $type == 'inbox'}
-			<p class="pl2">&gt; <a href="{SITE_URL}{ikUrl('message','ikmail',array('ik'=>'inbox'))}">返回到我的收件箱</a></p>
-			<p class="pl2">&gt; <a href="{SITE_URL}{ikUrl('hi','',array('id'=>$touser[doname]))}">去{$touser[username]}的主页看看</a></p>
+			<p class="pl2">&gt; <a href="{U('message','ikmail',array('ik'=>'inbox'))}">返回到我的收件箱</a></p>
+			<p class="pl2">&gt; <a href="{U('hi','',array('id'=>$touser[doname]))}">去{$touser[username]}的主页看看</a></p>
             {/if}
             {if $type == 'outbox'}
-			<p class="pl2">&gt; <a href="{SITE_URL}{ikUrl('message','ikmail',array('ik'=>'outbox'))}">回我的发件箱</a></p>
-            <p class="pl2">&gt; <a href="{SITE_URL}{ikUrl('message','ikmail',array('ik'=>'inbox'))}">去我的收件箱</a></p><br/>
-			<p class="pl2">&gt; <a href="{SITE_URL}{ikUrl('hi','',array('id'=>$touser[doname]))}">去{$touser[username]}的主页看看</a></p>
+			<p class="pl2">&gt; <a href="{U('message','ikmail',array('ik'=>'outbox'))}">回我的发件箱</a></p>
+            <p class="pl2">&gt; <a href="{U('message','ikmail',array('ik'=>'inbox'))}">去我的收件箱</a></p><br/>
+			<p class="pl2">&gt; <a href="{U('hi','',array('id'=>$touser[doname]))}">去{$touser[username]}的主页看看</a></p>
             {/if}            
         </div>
     </div>

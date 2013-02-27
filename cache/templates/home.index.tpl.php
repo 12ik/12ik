@@ -11,18 +11,18 @@
 <div>
 <b>12ik创新社区新体验，内容互动性强，交流更方便</b><br><em>简单</em><em>快捷</em><em>方便</em><em>建设本地化，垂直型社区；目前已有<cite><?php echo $count_user;?></cite>位用户加入！</em>
 </div>
-<a class="submit" href="<?php echo SITE_URL;?><?php echo ikurl('user','register')?>">加入我们</a>
+<a class="submit" href="<?php echo U('user','register')?>">加入我们</a>
 </div>
 
 <div class="login">
-<form action="<?php echo SITE_URL;?><?php echo ikurl('user','login',array('ik'=>'do'))?>" method="post" name="lzform" id="lzform">
+<form action="<?php echo U('user','login',array('ik'=>'do'))?>" method="post" name="lzform" id="lzform">
 <fieldset>
 <legend>登录</legend>
 <div class="item">
 <label>Email：</label><input type="email" tabindex="1" value="" name="email" class="txt">
 </div>
 <div class="item">
-<label>密码：</label><input type="password" tabindex="2" class="txt" name="pwd" > <a href="<?php echo SITE_URL;?>index.php?app=user&ac=forgetpwd">忘记密码？</a>
+<label>密码：</label><input type="password" tabindex="2" class="txt" name="pwd" > <a href="<?php echo SITE_URL;?>index.php?app=user&a=forgetpwd">忘记密码？</a>
 </div>
 
 <div class="item1">
@@ -46,19 +46,19 @@
 
 <div class="cleft">
 
-<h2>推荐小组<span class="pl">&nbsp;(<a href="<?php echo SITE_URL;?><?php echo ikurl('group','all')?>">全部</a>) </span></h2>
+<h2>推荐小组<span class="pl">&nbsp;(<a href="<?php echo U('group','all')?>">全部</a>) </span></h2>
 
 <div style="overflow:hidden;">
 <?php if($arrRecommendGroup) { ?>
 <?php foreach((array)$arrRecommendGroup as $key=>$item) {?>
 <div class="sub-item">
 <div class="pic">
-<a href="<?php echo SITE_URL;?><?php echo ikurl('group','show',array('id'=>$item['groupid']))?>">
+<a href="<?php echo U('group','show',array('id'=>$item['groupid']))?>">
 <img src="<?php echo $item['icon_48'];?>" alt="<?php echo $item['groupname'];?>">
 </a>
 </div>
 <div class="info">
-<a href="<?php echo SITE_URL;?><?php echo ikurl('group','show',array('id'=>$item['groupid']))?>"><?php echo $item['groupname'];?></a> (<?php echo $item['count_user'];?>/<font color="orange"><?php echo $item['count_topic'];?></font>)             
+<a href="<?php echo U('group','show',array('id'=>$item['groupid']))?>"><?php echo $item['groupname'];?></a> (<?php echo $item['count_user'];?>/<font color="orange"><?php echo $item['count_topic'];?></font>)             
 <p><?php echo $item['groupdesc'];?></p>
 </div>
 </div>
@@ -67,15 +67,15 @@
 </div>
 <div class="clear"></div>
 
-<h2>最热话题<span class="pl">&nbsp;(<a href="<?php echo SITE_URL;?><?php echo ikurl('group','all')?>">更多</a>) </span></h2>
+<h2>最热话题<span class="pl">&nbsp;(<a href="<?php echo U('group','all')?>">更多</a>) </span></h2>
 <div class="topic-list">
     <?php if($arrHotTopic) { ?>
     <?php foreach((array)$arrHotTopic as $key=>$item) {?>
 	<dl>
-    	<dt><a href="<?php echo SITE_URL;?><?php echo ikurl('user','space',array('id'=>$item['user'][userid]))?>"><img src="<?php echo $item['user'][face];?>"/></a></dt>
+    	<dt><a href="<?php echo U('user','space',array('id'=>$item['user'][userid]))?>"><img src="<?php echo $item['user'][face];?>"/></a></dt>
         <dd>
-        	<header class="title"><span><a href="<?php echo SITE_URL;?><?php echo ikurl('group','topic',array('id'=>$item['topicid']))?>#comment" title="回复数"><?php echo $item['count_comment'];?></a></span><a href="<?php echo SITE_URL;?><?php echo ikurl('group','topic',array('id'=>$item['topicid']))?>" title="<?php echo $time['title'];?>"><?php echo $item['title'];?></a></header>
-             <a href="<?php echo SITE_URL;?><?php echo ikurl('user','space',array('id'=>$item['user'][userid]))?>"><?php echo $item['user'][username];?></a> <summary><?php echo getTime($item['addtime'],time())?> <?php echo $item['count_view'];?>次阅读</summary>
+        	<header class="title"><span><a href="<?php echo U('group','topic',array('id'=>$item['topicid']))?>#comment" title="回复数"><?php echo $item['count_comment'];?></a></span><a href="<?php echo U('group','topic',array('id'=>$item['topicid']))?>" title="<?php echo $time['title'];?>"><?php echo $item['title'];?></a></header>
+             <a href="<?php echo U('user','space',array('id'=>$item['user'][userid]))?>"><?php echo $item['user'][username];?></a> <summary><?php echo getTime($item['addtime'],time())?> <?php echo $item['count_view'];?>次阅读</summary>
             <p><?php echo $item['content'];?></p>
         </dd>
     </dl>
@@ -94,29 +94,29 @@
     <?php foreach((array)$arrHotUser as $key=>$item) {?>
     <dl class="obu">
         <dt>
-            <a href="<?php echo SITE_URL;?><?php echo ikurl('hi','',array('id'=>$item['doname']))?>">
+            <a href="<?php echo U('hi','',array('id'=>$item['doname']))?>">
             <img alt="<?php echo $item['username'];?>" class="m_sub_img" src="<?php echo $item['face'];?>" width="48" />
             </a>
         </dt>
         <dd>
-            <a href="<?php echo SITE_URL;?><?php echo ikurl('hi','',array('id'=>$item['doname']))?>"><?php echo $item['username'];?></a>
+            <a href="<?php echo U('hi','',array('id'=>$item['doname']))?>"><?php echo $item['username'];?></a>
         </dd>
     </dl>
     <?php }?>
  	<br clear="all"/>
     </div>
     
-<h2>最新推荐小站&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·<span class="pl">&nbsp;(<a href="<?php echo SITE_URL;?><?php echo ikurl('site','explore',array('ik'=>'site'))?>">全部</a>) </span></h2>
+<h2>最新推荐小站&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·<span class="pl">&nbsp;(<a href="<?php echo U('site','explore',array('ik'=>'site'))?>">全部</a>) </span></h2>
 <div class="indent">
     <?php foreach((array)$recommendSites as $key=>$item) {?>
     <dl class="obu">
         <dt>
-            <a href="<?php echo SITE_URL;?><?php echo ikurl('site','mine',array('siteid'=>$item['siteid']))?>" target="_blank" title="<?php echo $item['sitename'];?>">
+            <a href="<?php echo U('site','mine',array('siteid'=>$item['siteid']))?>" target="_blank" title="<?php echo $item['sitename'];?>">
             <img  class="m_sub_img" alt="<?php echo $item['sitename'];?>" src="<?php echo $item['icon_48'];?>" width="48" />
             </a>
         </dt>
         <dd>
-            <a href="<?php echo SITE_URL;?><?php echo ikurl('site','mine',array('siteid'=>$item['siteid']))?>" target="_blank" title="<?php echo $item['sitename'];?>"><?php echo $item['sitename'];?></a>
+            <a href="<?php echo U('site','mine',array('siteid'=>$item['siteid']))?>" target="_blank" title="<?php echo $item['sitename'];?>"><?php echo $item['sitename'];?></a>
         </dd>
     </dl>
     <?php }?>
@@ -124,38 +124,38 @@
 </div>
 
 
-<h2>最新创建小站&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·<span class="pl">&nbsp;(<a href="<?php echo SITE_URL;?><?php echo ikurl('site','explore',array('ik'=>'site'))?>">全部</a>) </span></h2>
+<h2>最新创建小站&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·<span class="pl">&nbsp;(<a href="<?php echo U('site','explore',array('ik'=>'site'))?>">全部</a>) </span></h2>
 <div class="indent">
     <?php foreach((array)$arrNewSite as $key=>$item) {?>
     <dl class="obu">
         <dt>
-            <a href="<?php echo SITE_URL;?><?php echo ikurl('site','mine',array('siteid'=>$item['siteid']))?>" target="_blank" title="<?php echo $item['sitename'];?>">
+            <a href="<?php echo U('site','mine',array('siteid'=>$item['siteid']))?>" target="_blank" title="<?php echo $item['sitename'];?>">
             <img  class="m_sub_img" alt="<?php echo $item['sitename'];?>" src="<?php echo $item['icon_48'];?>" width="48" />
             </a>
         </dt>
         <dd>
-            <a href="<?php echo SITE_URL;?><?php echo ikurl('site','mine',array('siteid'=>$item['siteid']))?>" target="_blank" title="<?php echo $item['sitename'];?>"><?php echo $item['sitename'];?></a>
+            <a href="<?php echo U('site','mine',array('siteid'=>$item['siteid']))?>" target="_blank" title="<?php echo $item['sitename'];?>"><?php echo $item['sitename'];?></a>
         </dd>
     </dl>
     <?php }?>
     <br clear="all"/>
 </div>
 
-<h2>最新文章&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·<span class="pl">&nbsp;(<a href="<?php echo SITE_URL;?><?php echo ikurl('article','')?>">全部</a>) </span></h2>
+<h2>最新文章&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·<span class="pl">&nbsp;(<a href="<?php echo U('article','')?>">全部</a>) </span></h2>
 <div class="line23">
 <?php if($arrArticle) { ?>
 <?php foreach((array)$arrArticle as $key=>$item) {?>
-<a href="<?php echo SITE_URL;?><?php echo ikurl('article','show',array('id'=>$item['news'][nid]))?>"><?php echo $item['subject'];?></a><br>
+<a href="<?php echo U('article','show',array('id'=>$item['news'][nid]))?>"><?php echo $item['subject'];?></a><br>
 <?php }?>
 <?php } ?>
 </div>
 
     
-<h2>最新创建小组&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·<span class="pl">&nbsp;(<a href="<?php echo SITE_URL;?><?php echo ikurl('group','all')?>">全部</a>) </span></h2>
+<h2>最新创建小组&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·<span class="pl">&nbsp;(<a href="<?php echo U('group','all')?>">全部</a>) </span></h2>
 <div class="line23">
 <?php if($arrNewGroup) { ?>
 <?php foreach((array)$arrNewGroup as $key=>$item) {?>
-<a href="<?php echo SITE_URL;?><?php echo ikurl('group','show',array('id'=>$item['groupid']))?>"><?php echo $item['groupname'];?></a> (<?php echo $item['count_user'];?><?php if($item['uptime']>strtotime(date('Y-m-d 00:00:00'))) { ?>/<font color="orange"><?php echo $item['count_topic_today'];?></font><?php } else { ?><?php } ?>)<br>
+<a href="<?php echo U('group','show',array('id'=>$item['groupid']))?>"><?php echo $item['groupname'];?></a> (<?php echo $item['count_user'];?><?php if($item['uptime']>strtotime(date('Y-m-d 00:00:00'))) { ?>/<font color="orange"><?php echo $item['count_topic_today'];?></font><?php } else { ?><?php } ?>)<br>
 <?php }?>
 <?php } ?>
 </div>
@@ -166,7 +166,7 @@
 <div class="line23">
 <?php if($arrNewNote) { ?>
 <?php foreach((array)$arrNewNote as $key=>$item) {?>
-<a href="<?php echo SITE_URL;?><?php echo ikurl('note','show',array('noteid'=>$item['noteid']))?>"><?php echo $item['title'];?></a><br>
+<a href="<?php echo U('note','show',array('noteid'=>$item['noteid']))?>"><?php echo $item['title'];?></a><br>
 <?php }?>
 <?php } ?>
 </div>
@@ -176,7 +176,7 @@
 <div class="line23">
 <?php if($arrSiteNote) { ?>
 <?php foreach((array)$arrSiteNote as $key=>$item) {?>
-    <a href="<?php echo SITE_URL;?><?php echo ikurl('site','notes',array('notesid'=>$item['notesid'],'noteid'=>$item['contentid']))?>" title="<?php echo $item['title'];?>">
+    <a href="<?php echo U('site','notes',array('notesid'=>$item['notesid'],'noteid'=>$item['contentid']))?>" title="<?php echo $item['title'];?>">
     <?php echo $item['title'];?>
     </a><br>
 <?php }?>

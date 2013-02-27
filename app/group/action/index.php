@@ -7,7 +7,7 @@ if($IK_USER['user'] == ''){
 
 	//所有小组
 	$page = isset($_GET['page']) ? $_GET['page'] : '1';
-	$url = SITE_URL.ikUrl('group','all',array('page'=>''));
+	$url = SITE_URL.U('group','all',array('page'=>''));
 	$lstart = $page*20-20;
 	
 	$arrGroups = $new['group']->findAll('group',null,'isrecommend desc','groupid',$lstart.',20');
@@ -37,5 +37,5 @@ if($IK_USER['user'] == ''){
 	include template("index");
 	
 }else{
-	header("Location: ".SITE_URL.ikUrl('group','my_group_topics'));	
+	header("Location: ".SITE_URL.U('group','my_group_topics'));	
 }

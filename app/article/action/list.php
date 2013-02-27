@@ -5,7 +5,7 @@ switch ($ik) {
 		//分页
 		$cateid = isset($_GET['cateid']) ? $_GET['cateid'] : '0';
 		$page = isset($_GET['page']) ? $_GET['page'] : '1';
-		$url = SITE_URL.ikUrl('article','list',array('cateid'=>$cateid,'page'=>''));
+		$url = SITE_URL.U('article','list',array('cateid'=>$cateid,'page'=>''));
 		$lstart = $page*15-15;
 		if($cateid == 0)
 		{

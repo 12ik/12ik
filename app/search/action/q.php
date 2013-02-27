@@ -6,20 +6,20 @@ $userid = intval($IK_USER['user']['userid']);
 $kw=urldecode($_GET['kw']);
 
 if($kw==''){
-	header("Location: ".SITE_URL.ikUrl('search'));
+	header("Location: ".SITE_URL.U('search'));
 	exit;
 }
 
 
 if(strlen($kw)<2) {
-	header("Location: ".SITE_URL.ikUrl('search'));
+	header("Location: ".SITE_URL.U('search'));
 	exit;
 };
 
 switch($ik){
 	case "":
 		$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-		$url = "index.php?app=search&ac=s&kw=".$kw."&page=";
+		$url = "index.php?app=search&a=s&kw=".$kw."&page=";
 		$lstart = $page*10-10;
 		
 		$arrAlls = $db->fetch_all_assoc("select groupid as id,'group' as type from ".dbprefix."group where groupname like '%$kw%' or groupdesc like '%$kw%'  union select topicid as id,'topic' as type from ".dbprefix."group_topics WHERE title like '%$kw%' union select userid as id,'user' as type from ".dbprefix."user_info where username like '%$kw%' limit $lstart,10");
@@ -52,7 +52,7 @@ switch($ik){
 	case "group":
 		
 		$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-		$url = "index.php?app=search&ac=s&ik=group&kw=".$kw."&page=";
+		$url = "index.php?app=search&a=s&ik=group&kw=".$kw."&page=";
 		$lstart = $page*10-10;
 		
 		$arrGroups = $db->fetch_all_assoc("select groupid from ".dbprefix."group WHERE groupname like '%$kw%' or groupdesc like '%$kw%' order by groupid desc limit $lstart,10");
@@ -75,7 +75,7 @@ switch($ik){
 	case "topic":
 	
 		$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-		$url = "index.php?app=search&ac=s&ik=topic&kw=".$kw."&page=";
+		$url = "index.php?app=search&a=s&ik=topic&kw=".$kw."&page=";
 		$lstart = $page*10-10;
 	
 		$arrTopics = $db->fetch_all_assoc("select * from ".dbprefix."group_topics WHERE title like '%$kw%' order by topicid desc limit $lstart,10");
@@ -97,7 +97,7 @@ switch($ik){
 	case "user":
 		
 		$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-		$url = "index.php?app=search&ac=s&ik=user&kw=".$kw."&page=";
+		$url = "index.php?app=search&a=s&ik=user&kw=".$kw."&page=";
 		$lstart = $page*10-10;
 	
 		$arrUsers = $db->fetch_all_assoc("select userid from ".dbprefix."user_info WHERE username like '%$kw%' order by userid desc limit $lstart,10");

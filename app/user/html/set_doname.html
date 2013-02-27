@@ -6,7 +6,7 @@
 {template set_menu}
 
 <div class="utable">
-<form method="POST" action="{SITE_URL}{ikUrl('user','do',array('ik'=>'setdoname'))}">
+<form method="POST" action="{U('user','do',array('ik'=>'setdoname'))}">
 <table cellpadding="5" cellspacing="5">
 <tr>
 <th>个性域名：</th><td><input type="text" disabled="true" value="http://www.12ik.com/hi/" class="txt" style="width:140px; font-family:Arial; font-size:12px"/> <input class="txt" name="doname" value="{$strUser[doname]}" type="text" /></td>

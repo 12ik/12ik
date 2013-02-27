@@ -46,7 +46,7 @@ switch($ik){
 		//用户是否登录
 		$userid = intval($IK_USER['user']['userid']);
 		if($userid == 0){
-			header("Location: ".SITE_URL.ikUrl('user','login'));
+			header("Location: ".SITE_URL.U('user','login'));
 			exit;
 		}
 		
@@ -66,7 +66,7 @@ switch($ik){
 		
 		$db->query("update ".dbprefix."photo_album set `count_photo`='$count_photo' where albumid='$albumid'");
 		
-		qiMsg("照片删除成功！",'点击返回','index.php?app=photo&ac=album&ik=photo&albumid='.$albumid);
+		qiMsg("照片删除成功！",'点击返回','index.php?app=photo&a=album&ik=photo&albumid='.$albumid);
 		
 		break;
 	
@@ -78,7 +78,7 @@ switch($ik){
 		//用户是否登录
 		$userid = intval($IK_USER['user']['userid']);
 		if($userid == 0){
-			header("Location: ".SITE_URL.ikUrl('user','login'));
+			header("Location: ".SITE_URL.U('user','login'));
 			exit;
 		}
 		
@@ -105,12 +105,12 @@ switch($ik){
 			$msg_touserid = $strPhoto['userid'];
 			$msg_title = '你有照片新增一条评论，快去看看给个回复吧';
 			$msg_content = '你有照片新增一条评论，快去看看给个回复吧^_^ <br />'
-										.$IK_SITE['base']['site_url'].'index.php?app=photo&ac=show&photoid='.$photoid;
+										.$IK_SITE['base']['site_url'].'index.php?app=photo&a=show&photoid='.$photoid;
 			aac('message')->sendmsg($msg_userid,$msg_touserid,$msg_title,$msg_content);
 			
 		}
 		
-		header("Location: ".SITE_URL."index.php?app=photo&ac=show&photoid=".$photoid);
+		header("Location: ".SITE_URL."index.php?app=photo&a=show&photoid=".$photoid);
 
 		break;
 		
@@ -120,7 +120,7 @@ switch($ik){
 		//用户是否登录
 		$userid = intval($IK_USER['user']['userid']);
 		if($userid == 0){
-			header("Location: ".SITE_URL.ikUrl('user','login'));
+			header("Location: ".SITE_URL.U('user','login'));
 			exit;
 		}
 	

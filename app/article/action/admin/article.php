@@ -7,7 +7,7 @@ switch($ik){
 		
 		//列表 
 		$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-		$url = SITE_URL.'index.php?app=article&ac=admin&mg=article&ik=list&page=';
+		$url = SITE_URL.'index.php?app=article&a=admin&mg=article&ik=list&page=';
 		$lstart = $page*10-10;
 
 		//获取全部日志

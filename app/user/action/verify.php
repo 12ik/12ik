@@ -16,7 +16,7 @@ switch($ik){
 		}
 
 		$email = $strUser['email'];
-		$comeurl = SITE_URL.ikUrl('user','verify',array('id'=>'do', 'email'=>$email, 'verifycode'=>$verifycode));
+		$comeurl = SITE_URL.U('user','verify',array('id'=>'do', 'email'=>$email, 'verifycode'=>$verifycode));
 		//发送邮件
 		$subject = $IK_SITE['base']['site_title'].'会员真实性验证';
 		$content = '尊敬的'.$strUser['username'].'，<br />请点击以下链接进行会员验证：<a href="'.$comeurl.'">'.$comeurl.'</a>';

@@ -3,14 +3,14 @@ defined('IN_IK') or die('Access Denied.');
 $photoid = intval($_GET['photoid']);
 
 if($photoid == 0){
-	header("Location: ".SITE_URL.ikUrl('photo'));
+	header("Location: ".SITE_URL.U('photo'));
 	exit;
 }
 
 $photoNum = $db->once_fetch_assoc("select count(*) from ".dbprefix."photo where `photoid`='$photoid'");
 
 if($photoNum['count(*)']==0){
-	header("Location: ".SITE_URL.ikUrl('photo'));
+	header("Location: ".SITE_URL.U('photo'));
 	exit;
 }
 
@@ -42,7 +42,7 @@ $arrAlbum = aac('photo')->getAllAlbumByUserId($userid, 3);
 
 //评论列表 
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-$url = "index.php?app=photo&ac=show&photoid=".$photoid."&page=";
+$url = "index.php?app=photo&a=show&photoid=".$photoid."&page=";
 $lstart = $page*10-10;
 $arrComments = $db->fetch_all_assoc("select * from ".dbprefix."photo_comment where photoid='$photoid' limit $lstart,10");
 foreach($arrComments as $key=>$item){

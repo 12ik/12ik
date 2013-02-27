@@ -5,14 +5,14 @@
 <div class="mc">
 
 <div class="cleft">
-<h1>同城{if $arrArea[one]} - <a href="{SITE_URL}{ikUrl('location','area',array(areaid=>$arrArea[one][areaid]))}">{$arrArea[one][areaname]}</a>{/if}{if $arrArea[two]} - <a href="{SITE_URL}{ikUrl('location','area',array(areaid=>$arrArea[two][areaid]))}">{$arrArea[two][areaname]}</a>{/if}{if $arrArea[three]} - <a href="{SITE_URL}{ikUrl('location','area',array(areaid=>$arrArea[three][areaid]))}">{$arrArea[three][areaname]}</a>{/if}</h1>
+<h1>同城{if $arrArea[one]} - <a href="{U('location','area',array(areaid=>$arrArea[one][areaid]))}">{$arrArea[one][areaname]}</a>{/if}{if $arrArea[two]} - <a href="{U('location','area',array(areaid=>$arrArea[two][areaid]))}">{$arrArea[two][areaname]}</a>{/if}{if $arrArea[three]} - <a href="{U('location','area',array(areaid=>$arrArea[three][areaid]))}">{$arrArea[three][areaname]}</a>{/if}</h1>
 
 <h2>同城里的人</h2>
 <div class="obu_bar">
 <!--{loop $arrUser $key $item}-->
 <dl class="obu">
-<dt><a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[doname]))}" class="nbg"><img src="{$item[face]}" class="m_sub_img" /></a></dt>
-<dd><a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[doname]))}">{$item[username]}</a></dd>
+<dt><a href="{U('hi','',array('id'=>$item[doname]))}" class="nbg"><img src="{$item[face]}" class="m_sub_img" /></a></dt>
+<dd><a href="{U('hi','',array('id'=>$item[doname]))}">{$item[username]}</a></dd>
 </dl>
 <!--{/loop}-->
 </div>
@@ -33,7 +33,7 @@
 <h2>{$strArea[areaname]}下的区域</h2>
 <div>
 <!--{loop $referArea $key $item}-->
-<a href="{SITE_URL}{ikUrl('location','area',array(areaid=>$item[areaid]))}">{$item[areaname]}</a>
+<a href="{U('location','area',array(areaid=>$item[areaid]))}">{$item[areaname]}</a>
 <!--{/loop}-->
 </div>
 <!--{/if}-->

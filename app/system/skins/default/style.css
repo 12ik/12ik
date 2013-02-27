@@ -10,7 +10,7 @@ body {
 	padding: 0;
 	font-family: Arial;
 	font-size: 12px;
-	color: #555555;
+	color: #333;
 }
 
 ul,li {
@@ -25,7 +25,7 @@ img {
 
 h2 {
 	font-size: 14px;
-	padding: 10px 0;
+	padding: 10px 0px;
 	margin: 0;
 }
 
@@ -44,7 +44,15 @@ a {
 	color: #336699;
 	text-decoration: none;
 }
-
+.message{
+	background:#FFFFE9;
+    border: 1px solid #f9f9aa;
+    color: #FF0000;
+    height: 30px;
+    line-height: 30px;
+    margin-bottom: 5px;
+    padding-left: 10px;
+}
 /*登陆*/
 .ulogin {
 	width: 500px;
@@ -60,10 +68,11 @@ a {
 }
 
 .uinput,input,select,textarea {
-	border: 1px solid #CCCCCC;
+	border: 1px solid #D0D0D0;
 	line-height: 1.62;
 	margin-top: 5px;
 	padding: 3px;
+	border-radius:3px;
 }
 
 .uinput:focus {
@@ -75,41 +84,38 @@ input:focus {
 }
 
 .submit {
-	padding: 2px 4px;
-	font-size: 12px;
-	cursor: pointer
+	font-size: 13px;
+	cursor: pointer;
+ 	background: url("images/btn_b.gif") no-repeat scroll 0 0 #567AB4;
+    border: 0 none;
+    color: #FFFFFF;
+    height: 26px;
+    width: 65px;	
 }
-
+.page_btn{ text-align:center; padding-top:20px}
 /*导航*/
 .tabnav {
-	height: 35px;
-	padding: 0px;
+	height:auto;
+	margin-bottom:1px;
 }
 
 .tabnav ul {
-	border-bottom: 1px solid #3266A0;
 	margin: 0;
 	overflow: hidden;
 	padding: 0;
+	background:none repeat scroll 0 0 #D2DBEA; padding-top:5px; padding-left:10px; padding-right:10px;
 }
 
 .tabnav ul li {
-	border-color: #3266A0 #3266A0 -moz-use-text-color;
-	border-style: solid solid none;
-	border-width: 1px 1px medium;
 	float: left;
-	margin-right: 5px;
-	padding: 5px 10px;
+	margin-right: 10px;
+	padding: 4px 10px; padding-bottom:6px;
 }
-
+.tabnav ul li a{ font-size:14px;}
 .tabnav .select {
-	background: none repeat scroll 0 0 #3A81C0;
+	background: none repeat scroll 0 0 #fff; 
 }
-
-.tabnav .select a {
-	color: #FFFFFF;
-	font-weight: bold;
-}
+.tabnav .select a {color: #333;}
 
 /*中部*/
 .midder {
@@ -119,16 +125,16 @@ input:focus {
 }
 
 .midder table {
-	border: 1px solid #DDDDDD;
+	
 	width: 100%;
 	border-collapse: collapse;
 	border-spacing: 0;
 }
 
 .midder table tr td {
-	border-bottom: 1px solid #DDDDDD;
-	height: 30px;
-	line-height: 30px;
+	border-bottom: 1px solid #eee;
+	height: 32px;
+	line-height: 32px;
 	padding: 0 20px;
 	vertical-align: top;
 	margin: 0;
@@ -137,7 +143,9 @@ input:focus {
 
 .midder table tr.old td {
 	font-weight: bold;
-	background: none repeat scroll 0 0 #F6F6F6;
+	background: url("images/th_bg.gif") repeat-y scroll 0 0 #F2F4F6;
+	border-bottom:1px solid #C1C8D2;
+	height:22px; line-height:22px;
 }
 
 .midder table tr.odd td {
@@ -148,15 +156,15 @@ input:focus {
 .page {
 	margin: 0;
 	text-align: left;
-	padding: 5px;
+	padding: 10px;
 }
 
 .page a {
 	border: #eee 1px solid;
-	padding: 2px 5px;
-	margin: 2px;
+	padding: 3px 9px;
+	margin: 5px;
 	color: #336699;
-	text-decoration: none
+	text-decoration: none;
 }
 
 .page a:hover {

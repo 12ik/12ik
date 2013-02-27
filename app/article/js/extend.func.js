@@ -47,7 +47,7 @@ function recomment(rid,tid,itemid){
 
 	c = $('#recontent_'+rid).val();
 	if(c==''){tips('回复内容不能为空');return false;}
-	var url = siteUrl+'index.php?app=article&ac=comment&ik=recomment';
+	var url = siteUrl+'index.php?app=article&a=comment&ik=recomment';
 	$('#recomm_btn_'+rid).hide();
 	$.post(url,{referid:rid,nid:tid,infoid:itemid,content:c} ,function(rs){
 				if(rs == 0)

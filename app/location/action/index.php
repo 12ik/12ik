@@ -22,4 +22,4 @@ include template("index"); */
 	
 }
 
-header("Location: ".SITE_URL.ikUrl('location','area',array('areaid'=>$areaid)));
+header("Location: ".SITE_URL.U('location','area',array('areaid'=>$areaid)));

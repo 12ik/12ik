@@ -22,76 +22,11 @@ switch ($ik) {
 			$arrApp [] = $item;
 		}
 		
-		$title = 'APP管理';
+		$title = '应用列表';
 		
 		include template ( "apps" );
 		break;
 	
-	//安装APP
-	/*
-	case "install":
-		$appname = trim($_GET['appname']);
-		
-		$appAbout = require_once 'app/'.$appname.'/about.php';
-		
-		$isinstall = $appAbout['isinstall'];
-		$issql = $appAbout['issql'];
-		$issystem = $appAbout['issystem'];
-		
-		
-		if($isinstall == '0'){
-			if($issql == '1'){
-				//安装数据库
-				$sql = file_get_contents('app/'.$appname.'/sql/install.sql');
-				$sql = str_replace('ik_',dbprefix,$sql);
-				$array_sql = preg_split("/;[\r\n]/", $sql);
-				
-				foreach($array_sql as $sql){
-					$sql = trim($sql);
-					if ($sql){
-						if (strstr($sql, 'CREATE TABLE')){
-							preg_match('/CREATE TABLE ([^ ]*)/', $sql, $matches);
-							$ret = $db->query($sql);
-						} else {
-							$ret = $db->query($sql);
-						}
-					}
-				}
-
-			}
-			//更新about.php文件
-			$appAbout['isinstall'] = '1';
-			AppFileWrite($appAbout,$appname,'about.php');
-			
-			echo '1';
-		
-		}elseif($isinstall == '1'){
-		
-			if($issql == '1'){
-				//卸载数据库
-				$sql = file_get_contents('app/'.$appname.'/sql/uninstall.sql');
-				$sql = str_replace('ik_',dbprefix,$sql);
-				$array_sql = preg_split("/;[\r\n]/", $sql);
-				
-				foreach($array_sql as $sql){
-					$sql = trim($sql);
-					if ($sql){
-						$ret = $db->query($sql);
-					}
-				}
-			}
-		
-			$appAbout['isinstall'] = '0';
-			AppFileWrite($appAbout,$appname,'about.php');
-			
-			echo '2';
-			
-		}else{
-			echo '3';
-		}
-		
-		break;
-	*/
 	//导航 
 	case "appnav" :
 		$appkey = $_POST ['appkey'];

@@ -9,11 +9,11 @@
 <ul class="user-list">
 <!--{loop $arrFollowUser $key $item}-->
     <li class="clearfix" id="u$item[userid]">
-        <a title="{$item[username]}" href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[doname]))}">
+        <a title="{$item[username]}" href="{U('hi','',array('id'=>$item[doname]))}">
         <img alt="{$item[username]}" src="{$item[face]}" class="face">
         </a>
         <div class="info">
-          <h3> <a title="{$item[username]}" href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[doname]))}">{$item[username]}</a></h3>
+          <h3> <a title="{$item[username]}" href="{U('hi','',array('id'=>$item[doname]))}">{$item[username]}</a></h3>
           <!-- 签名档 -->
           <p>{$item['area']['areaname']}</p>
         </div>
@@ -39,7 +39,7 @@ $('.user-list .ban').click(function () {
 
 	if (hasBlackList) {
 		$(this).parents('li').fadeOut(function () {
-			var posturl = "{SITE_URL}{ikUrl('user','do',array('ik'=>'user_nofollow_ajax'))}";
+			var posturl = "{U('user','do',array('ik'=>'user_nofollow_ajax'))}";
 			$.post_withck(
 				posturl,
 				{ 'userid_follow': peopleId },
@@ -58,11 +58,11 @@ $('.user-list .ban').click(function () {
 
 <!--{if $strUser[userid] == $IK_USER[user][userid]}-->
         <p class="pl2">
-            &gt;&nbsp;<a href="{SITE_URL}{ikUrl('user','followed',array('userid'=>$userid))}">关注我的人({$strUser[count_followed]})</a>
+            &gt;&nbsp;<a href="{U('user','followed',array('userid'=>$userid))}">关注我的人({$strUser[count_followed]})</a>
         </p> 
 <!--{else}-->
         <p class="pl2">
-            &gt;&nbsp;<a href="{SITE_URL}{ikUrl('user','followed',array('userid'=>$userid))}">关注{$strUser[username]}的人({$strUser[count_followed]})</a>
+            &gt;&nbsp;<a href="{U('user','followed',array('userid'=>$userid))}">关注{$strUser[username]}的人({$strUser[count_followed]})</a>
         </p> 
 <!--{/if}-->               
 <!---
@@ -71,7 +71,7 @@ $('.user-list .ban').click(function () {
         </p>
 -->        
         <p class="pl2">
-            &gt;&nbsp;<a href="{SITE_URL}{ikUrl('user','contacts',array('ik'=>'invite'))}">邀请我的朋友加入爱客网</a>
+            &gt;&nbsp;<a href="{U('user','contacts',array('ik'=>'invite'))}">邀请我的朋友加入爱客网</a>
         </p>
 
 

@@ -1,14 +1,14 @@
 <ul class="type-nav">
-    <li {if $ik=='remind'||$ik==''} class="on" {/if}><a href="{SITE_URL}{ikUrl('site','admins',array('ik'=>'remind',
+    <li {if $ik=='remind'||$ik==''} class="on" {/if}><a href="{U('site','admins',array('ik'=>'remind',
     'siteid'=>$strSite[siteid]))}">提醒</a></li>
-    <li {if $ik=='postpermission'} class="on" {/if}><a href="{SITE_URL}{ikUrl('site','admins',array('ik'=>'postpermission',
+    <li {if $ik=='postpermission'} class="on" {/if}><a href="{U('site','admins',array('ik'=>'postpermission',
     'siteid'=>$strSite[siteid]))}">权限</a></li>
-    <li {if $ik=='log'} class="on" {/if}><a href="{SITE_URL}{ikUrl('site','admins',array('ik'=>'log',
+    <li {if $ik=='log'} class="on" {/if}><a href="{U('site','admins',array('ik'=>'log',
     'siteid'=>$strSite[siteid]))}">日志</a></li>
-    <li {if $ik=='kedou'} class="on" {/if}><a href="{SITE_URL}{ikUrl('site','admins',array('ik'=>'kedou',
+    <li {if $ik=='kedou'} class="on" {/if}><a href="{U('site','admins',array('ik'=>'kedou',
     'siteid'=>$strSite[siteid]))}">客豆</a></li>
-    <li {if $ik=='info'} class="on" {/if}><a href="{SITE_URL}{ikUrl('site','admins',array('ik'=>'info',
+    <li {if $ik=='info'} class="on" {/if}><a href="{U('site','admins',array('ik'=>'info',
     'siteid'=>$strSite[siteid]))}">资料</a></li>
-    <li {if $ik=='design'} class="on" {/if}><a href="{SITE_URL}{ikUrl('site','admins',array('ik'=>'design',
+    <li {if $ik=='design'} class="on" {/if}><a href="{U('site','admins',array('ik'=>'design',
     'siteid'=>$strSite[siteid]))}">设计</a></li>
 </ul>

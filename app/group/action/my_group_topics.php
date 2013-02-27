@@ -11,7 +11,7 @@ $strArea = aac('location')->getAreaForApp($strUser['areaid']);
 	
 //小组模式的跳转
 //if(intval($IK_APP['options']['ismode'])=='1'){
-//	header("Location: ".SITE_URL.ikUrl('group','show',array('id'=>'1')));
+//	header("Location: ".SITE_URL.U('group','show',array('id'=>'1')));
 //	exit;
 //}
 

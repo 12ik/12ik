@@ -76,15 +76,15 @@ switch ($ik) {
 		
 		$strRoom = aac('site')->getOneRoom($strNotes['roomid']);
 		
-		$actionUrl = SITE_URL.ikUrl('site','notes',array('ik'=>'settings','notesid'=>$notesid));
-		$deleteUrl = SITE_URL.ikUrl('site','notes',array('ik'=>'delete','notesid'=>$notesid));
+		$actionUrl = SITE_URL.U('site','notes',array('ik'=>'settings','notesid'=>$notesid));
+		$deleteUrl = SITE_URL.U('site','notes',array('ik'=>'delete','notesid'=>$notesid));
 		//判断是否是存档
 		if($strNotes['isarchive']==1)
 		{
-		 	$archiveUrl = SITE_URL.ikUrl('site','notes',array('ik'=>'unarchive','notesid'=>$notesid));//恢复url
+		 	$archiveUrl = SITE_URL.U('site','notes',array('ik'=>'unarchive','notesid'=>$notesid));//恢复url
 			$archiveName = "恢复此应用";
 		}else{
-		 	$archiveUrl = SITE_URL.ikUrl('site','notes',array('ik'=>'archive','notesid'=>$notesid));//存档url
+		 	$archiveUrl = SITE_URL.U('site','notes',array('ik'=>'archive','notesid'=>$notesid));//存档url
 			$archiveName = "存档此应用";			
 		}
 				
@@ -177,16 +177,16 @@ switch ($ik) {
 					$html .= '
 						<div class="item-entry">
 							<div class="title">
-								<a href="'.SITE_URL.ikUrl('site','notes',array('notesid'=>$item['notesid'],'noteid'=>$item['contentid'])).'" title="'.$item['title'].'">'.$item['title'].'</a>
+								<a href="'.SITE_URL.U('site','notes',array('notesid'=>$item['notesid'],'noteid'=>$item['contentid'])).'" title="'.$item['title'].'">'.$item['title'].'</a>
 							</div>
 							<div class="datetime">'.date('Y-m-d H:i:s',$item['addtime']).'</div>
-							<div id="note_'.$item['contentid'].'_short" class="summary">'.getsubstrutf8(t($item['content']),0,120).'<a href="'.SITE_URL.ikUrl('site','notes',array('notesid'=>$item['notesid'],'noteid'=>$item['contentid'])).'#note_'.$item['contentid'].'_footer">('.$item['count_comment'].'回应)</a>
+							<div id="note_'.$item['contentid'].'_short" class="summary">'.getsubstrutf8(t($item['content']),0,120).'<a href="'.SITE_URL.U('site','notes',array('notesid'=>$item['notesid'],'noteid'=>$item['contentid'])).'#note_'.$item['contentid'].'_footer">('.$item['count_comment'].'回应)</a>
 							</div>
 						</div> 				
 					';
 					}
 				}else{
-					$html ='<div class="createnew">记录你的最新动向 <a href="'.SITE_URL.ikUrl('site','notes',
+					$html ='<div class="createnew">记录你的最新动向 <a href="'.SITE_URL.U('site','notes',
 					array('ik'=>'create','notesid'=>$notesid)).'"> &gt; 提笔写日记</a></div>';
 				}
 		 
@@ -338,7 +338,7 @@ switch ($ik) {
 			}
 			
 			////////////////////////////////////////////////////////////
-			header("Location: ".SITE_URL.ikUrl('site','notes',array('notesid'=>$notesid,'noteid'=>$note_id)));
+			header("Location: ".SITE_URL.U('site','notes',array('notesid'=>$notesid,'noteid'=>$note_id)));
 		}
 
 		$title = '新加日记';
@@ -391,7 +391,7 @@ switch ($ik) {
 			}
 			
 			////////////////////////////////////////////////////////////
-			header("Location: ".SITE_URL.ikUrl('site','notes',array('notesid'=>$notesid,'noteid'=>$note_id)));
+			header("Location: ".SITE_URL.U('site','notes',array('notesid'=>$notesid,'noteid'=>$note_id)));
 		}
 	
 		$title = '编辑日记';
@@ -409,7 +409,7 @@ switch ($ik) {
 		//删除帖子	
 		aac('site')->delete('site_notes_content',array('contentid'=>$noteid,'notesid'=>$notesid));
 		
-	    header("Location: ".SITE_URL.ikUrl('site','notes',array('ik'=>'list','notesid'=>$notesid)));
+	    header("Location: ".SITE_URL.U('site','notes',array('ik'=>'list','notesid'=>$notesid)));
 
 		break;				
 	case "list" :
@@ -476,7 +476,7 @@ switch ($ik) {
 				array('count_comment'=>$strCount['count_comment']+1)
 			);
 		}
-		header("Location: ".SITE_URL.ikUrl('site','notes',array('notesid'=>$notesid,'noteid'=>$noteid)));
+		header("Location: ".SITE_URL.U('site','notes',array('notesid'=>$notesid,'noteid'=>$noteid)));
 
 		break;		
 	case "del_comment" :	
@@ -490,7 +490,7 @@ switch ($ik) {
 			
 		}else if(empty($userid)){
 			
-			ikNotice('你没有执行该操作(del_comment)的权限！','请登录后重试',SITE_URL.ikUrl('user','login'));	
+			ikNotice('你没有执行该操作(del_comment)的权限！','请登录后重试',SITE_URL.U('user','login'));	
 		}
 				
 		aac('site')->delete('site_note_comment',array('commentid'=>$commentid,'noteid'=>$noteid));		
@@ -502,7 +502,7 @@ switch ($ik) {
 			array('count_comment'=>$strCount['count_comment']-1)
 		);
 		
-		header("Location: ".SITE_URL.ikUrl('site','notes',array('notesid'=>$notesid,'noteid'=>$noteid)));
+		header("Location: ".SITE_URL.U('site','notes',array('notesid'=>$notesid,'noteid'=>$noteid)));
 
 		break;
 	case "add_photo" :

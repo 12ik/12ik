@@ -39,21 +39,20 @@ switch ($ik) {
 		if ($strAdminInfo ['isadmin'] != 1)
 			qiMsg ( "你无权登录后台管理！" );
 
-		$_SESSION ['tsadmin'] = $strAdminInfo;
+		$_SESSION ['ikadmin'] = $strAdminInfo;
 		
 		$_SGLOBAL['supe_uid'] = $strAdminInfo['userid'];
 		$_SGLOBAL['supe_username'] = $strAdminInfo['username'];
 
-		
 		header ( "Location: " . SITE_URL . "index.php?app=system" );
 		
 		break;
 	
 	//退出 
 	case "out" :
-		unset ( $_SESSION ['tsadmin'] );
+		unset ( $_SESSION ['ikadmin'] );
 		
-		header ( "Location: " . SITE_URL . "index.php?app=system&ac=login" );
+		header ( "Location: " . SITE_URL . "index.php?app=system&a=login" );
 		
 		break;
 }

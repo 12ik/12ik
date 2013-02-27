@@ -11,7 +11,7 @@ $strNote ['user'] = aac ( 'user' )->getOneUser ( $strNote ['userid'] );
 
 //获取评论
 $page = isset ( $_GET ['page'] ) ? intval ( $_GET ['page'] ) : 1;
-$url = SITE_URL . ikUrl ( 'note', 'show', array ('noteid' => $noteid, 'page' => '' ) );
+$url = SITE_URL . U ( 'note', 'show', array ('noteid' => $noteid, 'page' => '' ) );
 $lstart = $page * 10 - 10;
 $arrComments = $db->fetch_all_assoc("select * from ".dbprefix."note_comment where `noteid`='$noteid' order by addtime desc limit $lstart,10");
 

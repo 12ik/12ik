@@ -5,7 +5,7 @@ defined('IN_IK') or die('Access Denied.');
 $userid = aac('user')->isLogin();
 
 $page = isset($_GET['page']) ? $_GET['page'] : '1';
-$url = SITE_URL.ikUrl('feed','index',array('page'=>''));
+$url = SITE_URL.U('feed','index',array('page'=>''));
 $lstart = $page*20-20;
 
 $arrFeeds = $db->fetch_all_assoc("select * from ".dbprefix."feed where userid='$userid' order by addtime desc limit $lstart,20");

@@ -24,24 +24,24 @@
 <div id="db-photo-view">
   <div id="link-report">
     <div class="photitle">
-        <span class="back-lnk">&gt;<a href="{SITE_URL}{ikUrl('site','photos',array('ik'=>'list','photosid'=>$photosid))}">返回{$strPhotos[title]}</a></span>
+        <span class="back-lnk">&gt;<a href="{U('site','photos',array('ik'=>'list','photosid'=>$photosid))}">返回{$strPhotos[title]}</a></span>
         <span class="nums">第{$nowPage}张 / 共{$conutPage}张</span>
         <!--{if $nowPage >1}-->
         <link href="#" rel="prev">
-        <a id="pre_photo" title="用方向键←可以向前翻页" href="{SITE_URL}{ikUrl('site','photos',array('ik'=>'photo','photosid'=>$photosid,'pid'=>$prev))}">上一张</a>
+        <a id="pre_photo" title="用方向键←可以向前翻页" href="{U('site','photos',array('ik'=>'photo','photosid'=>$photosid,'pid'=>$prev))}">上一张</a>
         <!--{if $nowPage < $conutPage}-->
         /
         <!--{/if}-->
         <!--{/if}-->
         <!--{if $nowPage < $conutPage}-->
         <link href="#" rel="next">
-        <a id="next_photo" title="用方向键→可以向后翻页" name="next_photo" href="{SITE_URL}{ikUrl('site','photos',array('ik'=>'photo','photosid'=>$photosid,'pid'=>$next))}">下一张</a>
+        <a id="next_photo" title="用方向键→可以向后翻页" name="next_photo" href="{U('site','photos',array('ik'=>'photo','photosid'=>$photosid,'pid'=>$next))}">下一张</a>
         <!--{/if}-->
     </div>
 
     <div class="phoview">
         <!--{if $nowPage < $conutPage}-->
-        <a title="点击查看下一张" href="{SITE_URL}{ikUrl('site','photos',array('ik'=>'photo','photosid'=>$photosid,'pid'=>$next))}" class="mainphoto">
+        <a title="点击查看下一张" href="{U('site','photos',array('ik'=>'photo','photosid'=>$photosid,'pid'=>$next))}" class="mainphoto">
         <!--{/if}-->
             <img src="{SITE_URL}{php echo ikXimg($strPhoto[photourl],'site',600,600,$strPhoto[path])}">
         <!--{if $nowPage < $conutPage}-->

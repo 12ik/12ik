@@ -1214,7 +1214,6 @@ INSERT INTO `ik_system_options` (`optionname`, `optionvalue`) VALUES
 ('site_url', 'http://localhost/12ik/'),
 ('site_email', 'admin@admin.com'),
 ('site_icp', '正在备案中'),
-('isface', '0'),
 ('site_key', '12ik'),
 ('site_desc', '又一个爱客网(12IK)开源社区'),
 ('site_theme', 'blue'),

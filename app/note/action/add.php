@@ -53,7 +53,7 @@ switch($ik){
 		//处理标签
 		aac('tag')->addTag('note','noteid',$noteid,trim($_POST['tag']));
 		
-		header("Location: ".SITE_URL.ikUrl('note','show',array('noteid'=>$noteid)));
+		header("Location: ".SITE_URL.U('note','show',array('noteid'=>$noteid)));
 	
 		break;
 	}

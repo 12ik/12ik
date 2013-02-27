@@ -21,9 +21,9 @@
         <div id="{$item[widgetname]}-{$item[widgetid]}" archives="1" class="mod">
             <div class="hd">
                 <span>[<!--{$item[strwidget][widgetname]}-->]</span>
-                <span><a href="{SITE_URL}{ikUrl('site',$item[widgetname],array('ik'=>'list',$item[widgetname].'id'=>$item[widgetid]))}"><!--{$item[widget][title]}--></a></span>
+                <span><a href="{U('site',$item[widgetname],array('ik'=>'list',$item[widgetname].'id'=>$item[widgetid]))}"><!--{$item[widget][title]}--></a></span>
                 <div class="edit">
-                        <a href="javascript:;" rel="{SITE_URL}{ikUrl('site',$item[widgetname],array('ik'=>'settings',$item[widgetname].'id'=>$item[widgetid]))}" class="a_lnk_mod_setting">设置</a>
+                        <a href="javascript:;" rel="{U('site',$item[widgetname],array('ik'=>'settings',$item[widgetname].'id'=>$item[widgetid]))}" class="a_lnk_mod_setting">设置</a>
                 </div>
             </div>
         </div> 

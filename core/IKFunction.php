@@ -43,7 +43,7 @@ function editor2html($str) {
 			$strAttach = aac ( 'attach' )->getOneAttach ( $aitem );
 			if ($strAttach ['isattach'] == '1') {
 				$str = str_replace ( "[attach={$aitem}]", '<span class="attach_down">附件下载：
-									 <a href="' . SITE_URL . 'index.php?app=attach&ac=ajax&ik=down&attachid=' . $aitem . '" target="_blank">' . $strAttach ["attachname"] . '</a></span>', $str );
+									 <a href="' . SITE_URL . 'index.php?app=attach&a=ajax&ik=down&attachid=' . $aitem . '" target="_blank">' . $strAttach ["attachname"] . '</a></span>', $str );
 			} else {
 				$str = str_replace ( "[attach={$aitem}]", '', $str );
 			}
@@ -841,8 +841,8 @@ function ob_gzip($content) {
 }
 
 /* tsUrl()  By 12ik
- * ikUrl提供至少4种的url展示方式
- * (1)index.php?app=group&ac=topic&topicid=1 //标准默认模式
+ * U提供至少4种的url展示方式
+ * (1)index.php?app=group&a=topic&topicid=1 //标准默认模式
  * (2)index.php/group/topic/topicid-1   //path_info模式
  * (3)group-topic-topicid-1.html   //rewrite模式1
  * (4)group/topic/ik-user/topicid-1/   //rewrite模式2
@@ -850,7 +850,7 @@ function ob_gzip($content) {
  * (6)group/topic/id/1   //rewrite模式2
  * (7)group/topic/1/   //rewrite模式2
  */
-function ikUrl($app, $ac = '', $params = array()) {
+function U($app, $a = '', $params = array()) {
 	//global $IK_SITE;
 	//echo $IK_SITE['base']['site_urltype'];
 	if (is_file ( 'data/system_options.php' )) {
@@ -865,94 +865,96 @@ function ikUrl($app, $ac = '', $params = array()) {
 		foreach($params as $k=>$v){
 			$str .= '&'.$k.'='.$v;
 		}
-		if($ac==''){
-			$ac = '';
+		if($a==''){
+			$a = '';
 		}else{
-			$ac='&ac='.$ac;
+			$a='&a='.$a;
 		}
-		$url = 'index.php?app='.$app.$ac.$str;
+		
+		$url = SITE_URL.'index.php?app='.$app.$a.$str;
+		
 	}elseif($urlset == 2){
 		foreach($params as $k=>$v){
 			$str .= '/'.$k.'-'.$v;
 		}
-		if($ac==''){
-			$ac='';
+		if($a==''){
+			$a='';
 		}else{
-			$ac='/'.$ac;
+			$a='/'.$a;
 		}
-		$url = 'index.php/'.$app.$ac.$str;
+		$url = 'index.php/'.$app.$a.$str;
 	}elseif($urlset == 3){
 		foreach($params as $k=>$v){
 			$str .= '-'.$k.'-'.$v;
 		}
 		
-		if($ac==''){
-			$ac='';
+		if($a==''){
+			$a='';
 		}else{
-			$ac='-'.$ac;
+			$a='-'.$a;
 		}
 		
 		$page = strpos($str,'page');
 		
 		if($page){
-			$url = $app.$ac.$str;
+			$url = $app.$a.$str;
 		}else{
-			$url = $app.$ac.$str.'.html';
+			$url = $app.$a.$str.'.html';
 		}
 		
 	}elseif($urlset == 4){
 		foreach($params as $k=>$v){
 			$str .= '/'.$k.'-'.$v;
 		}		
-		if($ac==''){
-			$ac='';
+		if($a==''){
+			$a='';
 		}else{
-			$ac='/'.$ac;
+			$a='/'.$a;
 		}
 		
-		$url = $app.$ac.$str;
+		$url = $app.$a.$str;
 	}elseif($urlset == 5){
 		foreach($params as $k=>$v){
 			$str .= '/'.$k.'/'.$v;
 		}
 		$str=str_replace('/id','',$str);	
-		if($ac==''){
-			$ac='';
+		if($a==''){
+			$a='';
 		}else{
-			$ac='/'.$ac;
+			$a='/'.$a;
 		}
 		
-		$url = $app.$ac.$str;
+		$url = $app.$a.$str;
 	}elseif($urlset == 6){
 		foreach($params as $k=>$v){
 			$str .= '/'.$k.'/'.$v;
 		}
 		
-		if($ac==''){
-			$ac='';
+		if($a==''){
+			$a='';
 		}else{
-			$ac='/'.$ac;
+			$a='/'.$a;
 		}
 		
-		$url = $app.$ac.$str;
+		$url = $app.$a.$str;
 	}elseif($urlset == 7){
 		foreach($params as $k=>$v){
 			$str .= '/'.$k.'/'.$v;
 		}
 		$str=str_replace('/id','',$str);
 		$str=str_replace('/ik','',$str);
-		if($ac==''){
-			$ac='';
+		if($a==''){
+			$a='';
 		}else{
-			$ac='/'.$ac;
+			$a='/'.$a;
 		}
 		
 		$page = strpos($str,'page');
 		
 		if($page){
-			$url = $app.$ac.$str;
+			$url = $app.$a.$str;
 		}else{
-			$url = $app.$ac.$str.'/';
+			$url = $app.$a.$str.'/';
 		}
 		
 	}	
@@ -965,7 +967,9 @@ function ikUrl($app, $ac = '', $params = array()) {
 function reurl(){ 
 	$options = fileRead('data/system_options.php');	
 	$scriptName = explode('index.php',$_SERVER['SCRIPT_NAME']);
+
 	$rurl = substr($_SERVER['REQUEST_URI'], strlen($scriptName[0]));
+	
 	
 	if(strpos($rurl,'?')==false){
 	
@@ -973,6 +977,7 @@ function reurl(){
 			$rurl = str_replace('index.php','',$rurl);
 			$rurl = substr($rurl, 1);			
 			$params = $rurl;
+			
 		}else{
 			$params = $rurl;
 		}
@@ -1681,4 +1686,32 @@ function ikVideo($videourl,$title='',$w = 500, $h = 400)
 {
 	$html = '<div align="center"><object width="'.$w.'" height="'.$h.'" data="'.$videourl.'" type="application/x-shockwave-flash"><param name="movie" value="'.$videourl.'"><param value="transparent" name="wmode"><param value="true" name="allowFullScreen"><param value="always" name="allowScriptAccess"><param value="autoplay=1" name="flashvars"></object><p>'.$title.'</p></div>';
 	return $html;
+}
+//所有的 ' (单引号), " (双引号), \ (反斜线) and 空字符会自动转为含有反斜线的转义字符
+function addslashes_deep($value) {
+	$value = is_array($value) ? array_map('addslashes_deep', $value) : addslashes($value);
+	return $value;
+}
+//删除由 addslashes() 函数添加的反斜杠
+function stripslashes_deep($value) {
+	if (is_array($value)) {
+		$value = array_map('stripslashes_deep', $value);
+	} elseif (is_object($value)) {
+		$vars = get_object_vars($value);
+		foreach ($vars as $key => $data) {
+			$value->{$key} = stripslashes_deep($data);
+		}
+	} else {
+		$value = stripslashes($value);
+	}
+
+	return $value;
+}
+function noGPC() {
+	if ( get_magic_quotes_gpc() ) {
+		$_POST = stripslashes_deep($_POST);
+		$_GET = stripslashes_deep($_GET);
+		$_COOKIE = stripslashes_deep($_COOKIE);
+		$_REQUEST= stripslashes_deep($_REQUEST);
+	}
 }

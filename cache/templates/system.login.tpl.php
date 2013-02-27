@@ -76,7 +76,7 @@ www.12ik.com </a></div>
 <h1>登录管理后台</h1>
 <div>
 <form method="post"
-	action="<?php echo SITE_URL;?>index.php?app=system&ac=login&ik=do">
+	action="<?php echo SITE_URL;?>index.php?app=system&a=login&ik=do">
 
 <p>管理员Email<br />
 <input style="width: 200px;" name="email" /></p>

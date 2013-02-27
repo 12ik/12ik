@@ -34,7 +34,7 @@ switch($ik){
 		if(mb_strlen($msg_content,'utf8')>50000) ikNotice('发这么多内容干啥^_^');
 		
 		aac('message')->sendmsg($msg_userid,$msg_touserid,$msg_title,$msg_content);
-		header("Location: ".SITE_URL.ikUrl('message','ikmail',array('ik'=>'outbox')));
+		header("Location: ".SITE_URL.U('message','ikmail',array('ik'=>'outbox')));
 		
 		break;
 }

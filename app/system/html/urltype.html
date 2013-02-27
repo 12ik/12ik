@@ -1,17 +1,15 @@
 {template header}
 
-<div class="midder">{template menu}
-
-<h2>链接形式</h2>
-
+<div class="midder">
+<h2>{$title}</h2>
 <div>
-<form method="POST" action="index.php?app=system&ac=urltype&ik=do">
+<form method="POST" action="index.php?app=system&a=urltype&ik=do">
 
 <table>
 	<tr>
 		<td width="100">形式1：</td>
 		<td><input type="radio" {if $IK_SITE[base][site_urltype]==1} checked="select" {/if}
-		name="site_urltype" value="1" /> index.php?app=group&ac=topic&id=1</td>
+		name="site_urltype" value="1" /> index.php?app=group&a=topic&id=1</td>
 	</tr>
 	<tr>
 		<td>形式2：</td>
@@ -50,10 +48,8 @@
 		group/topic/1/ (暂只支持apache环境的rewrite，非apache环境勿动)</td>
 	</tr>            
 </table>
-
-<div class="clear"></div>
-<br />
-<input type="submit" value="更改链接形式" /></form>
+<div class="page_btn"><input type="submit" value="提 交" class="submit" /></div>
+</form>
 
 </div>
 

@@ -95,12 +95,12 @@ class user extends IKApp{
 			if($this->isUser($userid)){
 				return $userid;
 			}else{
-				header("Location: ".SITE_URL.ikUrl('user','login',array('ik'=>'out')));
+				header("Location: ".SITE_URL.U('user','login',array('ik'=>'out')));
 				exit;
 			}
 		}else{
 			
-			header("Location: ".SITE_URL.ikUrl('user','login',array('ik'=>'out')));
+			header("Location: ".SITE_URL.U('user','login',array('ik'=>'out')));
 			exit;
 		}
 	}

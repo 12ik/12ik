@@ -9,23 +9,23 @@
             <div id="db-timeline-hd">
                 <ul class="menu-list">
                     <li <!--{if $ik=="inbox"}--> class="on" <!--{/if}-->>
-                        <a href="{SITE_URL}{ikUrl('message','ikmail',array('ik'=>'inbox'))}">
+                        <a href="{U('message','ikmail',array('ik'=>'inbox'))}">
                             所有消息
                         </a>
                     </li>
                     <li <!--{if $ik=="unread"}--> class="on" <!--{/if}--> >
-                        <a href="{SITE_URL}{ikUrl('message','ikmail',array('ik'=>'unread'))}">
+                        <a href="{U('message','ikmail',array('ik'=>'unread'))}">
                             未读消息({$unreadnum})
                         </a>
                     </li>
                     <li <!--{if $ik=="spam"}--> class="on" <!--{/if}--> >
-                        <a href="{SITE_URL}{ikUrl('message','ikmail',array('ik'=>'spam'))}">
+                        <a href="{U('message','ikmail',array('ik'=>'spam'))}">
                             垃圾消息({$spamnum})
                         </a>
                     </li>
                 </ul>
             </div>  
-		 <form  method="post" onSubmit="return isConfirmed" action="{SITE_URL}{ikUrl('message','do',array('ik'=>'all'))}">            
+		 <form  method="post" onSubmit="return isConfirmed" action="{U('message','do',array('ik'=>'all'))}">            
             <table class="olt">
               <tbody>
                 <tr>
@@ -40,12 +40,12 @@
                 <tr>
                   <td>{if $item[userid]==0}<span class="sys_doumail">系统邮件</span>{else} <span class="doumail_from">{$item[user][username]}</span> {/if}</td>
                   <td class="m" align="center">&gt;</td>
-                  <td><a href="{SITE_URL}{ikUrl('message','show',array('messageid'=>$item[messageid]))}">{$item[title]}</a></td>
+                  <td><a href="{U('message','show',array('messageid'=>$item[messageid]))}">{$item[title]}</a></td>
                   <td>{$item[addtime]}</td>
                   <td align="center"><input name="messageid[]" value="{$item[messageid]}" type="checkbox"></td>
                   <td style="display: none;" class="mail_options">
-                  {if $ik!="spam"}<a rel="direct" class="post_link" href="{SITE_URL}{ikUrl('message','do',array('ik'=>'spam','messageid'=>$item[messageid]))}">垃圾消息</a>{/if}
-                  <a onClick="return confirm('真的要删除消息吗？')" class="post_link" href="{SITE_URL}{ikUrl('message','do',array('ik'=>'del','type'=>'inbox','messageid'=>$item[messageid]))}">删除</a>
+                  {if $ik!="spam"}<a rel="direct" class="post_link" href="{U('message','do',array('ik'=>'spam','messageid'=>$item[messageid]))}">垃圾消息</a>{/if}
+                  <a onClick="return confirm('真的要删除消息吗？')" class="post_link" href="{U('message','do',array('ik'=>'del','type'=>'inbox','messageid'=>$item[messageid]))}">删除</a>
                   </td>
                 </tr>
                 <!--{/loop}-->

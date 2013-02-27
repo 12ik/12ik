@@ -42,7 +42,7 @@ switch ($ik) {
 			'count_user'=>$count_user
 		));
 		
-		header('Location: '.SITE_URL.ikUrl('group','show',array('id'=>$groupid)));
+		header('Location: '.SITE_URL.U('group','show',array('id'=>$groupid)));
 
 		break;
 	
@@ -75,7 +75,7 @@ switch ($ik) {
 			'count_user'=>$count_user,
 		));
 	
-		header('Location: '.SITE_URL.ikUrl('group','show',array('id'=>$groupid)));
+		header('Location: '.SITE_URL.U('group','show',array('id'=>$groupid)));
 		
 		break;
 	
@@ -354,7 +354,7 @@ switch ($ik) {
 		if($typename != '')
 		  $db->query("insert into ".dbprefix."group_topics_type (`groupid`,`typename`) values ('$groupid','$typename')");
 		
-		header("Location: ".SITE_URL.ikUrl('group','edit',array('groupid'=>$groupid,'ik'=>'type')));
+		header("Location: ".SITE_URL.U('group','edit',array('groupid'=>$groupid,'ik'=>'type')));
 		
 		break;
 			
@@ -392,12 +392,12 @@ switch ($ik) {
 			$msg_userid = '0';
 			$msg_touserid = $strTopic['userid'];
 			$msg_title = '你的帖子：《'.$strTopic['title'].'》新增一条评论，快去看看给个回复吧';
-			$msg_content = '你的帖子：《'.$strTopic['title'].'》新增一条评论，快去看看给个回复吧^_^ <br /><a href="'.SITE_URL.ikUrl('group','topic',array('id'=>$topicid)).'">'.SITE_URL.ikUrl('group','topic',array('id'=>$topicid)).'</a>';
+			$msg_content = '你的帖子：《'.$strTopic['title'].'》新增一条评论，快去看看给个回复吧^_^ <br /><a href="'.SITE_URL.U('group','topic',array('id'=>$topicid)).'">'.SITE_URL.U('group','topic',array('id'=>$topicid)).'</a>';
 			aac('message')->sendmsg($msg_userid,$msg_touserid,$msg_title,$msg_content);
 		}
 		
 		if($referid && $strComment['userid'] != $IK_USER['user']['userid']){
-			$topicurl = SITE_URL.ikUrl('group','topic',array('id'=>$topicid));
+			$topicurl = SITE_URL.U('group','topic',array('id'=>$topicid));
 			$msg_userid = '0';
 			$msg_touserid = $strComment['userid'];
 			$msg_title = '有人评论了你在帖子：《'.$strTopic['title'].'》中的回复，快去看看给个回复吧';
@@ -461,7 +461,7 @@ switch ($ik) {
 		
 		$db->query("update ".dbprefix."group_topics set `groupid`='$groupid' where topicid='$topicid'");
 		
-		header("Location: ".SITE_URL.ikUrl('group','topic',array('id'=>$topicid)));
+		header("Location: ".SITE_URL.U('group','topic',array('id'=>$topicid)));
 		
 		break;
 		
@@ -484,7 +484,7 @@ switch ($ik) {
 				$msg_userid = '0';
 				$msg_touserid = $strTopic['userid'];
 				$msg_title = '恭喜，你的帖子：《'.$strTopic['title'].'》被评为精华帖啦';
-				$msg_content = '恭喜，你的帖子：《'.$strTopic['title'].'》被评为精华帖啦^_^ <br /><a href="'.SITE_URL.ikUrl('group','topic',array('id'=>$topicid)).'">'.SITE_URL.ikUrl('group','topic',array('id'=>$topicid)).'</a>';
+				$msg_content = '恭喜，你的帖子：《'.$strTopic['title'].'》被评为精华帖啦^_^ <br /><a href="'.SITE_URL.U('group','topic',array('id'=>$topicid)).'">'.SITE_URL.U('group','topic',array('id'=>$topicid)).'</a>';
 				aac('message')->sendmsg($msg_userid,$msg_touserid,$msg_title,$msg_content);
 				//msg end
 				

@@ -7,10 +7,10 @@
         </span>
         
         <span class="fr">
-            <a href="<?php echo SITE_URL;?><?php echo ikurl('home','about')?>">关于12IK</a>
-            · <a href="<?php echo SITE_URL;?><?php echo ikurl('home','contact')?>">联系我们</a>
-            · <a href="<?php echo SITE_URL;?><?php echo ikurl('home','agreement')?>">用户条款</a>
-            · <a href="<?php echo SITE_URL;?><?php echo ikurl('home','privacy')?>">隐私申明</a>
+            <a href="<?php echo U('home','about')?>">关于12IK</a>
+            · <a href="<?php echo U('home','contact')?>">联系我们</a>
+            · <a href="<?php echo U('home','agreement')?>">用户条款</a>
+            · <a href="<?php echo U('home','privacy')?>">隐私申明</a>
         </span>
         <div class="cl"></div>
         <p>Powered by <a class="softname" href="<?php echo $IK_SOFT['info'][url];?>"><?php echo $IK_SOFT['info'][name];?></a> <?php echo $IK_SOFT['info'][version];?> <?php echo $IK_SOFT['info'][year];?> <?php echo $IK_SITE['base'][site_icp];?><br /><span style="font-size:0.83em;">Processed in <?php echo $runTime;?> second(s)</span>

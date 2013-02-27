@@ -16,11 +16,11 @@
     <div class="main"> 
          
         <div class="content-nav">
-        <a href="{SITE_URL}{ikUrl('site','room',array('siteid'=>$siteid,'roomid'=>$roomid))}">&gt; 回{$strSite[sitename]}</a>
+        <a href="{U('site','room',array('siteid'=>$siteid,'roomid'=>$roomid))}">&gt; 回{$strSite[sitename]}</a>
         </div>  
         <h1>{$title}</h1> 
         <div class="title-link">
-            <a class="lnk-flat" href="{SITE_URL}{ikUrl('site','forum',array('ik'=>'create','forumid'=>$forumid))}">+ 发言</a>
+            <a class="lnk-flat" href="{U('site','forum',array('ik'=>'create','forumid'=>$forumid))}">+ 发言</a>
         </div>                   
         <div class="mod">
 
@@ -31,9 +31,9 @@
    		 <!--{loop $arrDiscus $item}-->
         <tr>
             <td>
-                {if $item[istop]==1}<img src="/public/images/stick.gif"/>{/if} <a title="{$item[title]}" href="{SITE_URL}{ikUrl('site','forum',array('forumid'=>$item[forumid],'discussid'=>$item[discussid]))}">{$item[title]}</a>
+                {if $item[istop]==1}<img src="/public/images/stick.gif"/>{/if} <a title="{$item[title]}" href="{U('site','forum',array('forumid'=>$item[forumid],'discussid'=>$item[discussid]))}">{$item[title]}</a>
             </td>
-            <td>来自 <a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[user][doname]))}">$item[user][username]</a>
+            <td>来自 <a href="{U('hi','',array('id'=>$item[user][doname]))}">$item[user][username]</a>
             </td>
             <td nowrap="nowrap" class="count">{$item[count_comment]}</td>
             <td class="date">{php echo date('Y-m-d H:i:s',$item[addtime])}</td>

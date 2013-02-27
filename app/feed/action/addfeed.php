@@ -24,7 +24,7 @@ switch($ik){
 			//feed开始
 			$feed_template = '<span class="pl">说：</span><div class="quote"><span class="inq">{content}</span> <span></span></div>';
 			$feed_data = array(
-				//'link'	=> SITE_URL.ikUrl('group','topic',array('id'=>$topicid)),
+				//'link'	=> SITE_URL.U('group','topic',array('id'=>$topicid)),
 				//'title'	=> $strTopic['title'],
 				'content'	=>getsubstrutf8(htmlspecialchars($content),0,100),
 			);
@@ -32,7 +32,7 @@ switch($ik){
 			//feed结束
 		
 		
-			header("Location: ".SITE_URL.ikUrl('feed','index'));
+			header("Location: ".SITE_URL.U('feed','index'));
 			
 		}
 	

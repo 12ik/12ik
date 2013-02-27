@@ -41,15 +41,15 @@ switch ($ik) {
 		//当前房间
 		$strRoom = aac('site')->getOneRoom($strForum['roomid']);
 		
-		$actionUrl = SITE_URL.ikUrl('site','forum',array('ik'=>'settings','forumid'=>$forumid));
-		$deleteUrl = SITE_URL.ikUrl('site','forum',array('ik'=>'delete','forumid'=>$forumid));
+		$actionUrl = SITE_URL.U('site','forum',array('ik'=>'settings','forumid'=>$forumid));
+		$deleteUrl = SITE_URL.U('site','forum',array('ik'=>'delete','forumid'=>$forumid));
 		//判断是否是存档
 		if($strForum['isarchive']==1)
 		{
-		 	$archiveUrl = SITE_URL.ikUrl('site','forum',array('ik'=>'unarchive','forumid'=>$forumid));//恢复url
+		 	$archiveUrl = SITE_URL.U('site','forum',array('ik'=>'unarchive','forumid'=>$forumid));//恢复url
 			$archiveName = "恢复此应用";
 		}else{
-		 	$archiveUrl = SITE_URL.ikUrl('site','forum',array('ik'=>'archive','forumid'=>$forumid));//存档url
+		 	$archiveUrl = SITE_URL.U('site','forum',array('ik'=>'archive','forumid'=>$forumid));//存档url
 			$archiveName = "存档此应用";			
 		}			
 		//显示个数
@@ -152,8 +152,8 @@ switch ($ik) {
 					$istop = $item['istop'] == 1 ? $topimg : '';
 					$html .= '
 							<tr>
-								<td>'.$istop.' <a title="'.$item['title'].'" href="'.SITE_URL.ikUrl('site','forum',array('forumid'=>$item['forumid'],'discussid'=>$item['discussid'])).'">'.$item['title'].'</a></td>	
-								<td>来自 <a href='.SITE_URL.ikUrl('hi','',array('id'=>$struser['doname'])).'"">'.$struser['username'].'</a></td>
+								<td>'.$istop.' <a title="'.$item['title'].'" href="'.SITE_URL.U('site','forum',array('forumid'=>$item['forumid'],'discussid'=>$item['discussid'])).'">'.$item['title'].'</a></td>	
+								<td>来自 <a href='.SITE_URL.U('hi','',array('id'=>$struser['doname'])).'"">'.$struser['username'].'</a></td>
 								<td class="count" nowrap="nowrap">'.$item['count_comment'].'</td>
 								<td class="date">'.date('Y-m-d H:i:s',$item['addtime']).'</td>
 							</tr> 				
@@ -271,7 +271,7 @@ switch ($ik) {
 				array('forumid'=>$forumid,'userid'=>$userid, 'title'=>$title,'content'=>htmlspecialchars($content),'addtime'=>time())
 			);
 			
-			header("Location: ".SITE_URL.ikUrl('site','forum',array('forumid'=>$forumid,'discussid'=>$discussid)));
+			header("Location: ".SITE_URL.U('site','forum',array('forumid'=>$forumid,'discussid'=>$discussid)));
 		}
 
 		$title = '在"'.$strForum['title'].'"发言';
@@ -319,7 +319,7 @@ switch ($ik) {
 			);
 			
 		}
-		header("Location: ".SITE_URL.ikUrl('site','forum',array('forumid'=>$forumid,'discussid'=>$discussid)));
+		header("Location: ".SITE_URL.U('site','forum',array('forumid'=>$forumid,'discussid'=>$discussid)));
 		
 		break;	
 		
@@ -332,7 +332,7 @@ switch ($ik) {
 		//删除帖子
 		aac('site')->delete('site_forum_discuss',array('discussid'=>$discussid));
 		
-	    header("Location: ".SITE_URL.ikUrl('site','forum',array('ik'=>'list','forumid'=>$forumid)));
+	    header("Location: ".SITE_URL.U('site','forum',array('ik'=>'list','forumid'=>$forumid)));
 
 		break;	
 	case "istop" :
@@ -345,7 +345,7 @@ switch ($ik) {
 			array('forumid'=>$forumid,'discussid'=>$discussid),
 			array('istop'=>$istop)
 		);
-		header("Location: ".SITE_URL.ikUrl('site','forum',array('forumid'=>$forumid,'discussid'=>$discussid)));
+		header("Location: ".SITE_URL.U('site','forum',array('forumid'=>$forumid,'discussid'=>$discussid)));
 
 		break;
 			
@@ -369,7 +369,7 @@ switch ($ik) {
 				array('count_comment'=>$strdiscuss['count_comment']+1)
 			);
 		}
-		header("Location: ".SITE_URL.ikUrl('site','forum',array('forumid'=>$forumid,'discussid'=>$discussid)));
+		header("Location: ".SITE_URL.U('site','forum',array('forumid'=>$forumid,'discussid'=>$discussid)));
 
 		break;
 		
@@ -384,7 +384,7 @@ switch ($ik) {
 			
 		}else if(empty($userid)){
 			
-			ikNotice('你没有执行该操作(del_comment)的权限！','请登录后重试',SITE_URL.ikUrl('user','login'));	
+			ikNotice('你没有执行该操作(del_comment)的权限！','请登录后重试',SITE_URL.U('user','login'));	
 		}
 		
 		aac('site')->delete('site_discuss_comment',array('commentid'=>$commentid,'discussid'=>$discussid));		
@@ -396,7 +396,7 @@ switch ($ik) {
 			array('count_comment'=>$strdiscuss['count_comment']-1)
 		);
 		
-		header("Location: ".SITE_URL.ikUrl('site','forum',array('forumid'=>$forumid,'discussid'=>$discussid)));
+		header("Location: ".SITE_URL.U('site','forum',array('forumid'=>$forumid,'discussid'=>$discussid)));
 
 		break;
 		

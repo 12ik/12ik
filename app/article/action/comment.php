@@ -32,7 +32,7 @@ switch($ik){
 		$db->query("update ".dbprefix."article_spaceitems set replynum ='$count_comment' 
 		where itemid='$itemid'");
 		
-		header("Location: ".SITE_URL.ikUrl('article','show',array('id'=>$nid)));
+		header("Location: ".SITE_URL.U('article','show',array('id'=>$nid)));
 		
 		break;
 	
@@ -53,7 +53,7 @@ switch($ik){
 		}
 		
 		//跳转
-		header("Location: ".SITE_URL.ikUrl('article','show',array('id'=>$strComment['nid'])));
+		header("Location: ".SITE_URL.U('article','show',array('id'=>$strComment['nid'])));
 		
 		break;
 		

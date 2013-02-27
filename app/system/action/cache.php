@@ -8,7 +8,7 @@ defined ( 'IN_IK' ) or die ( 'Access Denied.' );
  */
 switch ($ik) {
 	case "" :
-
+		$title = '缓存管理';
 		include template ( 'cache' );
 		break;
 	

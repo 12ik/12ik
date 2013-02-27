@@ -8,17 +8,17 @@
 
 <div class="bd">
 <img align="left" alt="{$strGroup[groupname]}" src="{$strGroup[icon_48]}" class="pil mr5 groupicon" valign="top" />
-<div>创建于{php echo date('Y-m-d',$strGroup[addtime])}&nbsp; &nbsp; {$strGroup[role_leader]}：<a href="{SITE_URL}{ikUrl('hi','',array('id'=>$strLeader[doname]))}">{$strLeader[username]}</a><br></div>
+<div>创建于{php echo date('Y-m-d',$strGroup[addtime])}&nbsp; &nbsp; {$strGroup[role_leader]}：<a href="{U('hi','',array('id'=>$strLeader[doname]))}">{$strLeader[username]}</a><br></div>
 <!--{php echo nl2br($strGroup[groupdesc])}-->
 <div class="clearfix" style="margin-top: 10px;">
 
 <!--{if $isGroupUser > 0 && $IK_USER[user][userid] != $strGroup[userid]}-->
-<span class="fleft mr5 color-gray">我是这个小组的{$strGroup[role_user]} <a class="j a_confirm_link" href="{SITE_URL}{ikUrl('group','do',array('ik'=>'exit','groupid'=>$strGroup['groupid']))}" style="margin-left: 6px;">&gt;退出小组</a></span>
+<span class="fleft mr5 color-gray">我是这个小组的{$strGroup[role_user]} <a class="j a_confirm_link" href="{U('group','do',array('ik'=>'exit','groupid'=>$strGroup['groupid']))}" style="margin-left: 6px;">&gt;退出小组</a></span>
 <!--{elseif $isGroupUser > 0 && $IK_USER[user][userid] == $strGroup[userid]}-->
 <span class="fleft mr5 color-gray">我是这个小组的{$strGroup[role_leader]}</span>
 <!--{elseif $strGroup[joinway] == '0'}-->
 <span class="fright">
-<a class="button-join" href="{SITE_URL}{ikUrl('group','do',array('ik'=>'join','groupid'=>$strGroup['groupid']))}">申请加入小组</a></span>
+<a class="button-join" href="{U('group','do',array('ik'=>'join','groupid'=>$strGroup['groupid']))}">申请加入小组</a></span>
 
 <!--{else}-->
 <span class="fright">本小组禁止加入</span>
@@ -35,7 +35,7 @@
 <div class="box_content">
 
     <h2 style="margin-top:10px">
-                <a class="rr bn-post" href="{SITE_URL}{ikUrl('group','add',array('groupid'=>$strGroup[groupid]))}"><span>发布帖子</span></a>
+                <a class="rr bn-post" href="{U('group','add',array('groupid'=>$strGroup[groupid]))}"><span>发布帖子</span></a>
         最近小组话题  · · · · · ·
     </h2>
 
@@ -55,7 +55,7 @@
             <!--{loop $arrTopic $key $item}-->
                             <tr class="pl">
                                 <td>
-             <a title="{$item[title]}" href="{SITE_URL}{ikUrl('group','topic',array('id'=>$item[topicid]))}">{$item[title]}</a>
+             <a title="{$item[title]}" href="{U('group','topic',array('id'=>$item[topicid]))}">{$item[title]}</a>
             <!--{if $item[isvideo] == '1'}-->
             <img src="{SITE_URL}public/images/lc_cinema.png" align="absmiddle" title="[视频]" alt="[视频]" />
             <!--{/if}-->             
@@ -70,7 +70,7 @@
             <!--{/if}-->
             </td>
 
-                                <td nowrap="nowrap"><a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[user][doname]))}">{$item[user][username]}</a></td>
+                                <td nowrap="nowrap"><a href="{U('hi','',array('id'=>$item[user][doname]))}">{$item[user][username]}</a></td>
                                 <td nowrap="nowrap" ><!--{if $item[count_comment]>0}-->{$item[count_comment]}<!--{/if}--></td>
                                 <td nowrap="nowrap" class="time" align="right">{php echo getTime($item[uptime],time())}</td>
                             </tr>
@@ -95,10 +95,10 @@
         <!--{loop $arrGroupUser $key $item}-->
         <dl class="obu">
             <dt>
-            <a href="{SITE_URL}{ikUrl('hi','',array('id'=>$item[doname]))}"><img alt="{$item[username]}" class="m_sub_img" src="{$item[face]}" /></a>
+            <a href="{U('hi','',array('id'=>$item[doname]))}"><img alt="{$item[username]}" class="m_sub_img" src="{$item[face]}" /></a>
             </dt>
             <dd>{$item[username]}<br>
-                <span class="pl">(<a href="{SITE_URL}{ikUrl('location','area',array(areaid=>$item[area][areaid]))}">{$item[area][areaname]}</a>)</span>
+                <span class="pl">(<a href="{U('location','area',array(areaid=>$item[area][areaid]))}">{$item[area][areaname]}</a>)</span>
             </dd>
      	 </dl>
         <!--{/loop}-->
@@ -106,13 +106,13 @@
         <br clear="all">
     
         <!--{if $IK_USER[user][userid] == $strGroup[userid]}-->
-        <p class="pl2">&gt; <a href="{SITE_URL}{ikUrl('group','group_user',array(groupid=>$strGroup[groupid]))}">成员管理 ({$strGroup[count_user]})</a></p>
+        <p class="pl2">&gt; <a href="{U('group','group_user',array(groupid=>$strGroup[groupid]))}">成员管理 ({$strGroup[count_user]})</a></p>
         
-        <p class="pl2">&gt; <a href="{SITE_URL}{ikUrl('group','edit',array(ik=>base,groupid=>$strGroup[groupid]))}">修改小组设置 </a></p>
-        <p class="pl2">&gt; <a href="{SITE_URL}{ikUrl('group','recovery',array(groupid=>$strGroup[groupid]))}">回收站 ({$strGroup[recoverynum]})</a></p>
+        <p class="pl2">&gt; <a href="{U('group','edit',array(ik=>base,groupid=>$strGroup[groupid]))}">修改小组设置 </a></p>
+        <p class="pl2">&gt; <a href="{U('group','recovery',array(groupid=>$strGroup[groupid]))}">回收站 ({$strGroup[recoverynum]})</a></p>
         
         <!--{else}-->
-        <p class="pl2"><a href="{SITE_URL}{ikUrl('group','group_user',array(groupid=>$strGroup[groupid]))}">浏览所有成员 ({$strGroup[count_user]})</a></p>
+        <p class="pl2"><a href="{U('group','group_user',array(groupid=>$strGroup[groupid]))}">浏览所有成员 ({$strGroup[count_user]})</a></p>
         <!--{/if}-->
         
        <div class="clear"></div>
@@ -120,9 +120,9 @@
         
     </div>
     
-	<p class="pl">本页永久链接: <a href="{SITE_URL}{ikUrl('group','show',array(id=>$strGroup[groupid]))}">{SITE_URL}{ikUrl('group','show',array(id=>$strGroup[groupid]))}</a></p>
+	<p class="pl">本页永久链接: <a href="{U('group','show',array(id=>$strGroup[groupid]))}">{U('group','show',array(id=>$strGroup[groupid]))}</a></p>
     
-    <p class="pl"><span class="feed"><a href="{SITE_URL}{ikUrl('group','rss',array(groupid=>$strGroup[groupid]))}">feed: rss 2.0</a></span></p>
+    <p class="pl"><span class="feed"><a href="{U('group','rss',array(groupid=>$strGroup[groupid]))}">feed: rss 2.0</a></span></p>
     
     <div class="clear"></div>
 	{php doAction('group_group_right_footer',$strTopic)}

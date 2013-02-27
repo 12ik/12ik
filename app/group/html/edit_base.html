@@ -7,7 +7,7 @@
 
 <div class="cleft">
 
-<form method="POST" action="{SITE_URL}index.php?app=group&ac=do&ik=edit_base" onsubmit="return createGroup(this);">
+<form method="POST" action="{SITE_URL}index.php?app=group&a=do&ik=edit_base" onsubmit="return createGroup(this);">
 <table align="center" style="width:100%;clear: both;" class="table_1">
 	<tr><th>小组名称：</th>
     <td><input type="text" value="{$strGroup[groupname]}" maxlength="63" size="31" name="groupname" gtbfieldid="13" class="txt" placeholder="请填写小组名称"></td></tr>
@@ -42,7 +42,7 @@
 
 <div class="cright">
 
-<p class="pl2">&gt; <a href="{SITE_URL}{ikUrl('group','show',array('id'=>$strGroup[groupid]))}">返回{$strGroup[groupname]}</a></p>
+<p class="pl2">&gt; <a href="{U('group','show',array('id'=>$strGroup[groupid]))}">返回{$strGroup[groupname]}</a></p>
 
 </div>
 
