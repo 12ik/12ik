@@ -158,9 +158,7 @@ function getVideoInfo($link) {
 	}
 	return $return;
 }
-function show($str) {
-	echo $str . '<br>';
-}
+
 
 ?>
 

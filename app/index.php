@@ -19,20 +19,21 @@ if (is_file ( 'app/' . $app . '/action/' . $a . '.php' )) {
 	//加载系统缓存文件 
 	$IK_SITE ['base'] = fileRead ( 'data/system_options.php' );
 	
-	$_SGLOBAL = $_SCONFIG = $IK_SITE ['base'];
+	$_SGLOBAL = $IK_SITE ['base'];
 	$_SGLOBAL['db'] = $db;
 	$_SGLOBAL['timestamp'] = time();
-	$_SGLOBAL['supe_uid'] = $IK_USER['admin']['userid'];
-	$_SGLOBAL['supe_username'] = $IK_USER['admin']['username'];
+	$_SGLOBAL['admin_uid'] = $IK_USER['admin']['userid'];
+	$_SGLOBAL['admin_username'] = $IK_USER['admin']['username'];
 	
 	//配置
-	$_SCONFIG['timeoffset'] = 8;//设置时区 默认中国香港
 	$_SCONFIG['thumbarray'] = array('news' => array($_SCONFIG['thumbwidth'],$_SCONFIG['thumbheight']));//设置文章页面图片高宽
 
-	
 	//设置时区
-	date_default_timezone_set ( $IK_SITE ['base'] ['timezone'] );
-	
+	if(PHP_VERSION > '5.1') {
+		$timeoffset = intval($_SGLOBAL['timezone'] / 3600);
+		@date_default_timezone_set('Etc/GMT'.($timeoffset > 0 ? '-' : '+').(abs($timeoffset)));
+	}
+		
 	//加载APP导航
 	$IK_SITE ['appnav'] = fileRead ( 'data/system_appnav.php' );
 	
@@ -107,9 +108,10 @@ if (is_file ( 'app/' . $app . '/action/' . $a . '.php' )) {
 		
 		}
 	}
-
+	
 	//开始执行APP action
 	include $app . '/action/' . $a . '.php';
+	
 
 } else {
 	//header("Location: http://www.12ik.com/home/404/");

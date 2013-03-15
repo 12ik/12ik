@@ -1,9 +1,40 @@
 <?php
 defined ( 'IN_IK' ) or die ( 'Access Denied.' );
 /*
- * 12IK爱客社区 
- * @copyright (c) 2012-3000 12IK.COM All Rights Reserved
- * @author wanglijun
- * @Email:160780470@qq.com
+ * 12IK爱客社区 @copyright (c) 2012-3000 12IK.COM All Rights Reserved @author
+ * wanglijun @Email:160780470@qq.com
  */
-return array ('Pacific/Kwajalein' => '(GMT -12:00) International Date Line West', 'Pacific/Samoa' => '(GMT -11:00) Midway Island, Samoa', 'Pacific/Honolulu' => '(GMT -10:00) Hawaii', 'US/Alaska' => '(GMT -9:00) Alaska', 'US/Pacific' => '(GMT -8:00) Pacific Time (US &amp; Canada); Tijuana', 'US/Mountain' => '(GMT -7:00) Mountain Time (US &amp; Canada)', 'US/Arizona' => '(GMT -7:00) Arizona', 'Mexico/BajaNorte' => '(GMT -7:00) Chihuahua, La Paz, Mazatlan', 'US/Central' => '(GMT -6:00) Central Time (US &amp; Canada)', 'America/Costa_Rica' => '(GMT -6:00) Central America', 'Mexico/General' => '(GMT -6:00) Guadalajara, Mexico City, Monterrey', 'Canada/Saskatchewan' => '(GMT -6:00) Saskatchewan', 'US/Eastern' => '(GMT -5:00) Eastern Time (US &amp; Canada)', 'America/Bogota' => '(GMT -5:00) Bogota, Lima, Quito', 'US/East-Indiana' => '(GMT -5:00) Indiana (East)', 'Canada/Eastern' => '(GMT -4:00) Atlantic Time (Canada)', 'America/Caracas' => '(GMT -4:00) Caracas, La Paz', 'America/Santiago' => '(GMT -4:00) Santiago', 'Canada/Newfoundland' => '(GMT -3:30) Newfoundland', 'Canada/Atlantic' => '(GMT -3:00) Brasilia, Greenland', 'America/Buenos_Aires' => '(GMT -3:00) Buenos Aires, Georgetown', 'Atlantic/Cape_Verde' => '(GMT -1:00) Cape Verde Is.', 'Atlantic/Azores' => '(GMT -1:00) Azores', 'Africa/Casablanca' => '(GMT 0) Casablanca, Monrovia', 'Europe/Dublin' => '(GMT 0) Greenwich Mean Time : Dublin, Edinburgh, London', 'Europe/Amsterdam' => '(GMT +1:00) Amsterdam, Berlin, Rome, Stockholm, Vienna', 'Europe/Prague' => '(GMT +1:00) Belgrade, Bratislava, Budapest, Prague', 'Europe/Paris' => '(GMT +1:00) Brussels, Copenhagen, Madrid, Paris', 'Europe/Warsaw' => '(GMT +1:00) Sarajevo, Skopje, Warsaw, Zagreb', 'Africa/Bangui' => '(GMT +1:00) West Central Africa', 'Europe/Istanbul' => '(GMT +2:00) Athens, Beirut, Bucharest, Cairo, Istanbul	', 'Asia/Jerusalem' => '(GMT +2:00) Harare, Jerusalem, Pretoria', 'Europe/Kiev' => '(GMT +2:00) Helsinki, Kiev, Riga, Sofia, Tallinn, Vilnius', 'Asia/Riyadh' => '(GMT +3:00) Kuwait, Nairobi, Riyadh', 'Europe/Moscow' => '(GMT +3:00) Baghdad, Moscow, St. Petersburg, Volgograd', 'Asia/Tehran' => '(GMT +3:30) Tehran', 'Asia/Muscat' => '(GMT +4:00) Abu Dhabi, Muscat', 'Asia/Baku' => '(GMT +4:00) Baku, Tbilsi, Yerevan', 'Asia/Kabul' => '(GMT +4:30) Kabul', 'Asia/Yekaterinburg' => '(GMT +5:00) Yekaterinburg', 'Asia/Karachi' => '(GMT +5:00) Islamabad, Karachi, Tashkent', 'Asia/Calcutta' => '(GMT +5:30) Chennai, Calcutta, Mumbai, New Delhi', 'Asia/Katmandu' => '(GMT +5:45) Katmandu', 'Asia/Almaty' => '(GMT +6:00) Almaty, Novosibirsk', 'Asia/Dhaka' => '(GMT +6:00) Astana, Dhaka, Sri Jayawardenepura', 'Asia/Rangoon' => '(GMT +6:30) Rangoon', 'Asia/Bangkok' => '(GMT +7:00) Bangkok, Hanoi, Jakarta', 'Asia/Krasnoyarsk' => '(GMT +7:00) Krasnoyarsk', 'Asia/Hong_Kong' => '(GMT +8:00) 北京, 重庆, 香港, 乌鲁木齐', 'Asia/Irkutsk' => '(GMT +8:00) Irkutsk, Ulaan Bataar', 'Asia/Singapore' => '(GMT +8:00) Kuala Lumpar, Perth, Singapore, Taipei', 'Asia/Tokyo' => '(GMT +9:00) Osaka, Sapporo, Tokyo', 'Asia/Seoul' => '(GMT +9:00) Seoul', 'Asia/Yakutsk' => '(GMT +9:00) Yakutsk', 'Australia/Adelaide' => '(GMT +9:30) Adelaide', 'Australia/Darwin' => '(GMT +9:30) Darwin', 'Australia/Brisbane' => '(GMT +10:00) Brisbane, Guam, Port Moresby', 'Australia/Canberra' => '(GMT +10:00) Canberra, Hobart, Melbourne, Sydney, Vladivostok', 'Asia/Magadan' => '(GMT +11:00) Magadan, Soloman Is., New Caledonia', 'Pacific/Auckland' => '(GMT +12:00) Auckland, Wellington', 'Pacific/Fiji' => '(GMT +12:00) Fiji, Kamchatka, Marshall Is.' );
+return array(
+	'-12' => '(GMT -12:00) Eniwetok, Kwajalein',
+	'-11' => '(GMT -11:00) Midway Island, Samoa',
+	'-10' => '(GMT -10:00) Hawaii',
+	'-9' => '(GMT -09:00) Alaska',
+	'-8' => '(GMT -08:00) Pacific Time (US & Canada), Tijuana',
+	'-7' => '(GMT -07:00) Mountain Time (US & Canada), Arizona',
+	'-6' => '(GMT -06:00) Central Time (US & Canada), Mexico City',
+	'-5' => '(GMT -05:00) Eastern Time (US & Canada), Bogota, Lima, Quito',
+	'-4' => '(GMT -04:00) Atlantic Time (Canada), Caracas, La Paz',
+	'-3.5' => '(GMT -03:30) Newfoundland',
+	'-3' => '(GMT -03:00) Brassila, Buenos Aires, Georgetown, Falkland Is',
+	'-2' => '(GMT -02:00) Mid-Atlantic, Ascension Is., St. Helena',
+	'-1' => '(GMT -01:00) Azores, Cape Verde Islands',
+	'0' => '(GMT) Casablanca, Dublin, Edinburgh, London, Lisbon, Monrovia',
+	'1' => '(GMT +01:00) Amsterdam, Berlin, Brussels, Madrid, Paris, Rome',
+	'2' => '(GMT +02:00) Cairo, Helsinki, Kaliningrad, South Africa',
+	'3' => '(GMT +03:00) Baghdad, Riyadh, Moscow, Nairobi',
+	'3.5' => '(GMT +03:30) Tehran',
+	'4' => '(GMT +04:00) Abu Dhabi, Baku, Muscat, Tbilisi',
+	'4.5' => '(GMT +04:30) Kabul',
+	'5' => '(GMT +05:00) Ekaterinburg, Islamabad, Karachi, Tashkent',
+	'5.5' => '(GMT +05:30) Bombay, Calcutta, Madras, New Delhi',
+	'5.75' => '(GMT +05:45) Katmandu',
+	'6' => '(GMT +06:00) Almaty, Colombo, Dhaka, Novosibirsk',
+	'6.5' => '(GMT +06:30) Rangoon',
+	'7' => '(GMT +07:00) Bangkok, Hanoi, Jakarta',
+	'8' => '(GMT +08:00) 北京, 重庆, 香港, 乌鲁木齐',
+	'9' => '(GMT +09:00) Osaka, Sapporo, Seoul, Tokyo, Yakutsk',
+	'9.5' => '(GMT +09:30) Adelaide, Darwin',
+	'10' => '(GMT +10:00) Canberra, Guam, Melbourne, Sydney, Vladivostok',
+	'11' => '(GMT +11:00) Magadan, New Caledonia, Solomon Islands',
+	'12' => '(GMT +12:00) Auckland, Wellington, Fiji, Marshall Island'
+);

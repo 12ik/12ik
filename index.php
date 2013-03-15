@@ -23,8 +23,6 @@ include 'core/core.php';
 
 //除去加载内核运行时间统计开始
 $time_start = getmicrotime ();
-//全局变量
-$_SGLOBAL['starttime'] = $time_start;
 
 if (is_file ( 'data/config.inc.php' )) { 
 	//装载APP应用

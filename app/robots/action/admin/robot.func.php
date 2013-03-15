@@ -608,7 +608,7 @@ function sstrtotime($timestamp) {
 	} else {
 		return 0;
 	}
-	return gmmktime($hour, $minute, $second, $month, $day, $year) - $_SCONFIG['timeoffset'] * 3600;
+	return gmmktime($hour, $minute, $second, $month, $day, $year) - $_SGLOBAL['timezone'] * 3600;
 }
 
 /**
@@ -654,8 +654,8 @@ function messageaddtodb($msgarr, $robotid, $itemid=0) {
 	@include_once($filepath);
 
 	if(!$itemid) { 
-		$uid = empty($msgarr['uid']) ? $_SGLOBAL['supe_uid'] : $msgarr['uid'];
-		$username = empty($cacheinfo['uids'][$msgarr['uid']]) ? $_SGLOBAL['supe_username'] : $cacheinfo['uids'][$msgarr['uid']];
+		$uid = empty($msgarr['uid']) ? $_SGLOBAL['admin_uid'] : $msgarr['uid'];
+		$username = empty($cacheinfo['uids'][$msgarr['uid']]) ? $_SGLOBAL['admin_username'] : $cacheinfo['uids'][$msgarr['uid']];
 		//判断是否直接入库操作
 		if(empty($msgarr['importcatid'])) {
 				echo '没有指定栏目';
@@ -676,7 +676,7 @@ function messageaddtodb($msgarr, $robotid, $itemid=0) {
 
 				if($msgarr['importtype']=='album') {
 				 	//相册
-					$hashstr = smd5($_SGLOBAL['supe_uid'].'/'.rand(1000, 9999).$_SGLOBAL['timestamp']);
+					$hashstr = smd5($_SGLOBAL['admin_uid'].'/'.rand(1000, 9999).$_SGLOBAL['timestamp']);
 					$arrpath = explode('/', $msgarr['patharr'][0]['filepath']);
 					for($i=0; $i<count($arrpath)-1; $i++)
 					{
@@ -704,7 +704,7 @@ function messageaddtodb($msgarr, $robotid, $itemid=0) {
 									
 				}else{
 					//文章
-					$hashstr = smd5($_SGLOBAL['supe_uid'].'/'.rand(1000, 9999).$_SGLOBAL['timestamp']);
+					$hashstr = smd5($_SGLOBAL['admin_uid'].'/'.rand(1000, 9999).$_SGLOBAL['timestamp']);
 					$insertsqlarr = array(
 							'catid' => $msgarr['importcatid'],
 							'uid' => $uid,
@@ -1150,7 +1150,7 @@ function saveurlarr($msgarr, $varname) {
 			}
 			$subject = strtolower(trim(substr($patharr['name'], 0, strrpos($patharr['name'], '.'))));
 			$msgarr['patharr'][] = array(
-					'uid' => $_SGLOBAL['supe_uid'],
+					'uid' => $_SGLOBAL['admin_uid'],
 					'dateline' => $_SGLOBAL['timestamp'],
 					'catid' => $msgarr['importcatid'],
 					'itemid' => 0,

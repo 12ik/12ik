@@ -1517,7 +1517,7 @@ function sgmdate($timestamp, $dateformat='', $format=0) {
 	if($format) {
 		$time = $_SGLOBAL['timestamp'] - $timestamp;
 		if($time > 24*3600) {
-			$result = gmdate($dateformat, $timestamp + $_SCONFIG['timeoffset'] * 3600);
+			$result = gmdate($dateformat, $timestamp + $_SGLOBAL['timezone'] * 3600);
 		} elseif ($time > 3600) {
 			$result = intval($time/3600).'小时前';
 		} elseif ($time > 60) {
@@ -1528,7 +1528,7 @@ function sgmdate($timestamp, $dateformat='', $format=0) {
 			$result = '现在';
 		}
 	} else {
-		$result = gmdate($dateformat, $timestamp + $_SCONFIG['timeoffset'] * 3600);
+		$result = gmdate($dateformat, $timestamp + $_SGLOBAL['timezone'] * 3600);
 	}
 	return $result;
 }

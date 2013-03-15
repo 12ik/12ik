@@ -63,27 +63,13 @@ a {
 	padding: 20px;
 }
 
-.ulogin .uinput {
-	width: 150px;
-}
-
+.ulogin .uinput {width: 150px;}
 .uinput,input,select,textarea {
-	border: 1px solid #D0D0D0;
 	line-height: 1.62;
 	margin-top: 5px;
 	padding: 3px;
-	border-radius:3px;
 }
-
-.uinput:focus {
-	border-color: gray
-}
-
-input:focus {
-	border-color: gray
-}
-
-.submit {
+.submit ,input[type=submit]{
 	font-size: 13px;
 	cursor: pointer;
  	background: url("images/btn_b.gif") no-repeat scroll 0 0 #567AB4;
@@ -116,7 +102,31 @@ input:focus {
 	background: none repeat scroll 0 0 #fff; 
 }
 .tabnav .select a {color: #333;}
+/*登录*/
+#loginbody{ background-color:#1873aa;}
+.login {
+	width: 512px;
+	height:355px;
+	margin: 0 auto;
+	overflow: hidden;
+	margin-top: 200px;
+	background:url(images/admin.jpg) no-repeat 0px 0px;
+}
 
+.login .info {
+	margin: 100px 0;color: #FFFFFF; padding-left:50px
+}
+.login .linput{ border-top:#76676e solid 1px; border-left:#a0a29f solid 1px; border-right:#fff solid 1px; border-bottom:#fff solid 1px; 
+height:19px; color:#04518a; padding:0px; border-radius:0px}
+.login .info a {
+	color: #FFFFFF;
+	text-decoration: none;
+	font-size: 12px;display:block; float:left; line-height:30px; margin-left:10px
+}
+.login .info a:hover{ color:#04518a}
+.login th{ text-align:right;  padding-right:10px; font-weight:normal; }
+.login .lsubmit{ background:url(images/loginbtn.gif) no-repeat 0 0; width:64px; height:26px; text-indent:-9999px; overflow:hidden;  border:none;
+cursor:pointer; display:block; float:left}
 /*中部*/
 .midder {
 	margin: 0 auto;

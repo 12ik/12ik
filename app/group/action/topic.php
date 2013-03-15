@@ -31,7 +31,7 @@ $strGroupUserNum = aac('group')->findCount('group_users',array('groupid'=>$group
 $collectNum = aac('group')->findCount('group_topics_collects', array('topicid'=>$topicid));
 $is_Like = aac('group')->find('group_topics_collects', array('userid'=>$userid, 'topicid'=>$topicid));
 
-//喜欢收藏的人数
+//回复的人数
 $recommendNum = aac('group')->findCount('group_topics_recommend', array('topicid'=>$topicid));
 
 $isGroupUser = $db->once_num_rows("select * from ".dbprefix."group_users where userid='$userid' and groupid='$groupid'");
@@ -106,7 +106,7 @@ if($strGroup['isopen']=='1' && $isGroupUser=='0'){
 	}
 	
 	
-	$lstart = $page*15-15;
+	$lstart = $page*2-2;
 	
 	$arrComment = $db->fetch_all_assoc("select * from ".dbprefix."group_topics_comments where `topicid`='$topicid' order by addtime $sc limit $lstart,15");
 	foreach($arrComment as $key=>$item){
@@ -118,7 +118,7 @@ if($strGroup['isopen']=='1' && $isGroupUser=='0'){
 	
 	$commentNum = $db->once_fetch_assoc("select count(*) from ".dbprefix."group_topics_comments where `topicid`='$topicid'");
 	
-	$pageUrl = pagination($commentNum['count(*)'], 15, $page, $url);
+	$pageUrl = pagination($commentNum['count(*)'], 2, $page, $url);
 	//评论列表结束
 	
 	

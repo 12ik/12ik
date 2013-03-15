@@ -15,7 +15,7 @@ error_reporting ( E_ALL & ~ E_NOTICE & ~ E_WARNING );
 
 session_start ();
 // 定义全局配置
-$_SGLOBAL = $_SCONFIG = array ();
+$_SGLOBAL = array ();
 
 // 前台用户基本数据,$IK_USER数组
 $IK_USER = array (

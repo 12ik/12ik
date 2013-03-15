@@ -41,8 +41,8 @@ switch ($ik) {
 
 		$_SESSION ['ikadmin'] = $strAdminInfo;
 		
-		$_SGLOBAL['supe_uid'] = $strAdminInfo['userid'];
-		$_SGLOBAL['supe_username'] = $strAdminInfo['username'];
+		$_SGLOBAL['admin_uid'] = $strAdminInfo['userid'];
+		$_SGLOBAL['admin_username'] = $strAdminInfo['username'];
 
 		header ( "Location: " . SITE_URL . "index.php?app=system" );
 		

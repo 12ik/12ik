@@ -11,7 +11,7 @@ return array (
   'site_theme' => 'blue',
   'site_urltype' => '1',
   'isgzip' => '0',
-  'timezone' => 'Asia/Hong_Kong',
+  'timezone' => '8',
   'isinvite' => '0',
   'charset' => 'UTF-8',
   'thumbwidth' => '400',

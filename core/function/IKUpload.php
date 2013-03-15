@@ -1,7 +1,6 @@
 <?php
 defined ( 'IN_IK' ) or die ( 'Access Denied.' );
-
-function savelocalfile($filearr, $thumbarr=array(100, 100), $objfile='', $havethumb=1) {
+function savelocalfile($filearr, $thumbarr=array(120, 120), $objfile='', $havethumb=1) {
 
 	global $_SCONFIG, $_SGLOBAL;
 
@@ -13,7 +12,6 @@ function savelocalfile($filearr, $thumbarr=array(100, 100), $objfile='', $haveth
 
 	//debug 文件后缀
 	$ext = fileext($filename);
-
 	$patharr['name'] = addslashes($filename);
 	$patharr['type'] = $ext;
 	$patharr['size'] = $filearr['size'];
@@ -38,7 +36,7 @@ function savelocalfile($filearr, $thumbarr=array(100, 100), $objfile='', $haveth
 		if(empty($_SGLOBAL['_num'])) $_SGLOBAL['_num'] = 0;
 		$_SGLOBAL['_num'] = intval($_SGLOBAL['_num']);
 		$_SGLOBAL['_num']++;
-		$filemain = $_SGLOBAL['supe_uid'].'_'.sgmdate($_SGLOBAL['timestamp'], 'YmdHis').$_SGLOBAL['_num'].random(4);
+		$filemain = $_SGLOBAL['admin_uid'].'_'.sgmdate($_SGLOBAL['timestamp'], 'YmdHis').$_SGLOBAL['_num'].random(4);
 
 		//debug 得到存储目录
 		$dirpath = getattachdir();
@@ -46,7 +44,7 @@ function savelocalfile($filearr, $thumbarr=array(100, 100), $objfile='', $haveth
 		$patharr['file'] = $dirpath.$filemain.'.'.$ext;
 
 		//debug 上传
-		$newfilename = A_DIR.'/'.$patharr['file'];
+		$newfilename = IKDATA.'/'.$patharr['file'];
 	}
 	if(@copy($tmpname, $newfilename)) {
 	} elseif((function_exists('move_uploaded_file') && @move_uploaded_file($tmpname, $newfilename))) {
@@ -92,7 +90,7 @@ function saveremotefile($url, $thumbarr=array(100, 100), $mkthumb=1, $maxsize=0)
 	if(empty($_SGLOBAL['_num'])) $_SGLOBAL['_num'] = 0;
 	$_SGLOBAL['_num'] = intval($_SGLOBAL['_num']);
 	$_SGLOBAL['_num']++;
-	$filemain = $_SGLOBAL['supe_uid'].'_'.sgmdate($_SGLOBAL['timestamp'], 'YmdHis').$_SGLOBAL['_num'].random(4);
+	$filemain = $_SGLOBAL['admin_uid'].'_'.sgmdate($_SGLOBAL['timestamp'], 'YmdHis').$_SGLOBAL['_num'].random(4);
 	$patharr['name'] = $filemain.'.'.$ext;
 	
 	//debug 得到存储目录
@@ -149,7 +147,7 @@ function getattachdir() {
 			$dirpatharr[] = sgmdate($_SGLOBAL['timestamp'], 'd');
 			break;
 		case 'md5':
-			$md5string = md5($_SGLOBAL['supe_uid'].'-'.$_SGLOBAL['timestamp'].'-'.$_SGLOBAL['_num']);
+			$md5string = md5($_SGLOBAL['admin_uid'].'-'.$_SGLOBAL['timestamp'].'-'.$_SGLOBAL['_num']);
 			$dirpatharr[] =  substr($md5string, 0, 1);
 			$dirpatharr[] =  substr($md5string, 1, 1);
 			break;
@@ -189,14 +187,14 @@ function smkdir($dirname, $ismkindex=1) {
 function filemain($filename) {
 	return trim(substr($filename, 0, strrpos($filename, '.')));
 }
-
+//生成缩略图
 function makethumb($srcfile, $thumbsizearr = array(100, 100), $dstfile='') {
 	global $_SCONFIG;
 
 	if(empty($dstfile)) {
 		$dstfile = filemain($srcfile).'.thumb.jpg';//自建立缩略图
-		$srcfile_file = A_DIR.'/'.$srcfile;
-		$dstfile_file = A_DIR.'/'.$dstfile;
+		$srcfile_file = IKDATA.'/'.$srcfile;
+		$dstfile_file = IKDATA.'/'.$dstfile;
 	} else {
 		$srcfile_file = $srcfile;
 		$dstfile_file = $dstfile;
@@ -208,6 +206,10 @@ function makethumb($srcfile, $thumbsizearr = array(100, 100), $dstfile='') {
 	$opnotkeepscale = 4;
 	$opbestresizew = 8;
 	$opbestresizeh = 16;
+	$_SCONFIG = array(		'thumbcutmode' => 0, // 裁剪模式 0  默认模式 1  左或上剪切模式 2中间剪切模式 3右或下剪切模式
+		'thumbcutstartx' => 0,
+		'thumbcutstarty' => 0, //
+		'thumboption' => 16); //8 宽度最佳缩放  4 综合最佳缩放 16 高度最佳缩放
 	$option = $_SCONFIG['thumboption'];
 	$cutmode = $_SCONFIG['thumbcutmode'];
 	$startx = $_SCONFIG['thumbcutstartx'];

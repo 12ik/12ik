@@ -72,8 +72,7 @@
 		<td>时区:</td>
 		<td><select name="timezone">
 			<!--{loop $arrTime $key $item}-->
-			<option {if $key==$strOption[timezone]} selected="selected"
-				{/if}  value="{$key}">{$item}</option>
+			<option {if $key==$strOption[timezone]} selected="selected" {/if}  value="{$key}">{$item}</option>
 			<!--{/loop}-->
 		</select></td>
 	</tr>

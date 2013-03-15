@@ -72,8 +72,7 @@
 		<td>时区:</td>
 		<td><select name="timezone">
 			<?php foreach((array)$arrTime as $key=>$item) {?>
-			<option <?php if($key==$strOption['timezone']) { ?> selected="selected"
-				<?php } ?>  value="<?php echo $key;?>"><?php echo $item;?></option>
+			<option <?php if($key==$strOption['timezone']) { ?> selected="selected" <?php } ?>  value="<?php echo $key;?>"><?php echo $item;?></option>
 			<?php }?>
 		</select></td>
 	</tr>
